@@ -9,7 +9,7 @@
 // export { useFormatUserName } from './useFormatUserName'
 // export { useGetAgeByIDCard } from './useGetAgeByIDCard'
 // export { useGetBirthdayByIDCard } from './useGetBirthdayByIDCard'
-// export { useGetCurrentDate } from './useGetCurrentDate'
+export { useGetCurrentDate } from './useGetCurrentDate'
 // export { useGetGenderByIDCard } from './useGetGenderByIDCard'
 export { useGetIsDev } from './useGetIsDev'
 // export { useGetNumInString } from './useGetNumInString'

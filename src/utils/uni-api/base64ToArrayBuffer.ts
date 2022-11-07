@@ -7,7 +7,7 @@
    const base64 = 'test'
    const arrayBuffer = base64ToArrayBuffer(base64)
  */
-const base64ToArrayBuffer = (str) => {
+const base64ToArrayBuffer = (str:string):ArrayBuffer => {
   return uni.base64ToArrayBuffer(str)
 }
 export { base64ToArrayBuffer }

@@ -1,22 +1,25 @@
 /**
  * 获取当前日期，包括年月日，不包括其他粒度
- * @param {String} fileds 日期粒度 day（默认）、 month、 year lastYearToday
+ * @param {String} fileds 日期粒度 day（默认）、 month、 year
  * @param {String} delimiter 分隔符 默认 -
  */
-const useGetCurrentDate = (fileds = 'day', delimiter = '-') => {
+const useGetCurrentDate = (
+  fileds: string = 'day',
+  delimiter: string = '-'
+): string => {
   const nowDate = new Date()
 
-  let strArr = []
+  let strArr:string[] = []
 
-  let year = nowDate.getFullYear()
-  let month = nowDate.getMonth() + 1
-  let day = nowDate.getDate()
+  let year: string = nowDate.getFullYear()+''
+  let month: string = nowDate.getMonth() + 1 + ''
+  let day: string = nowDate.getDate() + ''
 
-  if (month < 10) {
+  if (parseInt(month) < 10) {
     month = '0' + month
   }
 
-  if (day < 10) {
+  if (parseInt(day) < 10) {
     day = '0' + day
   }
 
@@ -29,9 +32,6 @@ const useGetCurrentDate = (fileds = 'day', delimiter = '-') => {
       break
     case 'year':
       strArr = [year]
-      break
-    case 'lastYearToday':
-      strArr = [year - 1, month, day]
       break
     default:
       strArr = [year, month, day]

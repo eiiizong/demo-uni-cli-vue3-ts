@@ -15,13 +15,13 @@
  * ${attribute} 代表组件属性
  *
  * ${option} 代表组件属性的可选值
- * @return {Boolean} 当前版本是否可用
+ * @return {boolean} 当前版本是否可用
  * @support uniapp详细说明：https://uniapp.dcloud.io/api/caniuse.html#caniuse
  * @example 
    canIUse('request.object.method.GET');
    canIUse('button.open-type.contact');
 */
-const canIUse = (str) => {
+const canIUse = (str: string): boolean => {
   return uni.canIUse(str)
 }
 export { canIUse }
