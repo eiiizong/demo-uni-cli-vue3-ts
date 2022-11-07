@@ -2,12 +2,8 @@ import { setStorage } from '@/utils/uni-api'
 import {
   M_UPDATE_USER_INFO,
   M_UPDATE_USER_LIST,
-  M_UPDATE_CORPORATE_INFO,
-  M_UPDATE_TOKEN,
-  USER_INFO,
-  USER_LIST,
-  M_UPDATE_SUBSIDY_PROJECT_DECLARE_INFO,
-} from '@/store/constants/index.js'
+ 
+} from '@/store/constants'
 
 const mutations = {
   // 更新用户信息
@@ -34,24 +30,7 @@ const mutations = {
       setStorage(USER_LIST, JSON.stringify({}))
     }
   },
-  [M_UPDATE_CORPORATE_INFO](state, data) {
-    state.corporateInfo = {
-      ...data,
-    }
-  },
-  [M_UPDATE_TOKEN](state, data) {
-    state.token = data
-  },
-  [M_UPDATE_SUBSIDY_PROJECT_DECLARE_INFO](state, data) {
-    if (data) {
-      state.subsidyProjectDeclaraInfo = {
-        ...state.subsidyProjectDeclaraInfo,
-        ...data,
-      }
-    } else {
-      state.subsidyProjectDeclaraInfo = {}
-    }
-  },
+  
 }
 
 export default mutations
