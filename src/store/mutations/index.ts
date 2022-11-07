@@ -1,7 +1,11 @@
 import { M_UPDATE_USER_INFO, M_UPDATE_USER_LIST } from '@/store/constants'
 
+interface Mutations {
+  M_UPDATE_USER_INFO():void,
+  M_UPDATE_USER_LIST():void,
+}
 
-const mutations = {
+const mutations:Mutations = {
   // 更新用户信息
   [M_UPDATE_USER_INFO](state: any, data: Object) {
     // 存在数据
