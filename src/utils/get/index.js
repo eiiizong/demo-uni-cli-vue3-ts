@@ -1,0 +1,1 @@
+export { getIsDev } from './getIsDev'
