@@ -1,9 +1,5 @@
-// interface State {
-//   userInfo:Object,
-//   userList:Object
-// }
-
-const state = {
+import {AppState} from '@/store/types/state'
+const state:AppState = {
   userInfo: {
     idCard: '',
     avatarUrl:'',

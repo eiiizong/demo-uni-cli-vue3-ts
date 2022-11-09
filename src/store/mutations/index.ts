@@ -1,30 +1,18 @@
-import { M_UPDATE_USER_INFO, M_UPDATE_USER_LIST } from '@/store/constants'
+import { MutationTree } from 'vuex'
+import { AppState } from '@/store/types/state'
+import { AppMutationTypes } from '@/store/types/mutation'
 
-interface Mutations {
-  M_UPDATE_USER_INFO():void,
-  M_UPDATE_USER_LIST():void,
+export type Mutations<S = AppState> = {
+  [AppMutationTypes.M_UPDATE_USER_INFO](state: S, token: string): void,
+  [AppMutationTypes.M_UPDATE_USER_LIST](state: S, token: string): void,
 }
 
-const mutations:Mutations = {
-  // 更新用户信息
-  [M_UPDATE_USER_INFO](state: any, data: Object) {
-    // 存在数据
-    if (data) {
-      state.userInfo = { ...state.userInfo, ...data }
-    } else {
-      // 针对 null 用于清空用户数据
-      state.userInfo = {}
-    }
+const mutations: MutationTree<AppState> & Mutations = {
+  [AppMutationTypes.M_UPDATE_USER_INFO](state: AppState, token: string) {
+    state.token = token
   },
-  // 更新用户信息
-  [M_UPDATE_USER_LIST](state: any, data: Object) {
-    // 存在数据
-    if (data) {
-      state.userList = { ...state.userList, ...data }
-    } else {
-      // 针对 null 用于清空用户数据
-      state.userList = {}
-    }
+  [AppMutationTypes.M_UPDATE_USER_LIST](state: AppState, token: string) {
+    state.token = token
   },
 }
 

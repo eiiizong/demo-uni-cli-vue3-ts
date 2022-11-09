@@ -1,3 +1,4 @@
+# eslint 忽略文件名
 *.css
 *.less
 *.scss
