@@ -15,7 +15,6 @@
  * ${attribute} 代表组件属性
  *
  * ${option} 代表组件属性的可选值
- * @return {boolean} 当前版本是否可用
  * @support uniapp详细说明：https://uniapp.dcloud.io/api/caniuse.html#caniuse
  * @example 
    canIUse('request.object.method.GET');

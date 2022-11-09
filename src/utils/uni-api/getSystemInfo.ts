@@ -1,6 +1,5 @@
 /**
  * 异步获取系统信息
- * @returns { Promise }
  * @support uniapp详细说明： https://uniapp.dcloud.io/api/system/info?id=getsysteminfo
  * @example
   getSystemInfo().then(res => {

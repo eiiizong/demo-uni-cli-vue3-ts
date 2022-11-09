@@ -4,7 +4,7 @@ export { arrayBufferToBase64 } from './arrayBufferToBase64'
 export { canIUse } from './canIUse'
 
 // // 基础-系统
-// export { getSystemInfo } from './getSystemInfo'
+export { getSystemInfo } from './getSystemInfo'
 
 // // 基础-更新
 // export { updateWeChatApp } from './updateWeChatApp'
