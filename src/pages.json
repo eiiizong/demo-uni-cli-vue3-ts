@@ -22,7 +22,7 @@
     "backgroundColor": "#f5f5f5",
     "navigationBarBackgroundColor": "#3882ff",
     "navigationBarTextStyle": "white",
-    "navigationBarTitleText": "uni-preset-vue",
+    "navigationBarTitleText": "demo-uni-cli-vue3-ts",
     "enablePullDownRefresh": false,
     "backgroundTextStyle": "light",
     "backgroundColorTop": "#f0f3f9",
