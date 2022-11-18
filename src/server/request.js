@@ -1,10 +1,5 @@
 import config from '@/config'
-import {
-  showModal,
-  showLoading,
-  hideLoading,
-  request as uniRequest,
-} from '@/utils/uni-api'
+import { showModal, showLoading, hideLoading, request as uniRequest } from '@/utils/uni-api'
 import { getIsDev } from '@/utils/get'
 import store from '@/store'
 import { M_UPDATE_TOKEN } from '@/store/constants'
@@ -125,12 +120,10 @@ const request = async (
                   // 登录超时
                   if (!isError) {
                     isError = true
-                    showModal('登录超时！即将退出小程序，请重新进入！').then(
-                      (res) => {
-                        isError = false
-                        uni.exitMiniProgram()
-                      }
-                    )
+                    showModal('登录超时！即将退出小程序，请重新进入！').then((res) => {
+                      isError = false
+                      uni.exitMiniProgram()
+                    })
                     reject(resultData)
                   }
                 } else if (code == '402') {
