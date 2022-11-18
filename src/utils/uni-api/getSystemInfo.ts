@@ -1,3 +1,4 @@
+// import { GetSystemInfoOptions } from '@dcloudio'
 /**
  * 异步获取系统信息
  * @support uniapp详细说明： https://uniapp.dcloud.io/api/system/info?id=getsysteminfo
@@ -10,8 +11,8 @@
     // 接口调用完成
   })
  */
-const getSystemInfo = () => {
-  return new Promise((resolve, reject) => {
+const getSystemInfo = () =>
+  new Promise((resolve, reject) => {
     uni.getSystemInfo({
       success(res) {
         resolve(res)
@@ -22,5 +23,4 @@ const getSystemInfo = () => {
       },
     })
   })
-}
 export { getSystemInfo }

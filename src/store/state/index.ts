@@ -1,10 +1,11 @@
-import {AppState} from '@/store/types/state'
-const state:AppState = {
+import { AppState } from '@/store/types/state'
+const state: AppState = {
   userInfo: {
     idCard: '',
-    avatarUrl:'',
-    token:''
+    avatarUrl: '',
+    token: '',
   },
+  systemInfo: {},
   userList: {
     cpb10d: '未登录用户身份证号', // 经办用户身份证号码
     aae012: '未登录用户姓名', // 经办用户姓名

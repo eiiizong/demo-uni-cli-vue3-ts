@@ -12,4 +12,5 @@ export interface AppStateUserInfo {
 export interface AppState {
   userInfo: AppStateUserInfo
   userList: {}
+  systemInfo: {}
 }

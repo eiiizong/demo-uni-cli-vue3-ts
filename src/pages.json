@@ -31,8 +31,11 @@
     "onReachBottomDistance": -60, // 安卓和工具不支持负数
     "h5": {
       "navigationStyle": "custom"
+    },
+    "usingComponents": {
+      "van-button": "/wxcomponents/vant/button/index"
     }
-  },
+   },
   "tabBar": {
     "color": "#666666",
     "backgroundColor": "#ffffff",
