@@ -1,4 +1,3 @@
-// import { GetSystemInfoOptions } from '@dcloudio'
 /**
  * 异步获取系统信息
  * @support uniapp详细说明： https://uniapp.dcloud.io/api/system/info?id=getsysteminfo
@@ -11,16 +10,17 @@
     // 接口调用完成
   })
  */
-const getSystemInfo = () =>
+const getSystemInfo = (): Promise<UniApp.GetSystemInfoResult> =>
   new Promise((resolve, reject) => {
     uni.getSystemInfo({
       success(res) {
         resolve(res)
       },
       fail(err) {
-        console.error('getSystemInfo 接口调用失败 => ', err)
+        console.error('uni.getSystemInfo 接口调用失败 => ', err)
         reject(err)
       },
     })
   })
+
 export { getSystemInfo }

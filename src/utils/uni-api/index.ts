@@ -62,7 +62,7 @@ export { getSystemInfo } from './getSystemInfo'
 // export { startPullDownRefresh } from './startPullDownRefresh'
 
 // // 网络-发起请求
-// export { request } from './request'
+export { request } from './request'
 
 // // 网络-下载
 // export { downloadFile } from './downloadFile'
@@ -88,7 +88,7 @@ export { setStorage } from './setStorage'
 // export { chooseImage } from './chooseImage'
 
 // // 开放接口-登录
-// export { login } from './login'
+export { login } from './login'
 
 // // 位置
 // export { openLocation } from './openLocation'

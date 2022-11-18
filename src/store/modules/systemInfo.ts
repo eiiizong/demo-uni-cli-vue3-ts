@@ -20,13 +20,13 @@ const useStoreSystemInfo = defineStore({
   },
 
   getters: {
-    getStoreSystemInfo(state): Object {
+    getStoreSystemInfo(state) {
       return state.systemInfo
     },
   },
   actions: {
     // 不要使用箭头函数定义action,因为箭头函数绑定外部this
-    updateStoreSystemInfo(data: Object) {
+    updateStoreSystemInfo(data: UniApp.GetSystemInfoResult) {
       console.log('updateStoreSystemInfo=========', data)
       this.systemInfo = data
     },
