@@ -7,11 +7,8 @@ const storeSystemInfo = useStoreSystemInfo()
 onLaunch((e) => {
   console.log('App Launch', e)
 
-  const a = useCheckIDCard('510902199507236534')
-  console.log(a, 98)
-
+  // 获取并储存系统信息
   getSystemInfo().then((res) => {
-    console.log(res, 999888)
     storeSystemInfo.updateStoreSystemInfo(res)
   })
 })
