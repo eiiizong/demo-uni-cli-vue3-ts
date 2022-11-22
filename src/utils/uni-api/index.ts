@@ -8,7 +8,7 @@ export { getSystemInfo } from './getSystemInfo'
 
 // // 基础-更新
 // export { updateWeChatApp } from './updateWeChatApp'
-// export { getUpdateManager } from './getUpdateManager'
+export { getUpdateManager } from './getUpdateManager'
 
 // // 路由
 // export { switchTab } from './switchTab'
@@ -28,7 +28,7 @@ export { getSystemInfo } from './getSystemInfo'
 
 // // 界面-交互
 // export { showToast } from './showToast'
-// export { showModal } from './showModal'
+export { showModal } from './showModal'
 // export { showLoading } from './showLoading'
 // export { showActionSheet } from './showActionSheet'
 // export { hideToast } from './hideToast'
@@ -75,13 +75,13 @@ export { request } from './request'
 
 // // 数据缓存
 // export { setStorageSync } from './setStorageSync'
-export { setStorage } from './setStorage'
+// export { setStorage } from './setStorage'
 // export { removeStorageSync } from './removeStorageSync'
 // export { removeStorage } from './removeStorage'
 // export { getStorageSync } from './getStorageSync'
 // export { getStorage } from './getStorage'
 // export { clearStorageSync } from './clearStorageSync'
-// export { clearStorage } from './clearStorage'
+export { clearStorage } from './clearStorage'
 
 // // 媒体-图片
 // export { previewImage } from './previewImage'

@@ -1,4 +1,4 @@
-// export { useCheckAppUpdate } from './useCheckAppUpdate'
+export { useCheckAppUpdate } from './useCheckAppUpdate'
 export { useCheckIDCard } from './useCheckIDCard'
 export { useCheckPhoneNumber } from './useCheckPhoneNumber'
 export { useFormatBankCardNumber } from './useFormatBankCardNumber'

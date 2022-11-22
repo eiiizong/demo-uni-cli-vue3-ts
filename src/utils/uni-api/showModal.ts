@@ -21,7 +21,7 @@
   })
 */
 const showModal = (
-  content,
+  content: string,
   title = '提示',
   showCancel = false,
   editable = false,
@@ -30,7 +30,7 @@ const showModal = (
   cancelColor = '#000000',
   confirmText = '确定',
   confirmColor = '#576B95'
-) => {
+): Promise<boolean> => {
   return new Promise((resolve, reject) => {
     uni.showModal({
       title,
@@ -48,12 +48,12 @@ const showModal = (
         } else if (res.cancel) {
           reject(false)
         } else {
-          console.error('showModal 接口调用出现未知错误 => ', res)
+          console.error('uni.showModal 接口调用出现未知错误 => ', res)
           reject(res)
         }
       },
       fail(err) {
-        console.error('showModal 接口调用失败 => ', err)
+        console.error('uni.showModal 接口调用失败 => ', err)
         reject(err)
       },
     })
