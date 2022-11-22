@@ -1,0 +1,8 @@
+@import '../variables/index';
+
+@import './wx-reset.scss';
+@import './flex.scss';
+@import './common.scss';
+/*  #ifdef H5 */
+@import './h5-reset.scss';
+/*  #endif  */

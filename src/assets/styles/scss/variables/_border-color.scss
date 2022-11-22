@@ -1,0 +1,7 @@
+// border
+$border-color: #ddd !default;
+$border-color-base: $border-color !default;
+$border-color-split: tint($border-color-base, 20%) !default; // 分割线
+$border-color-light: tint($border-color-base, 30%) !default;
+$border-color-lighter: tint($border-color-base, 50%) !default;
+$border-color-lightest: tint($border-color-base, 80%) !default;

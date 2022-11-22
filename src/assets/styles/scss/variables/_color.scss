@@ -1,0 +1,18 @@
+// 字体颜色 主题色
+// $primary: pink !default;
+$primary: #3882ff !default; // 主题色
+
+$color-title: #001944 !default; // 标题字体颜色
+
+// 文本
+$color: #333 !default; // 正常  已定不改
+$color-title: #333 !default; // 标题 已定不改
+$color-active: $primary !default; // 高亮 已定不改
+
+$color-desc: #999 !default; // 描述
+
+$color-placeholder: #999 !default; // 提示
+$color-input-placeholder: #7a7a7a !default; // 提示
+
+// input 输入框
+$color-input-disabled: #ccc !default; // 禁用

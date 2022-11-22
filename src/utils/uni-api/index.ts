@@ -14,7 +14,7 @@ export { getUpdateManager } from './getUpdateManager'
 // export { switchTab } from './switchTab'
 // export { reLaunch } from './reLaunch'
 // export { redirectTo } from './redirectTo'
-// export { navigateTo } from './navigateTo'
+export { navigateTo } from './navigateTo'
 // export { navigateBack } from './navigateBack'
 
 // // 跳转
@@ -27,7 +27,7 @@ export { getUpdateManager } from './getUpdateManager'
 // export { hideShareMenu } from './hideShareMenu'
 
 // // 界面-交互
-// export { showToast } from './showToast'
+export { showToast } from './showToast'
 export { showModal } from './showModal'
 // export { showLoading } from './showLoading'
 // export { showActionSheet } from './showActionSheet'
@@ -121,6 +121,3 @@ export { login } from './login'
 
 // // 其他的方法
 // export { startFacialRecognitionVerify } from './startFacialRecognitionVerify'
-
-// // 自定义的方法
-// export { getJumpRouteUrl } from './getJumpRouteUrl'

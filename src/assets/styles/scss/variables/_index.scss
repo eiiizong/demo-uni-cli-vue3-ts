@@ -1,0 +1,17 @@
+// mixins
+@import '../mixins/index';
+
+// 变量
+@import 'color';
+@import 'background-color';
+@import 'border-color';
+@import 'border-radius';
+@import 'box-shadow';
+@import 'font-size';
+@import 'line-height';
+@import 'opacity';
+@import 'spacing';
+@import 'z-index';
+
+// 多主题配置
+// @import '../themes/index';

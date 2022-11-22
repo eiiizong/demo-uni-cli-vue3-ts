@@ -15,6 +15,15 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': pathResolve('src') + '/',
+      '~': pathResolve('src') + '/',
+    },
+  },
+  css: {
+    preprocessorOptions: {
+      // 全局样式引入
+      scss: {
+        additionalData: '@import "./src/assets/styles/scss/variables/index";',
+      },
     },
   },
   plugins: [uni()],
