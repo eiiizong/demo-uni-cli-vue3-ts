@@ -1,4 +1,0 @@
-export enum AppMutationTypes {
-  M_UPDATE_USER_INFO = 'M_UPDATE_USER_INFO',
-  M_UPDATE_USER_LIST = 'M_UPDATE_USER_LIST',
-}

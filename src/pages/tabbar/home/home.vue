@@ -3,13 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { useStoreSystemInfo } from '@/store/modules/systemInfo'
-
-const storeSystemInfo = useStoreSystemInfo()
-const systemInfo = computed(() => storeSystemInfo.systemInfo)
-
-setTimeout(() => {}, 1000)
+// import { ref, computed } from 'vue'
 </script>
 
 <style lang="scss" scoped>

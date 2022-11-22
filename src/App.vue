@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { onLaunch, onShow, onHide } from '@dcloudio/uni-app'
 import { getSystemInfo } from '@/utils/uni-api'
-import { useStoreSystemInfo } from '@/store/modules/systemInfo'
-import { useCheckIDCard } from '@/hooks/common'
+import { useStoreSystemInfo } from '@/store/modules'
+
 const storeSystemInfo = useStoreSystemInfo()
 onLaunch((e) => {
   console.log('App Launch', e)
