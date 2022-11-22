@@ -10,7 +10,7 @@ const IV = CryptoJS.enc.Utf8.parse('123456abba654321') // 十六位十六进制�
  * mode: CBC // 需要前后端保持一致
  * pad: Pkcs7 // 前端 Pkcs7 对应 后端 Pkcs5
  */
-const AES_Encrypt = (plaintext) => {
+const AES_Encrypt = (plaintext: string) => {
   let ciphertext = CryptoJS.AES.encrypt(plaintext, KEY, {
     iv: IV,
     mode: CryptoJS.mode.CBC,
@@ -23,7 +23,7 @@ const AES_Encrypt = (plaintext) => {
  * AES 解密
  * @param jsonStr
  */
-const AES_Decrypt = (jsonStr) => {
+const AES_Decrypt = (jsonStr: string) => {
   let decrypt = CryptoJS.AES.decrypt(jsonStr, KEY, {
     iv: IV,
     mode: CryptoJS.mode.CBC,

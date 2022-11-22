@@ -29,10 +29,10 @@ export { navigateTo } from './navigateTo'
 // // 界面-交互
 export { showToast } from './showToast'
 export { showModal } from './showModal'
-// export { showLoading } from './showLoading'
+export { showLoading } from './showLoading'
 // export { showActionSheet } from './showActionSheet'
 // export { hideToast } from './hideToast'
-// export { hideLoading } from './hideLoading'
+export { hideLoading } from './hideLoading'
 // export { enableAlertBeforeUnload } from './enableAlertBeforeUnload'
 // export { disableAlertBeforeUnload } from './disableAlertBeforeUnload'
 

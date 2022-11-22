@@ -23,8 +23,8 @@ const showToast = (
   duration = 1500,
   position: 'top' | 'center' | 'bottom' = 'center',
   image: string = ''
-): Promise<any> => {
-  return new Promise((resolve, reject) => {
+): Promise<any> =>
+  new Promise((resolve, reject) => {
     uni.showToast({
       title,
       image,
@@ -41,6 +41,5 @@ const showToast = (
       },
     })
   })
-}
 
 export { showToast }

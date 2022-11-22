@@ -1,19 +1,28 @@
 import config from '@/config'
 import { showModal, showLoading, hideLoading, request as uniRequest } from '@/utils/uni-api'
-import { getIsDev } from '@/utils/get'
-import store from '@/store'
-import { M_UPDATE_TOKEN } from '@/store/constants'
+import { useGetIsDev } from '@/hooks/common'
+import { useStoreUserInfo } from '@/store/modules'
 import { AES_Encrypt } from './aes' // 加密
 
-let isError = false // 是否已经发生错误
+interface RequestParams {
+  [naem: string]: any
+}
+
+// 当前环境是否为开发环境
+const isDev = useGetIsDev()
+// 字符串中是否含有“http”或者“https”的正则验证表达式
+const httpExp = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/
+const { requestUrl, isOpenEncryption } = config
+// 是否已经发生错误
+let isError = false
+
 /**
  * 自定义发起 HTTPS 网络请求
  * @param {string} url 开发者服务器接口地址，已默认加上前缀
  * @param {object} data 请求的参数
  * @param {boolean} isShowLoading [true] 请求数据时显示加载中
  * @param {boolean} showErrorToast [true] 是否显示错误提示
- * @param {string} method [POST] HTTP 请求方法。可取值 OPTIONS、GET、HEAD、POST、PUT、DELETE、TRACE、CONNECT
- *
+ * @param {"OPTIONS" | "GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "TRACE" | "CONNECT" | undefined} method [POST] HTTP 请求方法。
  * @returns { Promise }
  * @example
   request('test').then(res => {
@@ -24,24 +33,21 @@ let isError = false // 是否已经发生错误
     // 接口调用完成
   })
 */
-const request = async (
-  url,
-  data = {},
+const request = (
+  url: string,
+  data: RequestParams = {},
   isShowLoading = true,
   showErrorToast = true,
-  method = 'POST',
+  method: 'OPTIONS' | 'GET' | 'HEAD' | 'POST' | 'PUT' | 'DELETE' | 'TRACE' | 'CONNECT' | undefined = 'POST',
   timeout = 60000
 ) => {
-  // 当前环境是否为开发环境
-  const isDev = getIsDev()
-  // 字符串中是否含有“http”或者“https”的正则验证表达式
-  const httpExp = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/
-  const { requestUrl } = config
-  const { token, userList } = store.state
+  const { userInfo } = useStoreUserInfo()
 
   let header = {}
+  let params = {}
+
   // 根据加密情况使用content-type
-  if (config.isOpenEncryption) {
+  if (isOpenEncryption) {
     header = {
       'content-type': 'application/x-www-form-urlencoded',
     }
@@ -52,10 +58,10 @@ const request = async (
   }
 
   // 存在token
-  if (token) {
+  if (userInfo.token) {
     header = {
       ...header,
-      authorization: 'Bearer ' + token,
+      authorization: 'Bearer ' + userInfo.token,
     }
   }
 
@@ -78,20 +84,23 @@ const request = async (
     if (!isHttpUrl) {
       url = requestUrl + url
     }
-    data = {
-      ...data,
-      userList: JSON.stringify([userList]),
-    }
+
+    // params = {
+    //   ...params,
+    //   userList: JSON.stringify([userList]),
+    // }
 
     // 合并 data
-    data = {
-      ...data,
-      chb004: '03', // 调用渠道 01 核心系统 02 网厅 03 微信小程序
+    if (Object.prototype.toString.call(data) === '[object Object]') {
+      params = {
+        ...params,
+        chb004: '03', // 调用渠道 01 核心系统 02 网厅 03 微信小程序
+      }
     }
 
-    if (config.isOpenEncryption) {
-      data = JSON.stringify(data)
-      data = AES_Encrypt(data)
+    if (isOpenEncryption) {
+      params = JSON.stringify(params)
+      params = AES_Encrypt(params)
     }
 
     uniRequest(url, data, header, method, timeout)
@@ -128,7 +137,7 @@ const request = async (
                   }
                 } else if (code == '402') {
                   // 更新token
-                  store.commit(M_UPDATE_TOKEN, token)
+                  // store.commit(M_UPDATE_TOKEN, token)
                   resolve(resultData)
                 } else {
                   if (showErrorToast) {
