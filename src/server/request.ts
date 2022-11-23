@@ -8,6 +8,14 @@ interface RequestParams {
   [naem: string]: any
 }
 
+interface ApiResData {
+  code?: number,
+  data?: unknown,
+  errors?: [],
+  requestId?: string,
+  serviceSuccess?: boolean,
+}
+
 // 当前环境是否为开发环境
 const isDev = useGetIsDev()
 // 字符串中是否含有“http”或者“https”的正则验证表达式
@@ -111,7 +119,7 @@ const request = (
         // 请求成功 状态码为 200
         if (statusCode === 200 && _data) {
           // 最终服务器返回结果
-          let apiResData = {}
+          let apiResData:ApiResData = {}
           // 开启数据加密
           if (isOpenEncryption) {
             const decryptStr = AES_Decrypt(_data as string)
@@ -148,6 +156,7 @@ const request = (
                     isError = true
                     showModal('登录超时！即将退出小程序，请重新进入！').then((res) => {
                       isError = false
+                      // @ts-ignore：类型“Uni”上不存在属性“exitMiniProgram”
                       uni.exitMiniProgram()
                     })
                     reject(resultData)
