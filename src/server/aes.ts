@@ -1,36 +1,45 @@
 import CryptoJS from 'crypto-js'
 
-const KEY = CryptoJS.enc.Utf8.parse('123456bccb654321') // 十六位十六进制数作为密钥
-const IV = CryptoJS.enc.Utf8.parse('123456abba654321') // 十六位十六进制数作为密钥偏移量
+const KEY = CryptoJS.enc.Utf8.parse('_aes_secret_key_')
+const IV = CryptoJS.enc.Utf8.parse('_aes_secret_iv__')
 
 /**
  * AES 加密
- * @param word: 需要加密的文本
- * KEY: // 需要前后端保持一致
- * mode: CBC // 需要前后端保持一致
- * pad: Pkcs7 // 前端 Pkcs7 对应 后端 Pkcs5
+ * @param plaintext: 需要加密的文本
  */
-const AES_Encrypt = (plaintext: string) => {
-  let ciphertext = CryptoJS.AES.encrypt(plaintext, KEY, {
-    iv: IV,
+const AES_Encrypt = (plaintext:string) => {
+  let key = KEY
+  let iv = IV
+  let srcs = CryptoJS.enc.Utf8.parse(plaintext)
+  const encrypted = CryptoJS.AES.encrypt(srcs, key, {
+    iv: iv,
     mode: CryptoJS.mode.CBC,
-    padding: CryptoJS.pad.Pkcs7,
-  }).toString()
-  return ciphertext
+    padding: CryptoJS.pad.ZeroPadding,
+  })
+
+  const encryptRes = CryptoJS.enc.Base64.stringify(encrypted.ciphertext)
+  return encryptRes
 }
 
 /**
  * AES 解密
  * @param jsonStr
  */
-const AES_Decrypt = (jsonStr: string) => {
-  let decrypt = CryptoJS.AES.decrypt(jsonStr, KEY, {
-    iv: IV,
+const AES_Decrypt = (jsonStr:string) => {
+  let key = KEY
+  let iv = IV
+  let base64 = CryptoJS.enc.Base64.parse(jsonStr)
+  let src = CryptoJS.enc.Base64.stringify(base64)
+
+  const decrypt = CryptoJS.AES.decrypt(src, key, {
+    iv: iv,
     mode: CryptoJS.mode.CBC,
-    padding: CryptoJS.pad.Pkcs7,
+    padding: CryptoJS.pad.ZeroPadding,
   })
-  let decryptedStr = decrypt.toString(CryptoJS.enc.Utf8)
-  return decryptedStr.toString()
+
+  const decryptedStr = decrypt.toString(CryptoJS.enc.Utf8).toString()
+
+  return decryptedStr
 }
 
 export { AES_Encrypt, AES_Decrypt }

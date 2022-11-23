@@ -2,7 +2,7 @@ import config from '@/config'
 import { showModal, showLoading, hideLoading, request as uniRequest } from '@/utils/uni-api'
 import { useGetIsDev } from '@/hooks/common'
 import { useStoreUserInfo } from '@/store/modules'
-import { AES_Encrypt } from './aes' // 加密
+import { AES_Encrypt, AES_Decrypt } from './aes' // 加密
 
 interface RequestParams {
   [naem: string]: any
@@ -44,7 +44,7 @@ const request = (
   const { userInfo } = useStoreUserInfo()
 
   let header = {}
-  let params = {}
+  let paramsStr = ''
 
   // 根据加密情况使用content-type
   if (isOpenEncryption) {
@@ -85,31 +85,48 @@ const request = (
       url = requestUrl + url
     }
 
-    // params = {
-    //   ...params,
+    // data = {
+    //   ...data,
     //   userList: JSON.stringify([userList]),
     // }
 
     // 合并 data
     if (Object.prototype.toString.call(data) === '[object Object]') {
-      params = {
-        ...params,
+      data = {
+        ...data,
         chb004: '03', // 调用渠道 01 核心系统 02 网厅 03 微信小程序
       }
     }
 
     if (isOpenEncryption) {
-      params = JSON.stringify(params)
-      params = AES_Encrypt(params)
+      paramsStr = JSON.stringify(data)
+      paramsStr = AES_Encrypt(paramsStr)
+      paramsStr = encodeURIComponent(paramsStr)
     }
 
-    uniRequest(url, data, header, method, timeout)
+    uniRequest(url, isOpenEncryption ? paramsStr : data, header, method, timeout)
       .then((res) => {
-        let { statusCode, data: resData } = res // 服务器返回的数据
+        let { statusCode, data: _data } = res // 服务器返回的数据
 
         // 请求成功 状态码为 200
-        if (statusCode === 200 && resData) {
-          const { code, data, errors } = resData
+        if (statusCode === 200 && _data) {
+          // 最终服务器返回结果
+          let apiResData = {}
+          // 开启数据加密
+          if (isOpenEncryption) {
+            const decryptStr = AES_Decrypt(_data as string)
+            apiResData = JSON.parse(decryptStr)
+
+            if (isDev) {
+              console.groupCollapsed(`请求地址 => ${url}`)
+              console.log('%c params', 'color: #03A9F4; font-weight: bold', data)
+              console.log('%c res data', 'color: #4CAF50; font-weight: bold', apiResData)
+              console.groupEnd()
+            }
+          }
+
+          const { code, data: resData, errors } = apiResData
+
           // 服务器返回错误
           if (errors && errors.length > 0) {
             const error = errors[0]
