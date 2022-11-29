@@ -1,5 +1,5 @@
 import type { Ref } from 'vue'
-import type { StoreUserInfo } from '@/store/types'
+import type { StoreUserInfo } from '@/stores/types'
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 

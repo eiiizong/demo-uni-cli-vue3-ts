@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onLaunch, onShow, onHide, onError } from '@dcloudio/uni-app'
 import { getSystemInfo } from '@/utils/uni-api'
-import { useStoreSystemInfo } from '@/store/modules'
+import { useStoreSystemInfo } from '~/stores/modules'
 import { requestSPGetHi05List } from '@/server/api'
 
 const storeSystemInfo = useStoreSystemInfo()

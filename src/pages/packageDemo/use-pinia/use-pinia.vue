@@ -7,7 +7,7 @@
 </template>
 <script setup lang="ts">
 import { toRefs } from 'vue'
-import { useStoreUserInfo } from '@/store/modules'
+import { useStoreUserInfo } from '@/stores/modules'
 
 const storeUserInfo = useStoreUserInfo()
 const { userInfo } = toRefs(storeUserInfo)

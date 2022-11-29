@@ -1,7 +1,7 @@
 import config from '@/config'
 import { showModal, showLoading, hideLoading, request as uniRequest } from '@/utils/uni-api'
 import { useGetIsDev } from '@/hooks/common'
-import { useStoreUserInfo } from '@/store/modules'
+import { useStoreUserInfo } from '@/stores/modules'
 import { AES_Encrypt, AES_Decrypt } from './aes' // 加密
 
 interface RequestParams {
