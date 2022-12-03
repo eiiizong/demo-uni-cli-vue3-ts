@@ -1,7 +1,7 @@
 <template>
   <div class="login-agreement">
     <label class="label" for="login_agreement">
-      <checkbox-group @change="handleChangeCheckbox($event)" class="checkbox-group">
+      <checkbox-group @change="handleChangeCheckbox" class="checkbox-group">
         <checkbox id="login_agreement" class="checkbox" :checked="moduleValue" value="checkbox" />
       </checkbox-group>
       <div class="icon-checkbox" :class="[moduleValue ? 'checked' : '']">
@@ -32,8 +32,8 @@ const props = defineProps({
 })
 
 // 协议改变 选择协议
-const handleChangeCheckbox = (e) => {
-  const { value } = e.target
+const handleChangeCheckbox = (event: WechatMiniprogram.CheckboxGroupChange) => {
+  const { value } = event.detail
   if (value && value.length > 0) {
     emit('update:moduleValue', true)
   } else {

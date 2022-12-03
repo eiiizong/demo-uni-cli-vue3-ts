@@ -1,6 +1,6 @@
 <template>
   <view class="button-wrapper">
-    <button @click="emit('click')">{{ name }}</button>
+    <button @click="emit('click')" :open-type="openType" @getphonenumber="onGetPhoneNumber">{{ name }}</button>
   </view>
 </template>
 
@@ -8,14 +8,21 @@
 import type { Ref } from 'vue'
 import { onMounted, ref, computed } from 'vue'
 
+const emit = defineEmits(['click', 'getphonenumber'])
 const props = defineProps({
   name: {
     type: String,
     required: true,
   },
+  openType: {
+    type: String,
+    required: true,
+  },
 })
 
-const emit = defineEmits(['click'])
+const onGetPhoneNumber = (event: WechatMiniprogram.ButtonGetPhoneNumber) => {
+  emit('getphonenumber', event)
+}
 
 onMounted(() => {})
 </script>
