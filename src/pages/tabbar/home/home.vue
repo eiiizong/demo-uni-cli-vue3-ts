@@ -1,6 +1,6 @@
 <template>
   <view class="home">
-    <YhNavBar></YhNavBar>
+    <YhNavBar title="首页"></YhNavBar>
   </view>
 </template>
 
