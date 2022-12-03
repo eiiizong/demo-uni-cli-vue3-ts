@@ -2,12 +2,16 @@
 import { onLaunch, onShow, onHide, onError } from '@dcloudio/uni-app'
 import { checkAppUpdate } from '@/utils/check'
 import { getSystemInfo } from '@/utils/uni-api'
+import { useLogin } from '@/hooks/project'
 import { useStoreSystemInfo } from '@/stores/modules'
 
 const storeSystemInfo = useStoreSystemInfo()
 onLaunch((e) => {
   // console.log('App Launch', e)
-
+  // 登录
+  useLogin().then((res) => {
+    console.log(res, 987)
+  })
   // 获取并储存系统信息
   getSystemInfo().then((res) => {
     storeSystemInfo.updateStoreSystemInfo(res)

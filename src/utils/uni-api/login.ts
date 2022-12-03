@@ -11,10 +11,10 @@
   })
  */
 const login = (
-  provider: 'weixin' | 'qq' | 'sinaweibo' | 'xiaomi' | 'apple' | 'univerify' | undefined,
-  scopes: UniApp.LoginScopes | UniApp.LoginScopes[] | undefined,
-  timeout: number,
-  univerifyStyle: object
+  provider: 'weixin' | 'qq' | 'sinaweibo' | 'xiaomi' | 'apple' | 'univerify' | undefined=undefined,
+  scopes: UniApp.LoginScopes | UniApp.LoginScopes[] | undefined=undefined,
+  timeout: number = 6000,
+  univerifyStyle: object = {}
 ): Promise<UniApp.LoginRes> => {
   return new Promise((resolve, reject) => {
     uni.login({
