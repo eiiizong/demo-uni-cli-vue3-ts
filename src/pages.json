@@ -61,7 +61,7 @@
     "backgroundTextStyle": "light",
     "backgroundColorTop": "#f0f3f9",
     "backgroundColorBottom": "#f0f3f9",
-    "navigationStyle": "default",
+    "navigationStyle": "custom",
     "onReachBottomDistance": -60, // 安卓和工具不支持负数
     "h5": {
       "navigationStyle": "custom"
