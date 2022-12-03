@@ -1,5 +1,5 @@
 <template>
-  <div class="privacy-policy">
+  <div class="login-privacy-policy">
     <div class="main">
       <div class="agree">
         <div class="agree-title">隐私条款</div>
@@ -36,9 +36,11 @@
     </div>
   </div>
 </template>
-<script setup></script>
+
+<script setup lang="ts"></script>
+
 <style lang="scss" scoped>
-.privacy-policy {
+.login-privacy-policy {
   background-color: #fff;
   padding: $spacing;
   color: $color;

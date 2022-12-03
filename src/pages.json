@@ -35,6 +35,29 @@
   ],
   "subPackages": [
     {
+      "root": "pages/packageCommon",
+      "pages": [
+        {
+          "path": "login/login",
+          "style": {
+            "navigationBarTitleText": "登录"
+          }
+        },
+        {
+          "path": "login-privacy-policy/login-privacy-policy",
+          "style": {
+            "navigationBarTitleText": "隐私协议"
+          }
+        },
+        {
+          "path": "login-user-agreement/login-user-agreement",
+          "style": {
+            "navigationBarTitleText": "用户协议"
+          }
+        }
+      ]
+    },
+    {
       "root": "pages/packageDemo",
       "pages": [
         {
@@ -61,7 +84,7 @@
     "backgroundTextStyle": "light",
     "backgroundColorTop": "#f0f3f9",
     "backgroundColorBottom": "#f0f3f9",
-    "navigationStyle": "custom",
+    "navigationStyle": "default",
     "onReachBottomDistance": -60, // 安卓和工具不支持负数
     "h5": {
       "navigationStyle": "custom"
@@ -108,6 +131,11 @@
       {
         "name": "packageDemo-dashboard",
         "path": "pages/packageDemo/dashboard/dashboard",
+        "query": ""
+      },
+      {
+        "name": "packageCommon-login",
+        "path": "pages/packageCommon/login/login",
         "query": ""
       }
     ]

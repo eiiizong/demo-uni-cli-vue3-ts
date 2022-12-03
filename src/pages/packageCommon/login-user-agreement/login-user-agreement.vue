@@ -1,5 +1,5 @@
 <template>
-  <div class="user-aggreement">
+  <div class="login-user-aggreement">
     <div class="main">
       <div class="agree">
         <div class="agree-title">用户协议</div>
@@ -37,51 +37,31 @@
             <div class="p">
               （三）若违反相关法律法规和本协议各项规定，本平台有权对该用户账号单方采取暂停使用、注销登记等措施。
             </div>
-            <div class="p">
-              （四）若服务被终止或取消，本平台可以从服务器上永久地删除该用户的信息。
-            </div>
+            <div class="p">（四）若服务被终止或取消，本平台可以从服务器上永久地删除该用户的信息。</div>
           </div>
           <div class="agree-item">
             <div class="h4">四、用户行为规范</div>
-            <div class="h5">
-              （一）用户不得在本平台发布、转载、传送含有下列内容之一的信息：
-            </div>
+            <div class="h5">（一）用户不得在本平台发布、转载、传送含有下列内容之一的信息：</div>
             <div class="p">1.反对宪法所确定的基本原则的。</div>
-            <div class="p">
-              2.危害国家安全，泄露国家秘密，颠覆国家政权，破坏国家统一的。
-            </div>
+            <div class="p">2.危害国家安全，泄露国家秘密，颠覆国家政权，破坏国家统一的。</div>
             <div class="p">3.损害国家荣誉和利益的。</div>
             <div class="p">4.煽动民族仇恨、民族歧视，破坏民族团结的。</div>
             <div class="p">5.破坏国家宗教政策，宣扬邪教和封建迷信的。</div>
             <div class="p">6.散布谣言，扰乱社会秩序，破坏社会稳定的。</div>
-            <div class="p">
-              7.散布淫秽、色情、赌博、暴力、凶杀、恐怖或者教唆犯罪的。
-            </div>
+            <div class="p">7.散布淫秽、色情、赌博、暴力、凶杀、恐怖或者教唆犯罪的。</div>
             <div class="p">8.侮辱或者诽谤他人，侵害他人合法权益的。</div>
-            <div class="p">
-              9.侵犯任何第三者的知识产权，版权或公众/私人权利的。
-            </div>
+            <div class="p">9.侵犯任何第三者的知识产权，版权或公众/私人权利的。</div>
             <div class="p">10.含有法律、行政法规禁止的其他内容的。</div>
             <div class="h5">（二）用户不得利用本平台从事以下活动：</div>
             <div class="p">
               1.未经允许，进入本平台或者使用本平台资源（包括但不限于以任何机器人软件、蜘蛛软件、爬虫软件、刷屏软件或其它自动方式访问或登录本平台）；
             </div>
-            <div class="p">
-              2.未经允许，对本平台功能进行删除、修改或者增加；
-            </div>
-            <div class="p">
-              3.未经允许，对进入本平台中存储、处理或者传输的数据和应用程序进行删除、修改或者增加；
-            </div>
+            <div class="p">2.未经允许，对本平台功能进行删除、修改或者增加；</div>
+            <div class="p">3.未经允许，对进入本平台中存储、处理或者传输的数据和应用程序进行删除、修改或者增加；</div>
             <div class="p">4.故意制作、传播计算机病毒等破坏性程序；</div>
-            <div class="p">
-              5.通过任何方式对本平台内部结构造成或可能造成不合理或不合比例的重大负荷的行为；
-            </div>
-            <div class="p">
-              6.通过任何方式干扰或试图干扰本平台的正常工作或本平台上进行的任何活动；
-            </div>
-            <div class="p">
-              7. 利用本平台进行任何可能对网络的正常运转造成不利影响的行为；
-            </div>
+            <div class="p">5.通过任何方式对本平台内部结构造成或可能造成不合理或不合比例的重大负荷的行为；</div>
+            <div class="p">6.通过任何方式干扰或试图干扰本平台的正常工作或本平台上进行的任何活动；</div>
+            <div class="p">7. 利用本平台进行任何可能对网络的正常运转造成不利影响的行为；</div>
             <div class="p">8.其他危害网络或本平台安全的行为。</div>
           </div>
           <div class="agree-item">
@@ -89,9 +69,7 @@
             <div class="p">
               （一）遵守中国法律法规，遵守所有与网络服务有关的协议、规定和程序，不从事任何非法的行为。
             </div>
-            <div class="p">
-              （二）用户应当对其所提供信息的真实性、准确性、合法性负责，不得出现违法违规和不实信息。
-            </div>
+            <div class="p">（二）用户应当对其所提供信息的真实性、准确性、合法性负责，不得出现违法违规和不实信息。</div>
             <div class="p">
               （三）用户负有对其平台账户的用户名和密码的保密义务，对操作使用其平台账户的所有行为暨该账户下发生的所有活动及事件承担全部责任。
             </div>
@@ -112,9 +90,7 @@
             <div class="p">
               （二）对于因不可抗力、系统故障或维护、通讯或网络故障、病毒或恶意攻击等或本平台不能控制的原因造成服务中断等影响或后果，本平台不承担任何责任，请注意及时备份相关资料。
             </div>
-            <div class="p">
-              （三）服务终止或取消后，本平台没有义务向用户返还或恢复任何信息或数据。
-            </div>
+            <div class="p">（三）服务终止或取消后，本平台没有义务向用户返还或恢复任何信息或数据。</div>
             <div class="p">
               （四）所有联系、通知或送达，本平台都将通过正式的页面通知公告、电子邮件、客服电话、联系手机或常规的信件等方式进行。本平台不承担因用户未提供或未及时、准确提供联系方式而未收到通告或无法送达导致的任何后果。
             </div>
@@ -127,18 +103,13 @@
     </div>
   </div>
 </template>
-<script setup>
-import { ref, onMounted } from 'vue'
-import config from '@/config'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-const unit = ref('')
-
-onMounted(() => {
-  unit.value = config.userAgreementUnit
-})
+const unit = ref('银海')
 </script>
 <style lang="scss" scoped>
-.user-aggreement {
+.login-user-aggreement {
   background-color: #fff;
   padding: $spacing;
   color: $color;
