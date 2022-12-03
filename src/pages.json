@@ -137,6 +137,11 @@
         "name": "packageCommon-login",
         "path": "pages/packageCommon/login/login",
         "query": ""
+      },
+      {
+        "name": "tabbar-process",
+        "path": "pages/tabbar/process/process",
+        "query": ""
       }
     ]
   }
