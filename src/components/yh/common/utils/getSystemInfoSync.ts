@@ -1,4 +1,4 @@
-let systemInfo = null
+let systemInfo:unknown = null
 
 const getSystemInfoSync = () => {
   if (systemInfo === null) {

@@ -1,0 +1,39 @@
+// mixins
+// @import '../mixins';
+
+// 变量
+// @use 'color';
+// @use 'background-color';
+// @import 'border-color';
+// @import 'border-radius';
+// @import 'box-shadow';
+// @import 'font-size';
+// @import 'line-height';
+// @import 'opacity';
+// @use 'spacing';
+// @import 'yh';
+// @import 'z-index';
+
+// 多主题配置
+// @import '../themes/index';
+$page-background-color: #f0f3f9 !default;
+
+$primary: #3882ff !default; // 主题色
+
+$color-title: #001944 !default; // 标题字体颜色
+
+// 文本
+$color: #333 !default; // 正常  已定不改
+$color-title: #333 !default; // 标题 已定不改
+$color-active: $primary !default; // 高亮 已定不改
+
+$color-desc: #999 !default; // 描述
+
+$color-placeholder: #999 !default; // 提示
+$color-input-placeholder: #7a7a7a !default; // 提示
+
+// input 输入框
+$color-input-disabled: #ccc !default; // 禁用
+
+// 默认间距
+$spacing: 32rpx !default;

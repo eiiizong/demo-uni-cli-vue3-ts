@@ -1,0 +1,8 @@
+// @import '../variables/index';
+
+@use './wx-reset';
+@use './flex';
+@use './common';
+/*  #ifdef H5 */
+@use './h5-reset';
+/*  #endif  */

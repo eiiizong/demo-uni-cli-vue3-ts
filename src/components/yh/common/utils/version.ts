@@ -1,6 +1,6 @@
 import { getSystemInfoSync } from './index'
 
-const compareVersion = (v1, v2) => {
+const compareVersion = (v1:any, v2:any,) => {
   v1 = v1.split('.')
   v2 = v2.split('.')
   const len = Math.max(v1.length, v2.length)
@@ -27,8 +27,8 @@ const compareVersion = (v1, v2) => {
   return 0
 }
 
-const gte = (version) => {
-  const system = getSystemInfoSync()
+const gte = (version:any) => {
+  const system:any = getSystemInfoSync()
 
   return compareVersion(system.SDKVersion, version) >= 0
 }
