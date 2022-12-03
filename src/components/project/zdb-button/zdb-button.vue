@@ -16,7 +16,7 @@ const props = defineProps({
   },
   openType: {
     type: String,
-    required: true,
+    default: '',
   },
 })
 

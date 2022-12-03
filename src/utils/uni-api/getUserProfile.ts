@@ -13,7 +13,10 @@
     // 接口调用完成
   })
  */
-const getUserProfile = (desc = '获取您的个人信息用于展示头像', lang = 'en') => {
+const getUserProfile = (
+  desc = '获取您的个人信息用于展示头像',
+  lang: 'en' | 'zh_CN' | 'zh_TW' | undefined = 'en'
+): Promise<UniApp.GetUserProfileRes> => {
   return new Promise((resolve, reject) => {
     uni.getUserProfile({
       desc,

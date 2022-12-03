@@ -100,7 +100,7 @@ export { login } from './login'
 // export { getFileSystemManager } from './getFileSystemManager'
 
 // // 开放接口-用户信息
-// export { getUserProfile } from './getUserProfile'
+export { getUserProfile } from './getUserProfile'
 
 // // 开放接口-设置
 // export { openSetting } from './openSetting'
