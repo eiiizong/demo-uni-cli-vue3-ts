@@ -1,16 +1,12 @@
 <script setup lang="ts">
 import { onLaunch, onShow, onHide, onError } from '@dcloudio/uni-app'
+import { checkAppUpdate } from '@/utils/check'
 import { getSystemInfo } from '@/utils/uni-api'
-import { useStoreSystemInfo } from '~/stores/modules'
-import { requestSPGetHi05List } from '@/server/api'
+import { useStoreSystemInfo } from '@/stores/modules'
 
 const storeSystemInfo = useStoreSystemInfo()
 onLaunch((e) => {
   // console.log('App Launch', e)
-  // 测试接口调用
-  requestSPGetHi05List().then((res) => {
-    console.log(res, 987657657)
-  })
 
   // 获取并储存系统信息
   getSystemInfo().then((res) => {
@@ -20,6 +16,7 @@ onLaunch((e) => {
 
 onShow((e) => {
   // console.log('App Show', e)
+  checkAppUpdate()
 })
 
 onHide(() => {

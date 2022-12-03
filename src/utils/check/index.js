@@ -1,1 +1,0 @@
-export { checkIDCard } from './checkIDCard'

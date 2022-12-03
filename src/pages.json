@@ -10,9 +10,25 @@
       }
     },
     {
-      "path": "pages/tabbar/my/my",
+      "path": "pages/tabbar/bills/bills",
       "style": {
-        "navigationBarTitleText": "我的",
+        "navigationBarTitleText": "蓉易贷一本账",
+        "backgroundColorTop": "#3882ff",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/tabbar/process/process",
+      "style": {
+        "navigationBarTitleText": "进度查询",
+        "backgroundColorTop": "#3882ff",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/tabbar/supervise/supervise",
+      "style": {
+        "navigationBarTitleText": "督办",
         "backgroundColorTop": "#3882ff"
       }
     }
@@ -50,9 +66,7 @@
     "h5": {
       "navigationStyle": "custom"
     },
-    "usingComponents": {
-      "van-button": "/wxcomponents/vant/button/index"
-    }
+    "usingComponents": {}
   },
   "tabBar": {
     "color": "#666666",
@@ -62,16 +76,28 @@
     "borderStyle": "black",
     "list": [
       {
-        "text": "工作台",
+        "text": "首页",
         "pagePath": "pages/tabbar/home/home",
         "iconPath": "static/images/tabbar/icon/home.png",
         "selectedIconPath": "static/images/tabbar/icon/home_active.png"
       },
       {
-        "text": "我的",
-        "pagePath": "pages/tabbar/my/my",
-        "iconPath": "static/images/tabbar/icon/my.png",
-        "selectedIconPath": "static/images/tabbar/icon/my_active.png"
+        "text": "蓉易贷一本账",
+        "pagePath": "pages/tabbar/bills/bills",
+        "iconPath": "static/images/tabbar/icon/bills.png",
+        "selectedIconPath": "static/images/tabbar/icon/bills_active.png"
+      },
+      {
+        "text": "进度查询",
+        "pagePath": "pages/tabbar/process/process",
+        "iconPath": "static/images/tabbar/icon/process.png",
+        "selectedIconPath": "static/images/tabbar/icon/process_active.png"
+      },
+      {
+        "text": "督办",
+        "pagePath": "pages/tabbar/supervise/supervise",
+        "iconPath": "static/images/tabbar/icon/supervise.png",
+        "selectedIconPath": "static/images/tabbar/icon/supervise_active.png"
       }
     ],
     "position": "bottom"

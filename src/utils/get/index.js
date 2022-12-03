@@ -1,1 +1,0 @@
-export { getIsDev } from './getIsDev'

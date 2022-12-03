@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig ,loadEnv} from 'vite'
 import uni from '@dcloudio/vite-plugin-uni'
 import { resolve } from 'path'
 
@@ -11,23 +11,27 @@ const pathResolve = (dir: string): string => {
 }
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  resolve: {
-    alias: {
-      '@': pathResolve('src') + '/',
-      '~': pathResolve('src') + '/',
-    },
-  },
-  css: {
-    preprocessorOptions: {
-      // 全局样式引入
-      scss: {
-        additionalData: '@import "./src/assets/styles/scss/variables/index";',
+export default defineConfig(({mode}) => {
+  const env = loadEnv(mode, process.cwd())
+  console.log('当前环境配置字段===>',env);
+  return {
+    resolve: {
+      alias: {
+        '@': pathResolve('src') + '/',
+        '~': pathResolve('src') + '/',
       },
     },
-  },
-  plugins: [uni()],
-  build: {
-    sourcemap: true,
-  },
+    css: {
+      preprocessorOptions: {
+        // 全局样式引入
+        scss: {
+          additionalData: '@import "./src/assets/styles/scss/variables/index";',
+        },
+      },
+    },
+    plugins: [uni()],
+    build: {
+      sourcemap: true,
+    },
+  }
 })
