@@ -1,6 +1,7 @@
 <template>
   <view class="home">
     <YhNavBar title="首页"></YhNavBar>
+    <div class="cs">测试测试测试测试测试测试测试测试测试</div>
   </view>
 </template>
 
@@ -14,5 +15,8 @@ import YhNavBar from '@/components/yh/nav-bar/nav-bar.vue'
   width: 100%;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(30px);
+  .cs {
+    @include textOverflow();
+  }
 }
 </style>
