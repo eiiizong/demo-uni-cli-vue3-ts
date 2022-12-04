@@ -52,7 +52,7 @@ const handleJumpRoute = (name: string, packageName: string) => {
   padding-top: 40rpx;
   .label {
     display: block;
-    color: $color-placeholder;
+    color: $color-text-placeholder;
     font-weight: 400;
     line-height: 40rpx;
     font-size: 24rpx;
@@ -73,7 +73,7 @@ const handleJumpRoute = (name: string, packageName: string) => {
       left: 0;
       width: $size;
       height: $size;
-      border: 1px solid $color-placeholder;
+      border: 1px solid $color-border;
       border-radius: 2px;
       display: flex;
       transition: all 0.3s;

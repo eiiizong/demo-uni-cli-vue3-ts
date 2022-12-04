@@ -2,8 +2,6 @@
 @forward '../mixins';
 
 // 变量
-@forward 'background-color';
-@forward 'border-color';
 @forward 'border-radius';
 @forward 'box-shadow';
 @forward 'color';
@@ -11,5 +9,4 @@
 @forward 'line-height';
 @forward 'opacity';
 @forward 'spacing';
-@forward 'yh';
 @forward 'z-index';

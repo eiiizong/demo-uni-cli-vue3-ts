@@ -1,18 +1,28 @@
-// 字体颜色 主题色
-// $primary: pink !default;
+// 主题色
 $primary: #3882ff !default; // 主题色
 
-$color-title: #001944 !default; // 标题字体颜色
+/* 行为相关颜色 */
+$color-primary: $primary;
+$color-success: #4cd964;
+$color-warning: #f0ad4e;
+$color-error: #dd524d;
 
-// 文本
-$color: #333 !default; // 正常  已定不改
-$color-title: #333 !default; // 标题 已定不改
-$color-active: $primary !default; // 高亮 已定不改
+/* 文字基本颜色 */
+$color-text: #333; // 基本色
+$color-text-active: $primary; // 主题色
+$color-text-inverse: #fff; // 反色
+$color-text-grey: #999; // 辅助灰色，如加载更多的提示信息
+$color-text-placeholder: #808080;
+$color-text-disable: #c0c0c0;
 
-$color-desc: #999 !default; // 描述
+/* 边框颜色 */
+$color-border: #c8c7cc;
+$color-border-active: $primary;
 
-$color-placeholder: #999 !default; // 提示
-$color-input-placeholder: #7a7a7a !default; // 提示
+/* 文章场景相关 */
+$color-title: #2c405a; // 文章标题颜色
+$color-subtitle: #555; // 二级标题颜色
+$color-paragraph: #3f536e; // 文章段落颜色
 
-// input 输入框
-$color-input-disabled: #ccc !default; // 禁用
+// 背景色
+$color-page: #f0f3f9 !default;

@@ -112,7 +112,7 @@ const unit = ref('银海')
 .login-user-aggreement {
   background-color: #fff;
   padding: $spacing;
-  color: $color;
+  color: $color-text;
   font-size: 32rpx;
   line-height: 1.4;
   .agree-title {
