@@ -26,7 +26,7 @@ export default defineConfig(({ mode }) => {
         // 全局样式引入
         scss: {
           additionalData: `
-            @use "@/assets/styles/variables/_index.scss" as *;
+            @use "@/assets/styles/variables/index.scss" as *;
           `,
         },
       },

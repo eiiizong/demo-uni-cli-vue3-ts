@@ -1,4 +1,6 @@
 /*  #ifdef  MP-WEIXIN  */
+@use '../variables' as *;
+
 // 所有标签 盒模型
 page,
 page:after,
@@ -135,7 +137,10 @@ textarea:before {
 page {
   width: 100%;
   height: 100%;
-  overflow: auto;
+  height: 100vh;
+  min-height: 100%;
+  min-height: 100vh;
+  overflow: hidden;
   > view {
     background-color: $page-background-color;
     width: 100%;

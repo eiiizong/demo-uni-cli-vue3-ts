@@ -2,7 +2,5 @@
 
 // 全局控制变量 包括 mixins
 
-// @use './variables';
-
-// @use './components/index.scss';
-// @use './project/index.scss';
+@use './components';
+@use './project';

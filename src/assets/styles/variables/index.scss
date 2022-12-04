@@ -3,7 +3,7 @@
 
 // 变量
 // @use 'color';
-// @use 'background-color';
+@forward 'background-color';
 // @import 'border-color';
 // @import 'border-radius';
 // @import 'box-shadow';
@@ -16,7 +16,7 @@
 
 // 多主题配置
 // @import '../themes/index';
-$page-background-color: #f0f3f9 !default;
+// $page-background-color: #f0f3f9 !default;
 
 $primary: #3882ff !default; // 主题色
 
