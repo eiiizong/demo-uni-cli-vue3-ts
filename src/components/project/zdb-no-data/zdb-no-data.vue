@@ -1,18 +1,14 @@
 <template>
-  <div class="yh-no-data-wrapper">
-    <img class="img" :src="images01" alt="" />
+  <div class="zdb-no-data">
+    <img class="img" :src="imagesNoData" alt="" />
     <div class="tip">{{ tip }}</div>
   </div>
 </template>
 
 <script setup lang="ts">
-import images01 from './images/02.png'
+import imagesNoData from './images/no-data.png'
 
-import { computed } from 'vue'
-
-const emit = defineEmits(['click'])
-
-const props = defineProps({
+defineProps({
   tip: {
     type: String,
     default: () => '暂无相关数据',
@@ -21,7 +17,7 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
-.yh-no-data-wrapper {
+.zdb-no-data {
   width: 100%;
   margin: 0 auto;
   text-align: center;
@@ -31,8 +27,8 @@ const props = defineProps({
     margin: auto;
   }
   .tip {
-    font-size: 26rpx;
-    line-height: 1.5;
+    font-size: $font-size-base;
+    line-height: 1.4;
     color: $color-text-placeholder;
     padding-bottom: $spacing-col-base;
   }

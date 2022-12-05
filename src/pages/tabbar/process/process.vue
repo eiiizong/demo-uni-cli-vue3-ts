@@ -10,7 +10,7 @@
     <div class="content-no">
       <ZdbNoData></ZdbNoData>
     </div>
-    <ZdbLoadMore></ZdbLoadMore>
+    <ZdbLoadMore :is-load-over="customData.isLoadOver"></ZdbLoadMore>
   </view>
 </template>
 
