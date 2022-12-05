@@ -73,6 +73,12 @@
           }
         },
         {
+          "path": "collapse/collapse",
+          "style": {
+            "navigationBarTitleText": "Collapse 折叠面板"
+          }
+        },
+        {
           "path": "icon/icon",
           "style": {
             "navigationBarTitleText": "Icon 图标"

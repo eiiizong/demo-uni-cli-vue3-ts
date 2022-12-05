@@ -1,5 +1,10 @@
 <template>
-  <view> 12 </view>
+  <view v-if="title" class="van-cell-group__title">
+    {{ title }}
+  </view>
+  <view class="custom-class van-cell-group {{ border ? 'van-hairline--top-bottom' : '' }}">
+    <slot />
+  </view>
 </template>
 
 <script setup lang="ts">
@@ -9,22 +14,20 @@ import { bem } from '../common/utils'
 const emit = defineEmits(['change', 'close', 'open'])
 
 const props = defineProps({
-  // 当前展开面板的 name
-  // 非手风琴模式：(string | number)[]
-  // 手风琴模式：string | number
-  modelValue: {
-    type: [String, Number, Array],
+  // 分组标题
+  title: {
+    type: String,
     default: () => '',
   },
-  // 是否开启手风琴模式
-  accordion: {
+  // 是否展示为圆角卡片风格
+  inset: {
     type: Boolean,
-    default: () => false,
+    value: true,
   },
   // 是否显示外边框
   border: {
     type: Boolean,
-    default: () => false,
+    value: true,
   },
 })
 </script>
