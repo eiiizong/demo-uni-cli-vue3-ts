@@ -32,6 +32,7 @@ onError((err) => {
 })
 </script>
 <style lang="scss">
+// 引入通用样式
 @use '@/assets/styles/index.scss';
 /* 每个页面公共css */
 // @import '@/assets/styles/scss/index.scss';

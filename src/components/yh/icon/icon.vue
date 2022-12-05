@@ -1,27 +1,12 @@
 <template>
-  <view
-    class="yh-icon"
-    :class="getClass"
-    :style="getStyle"
-    @click="emit('click')"
-  >
-    <YhInfo
-      v-if="info !== null || dot"
-      :dot="dot"
-      :info="info"
-      customStyle="z-index: 1"
-    />
-    <image
-      v-if="isImageName"
-      :src="name"
-      mode="aspectFit"
-      class="yh-icon__image"
-    />
+  <view class="yh-icon" :class="getClass" :style="getStyle" @click="emit('click')">
+    <Info v-if="info !== null || dot" :dot="dot" :info="info" customStyle="z-index: 1" />
+    <image v-if="isImageName" :src="name" mode="aspectFit" class="yh-icon__image" />
   </view>
 </template>
 
-<script setup>
-import YhInfo from '../info/info.vue'
+<script setup lang="ts">
+import Info from '../info/info.vue'
 
 import { computed } from 'vue'
 import { addUnit } from '../common/utils'
@@ -110,7 +95,7 @@ const getStyle = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-@import './iconfont/index.scss';
+@use './iconfont/index.scss';
 .yh-icon,
 .yh-icon:before {
   display: inline-block;
