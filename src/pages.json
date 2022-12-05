@@ -189,6 +189,11 @@
         "name": "tabbar-process",
         "path": "pages/tabbar/process/process",
         "query": ""
+      },
+      {
+        "name": "packageProject",
+        "path": "pages/packageProject/cooperative-institution/cooperative-institution",
+        "query": ""
       }
     ]
   }

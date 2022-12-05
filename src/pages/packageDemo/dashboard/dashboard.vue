@@ -62,6 +62,10 @@ const renderData = ref([
         name: 'NoticeBar 通知栏',
       },
       {
+        id: 'collapse',
+        name: 'Collapse 折叠面板',
+      },
+      {
         id: 'divider',
         name: 'Divider 分割线',
       },

@@ -2,7 +2,11 @@
   <view class="tabs"> tabs </view>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+const emit = defineEmits([''])
+const props = defineProps({})
+</script>
 
 <style lang="scss" scoped>
 .tabs {
