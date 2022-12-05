@@ -24,9 +24,11 @@ import HomeHeaderWeather from './HomeHeaderWeather.vue'
 .home-header {
   width: 100%;
   position: relative;
+  padding-bottom: 100px;
   .wrapper {
     display: flex;
     align-items: center;
+    justify-content: space-between;
   }
   .statics {
     position: absolute;
