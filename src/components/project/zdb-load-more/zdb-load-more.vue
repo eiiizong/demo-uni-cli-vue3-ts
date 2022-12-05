@@ -4,29 +4,24 @@
       <span class="text">没有其他数据了</span>
     </div>
     <div class="yh-load-more-tip" v-else>
-      <span class="text" v-if="platform == 'ios' || platform == 'mac'"
-        >上拉加载更多</span
-      >
+      <span class="text" v-if="platform == 'ios' || platform == 'mac'">上拉加载更多</span>
       <div class="button-wrapper" v-else>
-        <YhButton
-          type="info"
-          block
-          @click="emit('loadMore')"
-          custom-style="border-radius:8rpx; height:80rpx"
+        <!-- <YhButton type="info" block @click="emit('loadMore')" custom-style="border-radius:8rpx; height:80rpx"
           >加载更多</YhButton
-        >
+        > -->
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
-import YhButton from '@/components/yh/button/button.vue'
+<script setup lang="ts">
+// import YhButton from '@/components/yh/button/button.vue'
 
 import { onMounted, ref } from 'vue'
 import { getSystemInfo } from '@/utils/uni-api'
 
 const emit = defineEmits(['loadMore'])
+
 const props = defineProps({
   // 是否加载完成
   isLoadOver: {

@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import images01 from './images/02.png'
 
 import { computed } from 'vue'
@@ -33,8 +33,8 @@ const props = defineProps({
   .tip {
     font-size: 26rpx;
     line-height: 1.5;
-    color: $color-placeholder;
-    padding-bottom: 30rpx;
+    color: $color-text-placeholder;
+    padding-bottom: $spacing-col-base;
   }
 }
 </style>

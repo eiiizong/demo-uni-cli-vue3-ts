@@ -25,15 +25,15 @@
     @opensetting="onOpenSetting"
     @chooseavatar="onChooseavatar"
   >
-    <block v-if="loading">
+    <template v-if="loading">
       <view :style="getLoadingStyle">
         <yh-loading :size="loadingSize" :type="loadingType" :color="getLoadingColor" />
       </view>
       <view v-if="loadingText" class="yh-button__loading-text">
         {{ loadingText }}
       </view>
-    </block>
-    <block v-else>
+    </template>
+    <template v-else>
       <view class="yh-button__icon" v-if="icon" style="height: 1.2em">
         <yh-icon
           size="1.2em"
@@ -46,7 +46,7 @@
       <view class="yh-button__text">
         <slot />
       </view>
-    </block>
+    </template>
   </button>
 </template>
 

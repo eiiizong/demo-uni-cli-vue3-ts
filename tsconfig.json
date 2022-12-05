@@ -10,7 +10,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
-    "types": ["@dcloudio/types", "node"],
+    "types": ["@dcloudio/types", "node", "miniprogram-api-typings"],
     "baseUrl": ".",
     "paths": {
       "~/*": ["./src/*"],
