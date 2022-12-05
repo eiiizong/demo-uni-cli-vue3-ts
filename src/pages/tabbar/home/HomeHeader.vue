@@ -1,10 +1,12 @@
 <template>
   <view class="home-header">
-    <div class="avatar">
-      <HomeHeaderAvatar></HomeHeaderAvatar>
-    </div>
-    <div class="weather">
-      <HomeHeaderWeather></HomeHeaderWeather>
+    <div class="wrapper">
+      <div class="avatar">
+        <HomeHeaderAvatar></HomeHeaderAvatar>
+      </div>
+      <div class="weather">
+        <HomeHeaderWeather></HomeHeaderWeather>
+      </div>
     </div>
     <div class="statics">
       <HomeHeaderToDayStatistics></HomeHeaderToDayStatistics>
@@ -21,5 +23,16 @@ import HomeHeaderWeather from './HomeHeaderWeather.vue'
 <style lang="scss" scoped>
 .home-header {
   width: 100%;
+  position: relative;
+  .wrapper {
+    display: flex;
+    align-items: center;
+  }
+  .statics {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
 }
 </style>

@@ -3,7 +3,6 @@
     :id="id"
     :data-detail="dataset"
     :class="getButtonClass"
-    hover-class="yh-button--active hover-class"
     :lang="lang"
     :form-type="formType"
     :style="getButtonStyle"
