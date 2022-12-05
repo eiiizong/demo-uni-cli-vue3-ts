@@ -54,15 +54,6 @@ const renderList = [
   'search',
   'checkbox',
   'checkbox-checked',
-
-  'back',
-  'arrow-right',
-  'close',
-  'close-round-fill',
-  'search',
-  'checkbox',
-  'checkbox-checked',
-]
 ]
 </script>
 
