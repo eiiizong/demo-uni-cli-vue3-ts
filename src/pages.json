@@ -73,6 +73,17 @@
           }
         }
       ]
+    },
+    {
+      "root": "pages/packageQuery",
+      "pages": [
+        {
+          "path": "policy/policy",
+          "style": {
+            "navigationBarTitleText": "政策文件"
+          }
+        }
+      ]
     }
   ],
   "globalStyle": {

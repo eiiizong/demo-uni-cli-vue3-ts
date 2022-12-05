@@ -1,22 +1,23 @@
 <template>
   <view class="home">
-    <YhNavBar title="首页"></YhNavBar>
-    <div class="cs">测试测试测试测试测试测试测试测试测试</div>
+    <HomeHeader></HomeHeader>
+    <HomeSearch></HomeSearch>
+    <HomePopularServices></HomePopularServices>
+    <HomeNews></HomeNews>
+    <HomePolicy></HomePolicy>
   </view>
 </template>
 
 <script setup lang="ts">
-// import { ref, computed } from 'vue'
-import YhNavBar from '@/components/yh/nav-bar/nav-bar.vue'
+import HomeHeader from './HomeHeader.vue'
+import HomeSearch from './HomeSearch.vue'
+import HomePopularServices from './HomePopularServices.vue'
+import HomeNews from './HomeNews.vue'
+import HomePolicy from './HomePolicy.vue'
 </script>
 
 <style lang="scss" scoped>
 .home {
   width: 100%;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(30px);
-  .cs {
-    @include textOverflow();
-  }
 }
 </style>
