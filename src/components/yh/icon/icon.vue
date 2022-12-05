@@ -1,6 +1,6 @@
 <template>
   <view class="yh-icon" :class="getClass" :style="getStyle" @click="emit('click')">
-    <Info v-if="info !== null || dot" :dot="dot" :info="info" customStyle="z-index: 1" />
+    <Info :dot="dot" :info="info" customStyle="z-index: 1" />
     <image v-if="isImageName" :src="name" mode="aspectFit" class="yh-icon__image" />
   </view>
 </template>
@@ -17,7 +17,7 @@ const props = defineProps({
   // 图标名称或图片链接
   name: {
     type: String,
-    default: () => '',
+    required: true,
   },
   // 是否显示图标右上角小红点
   dot: {
@@ -26,7 +26,7 @@ const props = defineProps({
   },
   // 图标右上角文字提示
   info: {
-    type: [String],
+    type: [String, Number],
     default: () => '',
   },
   // 图标颜色
@@ -47,10 +47,11 @@ const props = defineProps({
   // 类名前缀
   classPrefix: {
     type: String,
-    default: () => 'yh-icon',
+    default: () => 'yh-iconfont',
   },
 })
 
+// icon 名称是否为 url 链接
 const isImageName = computed(() => {
   const { name } = props
   let tag = false
@@ -82,7 +83,7 @@ const getStyle = computed(() => {
     str += `color: ${color}; `
   }
 
-  if (size) {
+  if (size && addUnit(size)) {
     str += `font-size: ${addUnit(size)}; `
   }
 
@@ -100,24 +101,18 @@ const getStyle = computed(() => {
 .yh-icon:before {
   display: inline-block;
 }
-
-:host {
-  display: -webkit-inline-flex;
-  display: inline-flex;
-  -webkit-align-items: center;
-  align-items: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-}
-.yh-icon--image {
-  width: 1em;
-  height: 1em;
-}
-.yh-icon__image {
-  width: 100%;
-  height: 100%;
-}
-.yh-icon__info {
-  z-index: 1;
+.yh-icon {
+  position: relative;
+  &--image {
+    width: 1em;
+    height: 1em;
+  }
+  &__image {
+    width: 100%;
+    height: 100%;
+  }
+  &__info {
+    z-index: 1;
+  }
 }
 </style>

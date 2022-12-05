@@ -5,6 +5,11 @@
     <HomePopularServices></HomePopularServices>
     <HomeNews></HomeNews>
     <HomePolicy></HomePolicy>
+
+    <div style="positon: relative">
+      123
+      <YhInfo info="" dot></YhInfo>
+    </div>
   </view>
 </template>
 
@@ -14,6 +19,7 @@ import HomeSearch from './HomeSearch.vue'
 import HomePopularServices from './HomePopularServices.vue'
 import HomeNews from './HomeNews.vue'
 import HomePolicy from './HomePolicy.vue'
+import YhInfo from '@/components/yh/info/info.vue'
 </script>
 
 <style lang="scss" scoped>

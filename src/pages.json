@@ -67,6 +67,12 @@
           }
         },
         {
+          "path": "icon/icon",
+          "style": {
+            "navigationBarTitleText": "Icon 图标"
+          }
+        },
+        {
           "path": "use-pinia/use-pinia",
           "style": {
             "navigationBarTitleText": "使用pinia"

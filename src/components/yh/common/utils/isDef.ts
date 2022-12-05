@@ -1,9 +1,9 @@
 /**
- * 
- * @param value 
- * @returns 
+ *
+ * @param value
+ * @returns
  */
-const isDef = (value:unknown) => {
+const isDef = (value: string | number) => {
   return value !== undefined && value !== null
 }
 

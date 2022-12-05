@@ -1,8 +1,12 @@
-import { memoize } from './index'
-
 const PREFIX = 'yh-'
 
-const join = (name, mods) => {
+/**
+ *
+ * @param name
+ * @param mods
+ * @returns
+ */
+const join = (name: string, mods: string[]) => {
   name = PREFIX + name
   mods = mods.map((mod) => {
     return name + '--' + mod
@@ -11,12 +15,18 @@ const join = (name, mods) => {
   return mods.join(' ')
 }
 
-const traversing = (mods, conf) => {
+/**
+ * 
+ * @param mods 
+ * @param conf 
+ * @returns 
+ */
+const traversing = (mods: string[], conf: any) => {
   if (!conf) {
     return
   }
   if (typeof conf === 'string' || typeof conf === 'number') {
-    mods.push(conf)
+    mods.push(conf + '')
   } else if (Array.isArray(conf)) {
     conf.forEach((item) => {
       traversing(mods, item)
@@ -28,10 +38,16 @@ const traversing = (mods, conf) => {
   }
 }
 
-const bem = memoize((name, conf) => {
-  var mods = []
+/**
+ * 
+ */
+// const bem: (name: string, conf:any):string
+const bem = (name: string, conf:any) => {
+  var mods:string[] = []
   traversing(mods, conf)
+  console.log('mods',mods);
+  
   return join(name, mods)
-})
+}
 
 export { bem }

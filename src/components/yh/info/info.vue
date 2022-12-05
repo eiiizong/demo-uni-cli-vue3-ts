@@ -1,12 +1,10 @@
 <template>
-  <view v-if="(info !== null && info !== '') || dot" class="yh-info" :class="getClass" :style="customStyle">{{
-    dot ? '' : info
-  }}</view>
+  <view v-if="isShow" :class="getClass" :style="customStyle" @click="emit('click')">
+    {{ dot ? '' : info }}
+  </view>
 </template>
 
 <script setup lang="ts">
-import YhTransition from '../transition/transition.vue'
-
 import { computed } from 'vue'
 import { bem } from '../common/utils'
 
@@ -18,30 +16,39 @@ const props = defineProps({
     type: String,
     default: () => '',
   },
-  // 是否显示图标右上角小红点
+  // 是否显示图标右上角小红点 优先级大于info参数
   dot: {
     type: Boolean,
     default: () => false,
   },
   // 图标右上角文字提示
   info: {
-    type: [String],
+    type: [String, Number],
     default: () => '',
   },
 })
 
+// 是否显示组件
+const isShow = computed(() => {
+  const { info, dot } = props
+  let result = false
+  if ((info !== null && info !== '') || dot) {
+    result = true
+  }
+  return result
+})
+
+// 组件类名
 const getClass = computed(() => {
   let str = ''
   const { dot } = props
   str = bem('info', { dot })
   return str
 })
-
-// for prevent touchmove
-const noop = () => {}
 </script>
 
 <style lang="scss" scoped>
+$color: #ee0a24;
 .yh-info {
   position: absolute;
   top: 0;
@@ -53,35 +60,21 @@ const noop = () => {}
   transform: translate(50%, -50%);
   -webkit-transform-origin: 100%;
   transform-origin: 100%;
-  min-width: 16px;
-  min-width: var(--info-size, $info-size);
-  padding: 0 3px;
-  padding: var(--info-padding, $info-padding);
+  min-width: 32rpx;
+  padding: 0 6rpx;
   color: #fff;
-  color: var(--info-color, $info-color);
   font-weight: 500;
-  font-weight: var(--info-font-weight, $info-font-weight);
-  font-size: 12px;
-  font-size: var(--info-font-size, $info-font-size);
+  font-size: 24rpx;
   font-family: PingFang SC, Helvetica Neue, Arial, sans-serif;
-  font-family: var(--info-font-family, $info-font-family);
-  line-height: 14px;
-  line-height: calc(var(--info-size, $info-size) - var(--info-border-width, $info-border-width) * 2);
-  background-color: #ee0a24;
-  background-color: var(--info-background-color, $info-background-color);
+  line-height: 28rpx;
+  background-color: $color;
   border: 1px solid #fff;
-  border: var(--info-border-width, $info-border-width) solid var(--white, $white);
-  border-radius: 16px;
-  border-radius: var(--info-size, $info-size);
-}
-.yh-info--dot {
-  min-width: 0;
-  border-radius: 100%;
-  width: 8px;
-  width: var(--info-dot-size, $info-dot-size);
-  height: 8px;
-  height: var(--info-dot-size, $info-dot-size);
-  background-color: #ee0a24;
-  background-color: var(--info-dot-color, $info-dot-color);
+  border-radius: 32rpx;
+  &--dot {
+    min-width: 0;
+    border-radius: 50%;
+    width: 16rpx;
+    height: 16rpx;
+  }
 }
 </style>
