@@ -304,6 +304,7 @@ const getLoadingStyle = computed(() => {
 
   return str
 })
+
 const onClick = (event) => {
   const { disabled, loading } = props
   if (!disabled && !loading) {
@@ -346,7 +347,7 @@ const onChooseavatar = (event) => {
 </script>
 
 <style lang="scss" scoped>
-@import '../common/style/hairline.scss';
+@use '../common/style/hairline.scss';
 .yh-button {
   position: relative;
   display: inline-flex;
@@ -358,11 +359,11 @@ const onChooseavatar = (event) => {
   vertical-align: middle;
   -webkit-appearance: none;
   -webkit-text-size-adjust: 100%;
-  height: var(--button-default-height, $button-default-height);
-  line-height: var(--button-line-height, $button-line-height);
-  font-size: var(--button-default-font-size, $button-default-font-size);
-  transition: opacity $animation-duration-fast;
-  border-radius: var(--button-border-radius, $button-border-radius);
+  height: 88rpx;
+  line-height: 40rpx;
+  font-size: 32rpx;
+  transition: opacity 0.2;
+  border-radius: 4rpx;
 
   &::before {
     position: absolute;
@@ -375,8 +376,8 @@ const onChooseavatar = (event) => {
     transform: translate(-50%, -50%);
     opacity: 0;
     content: ' ';
-    background-color: $black;
-    border-color: $black;
+    background-color: #000;
+    border-color: #000;
   }
 
   // reset weapp default border
@@ -393,83 +394,78 @@ const onChooseavatar = (event) => {
   }
 
   &--default {
-    color: var(--button-default-color, $button-default-color);
-    background: var(--button-default-background-color, $button-default-background-color);
-    border: var(--button-border-width, $button-border-width) solid
-      var(--button-default-border-color, $button-default-border-color);
+    color: #323233;
+    background: #fff;
+    border: 1px solid $color-border;
   }
 
   &--primary {
-    color: var(--button-primary-color, $button-primary-color);
-    background: var(--button-primary-background-color, $button-primary-background-color);
-    border: var(--button-border-width, $button-border-width) solid
-      var(--button-primary-border-color, $button-primary-border-color);
+    color: #fff;
+    background: $color-primary;
+    border: 1px solid $color-primary;
   }
 
   &--info {
-    color: var(--button-info-color, $button-info-color);
-    background: var(--button-info-background-color, $button-info-background-color);
-    border: var(--button-border-width, $button-border-width) solid
-      var(--button-info-border-color, $button-info-border-color);
+    color: #fff;
+    background: $color-info;
+    border: 1px solid $color-info;
   }
 
   &--danger {
-    color: var(--button-danger-color, $button-danger-color);
-    background: var(--button-danger-background-color, $button-danger-background-color);
-    border: var(--button-border-width, $button-border-width) solid
-      var(--button-danger-border-color, $button-danger-border-color);
+    color: #fff;
+    background: $color-danger;
+    border: 1px solid $color-danger;
   }
 
   &--warning {
-    color: var(--button-warning-color, $button-warning-color);
-    background: var(--button-warning-background-color, $button-warning-background-color);
-    border: var(--button-border-width, $button-border-width) solid
-      var(--button-warning-border-color, $button-warning-border-color);
+    color: #fff;
+    background: $color-warning;
+    border: 1px solid $color-warning;
   }
 
   &--plain {
-    background: var(--button-plain-background-color, $button-plain-background-color);
+    background: #fff;
 
     &.yh-button--primary {
-      color: var(--button-primary-background-color, $button-primary-background-color);
+      color: $color-primary;
     }
 
     &.yh-button--info {
-      color: var(--button-info-background-color, $button-info-background-color);
+      color: $color-info;
     }
 
     &.yh-button--danger {
-      color: var(--button-danger-background-color, $button-danger-background-color);
+      color: $color-danger;
     }
 
     &.yh-button--warning {
-      color: var(--button-warning-background-color, $button-warning-background-color);
+      color: $color-warning;
     }
   }
 
   &--large {
     width: 100%;
-    height: var(--button-large-height, $button-large-height);
+    height: 100rpx;
   }
 
   &--normal {
-    padding: 0 15px;
-    font-size: var(--button-normal-font-size, $button-normal-font-size);
+    padding: 0 30rpx;
+    font-size: 24rpx;
   }
 
   &--small {
-    min-width: var(--button-small-min-width, $button-small-min-width);
-    height: var(--button-small-height, $button-small-height);
-    padding: 0 var(--padding-xs, $padding-xs);
-    font-size: var(--button-small-font-size, $button-small-font-size);
+    min-width: 120rpx;
+    height: 60rpx;
+    padding: 0 16rpx;
+    font-size: 24rpx;
   }
 
   // mini图标默认宽度50px，文字不能超过4个
   &--mini {
     display: inline-block;
-    min-width: var(--button-mini-min-width, $button-mini-min-width);
-    height: var(--button-mini-height, $button-mini-height);
-    font-size: var(--button-mini-font-size, $button-mini-font-size);
+    min-width: 100rpx;
+    height: 44rpx;
+    font-size: 20rpx;
 
     & + .yh-button--mini {
       margin-left: 5px;
@@ -482,7 +478,7 @@ const onChooseavatar = (event) => {
   }
 
   &--round {
-    border-radius: var(--button-round-border-radius, $button-round-border-radius);
+    border-radius: 999px;
   }
 
   &--square {
@@ -490,7 +486,7 @@ const onChooseavatar = (event) => {
   }
 
   &--disabled {
-    opacity: var(--button-disabled-opacity, $button-disabled-opacity);
+    opacity: 0.5;
   }
 
   &__text {
@@ -499,7 +495,7 @@ const onChooseavatar = (event) => {
 
   &__loading-text,
   &__icon + &__text:not(:empty) {
-    margin-left: var(--padding-base, $padding-base);
+    margin-left: 8rpx;
   }
 
   &--hairline {
@@ -509,11 +505,11 @@ const onChooseavatar = (event) => {
     &::after {
       border-color: inherit;
       border-width: 1px;
-      border-radius: calc(var(--button-border-radius, $button-border-radius) * 2);
+      border-radius: calc(4rpx * 2);
     }
 
     &.yh-button--round::after {
-      border-radius: var(--button-round-border-radius, $button-round-border-radius);
+      border-radius: 999px;
     }
 
     &.yh-button--square::after {

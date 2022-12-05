@@ -77,7 +77,7 @@ const handleView = () => {
     }
   }
   .tip {
-    color: $color-error;
+    color: $color-danger;
   }
 }
 </style>

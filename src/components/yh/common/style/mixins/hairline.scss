@@ -1,3 +1,4 @@
+$color-border: #f00;
 @mixin hairline-common() {
   position: absolute;
   box-sizing: border-box;
@@ -6,7 +7,7 @@
   pointer-events: none;
 }
 
-@mixin hairline($color: $border-color) {
+@mixin hairline($color: $color-border) {
   @include hairline-common();
   top: -50%;
   right: -50%;
@@ -16,7 +17,7 @@
   transform: scale(0.5);
 }
 
-@mixin hairline-top($color: $border-color, $left: 0, $right: 0) {
+@mixin hairline-top($color: $color-border, $left: 0, $right: 0) {
   @include hairline-common();
   top: 0;
   right: $right;
@@ -25,7 +26,7 @@
   transform: scaleY(0.5);
 }
 
-@mixin hairline-bottom($color: $border-color, $left: 0, $right: 0) {
+@mixin hairline-bottom($color: $color-border, $left: 0, $right: 0) {
   @include hairline-common();
 
   right: $right;

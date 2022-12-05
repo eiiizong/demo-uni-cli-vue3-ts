@@ -1,6 +1,5 @@
-let systemInfo:unknown = null
-
 const getSystemInfoSync = () => {
+  let systemInfo: any = null
   if (systemInfo === null) {
     systemInfo = uni.getSystemInfoSync()
   }

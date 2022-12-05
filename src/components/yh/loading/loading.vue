@@ -1,15 +1,8 @@
 <template>
   <view :class="getClass">
-    <view
-      :class="'yh-loading__spinner yh-loading__spinner--' + type"
-      :style="getSpinnerStyle"
-    >
+    <view :class="'yh-loading__spinner yh-loading__spinner--' + type" :style="getSpinnerStyle">
       <block v-if="type === 'spinner'">
-        <view
-          v-for="(item, index) in array12"
-          :key="index"
-          class="yh-loading__dot"
-        />
+        <view v-for="(item, index) in array12" :key="index" class="yh-loading__dot" />
       </block>
     </view>
     <view class="yh-loading__text" style="getTextStyle">
@@ -18,7 +11,7 @@
   </view>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 import { bem, addUnit } from '../common/utils'
 
@@ -65,6 +58,7 @@ const getClass = computed(() => {
   str = bem('loading', { vertical })
   return str
 })
+
 const getSpinnerStyle = computed(() => {
   let str = ''
   const { color, size, customStyle } = props
@@ -80,6 +74,7 @@ const getSpinnerStyle = computed(() => {
   }
   return str
 })
+
 const getTextStyle = computed(() => {
   let str = ''
   const { textSize } = props
@@ -109,21 +104,16 @@ const getTextStyle = computed(() => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--loading-spinner-color, $loading-spinner-color);
+  color: #c8c9cc;
   &__spinner {
     position: relative;
     box-sizing: border-box;
-    width: var(--loading-spinner-size, $loading-spinner-size);
+    width: 60rpx;
     // compatible for 0.x, users may set width or height in root element
     max-width: 100%;
     max-height: 100%;
-    height: var(--loading-spinner-size, $loading-spinner-size);
-    animation: yh-rotate
-      var(
-        --loading-spinner-animation-duration,
-        $loading-spinner-animation-duration
-      )
-      linear infinite;
+    height: 60rpx;
+    animation: yh-rotate 0.8s linear infinite;
 
     &--spinner {
       animation-timing-function: steps(12);
@@ -137,10 +127,10 @@ const getTextStyle = computed(() => {
   }
 
   &__text {
-    margin-left: var(--padding-xs, $padding-xs);
-    color: var(--loading-text-color, $loading-text-color);
-    font-size: var(--loading-text-font-size, $loading-text-font-size);
-    line-height: var(--loading-text-line-height, $loading-text-line-height);
+    margin-left: 16rpx;
+    color: #969799;
+    font-size: 28rpx;
+    line-height: 40rpx;
 
     &:empty {
       display: none;
@@ -151,7 +141,7 @@ const getTextStyle = computed(() => {
     flex-direction: column;
 
     .yh-loading__text {
-      margin: var(--padding-xs, $padding-xs) 0 0;
+      margin: 16rpx 0 0;
     }
   }
 

@@ -1,6 +1,6 @@
 export { addUnit } from './addUnit'
 export { bem } from './bem'
-// export { getSystemInfoSync } from './getSystemInfoSync'
+export { getSystemInfoSync } from './getSystemInfoSync'
 // export { isArray } from './isArray'
 export { isDef } from './isDef'
 export { isNumber } from './isNumber'
@@ -8,12 +8,12 @@ export { isNumber } from './isNumber'
 // export { memoize } from './memoize'
 // export { nextTick } from './nextTick'
 // export { requestAnimationFrame } from './requestAnimationFrame'
-// export {
-//   canIUseModel,
-//   canIUseFormFieldButton,
-//   canIUseAnimate,
-//   canIUseGroupSetData,
-//   canIUseNextTick,
-//   canIUseCanvas2d,
-//   canIUseGetUserProfile,
-// } from './version'
+export {
+  canIUseModel,
+  canIUseFormFieldButton,
+  canIUseAnimate,
+  canIUseGroupSetData,
+  canIUseNextTick,
+  canIUseCanvas2d,
+  canIUseGetUserProfile,
+} from './version'

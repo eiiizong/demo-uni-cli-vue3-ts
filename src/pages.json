@@ -61,6 +61,12 @@
       "root": "pages/packageDemo",
       "pages": [
         {
+          "path": "button/button",
+          "style": {
+            "navigationBarTitleText": "Button 按钮"
+          }
+        },
+        {
           "path": "dashboard/dashboard",
           "style": {
             "navigationBarTitleText": "示例演示"
