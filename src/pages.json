@@ -87,10 +87,34 @@
       ]
     },
     {
-      "root": "pages/packageQuery",
+      "root": "pages/packageProject",
       "pages": [
         {
-          "path": "policy/policy",
+          "path": "business-intro/business-intro",
+          "style": {
+            "navigationBarTitleText": "业务介绍"
+          }
+        },
+        {
+          "path": "cooperative-institution/cooperative-institution",
+          "style": {
+            "navigationBarTitleText": "合作机构"
+          }
+        },
+        {
+          "path": "institution-details/institution-details",
+          "style": {
+            "navigationBarTitleText": "机构详情"
+          }
+        },
+        {
+          "path": "process-details/process-details",
+          "style": {
+            "navigationBarTitleText": "流程详情"
+          }
+        },
+        {
+          "path": "query-policy/query-policy",
           "style": {
             "navigationBarTitleText": "政策文件"
           }

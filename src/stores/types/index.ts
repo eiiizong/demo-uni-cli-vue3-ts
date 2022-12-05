@@ -1,16 +1,5 @@
 // 全局状态管理类型
 namespace Store {
-    // 主题
-    export type StoreThemeName = 'default' | 'dark'
-  
-    export interface StoreTheme {
-      // 主题名称
-      name?: StoreThemeName
-      // 主题颜色
-      color?: string
-    }
-    // 语言
-    export type StoreLanguage = 'zh-cn' | 'en'
     //  用户信息
     export interface StoreUserInfo {
       // 用户唯一 token

@@ -1,5 +1,5 @@
 import type { Ref } from 'vue'
-import type { StoreUserInfo } from '@/stores/types'
+import type { Store } from '@/stores/types'
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
@@ -15,11 +15,11 @@ import { defineStore } from 'pinia'
  * store 用户信息
  */
 const useStoreUserInfo = defineStore('storeUserInfo', () => {
-  const userInfo: Ref<StoreUserInfo> = ref({})
+  const userInfo: Ref<Store.StoreUserInfo> = ref({})
 
   const getStoreUserInfo = computed(() => userInfo.value)
 
-  function updateStoreUserInfo(data: StoreUserInfo) {
+  function updateStoreUserInfo(data: Store.StoreUserInfo) {
     userInfo.value = data
   }
 
