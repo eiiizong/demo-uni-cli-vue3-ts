@@ -67,6 +67,12 @@
           }
         },
         {
+          "path": "cell/cell",
+          "style": {
+            "navigationBarTitleText": "Cell 单元格"
+          }
+        },
+        {
           "path": "dashboard/dashboard",
           "style": {
             "navigationBarTitleText": "示例演示"

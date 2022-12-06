@@ -28,6 +28,10 @@ const renderData = ref([
         name: 'Button 按钮',
       },
       {
+        id: 'cell',
+        name: 'Cell 单元格',
+      },
+      {
         id: 'icon',
         name: 'Icon 图标',
       },
