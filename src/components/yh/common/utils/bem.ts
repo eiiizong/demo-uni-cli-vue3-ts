@@ -45,8 +45,6 @@ const traversing = (mods: string[], conf: any) => {
 const bem = (name: string, conf:any) => {
   var mods:string[] = []
   traversing(mods, conf)
-  console.log('mods',mods);
-  
   return join(name, mods)
 }
 

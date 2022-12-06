@@ -12,7 +12,6 @@ import { computed } from 'vue'
 import { addUnit } from '../common/utils'
 
 const emit = defineEmits(['click'])
-
 const props = defineProps({
   // 图标名称或图片链接
   name: {
@@ -61,6 +60,7 @@ const isImageName = computed(() => {
   return tag
 })
 
+// 根据参数获取类名
 const getClass = computed(() => {
   let str = ''
   const { classPrefix, name } = props
@@ -76,6 +76,7 @@ const getClass = computed(() => {
   return str
 })
 
+// 获取style
 const getStyle = computed(() => {
   let str = ''
   const { color, size, customStyle } = props
@@ -97,12 +98,14 @@ const getStyle = computed(() => {
 
 <style lang="scss" scoped>
 @use './iconfont/index.scss';
-.yh-icon,
-.yh-icon:before {
-  display: inline-block;
-}
+@use '../common/style/var.scss' as *;
+
 .yh-icon {
   position: relative;
+  display: inline-block;
+  &::before {
+    display: inline-block;
+  }
   &--image {
     width: 1em;
     height: 1em;

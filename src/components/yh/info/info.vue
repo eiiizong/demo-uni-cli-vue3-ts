@@ -48,7 +48,8 @@ const getClass = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-$color: #ee0a24;
+@use '../common/style/var.scss' as *;
+
 .yh-info {
   position: absolute;
   top: 0;
@@ -60,21 +61,22 @@ $color: #ee0a24;
   transform: translate(50%, -50%);
   -webkit-transform-origin: 100%;
   transform-origin: 100%;
-  min-width: 32rpx;
-  padding: 0 6rpx;
-  color: #fff;
-  font-weight: 500;
-  font-size: 24rpx;
-  font-family: PingFang SC, Helvetica Neue, Arial, sans-serif;
-  line-height: 28rpx;
-  background-color: $color;
-  border: 1px solid #fff;
-  border-radius: 32rpx;
+  min-width: $yh-info-size;
+  padding: $yh-info-padding;
+  color: $yh-info-color;
+  font-weight: $yh-info-font-weight;
+  font-size: $yh-info-font-size;
+  font-family: $yh-info-font-family;
+  line-height: calc($yh-info-size - $yh-info-border-width * 2);
+  background-color: $yh-info-background-color;
+  border: $yh-info-border-width solid $yh--white;
+  border-radius: $yh-info-size;
   &--dot {
     min-width: 0;
-    border-radius: 50%;
-    width: 16rpx;
-    height: 16rpx;
+    border-radius: 100%;
+    width: $yh-info-dot-size;
+    height: $yh-info-dot-size;
+    background-color: $yh-info-dot-color;
   }
 }
 </style>
