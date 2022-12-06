@@ -29,8 +29,13 @@
     </demo-block>
 
     <demo-block title="页面跳转">
-      <yh-cell title="单元格" is-link url="/pages/dashboard/index" />
-      <yh-cell title="单元格" is-link url="/pages/dashboard/index" link-type="redirectTo" />
+      <yh-cell title="单元格" is-link url="/pages/packageDemo/dashboard/dashboard" />
+      <yh-cell
+        title="单元格"
+        is-link
+        url="/pages/packageDemo/dashboard/dashboard"
+        link-type="redirectTo"
+      />
     </demo-block>
 
     <demo-block title="分组标题">
@@ -43,14 +48,18 @@
     </demo-block>
 
     <demo-block title="使用插槽">
-      <yh-cell value="内容" icon="shop-o" is-link>
-        <view slot="title">
-          <view class="title">单元格</view>
-          <yh-tag type="danger">标签</yh-tag>
-        </view>
+      <yh-cell value="内容" icon="wifi" is-link>
+        <template #title>
+          <view>
+            <view class="title">单元格</view>
+            <!-- <yh-tag type="danger">标签</yh-tag> -->
+          </view>
+        </template>
       </yh-cell>
       <yh-cell title="单元格" :border="false">
-        <yh-icon slot="right-icon" name="search" />
+        <template #rightIcon>
+          <yh-icon name="search" />
+        </template>
       </yh-cell>
     </demo-block>
 
@@ -63,26 +72,12 @@
 import DemoBlock from '@/pages/packageDemo/components/demo-block/demo-block.vue'
 import YhCellGroup from '@/components/yh/cell-group/cell-group.vue'
 import YhCell from '@/components/yh/cell/cell.vue'
+import YhIcon from '@/components/yh/icon/icon.vue'
 </script>
 
 <style lang="scss" scoped>
-.demo-icon {
+.demo-cell {
   width: 100%;
-  color: #323232;
-  .items {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    .item {
-      text-align: center;
-      margin-bottom: 32rpx;
-      margin: 0 32rpx;
-      .name {
-        font-size: 24rpx;
-        line-height: 48rpx;
-        color: #666;
-      }
-    }
-  }
+  background-color: #f8f8f8;
 }
 </style>

@@ -1,16 +1,21 @@
 <template>
-  <view v-if="title" class="van-cell-group__title">
+  <view v-if="title" class="yh-cell-group__title">
     {{ title }}
   </view>
-  <view class="custom-class van-cell-group {{ border ? 'van-hairline--top-bottom' : '' }}">
+  <view :class="getClass">
     <slot />
   </view>
 </template>
 
+<!-- 添加之后 可以样式穿透 目前未找到setup语法如何编写-->
+<script lang="ts">
+export default {
+  options: { styleIsolation: 'shared' },
+}
+</script>
+
 <script setup lang="ts">
 import { computed } from 'vue'
-import { bem } from '../common/utils'
-
 const emit = defineEmits(['change', 'close', 'open'])
 
 const props = defineProps({
@@ -29,37 +34,34 @@ const props = defineProps({
     type: Boolean,
     value: true,
   },
+  customClass: {
+    type: String,
+    default: () => '',
+  },
+})
+
+const getClass = computed(() => {
+  let str = ''
+  const { border, customClass } = props
+  if (border) {
+    str += ` yh-hairline--top-bottom`
+  }
+  if (customClass) {
+    str += ` ${customClass}`
+  }
+  return str
 })
 </script>
 
 <style lang="scss" scoped>
-$color: #ee0a24;
-.yh-info {
-  position: absolute;
-  top: 0;
-  right: 0;
-  box-sizing: border-box;
-  white-space: nowrap;
-  text-align: center;
-  -webkit-transform: translate(50%, -50%);
-  transform: translate(50%, -50%);
-  -webkit-transform-origin: 100%;
-  transform-origin: 100%;
-  min-width: 32rpx;
-  padding: 0 6rpx;
-  color: #fff;
-  font-weight: 500;
-  font-size: 24rpx;
-  font-family: PingFang SC, Helvetica Neue, Arial, sans-serif;
-  line-height: 28rpx;
-  background-color: $color;
-  border: 1px solid #fff;
-  border-radius: 32rpx;
-  &--dot {
-    min-width: 0;
-    border-radius: 50%;
-    width: 16rpx;
-    height: 16rpx;
+@use '../common/style/var.scss' as *;
+
+.yh-cell-group {
+  &__title {
+    padding: $yh-cell-group-title-padding;
+    font-size: $yh-cell-group-title-font-size;
+    line-height: $yh-cell-group-title-line-height;
+    color: $yh-cell-group-title-color;
   }
 }
 </style>

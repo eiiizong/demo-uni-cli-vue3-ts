@@ -1,8 +1,8 @@
 @font-face {
   font-family: "yh-iconfont"; /* Project id 3397845 */
-  src: url('iconfont.woff2?t=1670211208993') format('woff2'),
-       url('iconfont.woff?t=1670211208993') format('woff'),
-       url('iconfont.ttf?t=1670211208993') format('truetype');
+  src: url('iconfont.woff2?t=1670316888544') format('woff2'),
+       url('iconfont.woff?t=1670316888544') format('woff'),
+       url('iconfont.ttf?t=1670316888544') format('truetype');
 }
 
 .yh-iconfont {
@@ -105,7 +105,19 @@
   content: "\e67d";
 }
 
+.yh-iconfont-arrow-left:before {
+  content: "\e7e2";
+}
+
+.yh-iconfont-arrow-up:before {
+  content: "\e7e3";
+}
+
 .yh-iconfont-arrow-right:before {
   content: "\e665";
+}
+
+.yh-iconfont-arrow-down:before {
+  content: "\e7e1";
 }
 

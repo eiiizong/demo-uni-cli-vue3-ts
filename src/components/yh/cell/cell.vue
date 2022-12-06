@@ -1,45 +1,62 @@
 <template>
   <view
-    hover-class="yh-cell--hover hover-class"
+    :hover-class="['yh-cell--hover', hoverClass]"
     hover-stay-time="70"
     :style="customStyle"
     :class="getCellClass"
     @click="onClick"
   >
-    <Icon
-      v-if="icon"
-      :name="icon"
-      class="yh-cell__left-icon-wrap"
-      custom-class="yh-cell__left-icon"
-    />
-    <slot v-else name="icon" />
+    <template v-if="icon">
+      <Icon :name="icon" class="yh-cell__left-icon-wrap" custom-class="yh-cell__left-icon" />
+    </template>
+    <template v-else>
+      <slot name="icon" />
+    </template>
 
-    <view :style="getTitleStyle" class="yh-cell__title title-class">
-      <block v-if="title">{{ title }}</block>
-      <slot v-else name="title" />
+    <view :style="getTitleStyle" class="yh-cell__title" :class="titleClass">
+      <template v-if="title">{{ title }}</template>
+      <template v-else>
+        <slot name="title" />
+      </template>
 
-      <view v-if="label || useLabelSlot" class="yh-cell__label label-class">
-        <slot v-if="useLabelSlot" name="label" />
-        <block v-else-if="label">{{ label }}</block>
+      <view v-if="label || useLabelSlot" class="yh-cell__label" :class="labelClass">
+        <template v-if="useLabelSlot">
+          <slot name="label" />
+        </template>
+        <template v-else-if="label">
+          {{ label }}
+        </template>
       </view>
     </view>
 
-    <view class="yh-cell__value value-class">
-      <block v-if="value || value === 0">{{ value }}</block>
-      <slot v-else />
+    <view class="yh-cell__value" :class="valueClass">
+      <template v-if="value || value === 0">{{ value }}</template>
+      <template v-else>
+        <slot />
+      </template>
     </view>
 
-    <Icon
-      v-if="isLink"
-      :name="arrowDirection ? 'arrow' + '-' + arrowDirection : 'arrow'"
-      class="yh-cell__right-icon-wrap right-icon-class"
-      custom-class="yh-cell__right-icon"
-    />
-    <slot v-else name="right-icon" />
+    <template v-if="isLink">
+      <Icon
+        :name="arrowDirection ? 'arrow' + '-' + arrowDirection : 'arrow-right'"
+        :class="['yh-cell__right-icon-wrap', rightIconClass]"
+        custom-class="yh-cell__right-icon"
+      />
+    </template>
+    <template v-else>
+      <slot name="rightIcon" />
+    </template>
 
     <slot name="extra" />
   </view>
 </template>
+
+<!-- 添加之后 可以样式穿透 目前未找到setup语法如何编写-->
+<script lang="ts">
+export default {
+  options: { styleIsolation: 'shared' },
+}
+</script>
 
 <script setup lang="ts">
 import Icon from '../icon/icon.vue'
@@ -133,6 +150,26 @@ const props = defineProps({
     type: String,
     default: () => '',
   },
+  valueClass: {
+    type: String,
+    default: () => '',
+  },
+  titleClass: {
+    type: String,
+    default: () => '',
+  },
+  labelClass: {
+    type: String,
+    default: () => '',
+  },
+  rightIconClass: {
+    type: String,
+    default: () => '',
+  },
+  hoverClass: {
+    type: String,
+    default: () => '',
+  },
 })
 
 const getCellClass = computed(() => {
@@ -154,7 +191,19 @@ const getTitleStyle = computed(() => {
   }
   return str
 })
-const onClick = () => {}
+
+// 点击
+const onClick = () => {
+  const { url, linkType } = props
+
+  emit('click')
+
+  if (url) {
+    uni[linkType as 'redirectTo' | 'switchTab' | 'reLaunch']({
+      url,
+    })
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -170,6 +219,7 @@ const onClick = () => {}
   line-height: $yh-cell-line-height;
   color: $yh-cell-text-color;
   background-color: $yh-cell-background-color;
+  transition: all 0.3s;
   &::after {
     position: absolute;
     box-sizing: border-box;
@@ -211,6 +261,7 @@ const onClick = () => {}
       display: none;
     }
   }
+
   &__left-icon-wrap,
   &__right-icon-wrap {
     display: -webkit-flex;
@@ -220,6 +271,7 @@ const onClick = () => {}
     height: $yh-cell-line-height;
     font-size: $yh-cell-icon-size;
   }
+
   &__left-icon-wrap {
     margin-right: 10rpx;
   }
@@ -227,14 +279,19 @@ const onClick = () => {}
     margin-left: 5px;
     color: $yh-cell-right-icon-color;
   }
-  &__left-icon,
-  &__right-icon {
-    line-height: $yh-cell-line-height;
+
+  &::v-deep {
+    .yh-cell__left-icon,
+    .yh-cell__right-icon {
+      line-height: $yh-cell-line-height !important;
+    }
+    .yh-cell__left-icon {
+      vertical-align: middle;
+    }
   }
-  &__left-icon {
-    vertical-align: middle;
-  }
+
   &--clickable {
+    &:hover,
     &.yh-cell--hover {
       background-color: $yh-cell-active-color;
     }

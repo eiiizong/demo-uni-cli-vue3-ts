@@ -32,7 +32,7 @@ const props = defineProps({
     margin: 0;
     font-weight: 400;
     font-size: 28rpx;
-    color: rgba(69, 90, 100, 0.8);
+    color: rgba(69, 90, 100, 0.6);
     padding: 30rpx;
   }
   &__content {

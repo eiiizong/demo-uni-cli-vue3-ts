@@ -5,6 +5,13 @@
   </view>
 </template>
 
+<!-- 添加之后 可以样式穿透 -->
+<script lang="ts">
+export default {
+  options: { styleIsolation: 'shared' },
+}
+</script>
+
 <script setup lang="ts">
 import Info from '../info/info.vue'
 
@@ -38,6 +45,11 @@ const props = defineProps({
     type: [String, Number],
     default: () => 'inherit',
   },
+  // 自定义类名
+  customClass: {
+    type: String,
+    default: () => '',
+  },
   // 自定义样式
   customStyle: {
     type: String,
@@ -63,7 +75,7 @@ const isImageName = computed(() => {
 // 根据参数获取类名
 const getClass = computed(() => {
   let str = ''
-  const { classPrefix, name } = props
+  const { classPrefix, name, customClass } = props
   if (classPrefix) {
     str += classPrefix + ' '
   }
@@ -71,6 +83,10 @@ const getClass = computed(() => {
     str += 'yh-icon--image'
   } else {
     str += classPrefix + '-' + name
+  }
+
+  if (customClass) {
+    str += ` ${customClass}`
   }
 
   return str

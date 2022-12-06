@@ -10,7 +10,7 @@
 
 .yh-iconfont {
   font-family: 'yh-iconfont' !important;
-  font-size: 16px;
+  font-size: 32rpx;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -108,6 +108,18 @@
   content: '\e67d';
 }
 
+.yh-iconfont-arrow-left:before {
+  content: '\e7e2';
+}
+
+.yh-iconfont-arrow-up:before {
+  content: '\e7e3';
+}
+
 .yh-iconfont-arrow-right:before {
   content: '\e665';
+}
+
+.yh-iconfont-arrow-down:before {
+  content: '\e7e1';
 }

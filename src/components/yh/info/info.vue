@@ -4,6 +4,13 @@
   </view>
 </template>
 
+<!-- 添加之后 可以样式穿透 目前未找到setup语法如何编写-->
+<script lang="ts">
+export default {
+  options: { styleIsolation: 'shared' },
+}
+</script>
+
 <script setup lang="ts">
 import { computed } from 'vue'
 import { bem } from '../common/utils'
@@ -11,6 +18,11 @@ import { bem } from '../common/utils'
 const emit = defineEmits(['click'])
 
 const props = defineProps({
+  // 自定义类名
+  customClass: {
+    type: String,
+    default: () => '',
+  },
   // 自定义样式
   customStyle: {
     type: String,
@@ -41,8 +53,14 @@ const isShow = computed(() => {
 // 组件类名
 const getClass = computed(() => {
   let str = ''
-  const { dot } = props
-  str = bem('info', { dot })
+  const { dot, customClass } = props
+
+  str += bem('info', { dot })
+
+  if (customClass) {
+    str += ` ${customClass}`
+  }
+
   return str
 })
 </script>
