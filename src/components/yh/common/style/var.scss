@@ -1,4 +1,5 @@
 $yh--white: #fff;
+$yh--padding-xs: 16rpx;
 // info
 $yh-info-size: 32rxp;
 $yh-info-color: #fff;
@@ -12,4 +13,22 @@ $yh-info-dot-size: 16rpx;
 $yh-info-dot-color: #ee0a24;
 
 // icon
-$yh-icon-size: 32rxp;
+// cell
+$yh-cell-vertical-padding: 20rpx;
+$yh-cell-horizontal-padding: 32rpx;
+$yh-cell-font-size: 28rpx;
+$yh-cell-line-height: 48rpx;
+$yh-cell-text-color: #323233;
+$yh-cell-background-color: #fff;
+$yh-cell-label-margin-top: 6rpx;
+$yh-cell-label-font-size: 24rpx;
+$yh-cell-label-line-height: 36rpx;
+$yh-cell-label-color: #969799;
+$yh-cell-value-color: #969799;
+$yh-cell-icon-size: 32rpx;
+$yh-cell-right-icon-color: #969799;
+$yh-cell-active-color: #f2f3f5;
+$yh-cell-required-color: #ee0a24;
+$yh-cell-large-vertical-padding: 24rpx;
+$yh-cell-large-title-font-size: 32rpx;
+$yh-cell-large-label-font-size: 28rpx;
