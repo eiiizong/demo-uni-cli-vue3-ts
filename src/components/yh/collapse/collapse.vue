@@ -1,10 +1,11 @@
 <template>
-  <view> 12 </view>
+  <view class="yh-collapse" :class="getClass">
+    <slot />
+  </view>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { bem } from '../common/utils'
 
 const emit = defineEmits(['change', 'close', 'open'])
 
@@ -26,37 +27,64 @@ const props = defineProps({
     type: Boolean,
     default: () => false,
   },
+  customClass: {
+    type: String,
+    default: () => '',
+  },
 })
+
+const getClass = computed(() => {
+  let str = ''
+  const { customClass, border } = props
+
+  if (border) {
+    str += `yh-hairline--top-bottom`
+  }
+
+  if (customClass) {
+    str += ` ${customClass}`
+  }
+  return str
+})
+
+const updateExpanded = () => {
+  // this.children.forEach((child) => {
+  //   child.updateExpanded()
+  // })
+}
+
+const _switch = (name, expanded) => {
+  // const { accordion, value } = this.data
+  // if (!accordion) {
+  //   name = expanded
+  //     ? (value || []).concat(name)
+  //     : (value || []).filter((activeName) => activeName !== name)
+  // } else {
+  //   name = expanded ? name : ''
+  // }
+  // this.$emit('change', name)
+  // this.$emit('input', name)
+}
 </script>
 
 <style lang="scss" scoped>
-$color: #ee0a24;
-.yh-info {
-  position: absolute;
-  top: 0;
-  right: 0;
-  box-sizing: border-box;
-  white-space: nowrap;
-  text-align: center;
-  -webkit-transform: translate(50%, -50%);
-  transform: translate(50%, -50%);
-  -webkit-transform-origin: 100%;
-  transform-origin: 100%;
-  min-width: 32rpx;
-  padding: 0 6rpx;
-  color: #fff;
-  font-weight: 500;
-  font-size: 24rpx;
-  font-family: PingFang SC, Helvetica Neue, Arial, sans-serif;
-  line-height: 28rpx;
-  background-color: $color;
-  border: 1px solid #fff;
-  border-radius: 32rpx;
-  &--dot {
-    min-width: 0;
-    border-radius: 50%;
-    width: 16rpx;
-    height: 16rpx;
+.yh-hairline--top-bottom {
+  position: relative;
+  &::after {
+    position: absolute;
+    box-sizing: border-box;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    content: ' ';
+    pointer-events: none;
+    top: -50%;
+    right: -50%;
+    bottom: -50%;
+    left: -50%;
+    border: 0 solid #eee;
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    border-width: 1px 0;
   }
 }
 </style>

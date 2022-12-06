@@ -1,23 +1,67 @@
 <template>
-  <view> 123 </view>
+  <view class="yh-collapse-item" :class="getCollapseItemClass">
+    <yh-cell
+      :title="title"
+      title-class="title-class"
+      :icon="icon"
+      :value="value"
+      :label="label"
+      :is-link="isLink"
+      :clickable="clickable"
+      :border="border && expanded"
+      class="{{ utils.bem('collapse-item__title', { disabled, expanded }) }}"
+      right-icon-class="yh-cell__right-icon"
+      custom-class="yh-cell"
+      hover-class="yh-cell--hover"
+      @click="onClick"
+    >
+      <template #title>
+        <slot name="title" />
+      </template>
+      <template #icon>
+        <slot name="icon" />
+      </template>
+      <template #rightIcon>
+        <slot name="rightIcon" />
+      </template>
+      <slot name="value" />
+    </yh-cell>
+    <view
+      class="{{ utils.bem('collapse-item__wrapper', { transition }) }}"
+      :style="{ height: contentHeight }"
+      @transitionend="onTransitionEnd"
+    >
+      <view class="yh-collapse-item__content content-class">
+        <slot />
+      </view>
+    </view>
+  </view>
 </template>
+<!-- 添加之后 可以样式穿透 目前未找到setup语法如何编写-->
+<script lang="ts">
+export default {
+  options: { styleIsolation: 'shared' },
+}
+</script>
 
 <script setup lang="ts">
+import YhCell from '../cell/cell.vue'
+
 import { computed, ref, onMounted } from 'vue'
 import { bem } from '../common/utils'
 
 const emit = defineEmits(['change', 'close', 'open'])
 
 const props = defineProps({
-  // 唯一标识符，默认为索引值
+  // 标题栏左侧内容
   title: {
     type: [String, Number],
     default: () => '',
   },
-  // 标题栏左侧内容
+  // 唯一标识符，默认为索引值
   name: {
     type: [String, Number],
-    default: () => '',
+    default: () => 'index',
   },
   // 标题栏大小，可选值为 large
   size: {
@@ -59,11 +103,31 @@ const props = defineProps({
     type: Boolean,
     default: () => false,
   },
+  customClass: {
+    type: String,
+    default: () => '',
+  },
 })
 
 const contentHeight = ref(0)
 const expanded = ref(false)
 const transition = ref(false)
+
+const getCollapseItemClass = computed(() => {
+  let str = ''
+  const { customClass } = props
+
+  // index !== 0 ? 'yh-hairline--top' : ''
+
+  if (customClass) {
+    str += ` ${customClass}`
+  }
+  return str
+})
+
+const onClick = () => {}
+
+const onTransitionEnd = () => {}
 </script>
 
 <style lang="scss" scoped>
