@@ -47,8 +47,11 @@ export default {
 <script setup lang="ts">
 import YhCell from '../cell/cell.vue'
 
-import { computed, ref } from 'vue'
+import { computed, ref, getCurrentInstance } from 'vue'
 import { bem } from '../common/utils'
+
+const ctx = getCurrentInstance()
+console.log(ctx && ctx.parent, 1234)
 
 const emit = defineEmits(['change', 'close', 'open'])
 
@@ -145,6 +148,32 @@ const getItemWrapperClass = computed(() => {
 const onClick = () => {}
 
 const onTransitionEnd = () => {}
+
+const updateExpanded = () => {
+  if (ctx) {
+    const parent = ctx.parent
+    if (!parent) {
+      return Promise.resolve()
+    }
+    const { value, accordion } = parent.props
+    const { $children: children = [] } = parent.proxy.$children
+
+    const { name } = props
+    const index = children.indexOf(this)
+    const currentName = name == null ? index : name
+    const expanded = accordion
+      ? value === currentName
+      : (value || []).some((name) => name === currentName)
+    const stack = []
+    if (expanded !== this.data.expanded) {
+      stack.push(this.updateStyle(expanded))
+    }
+    stack.push(this.set({ index, expanded }))
+    return Promise.all(stack)
+  } else {
+    return Promise.resolve()
+  }
+}
 </script>
 
 <style lang="scss" scoped>
