@@ -7,6 +7,13 @@
           <template v-for="itemCell in item.list" :key="itemCell.id">
             <div class="cell-link" @click="handleJumpRoute(itemCell.id)">
               <div class="cell-name">{{ itemCell.name }}</div>
+              <yh-icon
+                name="tick"
+                v-if="itemCell.isOver"
+                color="green"
+                custom-style="position: absolute;right: 30px;top: 0;"
+              ></yh-icon>
+              <yh-icon name="arrow-right"></yh-icon>
             </div>
           </template>
         </div>
@@ -15,6 +22,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import YhIcon from '@/components/yh/icon/icon.vue'
 import { ref } from 'vue'
 import { navigateTo } from '@/utils/uni-api'
 
@@ -30,10 +38,12 @@ const renderData = ref([
       {
         id: 'cell',
         name: 'Cell 单元格',
+        isOver: true,
       },
       {
         id: 'icon',
         name: 'Icon 图标',
+        isOver: true,
       },
       {
         id: 'popup',
@@ -178,6 +188,7 @@ const handleJumpRoute = (pathName: string) => {
         justify-content: space-between;
         transition: all 0.3s;
         margin-bottom: 30rpx;
+        position: relative;
         &:active {
           opacity: 0.8;
           background-color: $primary;
