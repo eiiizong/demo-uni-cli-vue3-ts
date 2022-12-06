@@ -7,13 +7,13 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-const emit = defineEmits(['change', 'close', 'open'])
+const emit = defineEmits(['change', 'close', 'open', 'input'])
 
 const props = defineProps({
   // 当前展开面板的 name
   // 非手风琴模式：(string | number)[]
   // 手风琴模式：string | number
-  modelValue: {
+  value: {
     type: [String, Number, Array],
     default: () => '',
   },
@@ -53,38 +53,20 @@ const updateExpanded = () => {
   // })
 }
 
-const _switch = (name, expanded) => {
-  // const { accordion, value } = this.data
-  // if (!accordion) {
-  //   name = expanded
-  //     ? (value || []).concat(name)
-  //     : (value || []).filter((activeName) => activeName !== name)
-  // } else {
-  //   name = expanded ? name : ''
-  // }
-  // this.$emit('change', name)
-  // this.$emit('input', name)
+const _switch = (name: any, expanded: boolean) => {
+  const { accordion, value } = props
+  if (!accordion) {
+    name = expanded
+      ? (value || []).concat(name)
+      : (value || []).filter((activeName) => activeName !== name)
+  } else {
+    name = expanded ? name : ''
+  }
+  emit('change', name)
+  emit('input', name)
 }
 </script>
 
 <style lang="scss" scoped>
-.yh-hairline--top-bottom {
-  position: relative;
-  &::after {
-    position: absolute;
-    box-sizing: border-box;
-    -webkit-transform-origin: center;
-    transform-origin: center;
-    content: ' ';
-    pointer-events: none;
-    top: -50%;
-    right: -50%;
-    bottom: -50%;
-    left: -50%;
-    border: 0 solid #eee;
-    -webkit-transform: scale(0.5);
-    transform: scale(0.5);
-    border-width: 1px 0;
-  }
-}
+@use '../common/style/var.scss' as *;
 </style>

@@ -9,7 +9,7 @@
       :is-link="isLink"
       :clickable="clickable"
       :border="border && expanded"
-      class="{{ utils.bem('collapse-item__title', { disabled, expanded }) }}"
+      :class="getCellClass"
       right-icon-class="yh-cell__right-icon"
       custom-class="yh-cell"
       hover-class="yh-cell--hover"
@@ -27,11 +27,11 @@
       <slot name="value" />
     </yh-cell>
     <view
-      class="{{ utils.bem('collapse-item__wrapper', { transition }) }}"
+      :class="getItemWrapperClass"
       :style="{ height: contentHeight }"
       @transitionend="onTransitionEnd"
     >
-      <view class="yh-collapse-item__content content-class">
+      <view class="yh-collapse-item__content" :class="contentClass">
         <slot />
       </view>
     </view>
@@ -47,7 +47,7 @@ export default {
 <script setup lang="ts">
 import YhCell from '../cell/cell.vue'
 
-import { computed, ref, onMounted } from 'vue'
+import { computed, ref } from 'vue'
 import { bem } from '../common/utils'
 
 const emit = defineEmits(['change', 'close', 'open'])
@@ -107,6 +107,10 @@ const props = defineProps({
     type: String,
     default: () => '',
   },
+  contentClass: {
+    type: String,
+    default: () => '',
+  },
 })
 
 const contentHeight = ref(0)
@@ -125,39 +129,75 @@ const getCollapseItemClass = computed(() => {
   return str
 })
 
+const getCellClass = computed(() => {
+  let str = ''
+  const { disabled } = props
+  str += bem('collapse-item__title', { disabled, expanded: expanded.value })
+  return str
+})
+
+const getItemWrapperClass = computed(() => {
+  let str = ''
+  str += bem('collapse-item__wrapper', { transition: transition.value })
+  return str
+})
+
 const onClick = () => {}
 
 const onTransitionEnd = () => {}
 </script>
 
 <style lang="scss" scoped>
-$color: #ee0a24;
-.yh-info {
-  position: absolute;
-  top: 0;
-  right: 0;
-  box-sizing: border-box;
-  white-space: nowrap;
-  text-align: center;
-  -webkit-transform: translate(50%, -50%);
-  transform: translate(50%, -50%);
-  -webkit-transform-origin: 100%;
-  transform-origin: 100%;
-  min-width: 32rpx;
-  padding: 0 6rpx;
-  color: #fff;
-  font-weight: 500;
-  font-size: 24rpx;
-  font-family: PingFang SC, Helvetica Neue, Arial, sans-serif;
-  line-height: 28rpx;
-  background-color: $color;
-  border: 1px solid #fff;
-  border-radius: 32rpx;
-  &--dot {
-    min-width: 0;
-    border-radius: 50%;
-    width: 16rpx;
-    height: 16rpx;
+@use '../common/style/var.scss' as *;
+
+.yh-collapse-item {
+  &__title {
+    .yh-cell__right-icon {
+      -webkit-transform: rotate(90deg);
+      transform: rotate(90deg);
+      transition: -webkit-transform 0.3s;
+      transition: transform 0.3s;
+      transition: transform 0.3s, -webkit-transform 0.3s;
+      transition: -webkit-transform var(--collapse-item-transition-duration, 0.3s);
+      transition: transform var(--collapse-item-transition-duration, 0.3s);
+      transition: transform var(--collapse-item-transition-duration, 0.3s),
+        -webkit-transform var(--collapse-item-transition-duration, 0.3s);
+    }
+  }
+  &__title--expanded {
+    .yh-cell__right-icon {
+      -webkit-transform: rotate(-90deg);
+      transform: rotate(-90deg);
+    }
+  }
+  &__title--disabled {
+    .yh-cell,
+    .yh-cell__right-icon {
+      color: #c8c9cc !important;
+      color: var(--collapse-item-title-disabled-color, #c8c9cc) !important;
+    }
+    .yh-cell--hover {
+      background-color: #fff !important;
+      background-color: var(--white, #fff) !important;
+    }
+  }
+  &__wrapper {
+    overflow: hidden;
+    &--transition {
+      transition: height 0.3s ease-in-out;
+    }
+  }
+  &__content {
+    padding: 15px;
+    padding: var(--collapse-item-content-padding, 15px);
+    color: #969799;
+    color: var(--collapse-item-content-text-color, #969799);
+    font-size: 13px;
+    font-size: var(--collapse-item-content-font-size, 13px);
+    line-height: 1.5;
+    line-height: var(--collapse-item-content-line-height, 1.5);
+    background-color: #fff;
+    background-color: var(--collapse-item-content-background-color, #fff);
   }
 }
 </style>
