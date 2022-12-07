@@ -41,6 +41,11 @@ const renderData = ref([
         isOver: true,
       },
       {
+        id: 'image',
+        name: 'Image 图片',
+        isOver: true,
+      },
+      {
         id: 'popup',
         name: 'Popup 弹出层',
         isOver: true,

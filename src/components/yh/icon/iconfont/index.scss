@@ -16,6 +16,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.yh-iconfont-photo-fail:before {
+  content: '\e6ae';
+}
+
+.yh-iconfont-photo:before {
+  content: '\e6af';
+}
+
+.yh-iconfont-photo-o:before {
+  content: '\e6b0';
+}
+
 .yh-iconfont-plus:before {
   content: '\e767';
 }

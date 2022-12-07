@@ -91,6 +91,12 @@
           }
         },
         {
+          "path": "image/image",
+          "style": {
+            "navigationBarTitleText": "Image 图片"
+          }
+        },
+        {
           "path": "loading/loading",
           "style": {
             "navigationBarTitleText": "Loading 加载"

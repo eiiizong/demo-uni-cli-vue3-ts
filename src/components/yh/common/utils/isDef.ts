@@ -3,7 +3,7 @@
  * @param value
  * @returns
  */
-const isDef = (value: string | number) => {
+const isDef = (value:any) => {
   return value !== undefined && value !== null
 }
 
