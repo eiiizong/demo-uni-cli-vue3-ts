@@ -54,7 +54,7 @@ const props = defineProps({
   // z-index 层级
   zIndex: {
     type: Number,
-    default: () => 999,
+    default: () => 9999,
   },
   // 是否显示遮罩层
   overlay: {
@@ -185,13 +185,18 @@ const classes = ref(
 
 const getClass = computed(() => {
   let str = ''
-  const { round, safeAreaInsetBottom, safeAreaInsetTop, position } = props
+  const { round, safeAreaInsetBottom, safeAreaInsetTop, position, customClass } = props
 
   if (classes.value) {
     str += classes.value
   }
+
   if (position) {
     str += bem('popup', [position, { round, safe: safeAreaInsetBottom, safeTop: safeAreaInsetTop }])
+  }
+
+  if (customClass) {
+    str += ` ${customClass}`
   }
   return str
 })
@@ -328,6 +333,7 @@ watch(
 </script>
 
 <style lang="scss" scoped>
+@use '../common/style/var.scss' as *;
 .yh-popup {
   position: fixed;
   box-sizing: border-box;
@@ -337,157 +343,150 @@ watch(
   -webkit-animation: ease both;
   animation: ease both;
   -webkit-overflow-scrolling: touch;
-  background-color: #fff;
-  background-color: var(--popup-background-color, #fff);
+  background-color: $yh-popup-background-color;
+  &--top {
+    top: 0;
+    left: 0;
+    width: 100%;
+    &.yh-popup--round {
+      border-radius: 0 0 20px 20px;
+      border-radius: 0 0 $yh-popup-round-border-radius $yh-popup-round-border-radius;
+    }
+  }
+  &--right {
+    top: 50%;
+    right: 0;
+    -webkit-transform: translate3d(0, -50%, 0);
+    transform: translate3d(0, -50%, 0);
+    &.yh-popup--round {
+      border-radius: 20px 0 0 20px;
+      border-radius: $yh-popup-round-border-radius 0 0 $yh-popup-round-border-radius;
+    }
+  }
+  &--bottom {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    &.yh-popup--round {
+      border-radius: 20px 20px 0 0;
+      border-radius: $yh-popup-round-border-radius $yh-popup-round-border-radius 0 0;
+    }
+    &.yh-popup--safe {
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+  }
+  &--center {
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(-50%, -50%, 0);
+    &.yh-popup--round {
+      border-radius: $yh-popup-round-border-radius;
+    }
+  }
+  &--left {
+    top: 50%;
+    left: 0;
+    -webkit-transform: translate3d(0, -50%, 0);
+    transform: translate3d(0, -50%, 0);
+    &.yh-popup--round {
+      border-radius: 0 20px 20px 0;
+      border-radius: 0 $yh-popup-round-border-radius $yh-popup-round-border-radius 0;
+    }
+  }
+  &--safeTop {
+    padding-top: env(safe-area-inset-top);
+  }
+  &__close-icon {
+    position: absolute;
+    z-index: $yh-popup-close-icon-z-index;
+    color: $yh-popup-close-icon-color;
+    font-size: $yh-popup-close-font-size;
+    &--top-left {
+      top: $yh-popup-close-icon-margin;
+      left: $yh-popup-close-icon-margin;
+    }
+    &--top-right {
+      top: $yh-popup-close-icon-margin;
+      right: $yh-popup-close-icon-margin;
+    }
+    &--bottom-left {
+      bottom: $yh-popup-close-icon-margin;
+      left: $yh-popup-close-icon-margin;
+    }
+    &--bottom-right {
+      bottom: $yh-popup-close-icon-margin;
+      right: $yh-popup-close-icon-margin;
+    }
+    &:active,
+    &:hover {
+      opacity: 0.6;
+    }
+  }
 }
-.yh-popup--center {
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate3d(-50%, -50%, 0);
-  transform: translate3d(-50%, -50%, 0);
+.yh-scale {
+  &-enter-active,
+  &-leave-active {
+    transition-property: opacity, -webkit-transform;
+    transition-property: opacity, transform;
+    transition-property: opacity, transform, -webkit-transform;
+  }
+  &-enter,
+  &--leave-to {
+    -webkit-transform: translate3d(-50%, -50%, 0) scale(0.7);
+    transform: translate3d(-50%, -50%, 0) scale(0.7);
+    opacity: 0;
+  }
 }
-.yh-popup--center.yh-popup--round {
-  border-radius: 20px;
-  border-radius: var(--popup-round-border-radius, 20px);
+.yh-center,
+.yh-fade {
+  &-enter-active,
+  &-leave-active {
+    transition-property: opacity;
+  }
+  &-enter,
+  &--leave-to {
+    opacity: 0;
+  }
 }
-.yh-popup--top {
-  top: 0;
-  left: 0;
-  width: 100%;
+
+.yh-bottom,
+.yh-right,
+.yh-left,
+.yh-top {
+  &-enter-active,
+  &-leave-active {
+    transition-property: -webkit-transform;
+    transition-property: transform;
+    transition-property: transform, -webkit-transform;
+  }
 }
-.yh-popup--top.yh-popup--round {
-  border-radius: 0 0 20px 20px;
-  border-radius: 0 0 var(--popup-round-border-radius, 20px) var(--popup-round-border-radius, 20px);
+.yh-bottom {
+  &-enter,
+  &--leave-to {
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
 }
-.yh-popup--right {
-  top: 50%;
-  right: 0;
-  -webkit-transform: translate3d(0, -50%, 0);
-  transform: translate3d(0, -50%, 0);
+.yh-top {
+  &-enter,
+  &--leave-to {
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
 }
-.yh-popup--right.yh-popup--round {
-  border-radius: 20px 0 0 20px;
-  border-radius: var(--popup-round-border-radius, 20px) 0 0 var(--popup-round-border-radius, 20px);
+.yh-left {
+  &-enter,
+  &--leave-to {
+    -webkit-transform: translate3d(-100%, -50%, 0);
+    transform: translate3d(-100%, -50%, 0);
+  }
 }
-.yh-popup--bottom {
-  bottom: 0;
-  left: 0;
-  width: 100%;
-}
-.yh-popup--bottom.yh-popup--round {
-  border-radius: 20px 20px 0 0;
-  border-radius: var(--popup-round-border-radius, 20px) var(--popup-round-border-radius, 20px) 0 0;
-}
-.yh-popup--left {
-  top: 50%;
-  left: 0;
-  -webkit-transform: translate3d(0, -50%, 0);
-  transform: translate3d(0, -50%, 0);
-}
-.yh-popup--left.yh-popup--round {
-  border-radius: 0 20px 20px 0;
-  border-radius: 0 var(--popup-round-border-radius, 20px) var(--popup-round-border-radius, 20px) 0;
-}
-.yh-popup--bottom.yh-popup--safe {
-  padding-bottom: env(safe-area-inset-bottom);
-}
-.yh-popup--safeTop {
-  padding-top: env(safe-area-inset-top);
-}
-.yh-popup__close-icon {
-  position: absolute;
-  z-index: 1;
-  z-index: var(--popup-close-icon-z-index, 1);
-  color: #969799;
-  color: var(--popup-close-icon-color, #969799);
-  font-size: 18px;
-  font-size: var(--popup-close-icon-size, 18px);
-}
-.yh-popup__close-icon--top-left {
-  top: 16px;
-  top: var(--popup-close-icon-margin, 16px);
-  left: 16px;
-  left: var(--popup-close-icon-margin, 16px);
-}
-.yh-popup__close-icon--top-right {
-  top: 16px;
-  top: var(--popup-close-icon-margin, 16px);
-  right: 16px;
-  right: var(--popup-close-icon-margin, 16px);
-}
-.yh-popup__close-icon--bottom-left {
-  bottom: 16px;
-  bottom: var(--popup-close-icon-margin, 16px);
-  left: 16px;
-  left: var(--popup-close-icon-margin, 16px);
-}
-.yh-popup__close-icon--bottom-right {
-  right: 16px;
-  right: var(--popup-close-icon-margin, 16px);
-  bottom: 16px;
-  bottom: var(--popup-close-icon-margin, 16px);
-}
-.yh-popup__close-icon:active {
-  opacity: 0.6;
-}
-.yh-scale-enter-active,
-.yh-scale-leave-active {
-  transition-property: opacity, -webkit-transform;
-  transition-property: opacity, transform;
-  transition-property: opacity, transform, -webkit-transform;
-}
-.yh-scale-enter,
-.yh-scale-leave-to {
-  -webkit-transform: translate3d(-50%, -50%, 0) scale(0.7);
-  transform: translate3d(-50%, -50%, 0) scale(0.7);
-  opacity: 0;
-}
-.yh-fade-enter-active,
-.yh-fade-leave-active {
-  transition-property: opacity;
-}
-.yh-fade-enter,
-.yh-fade-leave-to {
-  opacity: 0;
-}
-.yh-center-enter-active,
-.yh-center-leave-active {
-  transition-property: opacity;
-}
-.yh-center-enter,
-.yh-center-leave-to {
-  opacity: 0;
-}
-.yh-bottom-enter-active,
-.yh-bottom-leave-active,
-.yh-left-enter-active,
-.yh-left-leave-active,
-.yh-right-enter-active,
-.yh-right-leave-active,
-.yh-top-enter-active,
-.yh-top-leave-active {
-  transition-property: -webkit-transform;
-  transition-property: transform;
-  transition-property: transform, -webkit-transform;
-}
-.yh-bottom-enter,
-.yh-bottom-leave-to {
-  -webkit-transform: translate3d(0, 100%, 0);
-  transform: translate3d(0, 100%, 0);
-}
-.yh-top-enter,
-.yh-top-leave-to {
-  -webkit-transform: translate3d(0, -100%, 0);
-  transform: translate3d(0, -100%, 0);
-}
-.yh-left-enter,
-.yh-left-leave-to {
-  -webkit-transform: translate3d(-100%, -50%, 0);
-  transform: translate3d(-100%, -50%, 0);
-}
-.yh-right-enter,
-.yh-right-leave-to {
-  -webkit-transform: translate3d(100%, -50%, 0);
-  transform: translate3d(100%, -50%, 0);
+.yh-right {
+  &-enter,
+  &--leave-to {
+    -webkit-transform: translate3d(100%, -50%, 0);
+    transform: translate3d(100%, -50%, 0);
+  }
 }
 </style>

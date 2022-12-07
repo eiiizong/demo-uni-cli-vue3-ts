@@ -7,44 +7,49 @@
       </yh-popup>
     </demo-block>
 
-    <!-- <demo-block title="弹出位置">
-      <yh-cell title="顶部弹出" is-link @click="showTop" />
-      <yh-cell title="底部弹出" is-link @click="showBottom" />
-      <yh-cell title="左侧弹出" is-link @click="showLeft" />
-      <yh-cell title="右侧弹出" is-link @click="showRight" />
+    <demo-block title="弹出位置">
+      <yh-cell title="顶部弹出" is-link @click="show.top = true" />
+      <yh-cell title="底部弹出" is-link @click="show.bottom = true" />
+      <yh-cell title="左侧弹出" is-link @click="show.left = true" />
+      <yh-cell title="右侧弹出" is-link @click="show.right = true" />
 
-      <yh-popup :show="show.top" position="top" custom-style="height: 20%" bind:close="hideTop" />
+      <yh-popup
+        :show="show.top"
+        position="top"
+        custom-style="height: 20%"
+        @close="show.top = false"
+      />
       <yh-popup
         :show="show.bottom"
         position="bottom"
         custom-style="height: 20%"
-        bind:close="hideBottom"
+        @close="show.bottom = false"
       />
       <yh-popup
         :show="show.left"
         position="left"
         custom-style="width: 20%; height: 100%"
-        bind:close="hideLeft"
+        @close="show.left = false"
       />
       <yh-popup
         :show="show.right"
         position="right"
         custom-style="width: 20%; height: 100%"
-        bind:close="hideRight"
+        @close="show.right = false"
       />
     </demo-block>
 
     <demo-block title="关闭图标">
-      <yh-cell title="关闭图标" is-link @click="showCloseIcon" />
-      <yh-cell title="自定义图标" is-link @click="showCustomCloseIcon" />
-      <yh-cell title="图标位置" is-link @click="showCustomIconPosition" />
+      <yh-cell title="关闭图标" is-link @click="show.closeIcon = true" />
+      <yh-cell title="自定义图标" is-link @click="show.customCloseIcon = true" />
+      <yh-cell title="图标位置" is-link @click="show.customIconPosition = true" />
 
       <yh-popup
         :show="show.closeIcon"
         closeable
         position="bottom"
         custom-style="height: 20%"
-        bind:close="hideCloseIcon"
+        @close="show.closeIcon = false"
       />
 
       <yh-popup
@@ -53,7 +58,7 @@
         close-icon="close"
         position="bottom"
         custom-style="height: 20%"
-        bind:close="hideCustomCloseIcon"
+        @close="show.customCloseIcon = false"
       />
 
       <yh-popup
@@ -62,30 +67,29 @@
         close-icon-position="top-left"
         position="bottom"
         custom-style="height: 20%"
-        bind:close="hideCustomIconPosition"
+        @close="show.customIconPosition = false"
       />
     </demo-block>
 
     <demo-block title="圆角弹窗">
-      <yh-cell title="圆角弹窗" is-link @click="showRound" />
+      <yh-cell title="圆角弹窗" is-link @click="show.round = true" />
 
       <yh-popup
         :show="show.round"
         round
         position="bottom"
         custom-style="height: 20%"
-        bind:close="hideRound"
+        @close="show.round = false"
       />
-    </demo-block> -->
+    </demo-block>
   </div>
 </template>
 <script setup lang="ts">
 import DemoBlock from '@/pages/packageDemo/components/demo-block/demo-block.vue'
 import YhPopup from '@/components/yh/popup/popup.vue'
 import YhCell from '@/components/yh/cell/cell.vue'
-import YhIcon from '@/components/yh/icon/icon.vue'
 
-import { ref, reactive } from 'vue'
+import { reactive } from 'vue'
 
 const show = reactive({
   basic: false,

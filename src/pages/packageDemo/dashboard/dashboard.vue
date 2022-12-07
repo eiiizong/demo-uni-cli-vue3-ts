@@ -43,6 +43,7 @@ const renderData = ref([
       {
         id: 'popup',
         name: 'Popup 弹出层',
+        isOver: true,
       },
       {
         id: 'toast',
