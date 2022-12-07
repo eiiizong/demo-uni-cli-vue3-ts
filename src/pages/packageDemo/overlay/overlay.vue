@@ -27,7 +27,7 @@
     </DemoBlock>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import DemoBlock from '@/pages/packageDemo/components/demo-block/demo-block.vue'
 import YhOverlay from '@/components/yh/overlay/overlay.vue'
 import YhIcon from '@/components/yh/icon/icon.vue'
@@ -42,43 +42,6 @@ const noop = () => {}
 
 <style lang="scss" scoped>
 .demo-overlay {
-  color: #323233;
-  font-size: 16px;
-  font-family: 'PingFang SC', Helvetica, Arial, sans-serif;
-  background: #f7f8fa;
-  -webkit-font-smoothing: antialiased;
-}
-.cells {
-  background-color: #fff;
-  font-size: 28rpx;
-  padding: 0 30rpx;
-  .cell {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    line-height: 48rpx;
-    padding: 20rpx 0;
-    border-bottom: 1px solid #ebedf0;
-    &:last-child {
-      border-bottom: 0;
-    }
-    .yhiconfont {
-      color: #969799;
-      font-size: 24rpx;
-    }
-  }
-}
-
-.wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-
-.block {
-  width: 120px;
-  height: 120px;
-  background-color: #fff;
+  background-color: #f8f8f8;
 }
 </style>

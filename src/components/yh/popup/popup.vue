@@ -15,17 +15,17 @@
       :name="closeIcon"
       :custom-style="iconStyle"
       :class="'yh-popup__close-icon yh-popup__close-icon--' + closeIconPosition"
-      @click="onClickCloseIcon"
+      @click="emit('close')"
     />
   </view>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import YhOverlay from '../overlay/overlay.vue'
 import YhIcon from '../icon/icon.vue'
 
 import { computed, ref, watch } from 'vue'
-import { isObj, bem } from '../common/utils'
+import { bem } from '../common/utils'
 
 const emit = defineEmits([
   // 关闭弹出层时触发
@@ -54,7 +54,7 @@ const props = defineProps({
   // z-index 层级
   zIndex: {
     type: Number,
-    default: () => 100,
+    default: () => 999,
   },
   // 是否显示遮罩层
   overlay: {
@@ -73,8 +73,13 @@ const props = defineProps({
   },
   // 动画时长，单位为毫秒
   duration: {
-    type: [Number, Object],
-    default: () => 300,
+    type: [Object],
+    default: () => {
+      return {
+        enter: 300,
+        leave: 300,
+      }
+    },
   },
   // 是否显示圆角
   round: {
@@ -131,6 +136,34 @@ const props = defineProps({
     type: Boolean,
     default: () => true,
   },
+  customClass: {
+    type: String,
+    default: () => '',
+  },
+  enterClass: {
+    type: String,
+    default: () => '',
+  },
+  enterActiveClass: {
+    type: String,
+    default: () => '',
+  },
+  enterToClass: {
+    type: String,
+    default: () => '',
+  },
+  leaveClass: {
+    type: String,
+    default: () => '',
+  },
+  leaveActiveClass: {
+    type: String,
+    default: () => '',
+  },
+  leaveToClass: {
+    type: String,
+    default: () => '',
+  },
 })
 
 const onClickOverlay = () => {
@@ -141,10 +174,6 @@ const onClickOverlay = () => {
   }
 }
 
-const onClickCloseIcon = () => {
-  emit('close')
-}
-
 const status = ref('')
 const inited = ref(false)
 const display = ref(false)
@@ -153,6 +182,7 @@ const currentDuration = ref(300)
 const classes = ref(
   `enter-class enter-active-class enter-to-class leave-class leave-active-class leave-to-class `
 )
+
 const getClass = computed(() => {
   let str = ''
   const { round, safeAreaInsetBottom, safeAreaInsetTop, position } = props
@@ -161,13 +191,11 @@ const getClass = computed(() => {
     str += classes.value
   }
   if (position) {
-    str += bem('popup', [
-      position,
-      { round, safe: safeAreaInsetBottom, safeTop: safeAreaInsetTop },
-    ])
+    str += bem('popup', [position, { round, safe: safeAreaInsetBottom, safeTop: safeAreaInsetTop }])
   }
   return str
 })
+
 const getStyle = computed(() => {
   let str = ''
   const { customStyle, zIndex } = props
@@ -201,14 +229,18 @@ const name = computed(() => {
 
 const nextTick = () => new Promise((resolve) => setTimeout(resolve, 1000 / 30))
 
-const getClassNames = (name) => ({
-  enter: `yh-${name}-enter yh-${name}-enter-active enter-class enter-active-class `,
-  'enter-to': `yh-${name}-enter-to yh-${name}-enter-active enter-to-class enter-active-class `,
-  leave: `yh-${name}-leave yh-${name}-leave-active leave-class leave-active-class `,
-  'leave-to': `yh-${name}-leave-to yh-${name}-leave-active leave-to-class leave-active-class `,
-})
+const getClassNames = (name: string) => {
+  const { enterClass, enterActiveClass, enterToClass, leaveActiveClass, leaveClass, leaveToClass } =
+    props
+  return {
+    enter: `yh-${name}-enter yh-${name}-enter-active ${enterClass} ${enterActiveClass} `,
+    'enter-to': `yh-${name}-enter-to yh-${name}-enter-active ${enterToClass} ${enterActiveClass} `,
+    leave: `yh-${name}-leave yh-${name}-leave-active ${leaveClass} ${leaveActiveClass} `,
+    'leave-to': `yh-${name}-leave-to yh-${name}-leave-active ${leaveToClass} ${leaveActiveClass}  `,
+  }
+}
 
-const checkStatus = (new_status) => {
+const checkStatus = (new_status: string) => {
   if (new_status !== status.value) {
     throw new Error(`incongruent status: ${new_status}`)
   }
@@ -219,7 +251,11 @@ const onTransitionEnd = () => {
     return
   }
   transitionEnded.value = true
-  emit(`after-${status.value}`)
+
+  if (status.value === 'enter' || status.value === 'leave') {
+    emit(`after-${status.value}`)
+  }
+
   const { show } = props
   if (!show && display.value) {
     display.value = false
@@ -230,7 +266,7 @@ const onTransitionEnd = () => {
 const enter = () => {
   const { duration } = props
   const classNames = getClassNames(name.value)
-  const current_duration = isObj(duration) ? duration.enter : duration
+  const current_duration = duration.enter
   status.value = 'enter'
   emit('before-enter')
   Promise.resolve()
@@ -258,7 +294,7 @@ const leave = () => {
     return
   }
   const classNames = getClassNames(name.value)
-  const current_duration = isObj(duration) ? duration.leave : duration
+  const current_duration = duration.leave
   status.value = 'leave'
   emit('before-leave')
   Promise.resolve()
@@ -298,196 +334,160 @@ watch(
   max-height: 100%;
   overflow-y: auto;
   transition-timing-function: ease;
+  -webkit-animation: ease both;
   animation: ease both;
   -webkit-overflow-scrolling: touch;
-  background-color: var(--popup-background-color, $popup-background-color);
-
-  &--center {
-    top: 50%;
-    left: 50%;
-    transform: translate3d(-50%, -50%, 0);
-
-    &.yh-popup--round {
-      border-radius: var(
-        --popup-round-border-radius,
-        $popup-round-border-radius
-      );
-    }
-  }
-
-  &--top {
-    top: 0;
-    left: 0;
-    width: 100%;
-
-    &.yh-popup--round {
-      border-radius: 0 0
-        var(
-          --popup-round-border-radius,
-          var(--popup-round-border-radius, $popup-round-border-radius)
-        )
-        var(
-          --popup-round-border-radius,
-          var(--popup-round-border-radius, $popup-round-border-radius)
-        );
-    }
-  }
-
-  &--right {
-    top: 50%;
-    right: 0;
-    transform: translate3d(0, -50%, 0);
-
-    &.yh-popup--round {
-      border-radius: var(
-          --popup-round-border-radius,
-          var(--popup-round-border-radius, $popup-round-border-radius)
-        )
-        0 0
-        var(
-          --popup-round-border-radius,
-          var(--popup-round-border-radius, $popup-round-border-radius)
-        );
-    }
-  }
-
-  &--bottom {
-    bottom: 0;
-    left: 0;
-    width: 100%;
-
-    &.yh-popup--round {
-      border-radius: var(
-          --popup-round-border-radius,
-          var(--popup-round-border-radius, $popup-round-border-radius)
-        )
-        var(
-          --popup-round-border-radius,
-          var(--popup-round-border-radius, $popup-round-border-radius)
-        )
-        0 0;
-    }
-    &.yh-popup--safe {
-      padding-bottom: constant(safe-area-inset-bottom);
-      padding-bottom: env(safe-area-inset-bottom);
-    }
-  }
-
-  &--left {
-    top: 50%;
-    left: 0;
-    transform: translate3d(0, -50%, 0);
-
-    &.yh-popup--round {
-      border-radius: 0
-        var(
-          --popup-round-border-radius,
-          var(--popup-round-border-radius, $popup-round-border-radius)
-        )
-        var(
-          --popup-round-border-radius,
-          var(--popup-round-border-radius, $popup-round-border-radius)
-        )
-        0;
-    }
-  }
-
-  &--safeTop {
-    padding-top: constant(safe-area-inset-top);
-    padding-top: env(safe-area-inset-top);
-  }
-
-  &__close-icon {
-    position: absolute;
-    z-index: var(--popup-close-icon-z-index, $popup-close-icon-z-index);
-    color: var(--popup-close-icon-color, $popup-close-icon-color);
-    font-size: var(--popup-close-icon-size, $popup-close-icon-size);
-
-    &--top-left {
-      top: var(--popup-close-icon-margin, $popup-close-icon-margin);
-      left: var(--popup-close-icon-margin, $popup-close-icon-margin);
-    }
-
-    &--top-right {
-      top: var(--popup-close-icon-margin, $popup-close-icon-margin);
-      right: var(--popup-close-icon-margin, $popup-close-icon-margin);
-    }
-
-    &--bottom-left {
-      bottom: var(--popup-close-icon-margin, $popup-close-icon-margin);
-      left: var(--popup-close-icon-margin, $popup-close-icon-margin);
-    }
-
-    &--bottom-right {
-      right: var(--popup-close-icon-margin, $popup-close-icon-margin);
-      bottom: var(--popup-close-icon-margin, $popup-close-icon-margin);
-    }
-
-    &:active {
-      opacity: 0.6;
-    }
-  }
+  background-color: #fff;
+  background-color: var(--popup-background-color, #fff);
 }
-
+.yh-popup--center {
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+}
+.yh-popup--center.yh-popup--round {
+  border-radius: 20px;
+  border-radius: var(--popup-round-border-radius, 20px);
+}
+.yh-popup--top {
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.yh-popup--top.yh-popup--round {
+  border-radius: 0 0 20px 20px;
+  border-radius: 0 0 var(--popup-round-border-radius, 20px) var(--popup-round-border-radius, 20px);
+}
+.yh-popup--right {
+  top: 50%;
+  right: 0;
+  -webkit-transform: translate3d(0, -50%, 0);
+  transform: translate3d(0, -50%, 0);
+}
+.yh-popup--right.yh-popup--round {
+  border-radius: 20px 0 0 20px;
+  border-radius: var(--popup-round-border-radius, 20px) 0 0 var(--popup-round-border-radius, 20px);
+}
+.yh-popup--bottom {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.yh-popup--bottom.yh-popup--round {
+  border-radius: 20px 20px 0 0;
+  border-radius: var(--popup-round-border-radius, 20px) var(--popup-round-border-radius, 20px) 0 0;
+}
+.yh-popup--left {
+  top: 50%;
+  left: 0;
+  -webkit-transform: translate3d(0, -50%, 0);
+  transform: translate3d(0, -50%, 0);
+}
+.yh-popup--left.yh-popup--round {
+  border-radius: 0 20px 20px 0;
+  border-radius: 0 var(--popup-round-border-radius, 20px) var(--popup-round-border-radius, 20px) 0;
+}
+.yh-popup--bottom.yh-popup--safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.yh-popup--safeTop {
+  padding-top: env(safe-area-inset-top);
+}
+.yh-popup__close-icon {
+  position: absolute;
+  z-index: 1;
+  z-index: var(--popup-close-icon-z-index, 1);
+  color: #969799;
+  color: var(--popup-close-icon-color, #969799);
+  font-size: 18px;
+  font-size: var(--popup-close-icon-size, 18px);
+}
+.yh-popup__close-icon--top-left {
+  top: 16px;
+  top: var(--popup-close-icon-margin, 16px);
+  left: 16px;
+  left: var(--popup-close-icon-margin, 16px);
+}
+.yh-popup__close-icon--top-right {
+  top: 16px;
+  top: var(--popup-close-icon-margin, 16px);
+  right: 16px;
+  right: var(--popup-close-icon-margin, 16px);
+}
+.yh-popup__close-icon--bottom-left {
+  bottom: 16px;
+  bottom: var(--popup-close-icon-margin, 16px);
+  left: 16px;
+  left: var(--popup-close-icon-margin, 16px);
+}
+.yh-popup__close-icon--bottom-right {
+  right: 16px;
+  right: var(--popup-close-icon-margin, 16px);
+  bottom: 16px;
+  bottom: var(--popup-close-icon-margin, 16px);
+}
+.yh-popup__close-icon:active {
+  opacity: 0.6;
+}
 .yh-scale-enter-active,
 .yh-scale-leave-active {
+  transition-property: opacity, -webkit-transform;
   transition-property: opacity, transform;
+  transition-property: opacity, transform, -webkit-transform;
 }
-
 .yh-scale-enter,
 .yh-scale-leave-to {
+  -webkit-transform: translate3d(-50%, -50%, 0) scale(0.7);
   transform: translate3d(-50%, -50%, 0) scale(0.7);
   opacity: 0;
 }
-
 .yh-fade-enter-active,
 .yh-fade-leave-active {
   transition-property: opacity;
 }
-
 .yh-fade-enter,
 .yh-fade-leave-to {
   opacity: 0;
 }
-
 .yh-center-enter-active,
 .yh-center-leave-active {
   transition-property: opacity;
 }
-
 .yh-center-enter,
 .yh-center-leave-to {
   opacity: 0;
 }
-
 .yh-bottom-enter-active,
 .yh-bottom-leave-active,
-.yh-top-enter-active,
-.yh-top-leave-active,
 .yh-left-enter-active,
 .yh-left-leave-active,
 .yh-right-enter-active,
-.yh-right-leave-active {
+.yh-right-leave-active,
+.yh-top-enter-active,
+.yh-top-leave-active {
+  transition-property: -webkit-transform;
   transition-property: transform;
+  transition-property: transform, -webkit-transform;
 }
-
 .yh-bottom-enter,
 .yh-bottom-leave-to {
+  -webkit-transform: translate3d(0, 100%, 0);
   transform: translate3d(0, 100%, 0);
 }
-
 .yh-top-enter,
 .yh-top-leave-to {
+  -webkit-transform: translate3d(0, -100%, 0);
   transform: translate3d(0, -100%, 0);
 }
-
 .yh-left-enter,
 .yh-left-leave-to {
+  -webkit-transform: translate3d(-100%, -50%, 0);
   transform: translate3d(-100%, -50%, 0);
 }
-
 .yh-right-enter,
 .yh-right-leave-to {
+  -webkit-transform: translate3d(100%, -50%, 0);
   transform: translate3d(100%, -50%, 0);
 }
 </style>

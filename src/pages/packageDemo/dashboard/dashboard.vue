@@ -5,14 +5,8 @@
         <div class="item-name">{{ item.title }}</div>
         <div class="item">
           <template v-for="itemCell in item.list" :key="itemCell.id">
-            <div class="cell-link" @click="handleJumpRoute(itemCell.id)">
+            <div class="cell-link" @click="handleJumpRoute(itemCell.id)" v-if="itemCell.isOver">
               <div class="cell-name">{{ itemCell.name }}</div>
-              <yh-icon
-                name="tick"
-                v-if="itemCell.isOver"
-                color="green"
-                custom-style="position: absolute;right: 30px;top: 0;"
-              ></yh-icon>
               <yh-icon name="arrow-right"></yh-icon>
             </div>
           </template>
@@ -56,6 +50,7 @@ const renderData = ref([
       {
         id: 'transition',
         name: 'Transition 动画',
+        isOver: true,
       },
     ],
   },
@@ -119,6 +114,7 @@ const renderData = ref([
       {
         id: 'loading',
         name: 'Loading 加载',
+        isOver: true,
       },
       {
         id: 'overlay',

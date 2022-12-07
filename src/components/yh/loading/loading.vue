@@ -1,11 +1,11 @@
 <template>
-  <view :class="getClass">
+  <view :class="getClass" :style="customStyle">
     <view :class="'yh-loading__spinner yh-loading__spinner--' + type" :style="getSpinnerStyle">
-      <block v-if="type === 'spinner'">
+      <template v-if="type === 'spinner'">
         <view v-for="(item, index) in array12" :key="index" class="yh-loading__dot" />
-      </block>
+      </template>
     </view>
-    <view class="yh-loading__text" style="getTextStyle">
+    <view class="yh-loading__text" :style="getTextStyle">
       <slot />
     </view>
   </view>
@@ -18,11 +18,6 @@ import { bem, addUnit } from '../common/utils'
 const emit = defineEmits(['click'])
 
 const props = defineProps({
-  // 自定义样式
-  customStyle: {
-    type: String,
-    default: () => '',
-  },
   // 颜色
   color: {
     type: String,
@@ -33,20 +28,35 @@ const props = defineProps({
     type: String,
     default: () => 'circular',
   },
-  // 加载图标大小，默认单位为 px
+  // 加载图标大小，默认单位为 rpx
   size: {
     type: [String, Number],
-    default: () => '60rpx',
+    default: () => '',
   },
-  // 文字大小，默认单位为为 px
+  // 文字大小，默认单位为为 rpx
   textSize: {
     type: [String, Number],
-    default: () => '28rpx',
+    default: () => '',
+  },
+  // 文字颜色
+  textColor: {
+    type: [String],
+    default: () => '',
   },
   // 是否垂直排列图标和文字内容
   vertical: {
     type: [Boolean],
     default: () => false,
+  },
+  // 自定义样式
+  customStyle: {
+    type: String,
+    default: () => '',
+  },
+  // 自定义类名
+  customClass: {
+    type: String,
+    default: () => '',
   },
 })
 
@@ -54,14 +64,18 @@ const array12 = Array.from({ length: 12 })
 
 const getClass = computed(() => {
   let str = ''
-  const { vertical } = props
+  const { vertical, customClass } = props
   str = bem('loading', { vertical })
+
+  if (customClass) {
+    str += ` ${customClass}`
+  }
   return str
 })
 
 const getSpinnerStyle = computed(() => {
   let str = ''
-  const { color, size, customStyle } = props
+  const { color, size } = props
   if (color) {
     str += `color: ${color}; `
   }
@@ -69,27 +83,25 @@ const getSpinnerStyle = computed(() => {
     str += `width: ${addUnit(size)}; `
     str += `height: ${addUnit(size)}; `
   }
-  if (customStyle) {
-    str += customStyle
-  }
   return str
 })
 
 const getTextStyle = computed(() => {
   let str = ''
-  const { textSize } = props
+  const { textSize, textColor } = props
   if (textSize) {
-    str += `text-size: ${addUnit(textSize)}; `
+    str += `font-size: ${addUnit(textSize)}; `
+  }
+  if (textColor) {
+    str += `color: ${textColor}; `
   }
   return str
 })
 </script>
 
 <style lang="scss" scoped>
-:host {
-  font-size: 0;
-  line-height: 1;
-}
+@use '../common/style/var.scss' as *;
+
 @keyframes yh-rotate {
   from {
     transform: rotate(0deg);
@@ -104,16 +116,16 @@ const getTextStyle = computed(() => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #c8c9cc;
+  color: $yh-loading-spinner-color;
   &__spinner {
     position: relative;
     box-sizing: border-box;
-    width: 60rpx;
+    width: $yh-loading-spinner-size;
     // compatible for 0.x, users may set width or height in root element
     max-width: 100%;
     max-height: 100%;
-    height: 60rpx;
-    animation: yh-rotate 0.8s linear infinite;
+    height: $yh-loading-spinner-size;
+    animation: yh-rotate $yh-loading-animation-duration linear infinite;
 
     &--spinner {
       animation-timing-function: steps(12);
@@ -127,10 +139,10 @@ const getTextStyle = computed(() => {
   }
 
   &__text {
-    margin-left: 16rpx;
-    color: #969799;
-    font-size: 28rpx;
-    line-height: 40rpx;
+    margin-left: $yh--padding-xs;
+    font-size: $yh-loading-text-font-size;
+    line-height: $yh-loading-text-line-height;
+    color: $yh-loading-text-color;
 
     &:empty {
       display: none;
@@ -141,7 +153,7 @@ const getTextStyle = computed(() => {
     flex-direction: column;
 
     .yh-loading__text {
-      margin: 16rpx 0 0;
+      margin: $yh--padding-xs 0 0;
     }
   }
 
