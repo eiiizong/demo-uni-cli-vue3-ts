@@ -120,6 +120,7 @@ const renderData = ref([
       {
         id: 'overlay',
         name: 'Overlay 遮罩层',
+        isOver: true,
       },
     ],
   },

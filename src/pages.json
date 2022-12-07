@@ -96,6 +96,12 @@
             "navigationBarTitleText": "Loading 加载"
           }
         },
+        {
+          "path": "overlay/overlay",
+          "style": {
+            "navigationBarTitleText": "Overlay 遮罩层"
+          }
+        },
         // {
         //   "path": "popup/popup",
         //   "style": {
