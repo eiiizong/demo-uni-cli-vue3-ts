@@ -12,7 +12,6 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { isObj } from '../common/utils'
 
 const emit = defineEmits([
   'click',
@@ -37,8 +36,13 @@ const props = defineProps({
   },
   // 动画时长，单位为毫秒
   duration: {
-    type: [Number, Object],
-    default: () => 300,
+    type: [Object],
+    default: () => {
+      return {
+        enter: 300,
+        leave: 300,
+      }
+    },
   },
   // 动画类型
   // 名称	说明
@@ -56,6 +60,30 @@ const props = defineProps({
     default: () => 'fade',
   },
   customClass: {
+    type: String,
+    default: () => '',
+  },
+  enterClass: {
+    type: String,
+    default: () => '',
+  },
+  enterActiveClass: {
+    type: String,
+    default: () => '',
+  },
+  enterToClass: {
+    type: String,
+    default: () => '',
+  },
+  leaveClass: {
+    type: String,
+    default: () => '',
+  },
+  leaveActiveClass: {
+    type: String,
+    default: () => '',
+  },
+  leaveToClass: {
     type: String,
     default: () => '',
   },
@@ -102,12 +130,16 @@ const getClass = computed(() => {
   return str
 })
 
-const getClassNames = (name: string) => ({
-  enter: `yh-${name}-enter yh-${name}-enter-active enter-class enter-active-class `,
-  'enter-to': `yh-${name}-enter-to yh-${name}-enter-active enter-to-class enter-active-class `,
-  leave: `yh-${name}-leave yh-${name}-leave-active leave-class leave-active-class `,
-  'leave-to': `yh-${name}-leave-to yh-${name}-leave-active leave-to-class leave-active-class `,
-})
+const getClassNames = (name: string) => {
+  const { enterClass, enterActiveClass, enterToClass, leaveActiveClass, leaveClass, leaveToClass } =
+    props
+  return {
+    enter: `yh-${name}-enter yh-${name}-enter-active ${enterClass} ${enterActiveClass} `,
+    'enter-to': `yh-${name}-enter-to yh-${name}-enter-active ${enterToClass} ${enterActiveClass} `,
+    leave: `yh-${name}-leave yh-${name}-leave-active ${leaveClass} ${leaveActiveClass} `,
+    'leave-to': `yh-${name}-leave-to yh-${name}-leave-active ${leaveToClass} ${leaveActiveClass}  `,
+  }
+}
 
 const nextTick = () => new Promise((resolve) => setTimeout(resolve, 1000 / 30))
 
@@ -138,7 +170,7 @@ const onTransitionEnd = () => {
 const enter = () => {
   const { duration, name } = props
   const classNames = getClassNames(name)
-  const current_duration = isObj(duration) ? duration.enter : duration
+  const current_duration = duration.enter
   status.value = 'enter'
   emit('before-enter')
   Promise.resolve()
@@ -167,7 +199,7 @@ const leave = () => {
     return
   }
   const classNames = getClassNames(name)
-  const current_duration = isObj(duration) ? duration.leave : duration
+  const current_duration = duration.leave
   status.value = 'leave'
   emit('before-leave')
   Promise.resolve()
