@@ -25,6 +25,7 @@ import HomeHeaderWeather from './HomeHeaderWeather.vue'
   width: 100%;
   position: relative;
   padding-bottom: 100px;
+  background-color: $color-primary;
   .wrapper {
     display: flex;
     align-items: center;

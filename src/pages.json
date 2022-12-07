@@ -91,6 +91,12 @@
           }
         },
         {
+          "path": "transition/transition",
+          "style": {
+            "navigationBarTitleText": "Transition 动画"
+          }
+        },
+        {
           "path": "use-pinia/use-pinia",
           "style": {
             "navigationBarTitleText": "使用pinia"

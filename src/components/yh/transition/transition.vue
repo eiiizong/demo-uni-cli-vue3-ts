@@ -2,7 +2,7 @@
   <view
     v-if="inited"
     class="yh-transition"
-    :class="[classes]"
+    :class="getClass"
     :style="getStyle"
     @click="emit('click')"
   >
@@ -10,7 +10,7 @@
   </view>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import { isObj } from '../common/utils'
 
@@ -55,6 +55,10 @@ const props = defineProps({
     type: String,
     default: () => 'fade',
   },
+  customClass: {
+    type: String,
+    default: () => '',
+  },
 })
 
 const classes = ref(
@@ -83,7 +87,22 @@ const getStyle = computed(() => {
   return str
 })
 
-const getClassNames = (name) => ({
+const getClass = computed(() => {
+  let str = ''
+  const { customClass } = props
+
+  if (classes.value) {
+    str += `${classes.value}; `
+  }
+
+  if (customClass) {
+    str += ` ${customClass}`
+  }
+
+  return str
+})
+
+const getClassNames = (name: string) => ({
   enter: `yh-${name}-enter yh-${name}-enter-active enter-class enter-active-class `,
   'enter-to': `yh-${name}-enter-to yh-${name}-enter-active enter-to-class enter-active-class `,
   leave: `yh-${name}-leave yh-${name}-leave-active leave-class leave-active-class `,
@@ -92,7 +111,7 @@ const getClassNames = (name) => ({
 
 const nextTick = () => new Promise((resolve) => setTimeout(resolve, 1000 / 30))
 
-const checkStatus = (new_status) => {
+const checkStatus = (new_status: string) => {
   if (new_status !== status.value) {
     throw new Error(`incongruent status: ${new_status}`)
   }
@@ -103,7 +122,11 @@ const onTransitionEnd = () => {
     return
   }
   transitionEnded.value = true
-  emit(`after-${status.value}`)
+
+  if (status.value === 'enter' || status.value === 'leave') {
+    emit(`after-${status.value}`)
+  }
+
   const { show } = props
   if (!show && display.value) {
     display.value = false
@@ -111,6 +134,7 @@ const onTransitionEnd = () => {
   }
 }
 
+// 进入
 const enter = () => {
   const { duration, name } = props
   const classNames = getClassNames(name)
@@ -136,6 +160,7 @@ const enter = () => {
     .catch(() => {})
 }
 
+// 离开
 const leave = () => {
   const { duration, name } = props
   if (!display.value) {
