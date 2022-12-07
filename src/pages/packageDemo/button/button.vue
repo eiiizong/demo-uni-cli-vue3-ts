@@ -164,6 +164,7 @@ const onContact = (event: WechatMiniprogram.ButtonContact) => {
 <style lang="scss" scoped>
 .demo-button {
   width: 100%;
+  background-color: #f8f8f8;
   .row {
     height: 88rpx;
     margin-bottom: 30rpx;

@@ -60,7 +60,7 @@ const renderList = [
 <style lang="scss" scoped>
 .demo-icon {
   width: 100%;
-  color: #323232;
+  background-color: #f8f8f8;
   .items {
     display: flex;
     align-items: center;

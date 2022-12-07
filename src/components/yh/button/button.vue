@@ -1,6 +1,6 @@
 <template>
   <button
-    :id="id"
+    :id="idName"
     :data-detail="dataset"
     :class="getButtonClass"
     :lang="lang"
@@ -16,13 +16,12 @@
     :app-parameter="appParameter"
     :aria-label="ariaLabel"
     @click="onClick"
-    @getuserinfo="onGetUserInfo"
-    @contact="onContact"
-    @getphonenumber="onGetPhoneNumber"
-    @error="onError"
-    @launchapp="onLaunchApp"
-    @opensetting="onOpenSetting"
-    @chooseavatar="onChooseavatar"
+    @contact="emit('contact', $event)"
+    @getphonenumber="emit('getphonenumber', $event)"
+    @error="emit('error', $event)"
+    @launchapp="emit('launchapp', $event)"
+    @opensetting="emit('opensetting', $event)"
+    @chooseavatar="emit('chooseavatar', $event)"
   >
     <template v-if="loading">
       <view :style="getLoadingStyle">
@@ -70,7 +69,7 @@ const emit = defineEmits([
 
 const props = defineProps({
   // 标识符
-  id: {
+  idName: {
     type: [String],
     default: () => '',
   },
@@ -97,7 +96,7 @@ const props = defineProps({
   // 图标类名前缀，同 Icon 组件的 class-prefix 属性
   classPrefix: {
     type: [String],
-    default: () => 'yh-icon',
+    default: () => 'yh-iconfont',
   },
   // 是否为朴素按钮
   plain: {
@@ -149,11 +148,7 @@ const props = defineProps({
     type: [String, Number],
     default: () => '40rpx',
   },
-  // 自定义样式
-  customStyle: {
-    type: [String],
-    default: () => '',
-  },
+
   // 微信开放能力，具体支持可参考 微信官方文档 https://developers.weixin.qq.com/miniprogram/dev/component/button.html
   openType: {
     type: [String],
@@ -219,6 +214,16 @@ const props = defineProps({
     type: [String],
     default: () => '',
   },
+  // 自定义样式
+  customStyle: {
+    type: [String],
+    default: () => '',
+  },
+  // 自定义类名
+  customClass: {
+    type: [String],
+    default: () => '',
+  },
 })
 
 const getOpenType = computed(() => {
@@ -236,7 +241,8 @@ const getOpenType = computed(() => {
 
 const getButtonClass = computed(() => {
   let str = ''
-  const { type, block, round, plain, square, loading, disabled, hairline, size } = props
+  const { type, block, round, plain, square, loading, disabled, hairline, size, customClass } =
+    props
 
   if (hairline) {
     str += `yh-hairline--surround `
@@ -256,6 +262,10 @@ const getButtonClass = computed(() => {
       unclickable: disabled || loading,
     },
   ])
+
+  if (customClass) {
+    str += ` ${customClass}`
+  }
 
   return str
 })
@@ -304,49 +314,29 @@ const getLoadingStyle = computed(() => {
   return str
 })
 
-const onClick = (event) => {
+// 点击时间
+const onClick = (event: WechatMiniprogram.EventCallback) => {
   const { disabled, loading } = props
   if (!disabled && !loading) {
-    emit('click', event.detail)
+    emit('click', event)
     const { openType, lang, getUserProfileDesc } = props
 
     if (openType === 'getUserInfo' && canIUseGetUserProfile()) {
       uni.getUserProfile({
         desc: getUserProfileDesc || '',
-        lang: lang || 'en',
-        complete: (userProfile) => {
-          emit('getuserinfo', userProfile)
+        lang: (lang as 'en' | 'zh_CN' | 'zh_TW' | undefined) || 'en',
+        complete: (res) => {
+          emit('getuserinfo', res)
         },
       })
     }
   }
 }
-
-const onGetUserInfo = (event) => {
-  emit('getuserinfo', event.detail)
-}
-const onContact = (event) => {
-  emit('contact', event.detail)
-}
-const onGetPhoneNumber = (event) => {
-  emit('getphonenumber', event.detail)
-}
-const onError = (event) => {
-  emit('error', event.detail)
-}
-const onLaunchApp = (event) => {
-  emit('launchapp', event.detail)
-}
-const onOpenSetting = (event) => {
-  emit('opensetting', event.detail)
-}
-const onChooseavatar = (event) => {
-  emit('chooseavatar', event.detail)
-}
 </script>
 
 <style lang="scss" scoped>
-@use '../common/style/hairline.scss';
+@use '../common/style/var.scss' as *;
+
 .yh-button {
   position: relative;
   display: inline-flex;
@@ -358,11 +348,11 @@ const onChooseavatar = (event) => {
   vertical-align: middle;
   -webkit-appearance: none;
   -webkit-text-size-adjust: 100%;
-  height: 88rpx;
+  height: $yh-button-default-height;
   line-height: 40rpx;
-  font-size: 32rpx;
-  transition: opacity 0.2;
-  border-radius: 4rpx;
+  font-size: $yh-button-default-font-size;
+  transition: opacity $yh-animation-duration-fast;
+  border-radius: $yh-button-border-radius;
 
   &::before {
     position: absolute;
@@ -375,8 +365,8 @@ const onChooseavatar = (event) => {
     transform: translate(-50%, -50%);
     opacity: 0;
     content: ' ';
-    background-color: #000;
-    border-color: #000;
+    background-color: $yh--black;
+    border-color: $yh--black;
   }
 
   // reset weapp default border
@@ -393,78 +383,78 @@ const onChooseavatar = (event) => {
   }
 
   &--default {
-    color: #323233;
-    background: #fff;
-    border: 1px solid $color-border;
+    color: $yh-button-default-color;
+    background: $yh-button-default-background-color;
+    border: 1px solid $yh-button-default-border-color;
   }
 
   &--primary {
-    color: #fff;
-    background: $color-primary;
-    border: 1px solid $color-primary;
+    color: $yh--white;
+    background: $yh-button-primary-color;
+    border-color: $yh-button-primary-color;
   }
 
   &--info {
-    color: #fff;
-    background: $color-info;
-    border: 1px solid $color-info;
+    color: $yh--white;
+    background: $yh-button-info-color;
+    border-color: $yh-button-info-color;
   }
 
   &--danger {
-    color: #fff;
-    background: $color-danger;
-    border: 1px solid $color-danger;
+    color: $yh--white;
+    background: $yh-button-danger-color;
+    border-color: $yh-button-danger-color;
   }
 
   &--warning {
-    color: #fff;
-    background: $color-warning;
-    border: 1px solid $color-warning;
+    color: $yh--white;
+    background: $yh-button-warning-color;
+    border-color: $yh-button-warning-color;
   }
 
   &--plain {
-    background: #fff;
+    background-color: $yh-button-plain-background-color;
 
     &.yh-button--primary {
-      color: $color-primary;
+      color: $yh-button-primary-color;
     }
 
     &.yh-button--info {
-      color: $color-info;
+      color: $yh-button-info-color;
     }
 
     &.yh-button--danger {
-      color: $color-danger;
+      color: $yh-button-danger-color;
     }
 
     &.yh-button--warning {
-      color: $color-warning;
+      color: $yh-button-warning-color;
     }
   }
 
   &--large {
     width: 100%;
-    height: 100rpx;
+    height: $yh-button-large-height;
   }
 
   &--normal {
-    padding: 0 30rpx;
-    font-size: 24rpx;
+    padding: 0 15px;
+    font-size: $yh-button-normal-font-size;
   }
 
   &--small {
-    min-width: 120rpx;
-    height: 60rpx;
-    padding: 0 16rpx;
-    font-size: 24rpx;
+    min-width: $yh-button-small-min-width;
+    height: $yh-button-small-height;
+    padding: 0 $yh--padding-xs;
+    font-size: $yh-button-small-font-size;
   }
 
   // mini图标默认宽度50px，文字不能超过4个
   &--mini {
     display: inline-block;
-    min-width: 100rpx;
-    height: 44rpx;
-    font-size: 20rpx;
+    min-width: $yh-button-mini-min-width;
+    height: $yh-button-mini-height;
+    font-size: $yh-button-mini-font-size;
 
     & + .yh-button--mini {
       margin-left: 5px;
@@ -485,7 +475,7 @@ const onChooseavatar = (event) => {
   }
 
   &--disabled {
-    opacity: 0.5;
+    opacity: $yh-button-disabled-opacity;
   }
 
   &__text {
@@ -504,7 +494,7 @@ const onChooseavatar = (event) => {
     &::after {
       border-color: inherit;
       border-width: 1px;
-      border-radius: calc(4rpx * 2);
+      border-radius: calc($yh-button-border-radius * 2);
     }
 
     &.yh-button--round::after {

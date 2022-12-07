@@ -1,7 +1,11 @@
 @use './hairline.scss';
 
 $yh--white: #fff;
+$yh--black: #000;
 $yh--padding-xs: 16rpx;
+
+$yh-animation-duration-fast: 0.2;
+
 // info
 $yh-info-size: 32rxp;
 $yh-info-color: #fff;
@@ -48,3 +52,31 @@ $yh-loading-animation-duration: 0.8s;
 $yh-loading-text-color: #969799;
 $yh-loading-text-font-size: 28rpx;
 $yh-loading-text-line-height: 40rpx;
+
+// button
+$yh-button-border-radius: 4rpx;
+$yh-button-plain-background-color: #fff;
+
+$yh-button-default-color: #323233;
+$yh-button-default-background-color: #fff;
+$yh-button-default-border-color: #ebedf0;
+$yh-button-default-height: 88rpx;
+$yh-button-default-font-size: 32rpx;
+
+$yh-button-primary-color: #1989fa;
+$yh-button-info-color: #07c160;
+$yh-button-danger-color: #ee0a24;
+$yh-button-warning-color: #ff976a;
+
+$yh-button-large-height: 100rpx;
+$yh-button-normal-font-size: 28rpx;
+
+$yh-button-small-min-width: 120rpx;
+$yh-button-small-height: 60rpx;
+$yh-button-small-font-size: 24rpx;
+
+$yh-button-mini-min-width: 100rpx;
+$yh-button-mini-height: 44rpx;
+$yh-button-mini-font-size: 20rpx;
+
+$yh-button-disabled-opacity: 0.5;
