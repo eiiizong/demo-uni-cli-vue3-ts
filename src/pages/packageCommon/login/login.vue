@@ -1,13 +1,24 @@
 <template>
   <div class="login">
     <LoginLogo></LoginLogo>
-    <LoginAgreement v-model:module-value="isAgree"></LoginAgreement>
-    <ZdbButton v-if="!tel" name="获取手机号" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber"></ZdbButton>
-    <ZdbButton v-else name="立即登录" @click="handleLogin"></ZdbButton>
+    <LoginAgreement v-model="isAgree"></LoginAgreement>
+    <YhButton
+      v-if="!tel"
+      block
+      type="primary"
+      open-type="getPhoneNumber"
+      @getphonenumber="getPhoneNumber"
+    >
+      获取手机号
+    </YhButton>
+    <YhButton v-else block type="primary" open-type="chooseavatar" @chooseavatar="handleLogin">
+      立即登录
+    </YhButton>
   </div>
 </template>
 <script setup lang="ts">
 import ZdbButton from '@/components/project/zdb-button/zdb-button.vue'
+import YhButton from '@/components/yh/button/button.vue'
 import LoginLogo from './LoginLogo.vue'
 import LoginAgreement from './LoginAgreement.vue'
 
@@ -33,10 +44,8 @@ const getPhoneNumber = (event: WechatMiniprogram.ButtonGetPhoneNumber) => {
 }
 
 // 登录
-const handleLogin = () => {
-  getUserProfile().then((res) => {
-    console.log(res, 987)
-  })
+const handleLogin = (event: any) => {
+  console.log('onChooseavatar ===', event)
 }
 </script>
 

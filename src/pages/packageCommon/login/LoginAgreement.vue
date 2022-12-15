@@ -2,9 +2,9 @@
   <div class="login-agreement">
     <label class="label" for="login_agreement">
       <checkbox-group @change="handleChangeCheckbox" class="checkbox-group">
-        <checkbox id="login_agreement" class="checkbox" :checked="moduleValue" value="checkbox" />
+        <checkbox id="login_agreement" class="checkbox" :checked="modelValue" value="checkbox" />
       </checkbox-group>
-      <div class="icon-checkbox" :class="[moduleValue ? 'checked' : '']">
+      <div class="icon-checkbox" :class="[modelValue ? 'checked' : '']">
         <i class="icon-checkbox_inner"></i>
       </div>
       <div class="d-f">我同意惠农惠民一卡通平台收集、保存、使用/转交我所提交的信息用于快捷登录</div>
@@ -14,7 +14,9 @@
           >《用户服务协议》</span
         >
         <span>及</span>
-        <span class="link" @click.stop="handleJumpRoute('login-privacy-policy', 'packageCommon')">《隐私条款》</span>
+        <span class="link" @click.stop="handleJumpRoute('login-privacy-policy', 'packageCommon')"
+          >《隐私条款》</span
+        >
       </div>
     </label>
   </div>
@@ -23,9 +25,9 @@
 import { navigateTo } from '@/utils/uni-api'
 import type {} from '@dcloudio/uni-app'
 
-const emit = defineEmits(['update:moduleValue'])
+const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
-  moduleValue: {
+  modelValue: {
     type: Boolean,
     required: true,
   },
@@ -35,9 +37,9 @@ const props = defineProps({
 const handleChangeCheckbox = (event: WechatMiniprogram.CheckboxGroupChange) => {
   const { value } = event.detail
   if (value && value.length > 0) {
-    emit('update:moduleValue', true)
+    emit('update:modelValue', true)
   } else {
-    emit('update:moduleValue', false)
+    emit('update:modelValue', false)
   }
 }
 
