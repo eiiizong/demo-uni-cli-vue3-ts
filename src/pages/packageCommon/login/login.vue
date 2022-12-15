@@ -17,13 +17,11 @@
   </div>
 </template>
 <script setup lang="ts">
-import ZdbButton from '@/components/project/zdb-button/zdb-button.vue'
 import YhButton from '@/components/yh/button/button.vue'
 import LoginLogo from './LoginLogo.vue'
 import LoginAgreement from './LoginAgreement.vue'
 
 import { ref } from 'vue'
-import { getUserProfile } from '@/utils/uni-api'
 
 // 用户是否同意协议
 const isAgree = ref(false)

@@ -346,7 +346,9 @@ const onClick = (event: WechatMiniprogram.EventCallback) => {
   padding: 0;
   text-align: center;
   vertical-align: middle;
-  -webkit-appearance: none;
+  appearance: button;
+  -moz-appearance: button; /* Firefox */
+  -webkit-appearance: button; /* Safari and Chrome */
   -webkit-text-size-adjust: 100%;
   height: $yh-button-default-height;
   line-height: 40rpx;
