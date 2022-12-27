@@ -10,26 +10,14 @@
     <div class="main">
       <LoginLogo></LoginLogo>
       <YhButton
-        v-if="!tel"
         block
-        :round="false"
         type="primary"
         :disabled="!isAgree"
-        open-type="getPhoneNumber"
+        :open-type="tel ? 'chooseAvatar' : 'getPhoneNumber'"
         @getphonenumber="getPhoneNumber"
-      >
-        获取手机号
-      </YhButton>
-      <YhButton
-        v-else
-        block
-        :round="false"
-        type="primary"
-        :disabled="!isAgree"
-        open-type="chooseAvatar"
         @chooseavatar="handleLogin"
       >
-        立即登录
+        {{ tel ? '立即登录' : '获取手机号' }}
       </YhButton>
       <LoginAgreement v-model="isAgree"></LoginAgreement>
       <LoginFooter></LoginFooter>
@@ -98,6 +86,7 @@ const handleLogin = (event: any) => {
     overflow: hidden;
     padding: 0 74rpx 110rpx;
     position: relative;
+    border-radius: 4rpx;
   }
 }
 </style>
