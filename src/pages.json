@@ -5,7 +5,8 @@
       "path": "pages/tabbar/home/home",
       "style": {
         "navigationBarTitleText": "首页",
-        "backgroundColorTop": "#3882ff",
+        "backgroundColorTop": "#203f9a",
+        "backgroundColorBottom": "#f3f4f9",
         "navigationStyle": "custom",
         "enablePullDownRefresh": false
       }

@@ -1,6 +1,6 @@
 <template>
   <HomeBg class="home">
-    <YhNavBar :left-arrow="false" background-color="transparent" fixed :border="false">
+    <YhNavBar :left-arrow="false" :background-color="navBarBackgroundColor" fixed :border="false">
       <template #left>
         <img class="logo" :src="imageLogo" alt="" />
       </template>
@@ -25,7 +25,29 @@ import HomePopularServices from './HomePopularServices.vue'
 import HomeNews from './HomeNews.vue'
 import HomePolicy from './HomePolicy.vue'
 
+import type { Ref } from 'vue'
 import { ref, computed } from 'vue'
+import { onPageScroll, onHide } from '@dcloudio/uni-app'
+
+const scrollTimer: Ref<any> = ref(null)
+const navBarBackgroundColor = ref('transparent')
+
+// 监听页面滚动
+onPageScroll((e) => {
+  const { scrollTop } = e
+  scrollTimer.value && clearTimeout(scrollTimer.value)
+  scrollTimer.value = setTimeout(() => {
+    if (scrollTop > 10) {
+      navBarBackgroundColor.value = '#2f54d4'
+    } else {
+      navBarBackgroundColor.value = 'transparent'
+    }
+  }, 100)
+})
+
+onHide(() => {
+  scrollTimer.value && clearTimeout(scrollTimer.value)
+})
 </script>
 
 <style lang="scss" scoped>

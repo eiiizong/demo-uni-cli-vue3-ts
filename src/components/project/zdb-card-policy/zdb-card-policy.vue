@@ -1,8 +1,10 @@
 <template>
   <view class="zdb-card-policy" @click="handleClick">
     <div class="name">{{ renderData.chi051 }}</div>
+    <div class="desc">{{ renderData.chi037_desc }}</div>
     <div class="info">
       <div class="unit">{{ renderData.chi037_desc }}</div>
+      <div class="line">|</div>
       <div class="time">{{ renderData.chi052 }}</div>
     </div>
   </view>
@@ -33,39 +35,36 @@ const handleClick = () => {
 .zdb-card-policy {
   width: 100%;
   position: relative;
-  padding: 0 $spacing;
-  height: 214rpx;
-  &::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    left: 0;
-    height: 80px;
-    background-image: linear-gradient(180deg, #f6f7f8 0%, #ffffff 100%);
-    z-index: 1;
-  }
+  padding: $spacing;
+  background-color: #ffffff;
+  border-radius: 20rpx;
+  overflow: hidden;
   .name {
-    padding-top: 24rpx;
-    position: relative;
-    z-index: 2;
     font-size: 28rpx;
-    line-height: 42rpx;
-    height: 106rpx;
+    line-height: 38rpx;
+    max-height: 76rpx;
     font-weight: 500;
-    color: $color-text;
+    color: #404040;
+    @include textOverflow(2);
+  }
+  .desc {
+    font-size: 24rpx;
+    line-height: 38rpx;
+    max-height: 76rpx;
+    color: #777;
+    margin-top: 12rpx;
     @include textOverflow(2);
   }
   .info {
     position: relative;
-    padding-top: 18rpx;
-    z-index: 3;
+    padding-top: 24rpx;
     display: flex;
-    justify-content: space-between;
-    color: $color-text-placeholder;
+    align-items: center;
+    color: #b4bcc8;
     font-size: 24rpx;
-    .unit {
-      flex: 1;
-      overflow: hidden;
+    line-height: 1;
+    .line {
+      padding: 0 10rpx;
     }
   }
 }

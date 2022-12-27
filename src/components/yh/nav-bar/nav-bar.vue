@@ -162,6 +162,7 @@ onMounted(() => {
   height: $yh-nav-bar-height;
   line-height: $yh-nav-bar-height;
   padding: 0 190rpx;
+  transition: all 0.3s;
   &__text {
     display: inline-block;
     vertical-align: middle;

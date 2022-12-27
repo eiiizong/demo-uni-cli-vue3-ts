@@ -2,7 +2,7 @@
   <view class="zdb-panel">
     <div class="title">
       <div class="left">{{ title }}</div>
-      <div class="right" v-if="rightText">
+      <div class="right" v-if="rightText" @click="emit('click')">
         <span>查看更多</span>
         <YhIcon name="arrow-right" size="24rpx"></YhIcon>
       </div>
@@ -15,6 +15,7 @@
 
 <script setup lang="ts">
 import YhIcon from '@/components/yh/icon/icon.vue'
+
 const emit = defineEmits(['click'])
 const props = defineProps({
   title: {
