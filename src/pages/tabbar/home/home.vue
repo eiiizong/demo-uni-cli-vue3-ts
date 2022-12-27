@@ -28,9 +28,7 @@ import HomePolicy from './HomePolicy.vue'
 import { ref, computed } from 'vue'
 
 const domStyle = computed(() => {
-  let str = ''
-  str += `background-image: url(${imageBgHeader}); `
-  return str
+  return `background-image: url(${imageBgHeader}); `
 })
 </script>
 

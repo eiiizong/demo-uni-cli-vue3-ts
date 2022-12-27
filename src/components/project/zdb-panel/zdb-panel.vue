@@ -14,8 +14,6 @@
 </template>
 
 <script setup lang="ts">
-// import type { Ref } from 'vue'
-// import { onMounted, ref, computed } from 'vue'
 import YhIcon from '@/components/yh/icon/icon.vue'
 const emit = defineEmits(['click'])
 const props = defineProps({
