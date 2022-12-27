@@ -1,6 +1,6 @@
 <template>
   <view class="home-popular-services">
-    <QueryCriteria v-model="queryInfo.keyword" @confirm="handleSearch"></QueryCriteria>
+    <QueryCriteria v-model="queryInfo.keyword" @confirm="handleQueryData"></QueryCriteria>
     <Tabs v-model="queryInfo.tabId" :renderList="customData.tabsData"></Tabs>
     <QueryResult
       class="query-result-wrapper"
@@ -15,10 +15,13 @@ import Tabs from './Tabs.vue'
 import QueryResult from './QueryResult.vue'
 
 import { reactive } from 'vue'
+import { onLoad, onReachBottom } from '@dcloudio/uni-app'
 
 const queryInfo = reactive({
   keyword: '',
   tabId: '0',
+  pageNo: 1,
+  pageSize: 10,
 })
 
 const customData = reactive({
@@ -162,12 +165,42 @@ const customData = reactive({
       yab003_desc: '东兴区',
     },
   ],
+  isRequestOver: false, // 是否请求完成 控制no-data组件在未请求完成时显示
+  isLoadOver: false, // 是否加载完成
+  isMultiplePages: false, // 是否多页
 })
 
-// 搜索
-const handleSearch = () => {
-  console.log(queryInfo.keyword, '===keyword===')
+// 获取查询条件数据
+const getData = () => {
+  Promise.allSettled([]).then((res) => {})
 }
+
+// 查询信息
+const queryData = () => {
+  Promise.allSettled([]).then((res) => {})
+}
+
+// 查询
+const handleQueryData = () => {}
+
+// 加载更多数据
+const loadMoreData = () => {
+  queryInfo.pageNo++
+  queryData()
+}
+
+onLoad((e) => {
+  console.log(e)
+})
+
+// 页面上拉触底事件的处理函数 上拉加载更多
+onReachBottom(() => {
+  const { isLoadOver } = customData
+  if (isLoadOver) {
+    return
+  }
+  loadMoreData()
+})
 </script>
 
 <style lang="scss" scoped>
