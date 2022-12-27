@@ -10,11 +10,17 @@
 
 <script setup lang="ts">
 import ZdbCardPolicy from '@/components/project/zdb-card-policy/zdb-card-policy.vue'
+import type { PropType } from 'vue'
 import { ref } from 'vue'
+
+interface objType {
+  id: string
+}
+
 const emit = defineEmits([''])
 const props = defineProps({
   renderList: {
-    type: Array,
+    type: Array as PropType<objType[]>,
     default: () => [],
   },
 })
