@@ -21,7 +21,6 @@ import imageBgHeader from './images/bg-header.png'
 
 import YhNavBar from '@/components/yh/nav-bar/nav-bar.vue'
 import HomeHeader from './HomeHeader.vue'
-
 import HomePopularServices from './HomePopularServices.vue'
 import HomeNews from './HomeNews.vue'
 import HomePolicy from './HomePolicy.vue'
@@ -50,7 +49,7 @@ const domStyle = computed(() => {
     flex: 1;
     overflow: hidden;
     background-color: #fff;
-    border-top-left-radius: 30rpx;
+    border-top-left-radius: 48rpx;
   }
 }
 </style>
