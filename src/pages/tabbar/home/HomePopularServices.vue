@@ -108,7 +108,7 @@ const navs = computed(() => {
         padding-top: 22rpx;
       }
       &:nth-of-type(2n + 1) {
-        margin-right: 30rpx;
+        margin-right: 26rpx;
       }
     }
   }

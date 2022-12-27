@@ -15,7 +15,7 @@
       "path": "pages/tabbar/bills/bills",
       "style": {
         "navigationBarTitleText": "蓉易贷一本账",
-        "backgroundColorTop": "#3882ff",
+        "backgroundColorTop": "#2f54d4",
         "enablePullDownRefresh": true
       }
     },
@@ -23,7 +23,7 @@
       "path": "pages/tabbar/process/process",
       "style": {
         "navigationBarTitleText": "进度查询",
-        "backgroundColorTop": "#3882ff",
+        "backgroundColorTop": "#2f54d4",
         "enablePullDownRefresh": true
       }
     },
@@ -31,7 +31,7 @@
       "path": "pages/tabbar/supervise/supervise",
       "style": {
         "navigationBarTitleText": "督办",
-        "backgroundColorTop": "#3882ff"
+        "backgroundColorTop": "#2f54d4"
       }
     }
   ],
@@ -178,7 +178,7 @@
   ],
   "globalStyle": {
     "backgroundColor": "#f5f5f5",
-    "navigationBarBackgroundColor": "#3882ff",
+    "navigationBarBackgroundColor": "#2f54d4",
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "demo-uni-cli-vue3-ts",
     "enablePullDownRefresh": false,
@@ -195,7 +195,7 @@
   "tabBar": {
     "color": "#666666",
     "backgroundColor": "#ffffff",
-    "selectedColor": "#3882ff",
+    "selectedColor": "#2f54d4",
     // "borderStyle": "white",
     "borderStyle": "black",
     "list": [
@@ -250,8 +250,8 @@
         "query": ""
       },
       {
-        "name": "packageProject",
-        "path": "pages/packageProject/cooperative-institution/cooperative-institution",
+        "name": "packageProject-query-policy",
+        "path": "pages/packageProject/query-policy/query-policy",
         "query": ""
       }
     ]
