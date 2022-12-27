@@ -12,14 +12,23 @@
       <YhButton
         v-if="!tel"
         block
+        :round="false"
         type="primary"
-        height="90rpx"
+        :disabled="!isAgree"
         open-type="getPhoneNumber"
         @getphonenumber="getPhoneNumber"
       >
         获取手机号
       </YhButton>
-      <YhButton v-else block type="primary" open-type="chooseavatar" @chooseavatar="handleLogin">
+      <YhButton
+        v-else
+        block
+        :round="false"
+        type="primary"
+        :disabled="!isAgree"
+        open-type="chooseAvatar"
+        @chooseavatar="handleLogin"
+      >
         立即登录
       </YhButton>
       <LoginAgreement v-model="isAgree"></LoginAgreement>
@@ -40,13 +49,15 @@ import { ref, computed } from 'vue'
 const isAgree = ref(false)
 // 用户手机号
 const tel = ref('')
+// 导航栏高度
 const navBarHeight = ref(0)
 
+// 获取导航栏高度
 const handleChangeNavBar = (e: number) => {
   navBarHeight.value = e
 }
 
-// 控制样式
+// login节点样式
 const loginStyle = computed(() => {
   let str = ''
   if (navBarHeight.value) {
@@ -68,9 +79,10 @@ const getPhoneNumber = (event: WechatMiniprogram.ButtonGetPhoneNumber) => {
   }
 }
 
-// 登录
+// 登录 获取用户头像
 const handleLogin = (event: any) => {
-  console.log('onChooseavatar ===', event)
+  const { avatarUrl } = event.detail
+  console.log('onChooseavatar ===', avatarUrl)
 }
 </script>
 
