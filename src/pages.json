@@ -41,7 +41,9 @@
           "path": "login/login",
           "style": {
             "navigationBarTitleText": "登录",
-            "navigationStyle": "custom"
+            "navigationStyle": "custom",
+            "backgroundColorTop": "#1a2970",
+            "backgroundColorBottom": "#1ba2ca"
           }
         },
         {

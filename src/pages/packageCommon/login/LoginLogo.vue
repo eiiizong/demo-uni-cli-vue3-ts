@@ -13,9 +13,11 @@ import imageLogo from './images/logo.png'
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 194rpx;
+  margin-bottom: 280rpx;
   .logo {
-    width: 184rpx;
-    height: 170rpx;
+    width: 255rpx;
+    height: 240rpx;
   }
 }
 </style>

@@ -91,6 +91,11 @@ const navBarStyle = computed(() => {
   const { safeAreaInsetTop, zIndex, color, backgroundColor } = props
   if (safeAreaInsetTop) {
     str += `padding-top: ${_statusBarHeight.value}px; `
+    str += `height: ${_statusBarHeight.value ? _statusBarHeight.value + 44 : 44}px; `
+  } else {
+    str += `height: 44px; `
+  }
+  if (_statusBarHeight.value) {
   }
   if (zIndex) {
     str += `z-index: ${zIndex}; `
@@ -142,6 +147,7 @@ onMounted(() => {
   text-align: center;
   -webkit-user-select: none;
   user-select: none;
+  height: $yh-nav-bar-height;
   line-height: $yh-nav-bar-height;
   padding: 0 190rpx;
   &__text {

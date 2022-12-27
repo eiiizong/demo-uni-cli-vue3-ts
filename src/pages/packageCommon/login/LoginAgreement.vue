@@ -7,7 +7,7 @@
       <div class="icon-checkbox" :class="[modelValue ? 'checked' : '']">
         <i class="icon-checkbox_inner"></i>
       </div>
-      <div class="d-f">我同意惠农惠民一卡通平台收集、保存、使用/转交我所提交的信息用于快捷登录</div>
+      <div class="d-f">我同意蓉易贷平台收集、保存、使用/转交我所提交的信息用于快捷登录</div>
       <div class="agreement d-f ai-c">
         <span>查看</span>
         <span class="link" @click.stop="handleJumpRoute('login-user-agreement', 'packageCommon')"
