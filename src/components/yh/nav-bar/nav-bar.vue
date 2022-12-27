@@ -1,16 +1,14 @@
 <template>
   <view class="yh-nav-bar" :class="navBarClass" :style="navBarStyle">
-    <view class="yh-nav-bar__left" @click="emit('click-left')">
+    <view class="yh-nav-bar__left" @click="handleClickLeft">
       <block v-if="leftArrow || leftText">
-        <yh-icon v-if="leftArrow" size="16px" name="arrow-left" custom-class="yh-nav-bar__arrow" />
-        <view v-if="leftText" class="yh-nav-bar__text" hover-class="yh-nav-bar__text--hover" hover-stay-time="70">{{
-          leftText
-        }}</view>
+        <yh-icon v-if="leftArrow" size="32rpx" name="back" custom-class="yh-nav-bar__arrow" />
+        <view v-if="leftText" class="yh-nav-bar__text">{{ leftText }}</view>
       </block>
       <slot v-else name="left" />
     </view>
     <view class="yh-nav-bar__title">
-      <view v-if="title">{{ title }}</view>
+      <view v-if="title" class="yh-ellipsis">{{ title }}</view>
       <slot v-else name="title" />
     </view>
     <view class="yh-nav-bar__right" @click="emit('click-right')">
@@ -19,13 +17,27 @@
     </view>
   </view>
 </template>
+<!-- 添加之后 可以样式穿透 目前未找到setup语法如何编写-->
+<script lang="ts">
+export default {
+  options: { styleIsolation: 'shared' },
+}
+</script>
 
 <script setup lang="ts">
+import YhIcon from '@/components/yh/icon/icon.vue'
+
 import type { Ref } from 'vue'
 import { onMounted, ref, computed } from 'vue'
+import { navigateBack } from '@/utils/uni-api'
+import { bem } from '../common/utils'
 
 const props = defineProps({
   title: {
+    type: String,
+    default: '',
+  },
+  customClass: {
     type: String,
     default: '',
   },
@@ -60,85 +72,122 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  color: {
+    type: String,
+    default: '#323233',
+  },
+  backgroundColor: {
+    type: String,
+    default: '#fff',
+  },
 })
 
-const emit = defineEmits(['click-left', 'click-right'])
+const emit = defineEmits(['click-left', 'click-right', 'change'])
 
 const _statusBarHeight: Ref<number | undefined> = ref(0)
 
 const navBarStyle = computed(() => {
   let str = ''
-  const { safeAreaInsetTop } = props
+  const { safeAreaInsetTop, zIndex, color, backgroundColor } = props
   if (safeAreaInsetTop) {
-    str += `padding-top: ${_statusBarHeight.value}px`
+    str += `padding-top: ${_statusBarHeight.value}px; `
+  }
+  if (zIndex) {
+    str += `z-index: ${zIndex}; `
+  }
+  if (color) {
+    str += `color: ${color}; `
+  }
+  if (backgroundColor) {
+    str += `background-color: ${backgroundColor}; `
   }
   return str
 })
 
 const navBarClass = computed(() => {
   let str = ''
-  const { border } = props
+  const { border, fixed, customClass } = props
 
+  str = bem('nav-bar', { fixed })
   if (border) {
-    str += `${border} `
+    str += ` yh-hairline--bottom`
   }
-
+  if (customClass) {
+    str += ` ${customClass}`
+  }
   return str
 })
+
+const handleClickLeft = () => {
+  const { leftArrow } = props
+  if (leftArrow) {
+    navigateBack(1)
+  }
+  emit('click-left')
+}
 
 onMounted(() => {
   const { statusBarHeight } = uni.getSystemInfoSync()
   _statusBarHeight.value = statusBarHeight
+  // 导出导航栏高度
+  emit('change', statusBarHeight ? statusBarHeight + 44 : 0)
 })
 </script>
 
 <style lang="scss" scoped>
+@use '../common/style/var.scss' as *;
+
 .yh-nav-bar {
-  width: 100%;
   position: relative;
   text-align: center;
   -webkit-user-select: none;
   user-select: none;
-  line-height: 88rpx;
-  color: #fff;
-  background-color: $primary;
-  &.fixed {
+  line-height: $yh-nav-bar-height;
+  padding: 0 190rpx;
+  &__text {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 0-$yh--padding-md;
+    padding: 0 $yh--padding-md;
+    color: inherit;
+  }
+  ::v-deep {
+    .yh-nav-bar__arrow {
+      vertical-align: middle;
+      font-size: $yh-nav-bar-arrow-size;
+      color: inherit;
+    }
+  }
+  &__title {
+    width: 100%;
+    color: inherit;
+    font-weight: $yh-nav-bar-title-font-weight;
+    line-height: $yh-nav-bar-height;
+    font-size: $yh-nav-bar-title-font-size;
+  }
+  &--fixed {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
   }
-
-  &__title {
-    max-width: 50%;
-    margin: 0 auto;
-    color: inherit;
-    font-weight: 500;
-    font-size: 16px;
-    background-color: #f00;
-  }
   &__left,
   &__right {
     position: absolute;
     bottom: 0;
-    font-size: 14px;
+    font-size: $yh--font-size-md;
   }
   &__left {
-    left: 16px;
+    left: $yh--padding-md;
+    display: flex;
+    align-items: center;
+    .yh-nav-bar__text {
+      padding: 0;
+      margin: 0;
+    }
   }
   &__right {
-    right: 16px;
-  }
-  &__text {
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0 -16px;
-    padding: 0 16px;
-    color: inherit;
-    &:hover,
-    &--hover {
-      background-color: #f2f3f5;
-    }
+    right: $yh--padding-md;
   }
 }
 </style>

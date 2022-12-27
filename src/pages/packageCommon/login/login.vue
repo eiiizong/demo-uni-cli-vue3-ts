@@ -1,23 +1,27 @@
 <template>
   <div class="login">
-    <LoginLogo></LoginLogo>
-    <LoginAgreement v-model="isAgree"></LoginAgreement>
-    <YhButton
-      v-if="!tel"
-      block
-      type="primary"
-      open-type="getPhoneNumber"
-      @getphonenumber="getPhoneNumber"
-    >
-      获取手机号
-    </YhButton>
-    <YhButton v-else block type="primary" open-type="chooseavatar" @chooseavatar="handleLogin">
-      立即登录
-    </YhButton>
+    <YhNavBar></YhNavBar>
+    <div class="main">
+      <LoginLogo></LoginLogo>
+      <LoginAgreement v-model="isAgree"></LoginAgreement>
+      <YhButton
+        v-if="!tel"
+        block
+        type="primary"
+        open-type="getPhoneNumber"
+        @getphonenumber="getPhoneNumber"
+      >
+        获取手机号
+      </YhButton>
+      <YhButton v-else block type="primary" open-type="chooseavatar" @chooseavatar="handleLogin">
+        立即登录
+      </YhButton>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
 import YhButton from '@/components/yh/button/button.vue'
+import YhNavBar from '@/components/yh/nav-bar/nav-bar.vue'
 import LoginLogo from './LoginLogo.vue'
 import LoginAgreement from './LoginAgreement.vue'
 
@@ -50,6 +54,12 @@ const handleLogin = (event: any) => {
 <style lang="scss" scoped>
 .login {
   width: 100%;
-  padding: 200rpx 60rpx;
+  padding: 0 $spacing $spacing * 2;
+  background-image: linear-gradient(to bottom, #1a2970, #1ba2ca);
+  .main {
+    background-color: #fff;
+    flex: 1;
+    overflow: hidden;
+  }
 }
 </style>

@@ -15,7 +15,7 @@ export { getUpdateManager } from './getUpdateManager'
 // export { reLaunch } from './reLaunch'
 // export { redirectTo } from './redirectTo'
 export { navigateTo } from './navigateTo'
-// export { navigateBack } from './navigateBack'
+export { navigateBack } from './navigateBack'
 
 // // 跳转
 // export { navigateToMiniProgram } from './navigateToMiniProgram'

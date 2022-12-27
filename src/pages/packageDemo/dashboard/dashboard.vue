@@ -137,6 +137,11 @@ const renderData = ref([
         id: 'indexBar',
         name: 'IndexBar 索引栏',
       },
+      {
+        id: 'nav-bar',
+        name: 'NavBar 导航栏',
+        isOver: true,
+      },
     ],
   },
   {

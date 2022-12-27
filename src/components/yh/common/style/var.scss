@@ -1,8 +1,11 @@
 @use './hairline.scss';
+@use './ellipsis.scss';
 
 $yh--white: #fff;
 $yh--black: #000;
 $yh--padding-xs: 16rpx;
+$yh--padding-md: 32rpx;
+$yh--font-size-md: 28rpx;
 
 $yh-animation-duration-fast: 0.2;
 
@@ -96,3 +99,9 @@ $yh-popup-close-icon-margin: 32rpx;
 $yh-image-placeholder-text-color: #969799;
 $yh-image-placeholder-font-size: 28rpx;
 $yh-image-placeholder-background-color: #f7f8fa;
+
+// nav-bar
+$yh-nav-bar-title-font-weight: 500;
+$yh-nav-bar-title-font-size: 32rpx;
+$yh-nav-bar-arrow-size: 32rpx;
+$yh-nav-bar-height: 88rpx;

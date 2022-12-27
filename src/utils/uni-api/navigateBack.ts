@@ -9,9 +9,9 @@
  */
 const navigateBack = (
   delta = 1,
-  animationType = 'pop-out',
+  animationType:"auto" | "none" | "pop-out" | "slide-out-right" | "slide-out-left" | "slide-out-top" | "slide-out-bottom" | "fade-out" | "zoom-in" | "zoom-fade-in" | undefined = 'pop-out',
   animationDuration = 300
-) => {
+) : Promise<any>=> {
   return new Promise((resolve, reject) => {
     uni.navigateBack({
       delta,
