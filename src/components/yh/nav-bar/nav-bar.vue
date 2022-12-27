@@ -68,7 +68,7 @@ const props = defineProps({
   },
   zIndex: {
     type: Number,
-    default: 1,
+    default: 9,
   },
   safeAreaInsetTop: {
     type: Boolean,
