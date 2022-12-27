@@ -15,7 +15,11 @@ import { defineStore } from 'pinia'
  * store 用户信息
  */
 const useStoreUserInfo = defineStore('storeUserInfo', () => {
-  const userInfo: Ref<Store.StoreUserInfo> = ref({})
+  const userInfo: Ref<Store.StoreUserInfo> = ref({
+    user_id:'123',
+    userName:'测试人',
+    company:'成都市社会保障局'
+  })
 
   const getStoreUserInfo = computed(() => userInfo.value)
 

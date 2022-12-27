@@ -16,6 +16,8 @@ namespace Store {
       idCard?: string
       // 用户姓名
       userName?: string
+      // 单位
+      company?:string,
       // 用户电话号码
       tel?: string
       // 用户id

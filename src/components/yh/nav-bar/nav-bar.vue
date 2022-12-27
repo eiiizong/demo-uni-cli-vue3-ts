@@ -1,21 +1,23 @@
 <template>
-  <view class="yh-nav-bar" :class="navBarClass" :style="navBarStyle">
-    <view class="yh-nav-bar__left" @click="handleClickLeft">
-      <block v-if="leftArrow || leftText">
-        <yh-icon v-if="leftArrow" size="32rpx" name="back" custom-class="yh-nav-bar__arrow" />
-        <view v-if="leftText" class="yh-nav-bar__text">{{ leftText }}</view>
-      </block>
-      <slot v-else name="left" />
+  <div class="yh-nav-bar-wrapper" :style="navBarSwipperStyle">
+    <view class="yh-nav-bar" :class="navBarClass" :style="navBarStyle">
+      <view class="yh-nav-bar__left" @click="handleClickLeft">
+        <block v-if="leftArrow || leftText">
+          <yh-icon v-if="leftArrow" size="32rpx" name="back" custom-class="yh-nav-bar__arrow" />
+          <view v-if="leftText" class="yh-nav-bar__text">{{ leftText }}</view>
+        </block>
+        <slot v-else name="left" />
+      </view>
+      <view class="yh-nav-bar__title">
+        <view v-if="title" class="yh-ellipsis">{{ title }}</view>
+        <slot v-else name="title" />
+      </view>
+      <view class="yh-nav-bar__right" @click="emit('click-right')">
+        <view v-if="rightText" class="yh-nav-bar__text">{{ rightText }}</view>
+        <slot v-else name="right" />
+      </view>
     </view>
-    <view class="yh-nav-bar__title">
-      <view v-if="title" class="yh-ellipsis">{{ title }}</view>
-      <slot v-else name="title" />
-    </view>
-    <view class="yh-nav-bar__right" @click="emit('click-right')">
-      <view v-if="rightText" class="yh-nav-bar__text">{{ rightText }}</view>
-      <slot v-else name="right" />
-    </view>
-  </view>
+  </div>
 </template>
 <!-- 添加之后 可以样式穿透 目前未找到setup语法如何编写-->
 <script lang="ts">
@@ -109,6 +111,16 @@ const navBarStyle = computed(() => {
   return str
 })
 
+const navBarSwipperStyle = computed(() => {
+  let str = ''
+  const { safeAreaInsetTop } = props
+  if (safeAreaInsetTop) {
+    str += `height: ${_statusBarHeight.value ? _statusBarHeight.value + 44 : 44}px; `
+  } else {
+    str += `height: 44px; `
+  }
+  return str
+})
 const navBarClass = computed(() => {
   let str = ''
   const { border, fixed, customClass } = props
@@ -181,6 +193,7 @@ onMounted(() => {
   &__right {
     position: absolute;
     bottom: 0;
+    height: $yh-nav-bar-height;
     font-size: $yh--font-size-md;
   }
   &__left {

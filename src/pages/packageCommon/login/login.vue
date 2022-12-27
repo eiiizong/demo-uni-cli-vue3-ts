@@ -1,26 +1,23 @@
 <template>
-  <div class="login" :style="loginStyle">
-    <YhNavBar
-      title="登录"
-      background-color="transparent"
-      color="#fff"
-      :border="false"
-      @change="handleChangeNavBar"
-    ></YhNavBar>
-    <div class="main">
-      <LoginLogo></LoginLogo>
-      <YhButton
-        block
-        type="primary"
-        :disabled="!isAgree"
-        :open-type="tel ? 'chooseAvatar' : 'getPhoneNumber'"
-        @getphonenumber="getPhoneNumber"
-        @chooseavatar="handleLogin"
-      >
-        {{ tel ? '立即登录' : '获取手机号' }}
-      </YhButton>
-      <LoginAgreement v-model="isAgree"></LoginAgreement>
-      <LoginFooter></LoginFooter>
+  <div class="login">
+    <YhNavBar title="登录" background-color="transparent" color="#fff" :border="false"></YhNavBar>
+
+    <div class="main-wrapper">
+      <div class="main">
+        <LoginLogo></LoginLogo>
+        <YhButton
+          block
+          type="primary"
+          :disabled="!isAgree"
+          :open-type="tel ? 'chooseAvatar' : 'getPhoneNumber'"
+          @getphonenumber="getPhoneNumber"
+          @chooseavatar="handleLogin"
+        >
+          {{ tel ? '立即登录' : '获取手机号' }}
+        </YhButton>
+        <LoginAgreement v-model="isAgree"></LoginAgreement>
+        <LoginFooter></LoginFooter>
+      </div>
     </div>
   </div>
 </template>
@@ -37,22 +34,6 @@ import { ref, computed } from 'vue'
 const isAgree = ref(false)
 // 用户手机号
 const tel = ref('')
-// 导航栏高度
-const navBarHeight = ref(0)
-
-// 获取导航栏高度
-const handleChangeNavBar = (e: number) => {
-  navBarHeight.value = e
-}
-
-// login节点样式
-const loginStyle = computed(() => {
-  let str = ''
-  if (navBarHeight.value) {
-    str += `padding-top: ${navBarHeight.value}px;`
-  }
-  return str
-})
 
 // 获取手机号弹窗
 const getPhoneNumber = (event: WechatMiniprogram.ButtonGetPhoneNumber) => {
@@ -77,13 +58,19 @@ const handleLogin = (event: any) => {
 <style lang="scss" scoped>
 .login {
   width: 100%;
-  padding: 0 $spacing $spacing * 2;
   background-image: linear-gradient(to bottom, #1a2970, #1ba2ca);
-  .main {
-    margin-top: 14rpx;
-    background-color: #fff;
+  .main-wrapper {
+    padding: 14rpx $spacing $spacing * 2;
     flex: 1;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .main {
+    width: 100%;
+    flex: 1;
+    overflow: hidden;
+    background-color: #fff;
     padding: 0 74rpx 110rpx;
     position: relative;
     border-radius: 4rpx;

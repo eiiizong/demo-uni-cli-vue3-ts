@@ -13,8 +13,8 @@ import imageLogo from './images/logo.png'
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 194rpx;
-  margin-bottom: 280rpx;
+  padding-top: 194rpx;
+  padding-bottom: 280rpx;
   .logo {
     width: 255rpx;
     height: 240rpx;
