@@ -1,5 +1,5 @@
 <template>
-  <view class="zdb-card-policy" @click="handleClick">
+  <view class="zdb-card-policy" @click="handleClick" :class="type === '02' ? 'type-02' : ''">
     <div class="name">{{ renderData.chi051 }}</div>
     <div class="desc">{{ renderData.chi037_desc }}</div>
     <div class="info">
@@ -22,6 +22,10 @@ const props = defineProps({
   renderData: {
     type: [Object],
     required: true,
+  },
+  type: {
+    type: String,
+    default: '01',
   },
 })
 
@@ -66,6 +70,12 @@ const handleClick = () => {
     .line {
       padding: 0 10rpx;
     }
+  }
+  &.type-02 {
+    border-bottom: 1px solid $color-border;
+    border-radius: 0;
+    background-color: transparent;
+    padding: $spacing 0;
   }
 }
 </style>

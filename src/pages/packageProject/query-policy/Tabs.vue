@@ -34,8 +34,8 @@ const props = defineProps({
 <style lang="scss" scoped>
 .tabs {
   width: 100%;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
+  border-top: 1px solid $color-border;
+  border-bottom: 1px solid $color-border;
   display: flex;
   align-items: center;
   justify-content: space-between;

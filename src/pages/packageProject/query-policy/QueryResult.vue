@@ -1,12 +1,15 @@
 <template>
   <view class="query-result">
-    <template v-for="item in 50">
-      <div>1233</div>
-    </template>
+    <div class="items">
+      <div class="item" v-for="item in renderList">
+        <ZdbCardPolicy type="02" :render-data="item"></ZdbCardPolicy>
+      </div>
+    </div>
   </view>
 </template>
 
 <script setup lang="ts">
+import ZdbCardPolicy from '@/components/project/zdb-card-policy/zdb-card-policy.vue'
 import { ref } from 'vue'
 const emit = defineEmits([''])
 const props = defineProps({
@@ -22,5 +25,6 @@ const props = defineProps({
   width: 100%;
   flex: 1;
   overflow: auto;
+  padding: 0 $spacing;
 }
 </style>
