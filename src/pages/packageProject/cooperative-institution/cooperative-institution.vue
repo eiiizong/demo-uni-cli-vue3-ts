@@ -1,7 +1,7 @@
 <template>
   <view class="cooperative-institution">
+    <InstiutionList :render-list="customData.queryResultList" v-model="tabId"></InstiutionList>
     <MyInstiution></MyInstiution>
-    <InstiutionList></InstiutionList>
   </view>
 </template>
 
@@ -15,6 +15,40 @@ import { useStoreUserInfo } from '@/stores/modules'
 
 const storeUserInfo = useStoreUserInfo()
 
+const tabId = ref('12')
+const customData = reactive({
+  queryResultList: [
+    {
+      id: '12',
+      name: '担保公司1',
+      list: [
+        {
+          id: '123',
+          name: '测试机构',
+        },
+        {
+          id: '1234',
+          name: '测试机构',
+        },
+        {
+          id: '1243',
+          name: '测试机构',
+        },
+      ],
+    },
+    {
+      id: '123',
+      name: '担保公司2',
+      list: [
+        {
+          id: '12345',
+          name: '测试机构22',
+        },
+      ],
+    },
+  ],
+})
+
 onLoad((e) => {
   console.log(e)
 })
@@ -23,5 +57,6 @@ onLoad((e) => {
 <style lang="scss" scoped>
 .cooperative-institution {
   width: 100%;
+  padding-bottom: 208rpx;
 }
 </style>

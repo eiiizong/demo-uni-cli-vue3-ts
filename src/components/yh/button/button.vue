@@ -416,9 +416,11 @@ const onClick = (event: WechatMiniprogram.EventCallback) => {
 
   &--plain {
     background-color: $yh-button-plain-background-color;
-
+    border-width: 1px;
+    border-style: solid;
     &.yh-button--primary {
       color: $yh-button-primary-color;
+      border-color: $yh-button-primary-color;
     }
 
     &.yh-button--info {
