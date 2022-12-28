@@ -16,8 +16,7 @@
       "style": {
         "navigationBarTitleText": "蓉易贷一本账",
         "backgroundColorTop": "#2f54d4",
-        "enablePullDownRefresh": false,
-        "navigationStyle": "custom"
+        "enablePullDownRefresh": false
       }
     },
     {
@@ -147,7 +146,8 @@
         {
           "path": "bills/bills",
           "style": {
-            "navigationBarTitleText": "蓉易贷一本账"
+            "navigationBarTitleText": "蓉易贷一本账",
+            "navigationStyle": "custom"
           }
         },
         {

@@ -1,5 +1,5 @@
 <template>
-  <BillBg>
+  <BillBg class="bills">
     <BillHearder></BillHearder>
     <div class="main">
       <BillCompare></BillCompare>
@@ -30,5 +30,12 @@ onLoad((e) => {
 <style lang="scss" scoped>
 .bills {
   width: 100%;
+  height: 100%;
+}
+.main {
+  flex: 1;
+  overflow: hidden;
+  background-color: #f00;
+  border-top-left-radius: 48rpx;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <view class="home-bg">
+  <view class="bill-bg">
     <img :src="imageBgHeader" alt="" class="bg" />
     <div class="content">
       <slot></slot>
@@ -12,8 +12,8 @@ import imageBgHeader from './images/bg-header.png'
 </script>
 
 <style lang="scss" scoped>
-$image-height: 428rpx;
-.home-bg {
+$image-height: 510rpx;
+.bill-bg {
   width: 100%;
   min-height: 100%;
   position: relative;
