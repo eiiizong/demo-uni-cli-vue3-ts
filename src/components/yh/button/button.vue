@@ -355,6 +355,7 @@ const onClick = (event: WechatMiniprogram.EventCallback) => {
   font-size: $yh-button-default-font-size;
   transition: opacity $yh-animation-duration-fast;
   border-radius: $yh-button-border-radius;
+  border: 1px solid $yh-button-default-border-color;
 
   &::before {
     position: absolute;
@@ -373,7 +374,7 @@ const onClick = (event: WechatMiniprogram.EventCallback) => {
 
   // reset weapp default border
   &::after {
-    border-width: 0;
+    border: 0;
   }
 
   &--active::before {
@@ -387,7 +388,6 @@ const onClick = (event: WechatMiniprogram.EventCallback) => {
   &--default {
     color: $yh-button-default-color;
     background: $yh-button-default-background-color;
-    border: 1px solid $yh-button-default-border-color;
   }
 
   &--primary {
@@ -416,8 +416,6 @@ const onClick = (event: WechatMiniprogram.EventCallback) => {
 
   &--plain {
     background-color: $yh-button-plain-background-color;
-    border-width: 1px;
-    border-style: solid;
     &.yh-button--primary {
       color: $yh-button-primary-color;
       border-color: $yh-button-primary-color;
