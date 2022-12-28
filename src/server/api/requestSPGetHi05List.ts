@@ -13,11 +13,11 @@ import { request } from '@/server/request'
  */
 
 const requestSPGetHi05List = (
-  chi051:string = '',
-  chi037:string = '',
-  chi031:string = '',
-  pageNo:number = 1,
-  pageSize:number = 10,
+  chi051: string = '',
+  chi037: string = '',
+  chi031: string = '',
+  pageNo: number = 1,
+  pageSize: number = 10,
   isShowLoading = true,
   isShowErrorToast = true
 ) => {

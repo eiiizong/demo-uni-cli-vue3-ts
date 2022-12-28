@@ -31,6 +31,7 @@ export default defineConfig(({ mode }) => {
         },
       },
     },
+    define: { 'process.env': { ...env } },
     plugins: [uni()],
     build: {
       sourcemap: true,

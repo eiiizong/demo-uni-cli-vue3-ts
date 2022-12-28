@@ -1,26 +1,17 @@
-import config from '@/config'
+import type { Api } from './types'
 import { showModal, showLoading, hideLoading, request as uniRequest } from '@/utils/uni-api'
-import { useGetIsDev } from '@/hooks/common'
+import { getIsDev } from '@/utils/get'
 import { useStoreUserInfo } from '@/stores/modules'
 import { AES_Encrypt, AES_Decrypt } from './aes' // 加密
 
-interface RequestParams {
-  [naem: string]: any
-}
-
-interface ApiResData {
-  code?: number,
-  data?: unknown,
-  errors?: [],
-  requestId?: string,
-  serviceSuccess?: boolean,
-}
+const { VITE_API_REQUEST_URL, VITE_OPEN_DATA_ENCRYPTION } = process.env
+const isOpenDataEncryption = VITE_OPEN_DATA_ENCRYPTION === 'true'
 
 // 当前环境是否为开发环境
-const isDev = useGetIsDev()
+const isDev = getIsDev()
 // 字符串中是否含有“http”或者“https”的正则验证表达式
 const httpExp = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/
-const { requestUrl, isOpenEncryption } = config
+
 // 是否已经发生错误
 let isError = false
 
@@ -43,10 +34,19 @@ let isError = false
 */
 const request = (
   url: string,
-  data: RequestParams = {},
+  data: {},
   isShowLoading = true,
   showErrorToast = true,
-  method: 'OPTIONS' | 'GET' | 'HEAD' | 'POST' | 'PUT' | 'DELETE' | 'TRACE' | 'CONNECT' | undefined = 'POST',
+  method:
+    | 'OPTIONS'
+    | 'GET'
+    | 'HEAD'
+    | 'POST'
+    | 'PUT'
+    | 'DELETE'
+    | 'TRACE'
+    | 'CONNECT'
+    | undefined = 'POST',
   timeout = 60000
 ) => {
   const { userInfo } = useStoreUserInfo()
@@ -55,7 +55,7 @@ const request = (
   let paramsStr = ''
 
   // 根据加密情况使用content-type
-  if (isOpenEncryption) {
+  if (isOpenDataEncryption) {
     header = {
       'content-type': 'application/x-www-form-urlencoded',
     }
@@ -90,7 +90,7 @@ const request = (
 
     // 不是以http/https开头的路径
     if (!isHttpUrl) {
-      url = requestUrl + url
+      url = VITE_API_REQUEST_URL + url
     }
 
     // data = {
@@ -106,22 +106,24 @@ const request = (
       }
     }
 
-    if (isOpenEncryption) {
+    if (isOpenDataEncryption) {
       paramsStr = JSON.stringify(data)
       paramsStr = AES_Encrypt(paramsStr)
       paramsStr = encodeURIComponent(paramsStr)
     }
 
-    uniRequest(url, isOpenEncryption ? paramsStr : data, header, method, timeout)
+    uniRequest(url, isOpenDataEncryption ? paramsStr : data, header, method, timeout)
       .then((res) => {
+        console.log('res', res)
+
         let { statusCode, data: _data } = res // 服务器返回的数据
 
         // 请求成功 状态码为 200
         if (statusCode === 200 && _data) {
           // 最终服务器返回结果
-          let apiResData:ApiResData = {}
+          let apiResData: Api.RequestResponseReslut = {}
           // 开启数据加密
-          if (isOpenEncryption) {
+          if (isOpenDataEncryption) {
             const decryptStr = AES_Decrypt(_data as string)
             apiResData = JSON.parse(decryptStr)
 
@@ -131,6 +133,8 @@ const request = (
               console.log('%c res data', 'color: #4CAF50; font-weight: bold', apiResData)
               console.groupEnd()
             }
+          } else {
+            apiResData = { ...(_data as Api.RequestResponseReslut) }
           }
 
           const { code, data: resData, errors } = apiResData

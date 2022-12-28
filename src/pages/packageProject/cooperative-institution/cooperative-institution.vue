@@ -9,14 +9,22 @@
 import MyInstiution from './MyInstiution.vue'
 import InstiutionList from './InstiutionList.vue'
 
+import type { Api } from '@/server/types'
+import type { Ref } from 'vue'
+
 import { ref, reactive } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 import { useStoreUserInfo } from '@/stores/modules'
 
+interface CustomData {
+  queryResultList: Api.AAA_01_Result[]
+}
+
 const storeUserInfo = useStoreUserInfo()
 
 const tabId = ref('12')
-const customData = reactive({
+
+const customData = reactive<CustomData>({
   queryResultList: [
     {
       id: '12',

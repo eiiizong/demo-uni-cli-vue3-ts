@@ -27,6 +27,8 @@
 <script setup lang="ts">
 import YhIcon from '@/components/yh/icon/icon.vue'
 
+import type { Api } from '@/server/types'
+import type { PropType } from 'vue'
 import { ref } from 'vue'
 
 const emit = defineEmits(['update:modelValue'])
@@ -36,7 +38,7 @@ const props = defineProps({
     required: true,
   },
   renderList: {
-    type: Array,
+    type: Array as PropType<Api.AAA_01_Result[]>,
     default: () => [],
   },
 })
