@@ -7,21 +7,32 @@ declare namespace Api {
     success: number
   }
 
-  
-  
   interface AAA_01_List {
     id: string
     name: string
   }
 
+  /**
+   * 接口调用错误
+   */
   interface RequestResponseReslutError {
     id: string
     msg: string
   }
 
-  export interface RequestResponseReslut {
+  /**
+   * 接口返回数据类型
+   */
+  export interface RequestResponseReslut<T> {
     code?: number
-    data?: unknown
+    data?: {
+      resultData: {
+        code?: string
+        message?: string
+        token?: string
+        data?: T
+      }
+    }
     errors?: RequestResponseReslutError[]
     requestId?: string
     serviceSuccess?: boolean

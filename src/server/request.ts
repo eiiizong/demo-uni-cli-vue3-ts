@@ -121,7 +121,7 @@ const request = (
         // 请求成功 状态码为 200
         if (statusCode === 200 && _data) {
           // 最终服务器返回结果
-          let apiResData: Api.RequestResponseReslut = {}
+          let apiResData: Api.RequestResponseReslut<any> = {}
           // 开启数据加密
           if (isOpenDataEncryption) {
             const decryptStr = AES_Decrypt(_data as string)
@@ -134,7 +134,7 @@ const request = (
               console.groupEnd()
             }
           } else {
-            apiResData = { ...(_data as Api.RequestResponseReslut) }
+            apiResData = { ...(_data as Api.RequestResponseReslut<any>) }
           }
 
           const { code, data: resData, errors } = apiResData
@@ -148,8 +148,8 @@ const request = (
             reject(error)
           } else {
             // 服务器返回的数据是否正常判断
-            if (code === 200 && data) {
-              const { resultData } = data
+            if (code === 200 && resData) {
+              const { resultData } = resData
               if (resultData) {
                 const { code, message, token } = resultData
                 if (code == '200') {
@@ -171,7 +171,7 @@ const request = (
                   resolve(resultData)
                 } else {
                   if (showErrorToast) {
-                    showModal(message)
+                    showModal(message?message:'接口未返回message字段')
                     reject(resultData)
                   } else {
                     reject(resultData)
