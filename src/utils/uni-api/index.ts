@@ -117,7 +117,8 @@ export { getUserProfile } from './getUserProfile'
 // // 设备-扫码
 export { scanCode } from './scanCode'
 // // 设备-剪贴板
-// export { setClipboardData } from './setClipboardData'
+export { setClipboardData } from './setClipboardData'
 
 // // 其他的方法
-// export { startFacialRecognitionVerify } from './startFacialRecognitionVerify'
+export { checkIsSupportFacialRecognition } from './checkIsSupportFacialRecognition'
+export { startFacialRecognitionVerify } from './startFacialRecognitionVerify'

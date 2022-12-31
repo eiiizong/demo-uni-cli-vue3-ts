@@ -1,10 +1,60 @@
-import { showToast } from './index'
+import { showToast } from './'
+
+interface StartFacialRecognitionVerifyeSucccessRes {
+  /**
+   * 错误信息
+   */
+  errMsg?: string
+  /**
+   * 错误码
+   */
+  errCode?: number
+  /**
+   * 本次认证结果凭据，第三方可以选择根据这个凭据获取相关信息
+   */
+  verifyResult?: string
+}
+
+interface StartFacialRecognitionVerifyeOptions {
+  /**
+   * 姓名
+   */
+  name: string
+  /**
+   * 身份证号码
+   */
+  idCardNumber: string
+  /**
+   * 人脸核验的交互方式，默认读数字
+   */
+  checkAliveType?: 0 | 1 | 2
+  /**
+   * 成功返回的回调函数
+   */
+  success?: (result: StartFacialRecognitionVerifyeSucccessRes) => void
+  /**
+   * 失败的回调函数
+   */
+  fail?: (result: any) => void
+  /**
+   * 结束的回调函数（调用成功、失败都会执行）
+   */
+  complete?: (result: any) => void
+}
+namespace CustomUniApp {
+  export interface Uni {
+    startFacialRecognitionVerify(options?: StartFacialRecognitionVerifyeOptions): void
+  }
+}
+declare const uni: CustomUniApp.Uni
+
 /**
- * 请求进行基于生物识别的人脸核身。 相关文档地址 https://developers.weixin.qq.com/community/business/doc/000442d352c1202bd498ecb105c00d
+ * 请求进行基于生物识别的人脸核身。 
  * @param {string} name - 姓名。
  * @param {string} idCardNumber - 身份证号码。
- * @param {number} [checkAliveType=2] - 人脸核验的交互方式，默认值`2` => 0 读数字（默认）1 屏幕闪烁 2 先检查是否可以屏幕闪烁，不可以则自动为读数字。
- * @param {Boolean} [showErrModal=true] - 是否显示错误提示 默认值 `true`。
+ * @param {0 | 1 | 2} [checkAliveType=2] - 人脸核验的交互方式，默认值2 => 0 读数字 1 屏幕闪烁 2 先检查是否可以屏幕闪烁，不可以则自动为读数字（默认）。
+ * @param {boolean} [showErrModal=true] - 是否显示错误提示 默认值true。
+ * @support 官方详细说明： https://developers.weixin.qq.com/community/business/doc/000442d352c1202bd498ecb105c00d
  * @example 使用示例
   startFacialRecognitionVerify('张三', '510902199999999999').then(res => {
     // success
@@ -13,12 +63,12 @@ import { showToast } from './index'
   })
  */
 const startFacialRecognitionVerify = (
-  name,
-  idCardNumber,
-  checkAliveType = 2,
+  name: string,
+  idCardNumber: string,
+  checkAliveType: 0 | 1 | 2 = 2,
   showErrModal = true
-) => {
-  const showErrMsg = (errCode) => {
+): Promise<StartFacialRecognitionVerifyeSucccessRes> => {
+  const showErrMsg = (errCode: number) => {
     let message = '系统错误'
     switch (errCode) {
       case 10001:
@@ -149,6 +199,7 @@ const startFacialRecognitionVerify = (
     }
     return message
   }
+
   return new Promise((resolve, reject) => {
     uni.startFacialRecognitionVerify({
       name,
