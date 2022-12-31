@@ -27,7 +27,7 @@ const switchTab = (name: string): Promise<any> => {
           resolve(res)
         },
         fail(err) {
-          console.error('uni.switchTab 接口调用失败 => ', err)
+          console.error('uni.switchTab 接口调用失败。跳转路径：${url}`=> ', err)
           reject(err)
         },
       })

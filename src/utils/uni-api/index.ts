@@ -12,8 +12,8 @@ export { getUpdateManager } from './getUpdateManager'
 
 // // 路由
 export { switchTab } from './switchTab'
-// export { reLaunch } from './reLaunch'
-// export { redirectTo } from './redirectTo'
+export { reLaunch } from './reLaunch'
+export { redirectTo } from './redirectTo'
 export { navigateTo } from './navigateTo'
 export { navigateBack } from './navigateBack'
 
