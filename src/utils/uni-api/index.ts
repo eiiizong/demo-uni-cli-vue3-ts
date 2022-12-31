@@ -24,14 +24,14 @@ export { navigateBack } from './navigateBack'
 
 // // 转发
 // export { showShareMenu } from './showShareMenu'
-// export { hideShareMenu } from './hideShareMenu'
+export { hideShareMenu } from './hideShareMenu'
 
 // // 界面-交互
 export { showToast } from './showToast'
 export { showModal } from './showModal'
 export { showLoading } from './showLoading'
 // export { showActionSheet } from './showActionSheet'
-// export { hideToast } from './hideToast'
+export { hideToast } from './hideToast'
 export { hideLoading } from './hideLoading'
 // export { enableAlertBeforeUnload } from './enableAlertBeforeUnload'
 // export { disableAlertBeforeUnload } from './disableAlertBeforeUnload'
@@ -41,7 +41,7 @@ export { hideLoading } from './hideLoading'
 // export { setNavigationBarTitle } from './setNavigationBarTitle'
 // export { setNavigationBarColor } from './setNavigationBarColor'
 // export { hideNavigationBarLoading } from './hideNavigationBarLoading'
-// export { hideHomeButton } from './hideHomeButton'
+export { hideHomeButton } from './hideHomeButton'
 
 // // 界面-背景
 // export { setBackgroundTextStyle } from './setBackgroundTextStyle'
