@@ -7,11 +7,11 @@ export { canIUse } from './canIUse'
 export { getSystemInfo } from './getSystemInfo'
 
 // // 基础-更新
-// export { updateWeChatApp } from './updateWeChatApp'
+export { updateWeChatApp } from './updateWeChatApp'
 export { getUpdateManager } from './getUpdateManager'
 
 // // 路由
-// export { switchTab } from './switchTab'
+export { switchTab } from './switchTab'
 // export { reLaunch } from './reLaunch'
 // export { redirectTo } from './redirectTo'
 export { navigateTo } from './navigateTo'
