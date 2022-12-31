@@ -115,7 +115,7 @@ export { getUserProfile } from './getUserProfile'
 // export { makePhoneCall } from './makePhoneCall'
 
 // // 设备-扫码
-// export { scanCode } from './scanCode'
+export { scanCode } from './scanCode'
 // // 设备-剪贴板
 // export { setClipboardData } from './setClipboardData'
 
