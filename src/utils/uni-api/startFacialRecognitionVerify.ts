@@ -208,11 +208,14 @@ const startFacialRecognitionVerify = (
       success(res) {
         // 识别成功
         if (res.errCode === 0) {
-          resolve(res.verifyResult)
+          resolve(res)
         } else {
-          const errMsg = showErrMsg(res.errCode)
-          if (showErrModal) {
-            showToast(errMsg)
+          let errMsg = ''
+          if (res.errCode) {
+            errMsg = showErrMsg(res.errCode)
+            if (showErrModal) {
+              showToast(errMsg)
+            }
           }
           reject({ data: res, errMsg })
         }
