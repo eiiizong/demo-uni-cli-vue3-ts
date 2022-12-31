@@ -1,6 +1,7 @@
 import type { Api } from './types'
 import { showModal, showLoading, hideLoading, request as uniRequest } from '@/utils/uni-api'
 import { getIsDev } from '@/utils/get'
+import { isObject } from '@/utils/is'
 import { useStoreUserInfo } from '@/stores/modules'
 import { AES_Encrypt, AES_Decrypt } from './aes' // 加密
 
@@ -12,11 +13,11 @@ const isDev = getIsDev()
 // 字符串中是否含有“http”或者“https”的正则验证表达式
 const httpExp = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/
 
-// 是否已经发生错误
+// 是否已经发生错误 如果发生错误 则不再执行
 let isError = false
 
 /**
- * 自定义发起 HTTPS 网络请求
+ * 自定义发起 HTTPS 网络请求 未定义token过期业务逻辑
  * @param {string} url 开发者服务器接口地址，已默认加上前缀
  * @param {object} data 请求的参数
  * @param {boolean} isShowLoading [true] 请求数据时显示加载中
@@ -34,7 +35,7 @@ let isError = false
 */
 const request = (
   url: string,
-  data: {},
+  data: any = {},
   isShowLoading = true,
   showErrorToast = true,
   method:
@@ -48,7 +49,7 @@ const request = (
     | 'CONNECT'
     | undefined = 'POST',
   timeout = 60000
-) => {
+): Promise<any> => {
   const { userInfo } = useStoreUserInfo()
 
   let header = {}
@@ -76,7 +77,7 @@ const request = (
   return new Promise((resolve, reject) => {
     // 没有请求地址时 终止程序
     if (!url) {
-      showModal('uni request接参数url必须传入，请检查！')
+      showModal('调用request接口参数 url 必须传入，请检查！')
       reject(false)
     }
 
@@ -93,13 +94,8 @@ const request = (
       url = VITE_API_REQUEST_URL + url
     }
 
-    // data = {
-    //   ...data,
-    //   userList: JSON.stringify([userList]),
-    // }
-
-    // 合并 data
-    if (Object.prototype.toString.call(data) === '[object Object]') {
+    // 合并 data 并且添加其他统一参数 如调用渠道
+    if (isObject(data)) {
       data = {
         ...data,
         chb004: '03', // 调用渠道 01 核心系统 02 网厅 03 微信小程序
@@ -114,8 +110,6 @@ const request = (
 
     uniRequest(url, isOpenDataEncryption ? paramsStr : data, header, method, timeout)
       .then((res) => {
-        console.log('res', res)
-
         let { statusCode, data: _data } = res // 服务器返回的数据
 
         // 请求成功 状态码为 200
@@ -126,7 +120,6 @@ const request = (
           if (isOpenDataEncryption) {
             const decryptStr = AES_Decrypt(_data as string)
             apiResData = JSON.parse(decryptStr)
-
             if (isDev) {
               console.groupCollapsed(`请求地址 => ${url}`)
               console.log('%c params', 'color: #03A9F4; font-weight: bold', data)
@@ -152,9 +145,9 @@ const request = (
               const { resultData } = resData
               if (resultData) {
                 const { code, message, token } = resultData
-                if (code == '200') {
+                if (code === '200') {
                   resolve(resultData)
-                } else if (code == '401') {
+                } else if (code === '401') {
                   // 登录超时
                   if (!isError) {
                     isError = true
@@ -165,18 +158,19 @@ const request = (
                     })
                     reject(resultData)
                   }
-                } else if (code == '402') {
+                } else if (code === '402') {
                   // 更新token
-                  // store.commit(M_UPDATE_TOKEN, token)
                   resolve(resultData)
                 } else {
                   if (showErrorToast) {
-                    showModal(message?message:'接口未返回message字段')
+                    showModal(message ? message : '接口未返回message字段')
                     reject(resultData)
                   } else {
                     reject(resultData)
                   }
                 }
+              } else {
+                reject(resData)
               }
             }
           }

@@ -1,3 +1,4 @@
+import type { Api } from '@/server/types'
 import { request } from '@/server/request'
 
 /**
@@ -7,12 +8,16 @@ import { request } from '@/server/request'
  * @param {Boolean} isShowErrorToast 是否显示错误提示 默认值 true
  * @returns
  */
-const requestGetOpenId = (code: string, isShowLoading = true, isShowErrorToast = true) => {
+const requestGetOpenId = (
+  code: string,
+  isShowLoading = true,
+  isShowErrorToast = true
+): Promise<Api.GetOpenIdResult> => {
   const data = {
     methodnamedesc: '获取openid或者登录信息',
     code,
     userType: '1',
-    appIndex: '2', // 小程序类别 默认 0 一卡通 1 移动监督 2 移动审核
+    appIndex: '0',
   }
 
   return new Promise((resolve, reject) => {
