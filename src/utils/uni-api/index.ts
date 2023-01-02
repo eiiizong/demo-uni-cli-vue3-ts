@@ -58,7 +58,7 @@ export { hideHomeButton } from './hideHomeButton'
 // export { hideTabBar } from './hideTabBar'
 
 // // 界面-下拉刷新
-// export { stopPullDownRefresh } from './stopPullDownRefresh'
+export { stopPullDownRefresh } from './stopPullDownRefresh'
 export { startPullDownRefresh } from './startPullDownRefresh'
 
 // // 网络-发起请求
