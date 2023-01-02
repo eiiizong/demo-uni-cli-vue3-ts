@@ -108,7 +108,7 @@ export { getSetting } from './getSetting'
 
 // // 设备-键盘
 export { onKeyboardHeightChange } from './onKeyboardHeightChange'
-// export { offKeyboardHeightChange } from './offKeyboardHeightChange'
+export { offKeyboardHeightChange } from './offKeyboardHeightChange'
 export { hideKeyboard } from './hideKeyboard'
 
 // // 设备-电话

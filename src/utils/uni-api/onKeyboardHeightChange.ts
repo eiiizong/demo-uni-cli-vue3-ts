@@ -1,3 +1,5 @@
+type Listener = (result: UniApp.OnKeyboardHeightChangeResult) => void
+
 /**
  * 监听键盘高度变化
  * @support uniapp详细说明： https://uniapp.dcloud.net.cn/api/key.html#onKeyboardHeightChange
@@ -10,11 +12,7 @@
     // 接口调用完成
   })
  */
-const onKeyboardHeightChange = (): Promise<UniApp.OnKeyboardHeightChangeResult> => {
-  return new Promise((resolve, reject) => {
-    uni.onKeyboardHeightChange((res) => {
-      resolve(res)
-    })
-  })
+const onKeyboardHeightChange = (listener: Listener): void => {
+  uni.onKeyboardHeightChange(listener)
 }
 export { onKeyboardHeightChange }
