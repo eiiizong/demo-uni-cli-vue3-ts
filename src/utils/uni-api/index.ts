@@ -74,13 +74,13 @@ export { uploadFile } from './uploadFile'
 // export { requestPayment } from './requestPayment'
 
 // // 数据缓存
-// export { setStorageSync } from './setStorageSync'
+export { setStorageSync } from './setStorageSync'
 export { setStorage } from './setStorage'
-// export { removeStorageSync } from './removeStorageSync'
-// export { removeStorage } from './removeStorage'
-// export { getStorageSync } from './getStorageSync'
+export { removeStorageSync } from './removeStorageSync'
+export { removeStorage } from './removeStorage'
+export { getStorageSync } from './getStorageSync'
 export { getStorage } from './getStorage'
-// export { clearStorageSync } from './clearStorageSync'
+export { clearStorageSync } from './clearStorageSync'
 export { clearStorage } from './clearStorage'
 
 // // 媒体-图片

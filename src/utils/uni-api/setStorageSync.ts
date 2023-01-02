@@ -5,7 +5,6 @@
  * @support uniapp详细说明： https://uniapp.dcloud.io/api/storage/storage.html#setStorageSync
  * @example setStorageSync('test', 'aaa')
  */
-const setStorageSync = (key, data) => {
-  uni.setStorageSync(key, data)
-}
+const setStorageSync = (key: string, data: any) => uni.setStorageSync(key, data)
+
 export { setStorageSync }

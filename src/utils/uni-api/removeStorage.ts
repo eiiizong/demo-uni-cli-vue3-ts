@@ -1,7 +1,6 @@
 /**
  * 从本地缓存中异步移除指定 key。
  * @param {string} key 本地缓存中的指定的 key
- * @returns { Promise }
  * @support uniapp详细说明： https://uniapp.dcloud.io/api/storage/storage.html#removeStorage
  * @example
   removeStorage('test').then(res => {
@@ -12,7 +11,7 @@
     // 接口调用完成
   })
 */
-const removeStorage = (key) => {
+const removeStorage = (key: string): Promise<any> => {
   return new Promise((resolve, reject) => {
     uni.removeStorage({
       key,
@@ -20,7 +19,7 @@ const removeStorage = (key) => {
         resolve(res)
       },
       fail(err) {
-        console.error('removeStorage 接口调用失败 => ', err)
+        console.error('uni.removeStorage 接口调用失败 => ', err)
         reject(err)
       },
     })

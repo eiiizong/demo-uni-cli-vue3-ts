@@ -4,7 +4,7 @@
  * @support uniapp详细说明： https://uniapp.dcloud.io/api/storage/storage.html#getStorageSync
  * @example getStorageSync('test')
  */
-const getStorageSync = (key) => {
+const getStorageSync = (key: string): any => {
   return uni.getStorageSync(key)
 }
 export { getStorageSync }
