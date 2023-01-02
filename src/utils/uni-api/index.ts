@@ -91,7 +91,7 @@ export { clearStorage } from './clearStorage'
 export { login } from './login'
 
 // // 位置
-// export { openLocation } from './openLocation'
+export { openLocation } from './openLocation'
 // export { getLocation } from './getLocation'
 // export { chooseLocation } from './chooseLocation'
 
