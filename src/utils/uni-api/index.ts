@@ -68,7 +68,7 @@ export { request } from './request'
 export { downloadFile } from './downloadFile'
 
 // // 网络-上传
-// export { uploadFile } from './uploadFile'
+export { uploadFile } from './uploadFile'
 
 // // 支付
 // export { requestPayment } from './requestPayment'
