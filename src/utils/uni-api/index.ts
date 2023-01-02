@@ -107,7 +107,7 @@ export { openSetting } from './openSetting'
 export { getSetting } from './getSetting'
 
 // // 设备-键盘
-// export { onKeyboardHeightChange } from './onKeyboardHeightChange'
+export { onKeyboardHeightChange } from './onKeyboardHeightChange'
 // export { offKeyboardHeightChange } from './offKeyboardHeightChange'
 export { hideKeyboard } from './hideKeyboard'
 
