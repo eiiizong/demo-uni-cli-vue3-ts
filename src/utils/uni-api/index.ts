@@ -96,7 +96,7 @@ export { login } from './login'
 // export { chooseLocation } from './chooseLocation'
 
 // // 文件
-// export { openDocument } from './openDocument'
+export { openDocument } from './openDocument'
 // export { getFileSystemManager } from './getFileSystemManager'
 
 // // 开放接口-用户信息
