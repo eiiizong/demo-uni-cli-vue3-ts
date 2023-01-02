@@ -112,7 +112,7 @@ export { getUserProfile } from './getUserProfile'
 // export { hideKeyboard } from './hideKeyboard'
 
 // // 设备-电话
-// export { makePhoneCall } from './makePhoneCall'
+export { makePhoneCall } from './makePhoneCall'
 
 // // 设备-扫码
 export { scanCode } from './scanCode'
