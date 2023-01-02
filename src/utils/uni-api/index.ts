@@ -75,11 +75,11 @@ export { uploadFile } from './uploadFile'
 
 // // 数据缓存
 // export { setStorageSync } from './setStorageSync'
-// export { setStorage } from './setStorage'
+export { setStorage } from './setStorage'
 // export { removeStorageSync } from './removeStorageSync'
 // export { removeStorage } from './removeStorage'
 // export { getStorageSync } from './getStorageSync'
-// export { getStorage } from './getStorage'
+export { getStorage } from './getStorage'
 // export { clearStorageSync } from './clearStorageSync'
 export { clearStorage } from './clearStorage'
 
