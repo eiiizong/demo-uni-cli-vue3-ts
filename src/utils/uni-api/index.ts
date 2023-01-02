@@ -37,7 +37,7 @@ export { hideLoading } from './hideLoading'
 // export { disableAlertBeforeUnload } from './disableAlertBeforeUnload'
 
 // // 界面-导航栏
-// export { showNavigationBarLoading } from './showNavigationBarLoading'
+export { showNavigationBarLoading } from './showNavigationBarLoading'
 // export { setNavigationBarTitle } from './setNavigationBarTitle'
 // export { setNavigationBarColor } from './setNavigationBarColor'
 // export { hideNavigationBarLoading } from './hideNavigationBarLoading'
