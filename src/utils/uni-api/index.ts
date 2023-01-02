@@ -40,7 +40,7 @@ export { hideLoading } from './hideLoading'
 export { showNavigationBarLoading } from './showNavigationBarLoading'
 export { setNavigationBarTitle } from './setNavigationBarTitle'
 export { setNavigationBarColor } from './setNavigationBarColor'
-// export { hideNavigationBarLoading } from './hideNavigationBarLoading'
+export { hideNavigationBarLoading } from './hideNavigationBarLoading'
 export { hideHomeButton } from './hideHomeButton'
 
 // // 界面-背景
