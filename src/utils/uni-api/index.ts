@@ -104,7 +104,7 @@ export { getUserProfile } from './getUserProfile'
 
 // // 开放接口-设置
 export { openSetting } from './openSetting'
-// export { getSetting } from './getSetting'
+export { getSetting } from './getSetting'
 
 // // 设备-键盘
 // export { onKeyboardHeightChange } from './onKeyboardHeightChange'
