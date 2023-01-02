@@ -65,7 +65,7 @@ export { startPullDownRefresh } from './startPullDownRefresh'
 export { request } from './request'
 
 // // 网络-下载
-// export { downloadFile } from './downloadFile'
+export { downloadFile } from './downloadFile'
 
 // // 网络-上传
 // export { uploadFile } from './uploadFile'
