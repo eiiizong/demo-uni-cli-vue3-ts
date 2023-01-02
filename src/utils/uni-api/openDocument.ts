@@ -21,8 +21,6 @@ const openDocument = (
   return new Promise((resolve, reject) => {
     uni.openDocument({
       filePath,
-      // @ts-ignore
-      showMenu,
       fileType,
       success(res) {
         resolve(res)
@@ -31,6 +29,8 @@ const openDocument = (
         console.error('uni.openDocument 接口调用失败 => ', err)
         reject(err)
       },
+      // @ts-ignore
+      showMenu,
     })
   })
 }

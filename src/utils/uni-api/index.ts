@@ -23,7 +23,7 @@ export { navigateBack } from './navigateBack'
 // export { exitMiniProgram } from './exitMiniProgram'
 
 // // 转发
-// export { showShareMenu } from './showShareMenu'
+export { showShareMenu } from './showShareMenu'
 export { hideShareMenu } from './hideShareMenu'
 
 // // 界面-交互

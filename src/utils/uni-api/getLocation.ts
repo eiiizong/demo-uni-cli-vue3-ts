@@ -34,10 +34,6 @@ const getLocation = (
       altitude,
       isHighAccuracy,
       highAccuracyExpireTime,
-      // @ts-ignore
-      timeout,
-      cacheTimeout,
-      accuracy,
       geocode,
       success(res) {
         resolve(res)
@@ -46,6 +42,12 @@ const getLocation = (
         console.error('uni.getLocation 接口调用失败 => ', err)
         reject(err)
       },
+      // @ts-ignore
+      timeout,
+      // @ts-ignore
+      cacheTimeout,
+      // @ts-ignore
+      accuracy,
     })
   })
 }
