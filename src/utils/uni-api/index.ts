@@ -59,7 +59,7 @@ export { hideHomeButton } from './hideHomeButton'
 
 // // 界面-下拉刷新
 // export { stopPullDownRefresh } from './stopPullDownRefresh'
-// export { startPullDownRefresh } from './startPullDownRefresh'
+export { startPullDownRefresh } from './startPullDownRefresh'
 
 // // 网络-发起请求
 export { request } from './request'
