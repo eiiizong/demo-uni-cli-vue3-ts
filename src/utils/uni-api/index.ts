@@ -92,7 +92,7 @@ export { login } from './login'
 
 // // 位置
 export { openLocation } from './openLocation'
-// export { getLocation } from './getLocation'
+export { getLocation } from './getLocation'
 // export { chooseLocation } from './chooseLocation'
 
 // // 文件
