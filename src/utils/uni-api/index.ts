@@ -103,7 +103,7 @@ export { openDocument } from './openDocument'
 export { getUserProfile } from './getUserProfile'
 
 // // 开放接口-设置
-// export { openSetting } from './openSetting'
+export { openSetting } from './openSetting'
 // export { getSetting } from './getSetting'
 
 // // 设备-键盘
