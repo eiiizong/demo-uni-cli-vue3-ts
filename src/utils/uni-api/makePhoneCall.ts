@@ -11,7 +11,7 @@
     // 接口调用完成
   })
  */
-const makePhoneCall = (phoneNumber: string) => {
+const makePhoneCall = (phoneNumber: string): Promise<any> => {
   return new Promise((resolve, reject) => {
     uni.makePhoneCall({
       phoneNumber,
