@@ -38,8 +38,8 @@ export { hideLoading } from './hideLoading'
 
 // // 界面-导航栏
 export { showNavigationBarLoading } from './showNavigationBarLoading'
-// export { setNavigationBarTitle } from './setNavigationBarTitle'
-// export { setNavigationBarColor } from './setNavigationBarColor'
+export { setNavigationBarTitle } from './setNavigationBarTitle'
+export { setNavigationBarColor } from './setNavigationBarColor'
 // export { hideNavigationBarLoading } from './hideNavigationBarLoading'
 export { hideHomeButton } from './hideHomeButton'
 
