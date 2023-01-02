@@ -18,8 +18,8 @@ export { navigateTo } from './navigateTo'
 export { navigateBack } from './navigateBack'
 
 // // 跳转
-// export { navigateToMiniProgram } from './navigateToMiniProgram'
-// export { navigateBackMiniProgram } from './navigateBackMiniProgram'
+export { navigateToMiniProgram } from './navigateToMiniProgram'
+export { navigateBackMiniProgram } from './navigateBackMiniProgram'
 // export { exitMiniProgram } from './exitMiniProgram'
 
 // // 转发
@@ -97,7 +97,6 @@ export { chooseLocation } from './chooseLocation'
 
 // // 文件
 export { openDocument } from './openDocument'
-// export { getFileSystemManager } from './getFileSystemManager'
 
 // // 开放接口-用户信息
 export { getUserProfile } from './getUserProfile'
