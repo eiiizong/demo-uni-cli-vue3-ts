@@ -1,4 +1,4 @@
-import { showToast } from './'
+import { showModal } from './'
 
 interface StartFacialRecognitionVerifyeSucccessRes {
   /**
@@ -27,7 +27,7 @@ interface StartFacialRecognitionVerifyeOptions {
   /**
    * 人脸核验的交互方式，默认读数字
    */
-  checkAliveType?: 0 | 1 | 2
+  checkAliveType?: 2
   /**
    * 成功返回的回调函数
    */
@@ -49,10 +49,9 @@ namespace CustomUniApp {
 declare const uni: CustomUniApp.Uni
 
 /**
- * 请求进行基于生物识别的人脸核身。 
+ * 请求进行基于生物识别的人脸核身 
  * @param {string} name - 姓名。
  * @param {string} idCardNumber - 身份证号码。
- * @param {0 | 1 | 2} [checkAliveType=2] - 人脸核验的交互方式，默认值2 => 0 读数字 1 屏幕闪烁 2 先检查是否可以屏幕闪烁，不可以则自动为读数字（默认）。
  * @param {boolean} [showErrModal=true] - 是否显示错误提示 默认值true。
  * @support 官方详细说明： https://developers.weixin.qq.com/community/business/doc/000442d352c1202bd498ecb105c00d
  * @example 使用示例
@@ -65,137 +64,165 @@ declare const uni: CustomUniApp.Uni
 const startFacialRecognitionVerify = (
   name: string,
   idCardNumber: string,
-  checkAliveType: 0 | 1 | 2 = 2,
   showErrModal = true
 ): Promise<StartFacialRecognitionVerifyeSucccessRes> => {
   const showErrMsg = (errCode: number) => {
-    let message = '系统错误'
+    let message = ''
     switch (errCode) {
       case 10001:
-        message = '参数错误'
+        message = '信息填写错误，请重试！'
         break
       case 10002:
-        message = '人脸特征检测失败'
+        message = '人脸特征检测失败！'
         break
       case 10003:
-        message = '身份证号不匹配'
+        message = '身份证号与姓名不匹配！'
         break
       case 10004:
-        message = '比对人脸信息不匹配'
+        message = '人脸与身份证信息不匹配！'
         break
       case 10005:
-        message = '正在检测中'
+        message = '当前光线过亮！'
         break
       case 10006:
-        message = 'appid没有权限（后台验证部分）'
-        break
-      case 10007:
-        message = '后台获取图片失败'
+        message = 'appid没有权限！'
         break
       case 10008:
-        message = '比对系统失败'
+      case 10013:
+      case 10014:
+      case 10015:
+      case 10020:
+      case 10029:
+      case 10045:
+      case 10048:
+      case 10071:
+      case 10075:
+      case 10081:
+      case 10083:
+      case 10088:
+      case 10091:
+      case 10094:
+      case 10100:
+      case 10106:
+        message = '系统繁忙！'
         break
       case 10009:
-        message = '未查到身份证照片比对源'
+      case 10026:
+      case 10032:
+      case 10049:
+      case 10072:
+      case 10076:
+      case 10084:
+      case 10086:
+      case 10089:
+      case 10092:
+      case 10095:
+      case 10107:
+        message = '系统未包含该身份证信息！'
         break
       case 10010:
-        message = '照片质量不满足比对要求'
+        message = '照片清晰度不足，请重新尝试！'
         break
-      case 10011:
-        message = '身份证信息未开通比对权限'
-        break
-      case 10015:
-        message = '比对服务暂时不可用'
-        break
-      case 10016:
-        message = '存储用户图片失败'
-        break
-      case 10017:
-        message = '非法identify_id'
+      case 10012:
+        message = '人脸与身份证信息不匹配！'
         break
       case 10018:
-        message = '用户信息不存在'
+        message = '用户信息过期！'
         break
-      case 10020:
-        message = '认证超时'
+      case 10019:
+        message = '用户信息不存在！'
         break
       case 10021:
-        message = '重复的请求，返回上一次的结果'
-        break
-      case 10022:
-        message = '用户信息错误，请检测json格式'
-        break
-      case 10026:
-        message = '用户身份证数据不在比对数据库中'
+        message = '重复的请求！'
         break
       case 10027:
-        message = '语音识别失败'
+        message = '语音识别失败！'
         break
       case 10028:
-        message = '唇动检测失败'
+        message = '唇动检测失败！'
         break
       case 10031:
-        message = '公众号/小程序没有设置昵称'
-        break
-      case 10040:
-        message = '请求数据编码不对，必须是UTF8编码'
-        break
-      case 10041:
-        message = '非法user_id_key'
+        message = '该业务接入有误，请稍后重试！'
         break
       case 10042:
-        message = '请求过于频繁，稍后再重试'
+        message = '操作过于频繁，请第二天0点后再重试！'
         break
-      case 10045:
-        message = '系统失败'
+      case 10050:
+        message = '证件信息失效！'
         break
       case 10052:
-        message = '请求数超限制'
+      case 10066:
+      case 10069:
+        message = '目前使用人数过多，请稍后重试！'
         break
       case 10057:
-        message = '检测过程中人脸主体不一致'
+        message = '检测过程中人脸主体不一致！'
         break
-      case 10066:
-        message = '人脸流水号bioid重复'
+      case 10064:
+        message = '用户未绑定银行卡完成实名！'
         break
-      case 10069:
-        message = '活体检测暂时不可用'
+      case 10065:
+        message = '拉取的实名信息证件不是身份证！'
         break
+      case 10077:
+        message = '服务维护中，请稍后重试！'
+        break
+      case 10101:
+        message = '获取用户设备失败！'
+        break
+      case 10153:
+        message = '为保障安全性，请升级微信最新版本后重试！'
+        break
+      case 90001:
+        message = '设备不支持！'
+        break
+      case 90002:
+      case 90003:
+      case 90004:
+      case 90005:
+      case 90024:
+      case 90025:
       case 90100:
-        message = '用户取消'
+        message = '用户取消！'
         break
-      case 90101:
-        message = '用户未授权'
+      case 90006:
+        message = '用户中断刷脸！'
         break
-      case 90102:
-        message = '底层库出错'
+      case 90007:
+      case 90012:
+      case 90020:
+      case 90021:
+        message = '网络错误！'
         break
-      case 90103:
-        message = 'CDN上传出错'
+      case 90008:
+        message = '用户未授予相机权限，退出检测！'
         break
-      case 90104:
-        message = '获取配置信息出错'
+      case 90009:
+        message = '用户未授予录音权限，退出检测！'
         break
-      case 90105:
-        message = '获取确认页信息失败'
+      case 90010:
+        message = '用户同时未授予相机和录音权限，退出检测！'
         break
-      case 90106:
-        message = '相机初始化失败'
+      case 90011:
+      case 90013:
+      case 90014:
+      case 90017:
+        message = '超时请重试！'
         break
-      case 90107:
-        message = '用户采集人脸超时'
+      case 90016:
+        message = '相机预览失败！'
         break
-      case 90108:
-        message = '用户采集过程中抖动太剧烈'
+      case 90018:
+      case 90019:
+      case 90050:
+        message = '系统错误！'
         break
-      case 90109:
-        message = '设备不支持人脸采集'
-        break
-      case 90199:
-        message = '未知错误'
+      case 90023:
+        message = '没有检测到人脸！'
         break
       default:
-        message = '未知错误'
+        message = '人脸识别出现未知错误，请重试！'
+        break
     }
     return message
   }
@@ -204,20 +231,26 @@ const startFacialRecognitionVerify = (
     uni.startFacialRecognitionVerify({
       name,
       idCardNumber,
-      checkAliveType,
+      checkAliveType: 2,
       success(res) {
+        const { errCode, errMsg } = res
         // 识别成功
-        if (res.errCode === 0) {
+        if (errCode === 0) {
           resolve(res)
         } else {
-          let errMsg = ''
-          if (res.errCode) {
-            errMsg = showErrMsg(res.errCode)
+          if (errCode) {
             if (showErrModal) {
-              showToast(errMsg)
+              if (errMsg) {
+                showModal(errMsg, '错误提示', false)
+              } else {
+                const _errMsg = showErrMsg(errCode)
+                showModal(_errMsg, '错误提示', false)
+              }
             }
+          } else {
+            showModal('人脸识别未返回正常的错误码！', '错误提示', false)
           }
-          reject({ data: res, errMsg })
+          reject(res)
         }
       },
       fail(err) {
@@ -225,15 +258,12 @@ const startFacialRecognitionVerify = (
         let errMsg = err.errMsg
         errMsg = errMsg.substring(errMsg.indexOf('fail ') + 'fail '.length)
         if (errMsg.match(RegExp(/cancel/))) {
-          errMsg = '您已取消人脸识别'
+          errMsg = '您已取消人脸识别！'
         }
         if (showErrModal) {
-          showToast(errMsg)
+          showModal(errMsg, '错误提示', false)
         }
-        reject({
-          data: err,
-          errMsg,
-        })
+        reject(err)
       },
     })
   })

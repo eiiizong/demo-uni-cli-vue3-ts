@@ -1,10 +1,19 @@
-interface CheckIsSupportFacialRecognitionSucccessRes {}
+interface CheckIsSupportFacialRecognitionSucccessRes {
+  /**
+   * 错误信息
+   */
+  errMsg?: string
+  /**
+   * 错误码
+   */
+  errCode?: number
+}
 interface CheckIsSupportFacialRecognitionFailRes {}
 interface CheckIsSupportFacialRecognitionOptions {
   /**
    * 人脸核验的交互方式，默认读数字
    */
-  checkAliveType?: 0 | 1 | 2
+  checkAliveType?: 2
   /**
    * 成功返回的回调函数
    */
@@ -18,17 +27,18 @@ interface CheckIsSupportFacialRecognitionOptions {
    */
   complete?: (result: any) => void
 }
+
 namespace CustomUniApp {
   export interface Uni {
     checkIsSupportFacialRecognition(options?: CheckIsSupportFacialRecognitionOptions): void
   }
 }
+
 declare const uni: CustomUniApp.Uni
 
 /**
  * 检查设备是否支持人脸检测
- * @param {0 | 1 | 2} [checkAliveType=2] - 人脸核验的交互方式，默认值2 => 0 读数字 1 屏幕闪烁 2 先检查是否可以屏幕闪烁，不可以则自动为读数字（默认）。
- * @support uniapp详细说明：https://uniapp.dcloud.io/api/caniuse.html#caniuse
+ * @support 官方详细说明： https://developers.weixin.qq.com/community/business/doc/000442d352c1202bd498ecb105c00d
  * @example 
    checkIsSupportFacialRecognition().then(res => {
     // success
@@ -36,12 +46,10 @@ declare const uni: CustomUniApp.Uni
     // error
   });
 */
-const checkIsSupportFacialRecognition = (
-  checkAliveType: 0 | 1 | 2 = 2
-): Promise<CheckIsSupportFacialRecognitionSucccessRes> => {
+const checkIsSupportFacialRecognition = (): Promise<CheckIsSupportFacialRecognitionSucccessRes> => {
   return new Promise((resolve, reject) => {
     uni.checkIsSupportFacialRecognition({
-      checkAliveType,
+      checkAliveType: 2,
       success(res) {
         resolve(res)
       },
