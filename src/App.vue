@@ -9,13 +9,13 @@ const storeSystemInfo = useStoreSystemInfo()
 onLaunch((e) => {
   // console.log('App Launch', e)
   // 登录
-  requestCustomLogin().then((res) => {
-    console.log(res, 987)
-  })
-  // 获取并储存系统信息
-  getSystemInfo().then((res) => {
-    storeSystemInfo.updateStoreSystemInfo(res)
-  })
+  // requestCustomLogin().then((res) => {
+  //   console.log(res, 987)
+  // })
+  // // 获取并储存系统信息
+  // getSystemInfo().then((res) => {
+  //   storeSystemInfo.updateStoreSystemInfo(res)
+  // })
 })
 
 onShow((e) => {

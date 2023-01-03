@@ -23,6 +23,7 @@ $image-height: 510rpx;
   }
   .content {
     width: 100%;
+    min-height: 100%;
     position: absolute;
     left: 0;
     top: 0;

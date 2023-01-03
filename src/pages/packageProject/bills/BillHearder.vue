@@ -2,7 +2,7 @@
   <view class="bill-header">
     <YhNavBar
       title="蓉易贷一本帐"
-      background-color="transparent"
+      :background-color="backgorundColor"
       color="#fff"
       left-arrow
       :border="false"
@@ -15,6 +15,7 @@
           v-for="item in tabsData"
           :key="item.id"
           :class="item.id === tabId ? 'active' : ''"
+          @click="tabId = item.id"
         >
           {{ item.name }}
         </div>
@@ -32,7 +33,7 @@
           <div class="unit">倍</div>
         </div>
       </div>
-      <div class="cell" v-if="tabId === '02'">
+      <div class="cell cell-02" v-if="tabId === '02'">
         <div class="left">
           <div class="value">
             <div class="val">627.04</div>
@@ -54,9 +55,15 @@
 
 <script setup lang="ts">
 import YhNavBar from '@/components/yh/nav-bar/nav-bar.vue'
-import { ref, reactive, onMounted } from 'vue'
+import { ref } from 'vue'
 
-const tabId = ref('01')
+const props = defineProps({
+  backgorundColor: {
+    type: String,
+  },
+})
+
+const tabId = ref('02')
 const tabsData = ref([
   {
     id: '01',
@@ -73,11 +80,102 @@ const tabsData = ref([
 .bill-header {
   width: 100%;
   color: #fff;
-  padding-top: 46rpx;
   .toolbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0 $spacing;
+    padding-top: 46rpx;
+    font-size: 32rpx;
+    color: #fff;
+    line-height: 1;
+    .tabs {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .tab {
+        line-height: 54rpx;
+        border: 1px solid #fff;
+        border-top-left-radius: 90px;
+        border-bottom-left-radius: 90px;
+        padding: 0 14rpx;
+        font-size: 28rpx;
+        background-color: rgba(255, 255, 255, 0.13);
+        transition: all 0.3s;
+        &:last-child {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+          border-top-right-radius: 90px;
+          border-bottom-right-radius: 90px;
+          border-left: 0;
+        }
+        &.active {
+          background-color: transparent;
+          color: #a3e1ff;
+          border-color: #a3e1ff;
+        }
+      }
+    }
+  }
+  .tab-content {
+    width: 100%;
+    padding: 0 $spacing;
+    .cell {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 156rpx;
+      .left {
+        display: flex;
+        align-items: center;
+        font-size: 82rpx;
+        font-size: 72rpx;
+        line-height: 1;
+        font-weight: 700;
+        .unit {
+          font-size: 38rpx;
+          font-weight: 400;
+        }
+      }
+      .right {
+        display: flex;
+        align-items: center;
+        font-size: 28rpx;
+        line-height: 1;
+        color: rgba(255, 255, 255, 0.8);
+        .value {
+          font-size: 52rpx;
+        }
+      }
+      &.cell-02 {
+        .right,
+        .left {
+          line-height: 1;
+          flex-direction: column;
+          color: #fff;
+          justify-content: flex-start;
+          align-items: flex-start;
+          .value {
+            display: flex;
+            align-items: center;
+            font-size: 70rpx;
+            .val {
+              font-weight: 700;
+            }
+            .unit {
+              font-size: 32rpx;
+            }
+          }
+          .desc {
+            font-size: 28rpx;
+            line-height: 1;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.8);
+            padding-top: 8rpx;
+          }
+        }
+      }
+    }
   }
 }
 </style>
