@@ -1,5 +1,5 @@
 <template>
-  <view class="home-search">
+  <view class="home-search" @click="onJumpRoute">
     <YhIcon name="search" size="26rpx"></YhIcon>
     <div class="placeholder">搜政策</div>
   </view>
@@ -7,6 +7,12 @@
 
 <script setup lang="ts">
 import YhIcon from '@/components/yh/icon/icon.vue'
+import { navigateTo } from '@/utils/uni-api'
+
+// 路由跳转
+const onJumpRoute = () => {
+  navigateTo('query-policy', 'packageProject')
+}
 </script>
 
 <style lang="scss" scoped>

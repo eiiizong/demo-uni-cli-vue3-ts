@@ -199,46 +199,17 @@
     },
     "usingComponents": {}
   },
-  "tabBar": {
-    "color": "#666666",
-    "backgroundColor": "#ffffff",
-    "selectedColor": "#2f54d4",
-    // "borderStyle": "white",
-    "borderStyle": "black",
-    "list": [
-      {
-        "text": "首页",
-        "pagePath": "pages/tabbar/home/home",
-        "iconPath": "static/images/tabbar/icon/home.png",
-        "selectedIconPath": "static/images/tabbar/icon/home_active.png"
-      },
-      {
-        "text": "蓉易贷一本账",
-        "pagePath": "pages/tabbar/bills/bills",
-        "iconPath": "static/images/tabbar/icon/bills.png",
-        "selectedIconPath": "static/images/tabbar/icon/bills_active.png"
-      },
-      {
-        "text": "进度查询",
-        "pagePath": "pages/tabbar/process/process",
-        "iconPath": "static/images/tabbar/icon/process.png",
-        "selectedIconPath": "static/images/tabbar/icon/process_active.png"
-      },
-      {
-        "text": "督办",
-        "pagePath": "pages/tabbar/supervise/supervise",
-        "iconPath": "static/images/tabbar/icon/supervise.png",
-        "selectedIconPath": "static/images/tabbar/icon/supervise_active.png"
-      }
-    ],
-    "position": "bottom"
-  },
   "condition": {
     "current": 0,
     "list": [
       {
         "name": "packageDemo-dashboard",
         "path": "pages/packageDemo/dashboard/dashboard",
+        "query": ""
+      },
+      {
+        "name": "packageProject-bills",
+        "path": "pages/packageProject/bills/bills",
         "query": ""
       },
       {
@@ -259,11 +230,6 @@
       {
         "name": "packageProject-query-policy",
         "path": "pages/packageProject/query-policy/query-policy",
-        "query": ""
-      },
-      {
-        "name": "packageProject-bills",
-        "path": "pages/packageProject/bills/bills",
         "query": ""
       },
       {

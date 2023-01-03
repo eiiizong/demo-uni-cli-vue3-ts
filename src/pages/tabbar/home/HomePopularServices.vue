@@ -2,7 +2,7 @@
   <view class="home-popular-services">
     <ZdbPanel title="热门服务">
       <div class="navs">
-        <div class="nav" v-for="item in navs" :key="item.id">
+        <div class="nav" v-for="item in navs" :key="item.id" @click="onJumpRoute(item)">
           <img :src="item.imgSrc" alt="" class="bg" />
           <div class="content">
             <div class="key">{{ item.name }}</div>
@@ -23,15 +23,19 @@ import imageNav04 from './images/nav-04.png'
 import ZdbPanel from '@/components/project/zdb-panel/zdb-panel.vue'
 
 import { ref, computed } from 'vue'
+import { navigateTo } from '@/utils/uni-api'
 
-const navs = computed(() => {
-  const arr = [
+import type { PopularServiceNavItem } from './type'
+
+// 热门服务渲染数据
+const navs = computed<PopularServiceNavItem[]>(() => {
+  const arr: PopularServiceNavItem[] = [
     {
       id: 'rydybz',
       name: '“蓉易贷”一本账',
       desc: '业务情况，在线总览',
-      pathName: '',
-      packageName: '',
+      pathName: 'bills',
+      packageName: 'packageProject',
       isAuth: false,
       disabled: false,
       imgSrc: imageNav01,
@@ -67,9 +71,14 @@ const navs = computed(() => {
       imgSrc: imageNav04,
     },
   ]
-
   return arr
 })
+
+// 路由跳转
+const onJumpRoute = (data: PopularServiceNavItem) => {
+  const { pathName, packageName } = data
+  navigateTo(pathName, packageName)
+}
 </script>
 
 <style lang="scss" scoped>
