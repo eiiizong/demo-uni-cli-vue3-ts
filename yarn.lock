@@ -910,6 +910,11 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@qiun/ucharts@^2.5.0-20230101":
+  version "2.5.0-20230101"
+  resolved "https://registry.npmmirror.com/@qiun/ucharts/-/ucharts-2.5.0-20230101.tgz#9ca5d646328ad4a002c745c28001f8916865c4f8"
+  integrity sha512-C7ccBgfPuGF6dxTRuMW0NPPMSCf1k/kh3I9zkRVBc5PaivudX/rPL+jd2Wty6gn5ya5L3Ob+YmYe09V5xw66Cw==
+
 "@rollup/pluginutils@^4.2.0":
   version "4.2.1"
   resolved "https://registry.npmmirror.com/@rollup/pluginutils/-/pluginutils-4.2.1.tgz"
