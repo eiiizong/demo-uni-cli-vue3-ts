@@ -37,7 +37,7 @@ onError((err) => {
 /* 每个页面公共css */
 // @import '@/assets/styles/scss/index.scss';
 // @import '@/assets/iconfont/index.scss'; // iconfont
-// @import '@/assets/fonts/Impact/Impact.scss'; // 字体文件
+@import '@/assets/fonts/Impact/Impact.scss'; // 字体文件
 // @import '@/assets/fonts/YouSheBiaoTiHei/YouSheBiaoTiHei.scss'; // 字体文件
 // @import '@/assets/fonts/PangMenZhengDao/PangMenZhengDao.scss'; // 字体文件
 </style>

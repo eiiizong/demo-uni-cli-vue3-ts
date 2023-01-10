@@ -24,26 +24,26 @@
     <div class="tab-content">
       <div class="cell" v-if="tabId === '01'">
         <div class="left">
-          <div class="value">627.04</div>
+          <div class="value Impact">627.04</div>
           <div class="unit">亿元</div>
         </div>
         <div class="right">
           <div class="key">杠杆放大：</div>
-          <div class="value">60</div>
+          <div class="value Impact">60</div>
           <div class="unit">倍</div>
         </div>
       </div>
       <div class="cell cell-02" v-if="tabId === '02'">
         <div class="left">
           <div class="value">
-            <div class="val">627.04</div>
+            <div class="val Impact">627.04</div>
             <div class="unit">亿元</div>
           </div>
           <div class="desc">73模式</div>
         </div>
         <div class="right">
           <div class="value">
-            <div class="val">627.04</div>
+            <div class="val Impact">627.04</div>
             <div class="unit">亿</div>
           </div>
           <div class="desc">442模式</div>

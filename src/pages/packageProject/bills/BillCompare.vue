@@ -4,19 +4,19 @@
       <div class="left">
         <div class="name">累计投放</div>
         <div class="value">
-          <div class="val">2224</div>
+          <div class="val Impact">2224</div>
           <div class="unit">户</div>
         </div>
         <div class="compare-value">
           <div class="last-year">去年：</div>
-          <div class="val">232424</div>
+          <div class="val Impact">232424</div>
           <div class="unit">户</div>
         </div>
       </div>
       <div class="right">
         <div class="compare-result">
           <div class="iconimg"></div>
-          <div class="value">2.5%</div>
+          <div class="value Impact">2.5%</div>
         </div>
         <div class="echart"></div>
       </div>
@@ -25,19 +25,19 @@
       <div class="left">
         <div class="name">累计投放</div>
         <div class="value">
-          <div class="val">2224</div>
+          <div class="val Impact">2224</div>
           <div class="unit">户</div>
         </div>
         <div class="compare-value">
           <div class="last-year">去年：</div>
-          <div class="val">232424</div>
+          <div class="val Impact">232424</div>
           <div class="unit">户</div>
         </div>
       </div>
       <div class="right">
         <div class="compare-result">
           <div class="iconimg"></div>
-          <div class="value">2.5%</div>
+          <div class="value Impact">2.5%</div>
         </div>
         <div class="echart"></div>
       </div>
@@ -46,19 +46,19 @@
       <div class="left">
         <div class="name">累计投放</div>
         <div class="value">
-          <div class="val">2224</div>
+          <div class="val Impact">2224</div>
           <div class="unit">户</div>
         </div>
         <div class="compare-value">
           <div class="last-year">去年：</div>
-          <div class="val">232424</div>
+          <div class="val Impact">232424</div>
           <div class="unit">户</div>
         </div>
       </div>
       <div class="right">
         <div class="compare-result">
           <div class="iconimg"></div>
-          <div class="value">2.5%</div>
+          <div class="value Impact">2.5%</div>
         </div>
         <div class="echart"></div>
       </div>
@@ -67,19 +67,19 @@
       <div class="left">
         <div class="name">累计投放</div>
         <div class="value">
-          <div class="val">2224</div>
+          <div class="val Impact">2224</div>
           <div class="unit">户</div>
         </div>
         <div class="compare-value">
           <div class="last-year">去年：</div>
-          <div class="val">232424</div>
+          <div class="val Impact">232424</div>
           <div class="unit">户</div>
         </div>
       </div>
       <div class="right">
         <div class="compare-result">
           <div class="iconimg"></div>
-          <div class="value">2.5%</div>
+          <div class="value Impact">2.5%</div>
         </div>
         <div class="echart"></div>
       </div>
