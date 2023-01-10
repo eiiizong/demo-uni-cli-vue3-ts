@@ -18,7 +18,9 @@
           <div class="iconimg"></div>
           <div class="value Impact">2.5%</div>
         </div>
-        <div class="echart"></div>
+        <div class="echart">
+          <qiun-data-charts type="line" :opts="opts" :chartData="chartData" />
+        </div>
       </div>
     </div>
     <div class="item">
@@ -89,6 +91,96 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
+
+const chartData = ref({})
+
+const opts = ref({
+  color: [
+    '#1890FF',
+    '#91CB74',
+    '#FAC858',
+    '#EE6666',
+    '#73C0DE',
+    '#3CA272',
+    '#FC8452',
+    '#9A60B4',
+    '#ea7ccc',
+  ],
+  padding: [15, 10, 0, 15],
+  dataLabel: false,
+  dataPointShape: false,
+  enableScroll: false,
+  legend: {},
+  xAxis: {
+    disableGrid: true,
+  },
+  yAxis: {
+    gridType: 'dash',
+    dashLength: 2,
+    data: [
+      {
+        min: 0,
+        max: 150,
+      },
+    ],
+  },
+  extra: {
+    line: {
+      type: 'curve',
+      width: 2,
+      activeType: 'hollow',
+      linearType: 'custom',
+    },
+  },
+})
+
+const getServerData = () => {
+  //模拟从服务器获取数据时的延时
+  setTimeout(() => {
+    //模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
+    let res = {
+      categories: ['2018', '2019', '2020', '2021', '2022', '2023'],
+      series: [
+        {
+          name: '成交量A',
+          linearColor: [
+            [0, '#1890FF'],
+            [0.25, '#00B5FF'],
+            [0.5, '#00D1ED'],
+            [0.75, '#00E6BB'],
+            [1, '#90F489'],
+          ],
+          data: [15, 45, 15, 45, 15, 45],
+        },
+        {
+          name: '成交量B',
+          linearColor: [
+            [0, '#91CB74'],
+            [0.25, '#2BDCA8'],
+            [0.5, '#2AE3A0'],
+            [0.75, '#C4D06E'],
+            [1, '#F2D375'],
+          ],
+          data: [55, 85, 55, 85, 55, 85],
+        },
+        {
+          name: '成交量C',
+          linearColor: [
+            [0, '#FAC858'],
+            [0.33, '#FFC371'],
+            [0.66, '#FFC2B2'],
+            [1, '#FA7D8D'],
+          ],
+          data: [95, 125, 95, 125, 95, 125],
+        },
+      ],
+    }
+    chartData.value = JSON.parse(JSON.stringify(res))
+  }, 500)
+}
+onMounted(() => {
+  getServerData()
+})
 </script>
 
 <style lang="scss" scoped>
@@ -141,6 +233,10 @@ $color4: #f85c5c;
         }
       }
     }
+  }
+  .echart {
+    width: 236rpx;
+    height: 120rpx;
   }
   .left {
     flex: 1;
