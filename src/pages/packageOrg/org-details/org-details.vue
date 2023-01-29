@@ -1,8 +1,12 @@
 <template>
-  <view class="institution-details"> institution-details </view>
+  <view class="org-details">
+    <BasicInfo></BasicInfo>
+  </view>
 </template>
 
 <script setup lang="ts">
+import BasicInfo from './BasicInfo.vue'
+
 import { ref, reactive } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 import { useStoreUserInfo } from '@/stores/modules'
@@ -15,7 +19,7 @@ onLoad((e) => {
 </script>
 
 <style lang="scss" scoped>
-.institution-details {
+.org-details {
   width: 100%;
 }
 </style>

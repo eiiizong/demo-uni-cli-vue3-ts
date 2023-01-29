@@ -239,8 +239,8 @@
         "query": ""
       },
       {
-        "name": "packageOrg-org-basic-info",
-        "path": "pages/packageOrg/org-basic-info/org-basic-info",
+        "name": "packageOrg-org-details",
+        "path": "pages/packageOrg/org-details/org-details",
         "query": ""
       }
     ]
