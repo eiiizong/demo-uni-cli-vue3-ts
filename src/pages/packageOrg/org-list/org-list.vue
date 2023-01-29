@@ -1,5 +1,5 @@
 <template>
-  <view class="cooperative-institution">
+  <view class="org-list">
     <InstiutionList :render-list="customData.queryResultList" v-model="tabId"></InstiutionList>
     <MyInstiution></MyInstiution>
   </view>
@@ -119,7 +119,7 @@ onLoad((e) => {
 </script>
 
 <style lang="scss" scoped>
-.cooperative-institution {
+.org-list {
   width: 100%;
   padding-bottom: 184rpx;
   position: relative;

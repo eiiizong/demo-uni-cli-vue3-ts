@@ -141,6 +141,29 @@
       ]
     },
     {
+      "root": "pages/packageOrg",
+      "pages": [
+        {
+          "path": "org-basic-info/org-basic-info",
+          "style": {
+            "navigationBarTitleText": "合作机构基本信息"
+          }
+        },
+        {
+          "path": "org-details/org-details",
+          "style": {
+            "navigationBarTitleText": "合作机构详情"
+          }
+        },
+        {
+          "path": "org-list/org-list",
+          "style": {
+            "navigationBarTitleText": "合作机构"
+          }
+        }
+      ]
+    },
+    {
       "root": "pages/packageProject",
       "pages": [
         {
@@ -154,18 +177,6 @@
           "path": "business-intro/business-intro",
           "style": {
             "navigationBarTitleText": "业务介绍"
-          }
-        },
-        {
-          "path": "cooperative-institution/cooperative-institution",
-          "style": {
-            "navigationBarTitleText": "合作机构"
-          }
-        },
-        {
-          "path": "institution-details/institution-details",
-          "style": {
-            "navigationBarTitleText": "机构详情"
           }
         },
         {
@@ -213,11 +224,6 @@
         "query": ""
       },
       {
-        "name": "packageDemo-NavBar",
-        "path": "pages/packageDemo/nav-bar/nav-bar",
-        "query": ""
-      },
-      {
         "name": "packageCommon-login",
         "path": "pages/packageCommon/login/login",
         "query": ""
@@ -233,8 +239,8 @@
         "query": ""
       },
       {
-        "name": "packageProject-cooperative-institution",
-        "path": "pages/packageProject/cooperative-institution/cooperative-institution",
+        "name": "packageOrg-org-basic-info",
+        "path": "pages/packageOrg/org-basic-info/org-basic-info",
         "query": ""
       }
     ]
