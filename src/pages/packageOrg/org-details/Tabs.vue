@@ -33,7 +33,7 @@ const tabsData = ref([
   { id: 3, name: '补偿情况' },
 ])
 
-const activeTabId = ref(1)
+const activeTabId = ref(2)
 
 const markStyle = computed(() => {
   let str = ''
