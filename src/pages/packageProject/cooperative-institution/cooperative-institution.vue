@@ -54,6 +54,62 @@ const customData = reactive<CustomData>({
         },
       ],
     },
+    {
+      id: '1278',
+      name: '担保公司1',
+      list: [
+        {
+          id: '123',
+          name: '测试机构',
+        },
+        {
+          id: '1234',
+          name: '测试机构',
+        },
+        {
+          id: '1243',
+          name: '测试机构',
+        },
+      ],
+    },
+    {
+      id: '12356',
+      name: '担保公司2',
+      list: [
+        {
+          id: '12345',
+          name: '测试机构22',
+        },
+      ],
+    },
+    {
+      id: '1209',
+      name: '担保公司1',
+      list: [
+        {
+          id: '123',
+          name: '测试机构',
+        },
+        {
+          id: '1234',
+          name: '测试机构',
+        },
+        {
+          id: '1243',
+          name: '测试机构',
+        },
+      ],
+    },
+    {
+      id: '12399',
+      name: '担保公司2',
+      list: [
+        {
+          id: '12345',
+          name: '测试机构22',
+        },
+      ],
+    },
   ],
 })
 
@@ -65,6 +121,7 @@ onLoad((e) => {
 <style lang="scss" scoped>
 .cooperative-institution {
   width: 100%;
-  padding-bottom: 208rpx;
+  padding-bottom: 184rpx;
+  position: relative;
 }
 </style>

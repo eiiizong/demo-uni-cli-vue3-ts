@@ -1,26 +1,22 @@
 <template>
   <view class="my-instiuition">
-    <YhButton
-      block
-      custom-style="background-color:transparent;"
-      type="primary"
-      plain
-      @click="handleClicck"
+    <YhButton block custom-class="custom-button" type="primary" plain @click="onClick"
       >我的合作机构</YhButton
     >
   </view>
 </template>
+<!-- 添加之后 组件可以样式穿透 目前未找到setup语法如何编写-->
+<script lang="ts">
+export default {
+  options: { styleIsolation: 'shared' },
+}
+</script>
 
 <script setup lang="ts">
 import YhButton from '@/components/yh/button/button.vue'
 
-import { ref } from 'vue'
-// const emit = defineEmits([''])
-// const props = defineProps({
-
-// })
-
-const handleClicck = () => {}
+// 监听点击事件
+const onClick = () => {}
 </script>
 
 <style lang="scss" scoped>
@@ -29,7 +25,18 @@ const handleClicck = () => {}
   position: absolute;
   left: 0;
   width: 100%;
-  bottom: 0;
-  padding: $spacing 54rpx;
+  bottom: 54rpx;
+  padding: 0 $spacing;
+  ::v-deep {
+    .custom-button {
+      height: 100rpx;
+      background-color: rgba($primary, 0.09);
+      border-radius: 8rpx;
+      border: solid 1px $primary;
+      color: $primary;
+      font-size: 36rpx;
+      border-radius: 8rpx;
+    }
+  }
 }
 </style>

@@ -25,7 +25,7 @@ import ZdbPanel from '@/components/project/zdb-panel/zdb-panel.vue'
 import { ref, computed } from 'vue'
 import { navigateTo } from '@/utils/uni-api'
 
-import type { PopularServiceNavItem } from './type'
+import type { PopularServiceNavItem } from '@/types'
 
 // 热门服务渲染数据
 const navs = computed<PopularServiceNavItem[]>(() => {
@@ -44,8 +44,8 @@ const navs = computed<PopularServiceNavItem[]>(() => {
       id: 'hzjg',
       name: '合作机构',
       desc: '查询合作机构详情',
-      pathName: '',
-      packageName: '',
+      pathName: 'cooperative-institution',
+      packageName: 'packageProject',
       isAuth: false,
       disabled: false,
       imgSrc: imageNav02,
