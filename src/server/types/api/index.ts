@@ -1,0 +1,1 @@
+export type { GetRealPhoneResult } from './GetRealPhone';

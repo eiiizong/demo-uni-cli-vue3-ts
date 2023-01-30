@@ -1,29 +1,50 @@
 // 全局状态管理类型
 namespace Store {
-    //  用户信息
-    export interface StoreUserInfo {
-      // 用户唯一 token
-      token?: string
-      // 用户唯一 openId
-      openId?: string
-      // 用户唯一 sessionId
-      sessionId?: string
-      // 用户唯一 session_key
-      session_key?: string
-      // 用户头像网络地址
-      avatarUrl?: string
-      // 用户身份证号
-      idCard?: string
-      // 用户姓名
-      userName?: string
-      // 单位
-      company?:string,
-      // 用户电话号码
-      tel?: string
-      // 用户id
-      user_id?: string
-    }
+  /**
+   * store 用户信息
+   */
+  export interface StoreUserInfo {
+    /**
+     * 用户唯一token
+     */
+    token?: string
+    /**
+     * openId
+     */
+    openId?: string
+    /**
+     * sessionId
+     */
+    sessionId?: string
+    /**
+     * sessionKey
+     */
+    sessionKey?: string
+    /**
+     * 用户头像网络地址
+     */
+    avatarUrl?: string
+    /**
+     * 用户身份证号
+     */
+    idCard?: string
+    /**
+     * 用户姓名
+     */
+    userName?: string
+    /**
+     * 用户单位名称
+     */
+    unitName?: string
+    /**
+     * 用户电话号码
+     */
+    tel?: string
+    /**
+     * 用户id
+     */
+    userId?: string
   }
-  
-  export type { Store }
-  
+}
+
+export type { Store }

@@ -38,7 +38,7 @@ declare namespace Api {
     serviceSuccess?: boolean
   }
   /**
-   * getOpenId 接口
+   * getOpenId 接口调用成功返回的数据格式
    */
   export interface GetOpenIdResult {
     openid: string

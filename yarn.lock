@@ -910,11 +910,6 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@qiun/ucharts@^2.5.0-20230101":
-  version "2.5.0-20230101"
-  resolved "https://registry.npmmirror.com/@qiun/ucharts/-/ucharts-2.5.0-20230101.tgz#9ca5d646328ad4a002c745c28001f8916865c4f8"
-  integrity sha512-C7ccBgfPuGF6dxTRuMW0NPPMSCf1k/kh3I9zkRVBc5PaivudX/rPL+jd2Wty6gn5ya5L3Ob+YmYe09V5xw66Cw==
-
 "@rollup/pluginutils@^4.2.0":
   version "4.2.1"
   resolved "https://registry.npmmirror.com/@rollup/pluginutils/-/pluginutils-4.2.1.tgz"
@@ -2810,10 +2805,10 @@ minimatch@^3.0.3, minimatch@^3.0.5, minimatch@^3.1.1, minimatch@^3.1.2:
   dependencies:
     brace-expansion "^1.1.7"
 
-miniprogram-api-typings@^3.6.0:
-  version "3.6.0"
-  resolved "https://registry.npmmirror.com/miniprogram-api-typings/-/miniprogram-api-typings-3.6.0.tgz#1ba29d749ccd07ef710754430c37f45634ea0f76"
-  integrity sha512-xwK3PzhhxnfWqDfBikHLdAbj7Wy4F887nBcQrzwuF758Fw2qC4ivpKPL9t0uJZk5QYnU28+NqA7Q3lzYGMHQnA==
+miniprogram-api-typings@latest:
+  version "3.9.0"
+  resolved "https://registry.npmmirror.com/miniprogram-api-typings/-/miniprogram-api-typings-3.9.0.tgz#c04a6b7eae5585733b5f8787297f2b9f1b60abac"
+  integrity sha512-QCXHHW9H4XYazb8J9EMiFyaOWHXhBG4oehkQqi+76FJpKKIlpgL0ZkXxzJ2L+6T/c5OxKm7iegovKIQGVkZDLQ==
 
 mkdirp@^1.0.4:
   version "1.0.4"
