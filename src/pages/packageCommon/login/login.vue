@@ -8,12 +8,11 @@
         <YhButton
           block
           type="primary"
+          open-type="getPhoneNumber"
           :disabled="!isAgree"
-          :open-type="tel ? 'chooseAvatar' : 'getPhoneNumber'"
-          @getphonenumber="getPhoneNumber"
-          @chooseavatar="handleLogin"
+          @getphonenumber="onGetPhoneNumber"
         >
-          {{ tel ? '立即登录' : '获取手机号' }}
+          登 录
         </YhButton>
         <LoginAgreement v-model="isAgree"></LoginAgreement>
         <LoginFooter></LoginFooter>
@@ -29,29 +28,22 @@ import LoginAgreement from './LoginAgreement.vue'
 import LoginFooter from './LoginFooter.vue'
 
 import { ref, computed } from 'vue'
+import { showModal } from '@/utils/uni-api'
 
 // 用户是否同意协议
 const isAgree = ref(false)
 // 用户手机号
 const tel = ref('')
 
-// 获取手机号弹窗
-const getPhoneNumber = (event: WechatMiniprogram.ButtonGetPhoneNumber) => {
-  console.log(event, 987)
-
-  const { errMsg } = event.detail
+// 登录 获取用户手机号
+const onGetPhoneNumber = (event: WechatMiniprogram.ButtonGetPhoneNumber) => {
+  console.log('onGetPhoneNumber', event)
+  const { errMsg, code, encryptedData, cloudID, iv } = event.detail
   if (errMsg === 'getPhoneNumber:ok') {
-    console.log('用户已允许')
     tel.value = '13222222222'
   } else {
-    console.log('用户已拒绝')
+    showModal('请点击允许同意')
   }
-}
-
-// 登录 获取用户头像
-const handleLogin = (event: any) => {
-  const { avatarUrl } = event.detail
-  console.log('onChooseavatar ===', avatarUrl)
 }
 </script>
 

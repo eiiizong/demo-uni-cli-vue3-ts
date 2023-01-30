@@ -314,7 +314,7 @@ const getLoadingStyle = computed(() => {
   return str
 })
 
-// 点击时间
+// 点击事件
 const onClick = (event: WechatMiniprogram.EventCallback) => {
   const { disabled, loading } = props
   if (!disabled && !loading) {
@@ -323,9 +323,9 @@ const onClick = (event: WechatMiniprogram.EventCallback) => {
 
     if (openType === 'getUserInfo' && canIUseGetUserProfile()) {
       uni.getUserProfile({
-        desc: getUserProfileDesc || '',
+        desc: getUserProfileDesc || '获取你的昵称、头像、地区及性别',
         lang: (lang as 'en' | 'zh_CN' | 'zh_TW' | undefined) || 'en',
-        complete: (res) => {
+        complete: (res: WechatMiniprogram.GetUserInfoSuccessCallbackResult) => {
           emit('getuserinfo', res)
         },
       })
