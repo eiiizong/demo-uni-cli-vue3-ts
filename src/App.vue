@@ -1,21 +1,16 @@
 <script setup lang="ts">
 import { onLaunch, onShow, onHide, onError } from '@dcloudio/uni-app'
 import { checkAppUpdate } from '@/utils/check'
-import { getSystemInfo } from '@/utils/uni-api'
 import { requestCustomLogin } from '@/server/custom-api'
-import { useStoreSystemInfo } from '@/stores/modules'
+import { useStoreUserInfo } from '@/stores/modules'
 
-const storeSystemInfo = useStoreSystemInfo()
 onLaunch((e) => {
-  // console.log('App Launch', e)
+  const storeUserInfo = useStoreUserInfo()
+
   // 登录
-  // requestCustomLogin().then((res) => {
-  //   console.log(res, 987)
-  // })
-  // // 获取并储存系统信息
-  // getSystemInfo().then((res) => {
-  //   storeSystemInfo.updateStoreSystemInfo(res)
-  // })
+  requestCustomLogin().then((res) => {
+    console.log(res, 987)
+  })
 })
 
 onShow((e) => {

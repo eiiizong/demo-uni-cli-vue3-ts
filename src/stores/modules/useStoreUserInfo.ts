@@ -15,16 +15,35 @@ import { defineStore } from 'pinia'
  * store 用户信息
  */
 const useStoreUserInfo = defineStore('storeUserInfo', () => {
+  /**
+   * 设置 userInfo
+   */
   const userInfo: Ref<Store.StoreUserInfo> = ref({
-    user_id:'123',
-    userName:'测试人',
-    company:'成都市社会保障局'
+    token: '',
+    userId: '',
+    userName: '',
+    idCard: '',
+    unitName: '',
+    tel: '',
+    openId: '',
+    sessionKey: '',
+    avatarUrl: '',
+    userType: '',
   })
 
+  /**
+   * 获取 userInfo
+   */
   const getStoreUserInfo = computed(() => userInfo.value)
 
+  /**
+   * 更新 userInfo
+   */
   function updateStoreUserInfo(data: Store.StoreUserInfo) {
-    userInfo.value = data
+    userInfo.value = {
+      ...userInfo.value,
+      ...data,
+    }
   }
 
   return { userInfo, getStoreUserInfo, updateStoreUserInfo }

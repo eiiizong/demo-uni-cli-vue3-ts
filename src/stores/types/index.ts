@@ -44,6 +44,10 @@ namespace Store {
      * 用户id
      */
     userId?: string
+    /**
+     * 用户类型 0 未登录用户 1 游客 2 领导 3 经办人 4 合作机构
+     */
+    userType?: string
   }
 }
 
