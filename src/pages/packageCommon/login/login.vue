@@ -29,18 +29,22 @@ import LoginFooter from './LoginFooter.vue'
 
 import { ref, computed } from 'vue'
 import { showModal } from '@/utils/uni-api'
+import { requestGetRealPhone } from '@/server/api'
 
 // 用户是否同意协议
 const isAgree = ref(false)
 // 用户手机号
 const tel = ref('')
 
-// 登录 获取用户手机号
+// 获取用户手机号登录
 const onGetPhoneNumber = (event: WechatMiniprogram.ButtonGetPhoneNumber) => {
   console.log('onGetPhoneNumber', event)
   const { errMsg, code, encryptedData, cloudID, iv } = event.detail
   if (errMsg === 'getPhoneNumber:ok') {
     tel.value = '13222222222'
+    requestGetRealPhone(encryptedData, iv, '').then((res) => {
+      console.log('res', res)
+    })
   } else {
     showModal('请点击允许同意')
   }
