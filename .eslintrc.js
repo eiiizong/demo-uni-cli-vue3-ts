@@ -39,6 +39,7 @@ module.exports = {
     'vue/singleline-html-element-content-newline': 'off',
     'vue/multiline-html-element-content-newline': 'off',
     'vue/max-attributes-per-line': 0,
+    'vue/comment-directive': 'off',
     'no-console': process.env.NODE_ENV === 'production' ? 'off' : 'warn',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
     'vue/no-v-html': 'off',

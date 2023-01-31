@@ -3,7 +3,10 @@
 *.jpge
 *.png
 *.gif
+*.html
 *vue.d.ts
 
-node_modules
-/dist
+# eslint 忽略文件
+node_modules/*
+dist/*
+src/pages/packageDemo/*
