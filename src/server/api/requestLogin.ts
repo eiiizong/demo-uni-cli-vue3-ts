@@ -12,8 +12,8 @@ import { request } from '@/server/request'
 const requestLogin = (
   openId: string,
   tel: string,
-  isShowLoading = true,
-  isShowErrorToast = true
+  isShowLoading: boolean = true,
+  isShowErrorToast: boolean = true
 ): Promise<LoginSuccessResult> => {
   const data = {
     openid: openId,
