@@ -5,7 +5,9 @@ module.exports = {
     node: true
   },
   globals: {
-    WechatMiniprogram: true
+    WechatMiniprogram: true,
+    uni: true,
+    wx: true
   },
   extends: [
     // 继承eslint推荐的规则集
@@ -29,10 +31,10 @@ module.exports = {
     // 关闭any类型警告
     '@typescript-eslint/no-explicit-any': 'off',
     'no-unused-vars': 'off',
-    // 允许props可以声明不使用
+    // 允许props、emit可以声明不使用
     '@typescript-eslint/no-unused-vars': [
       'error',
-      { vars: 'all', args: 'all', varsIgnorePattern: 'props', ignoreRestSiblings: false }
+      { vars: 'all', args: 'all', varsIgnorePattern: 'props|emit', ignoreRestSiblings: false }
     ],
     // 关闭vue文件和组件命名校验
     'vue/multi-word-component-names': 0,

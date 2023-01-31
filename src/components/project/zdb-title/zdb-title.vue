@@ -6,27 +6,27 @@
 </template>
 
 <script setup lang="ts">
-const emit = defineEmits(['click'])
-const props = defineProps({
-  title: {
-    type: String,
-    required: true,
-  },
-  rightText: {
-    type: String,
-    default: () => '查看更多',
-  },
-})
+  const emit = defineEmits(['click'])
+  const props = defineProps({
+    title: {
+      type: String,
+      required: true
+    },
+    rightText: {
+      type: String,
+      default: () => '查看更多'
+    }
+  })
 </script>
 
 <style lang="scss" scoped>
-.zdb-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 32rpx;
-  line-height: 44rpx;
-  color: #333333;
-  padding: 20rpx 0;
-}
+  .zdb-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 32rpx;
+    line-height: 44rpx;
+    color: #333333;
+    padding: 20rpx 0;
+  }
 </style>

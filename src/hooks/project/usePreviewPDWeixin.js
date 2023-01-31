@@ -1,12 +1,5 @@
 import config from '@/config/index.js'
-import {
-  downloadFile,
-  openDocument,
-  showLoading,
-  hideLoading,
-  request,
-  navigateTo,
-} from '~/utils/uni-api/index.js'
+import { downloadFile, openDocument, showLoading, hideLoading, request, navigateTo } from '~/utils/uni-api/index.js'
 /**
  * 预览 pdf
  * @param {string} chi050 必填。文件码值，可通过 downFile 获得
@@ -31,14 +24,9 @@ const previewPDFH5 = (chi050, chi056 = 'pdf', type = 'ygsp') => {
     const data = {
       chi050,
       chi056,
-      isRequestYGFF,
+      isRequestYGFF
     }
-    request(
-      '/frontRestService/frontBcpDataRestService/createPolicyFilePdf',
-      data,
-      {},
-      false
-    )
+    request('/frontRestService/frontBcpDataRestService/createPolicyFilePdf', data, {}, false)
       .then((res) => {
         const { newFileName } = res
         if (newFileName) {
@@ -46,7 +34,7 @@ const previewPDFH5 = (chi050, chi056 = 'pdf', type = 'ygsp') => {
           hideLoading()
           navigateTo('web-view', 'packageCommon', {
             url: encodeURIComponent(url),
-            name: chi056,
+            name: chi056
           })
           return
           downloadFile(url)
@@ -57,7 +45,7 @@ const previewPDFH5 = (chi050, chi056 = 'pdf', type = 'ygsp') => {
                 request(
                   '/frontRestService/frontBcpDataRestService/deletePolicyFilePdf',
                   {
-                    newFileName,
+                    newFileName
                   },
                   {},
                   false

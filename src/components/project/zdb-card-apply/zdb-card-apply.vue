@@ -30,35 +30,35 @@
 </template>
 
 <script setup lang="ts">
-import imageBg from './images/bg.png'
+  import imageBg from './images/bg.png'
 
-import type { PropType } from 'vue'
+  import type { PropType } from 'vue'
 
-interface Item {
-  key: string
-  value: string | number
-  unit: string
-}
+  interface Item {
+    key: string
+    value: string | number
+    unit: string
+  }
 
-const emit = defineEmits(['click'])
-const props = defineProps({
-  // renderData: {
-  //   type: Array as PropType<Item[]>,
-  //   required: true,
-  // },
-  renderData: {
-    type: Object,
-    required: true,
-  },
-  space: {
-    type: Boolean,
-    default: false,
-  },
-})
+  const emit = defineEmits(['click'])
+  const props = defineProps({
+    // renderData: {
+    //   type: Array as PropType<Item[]>,
+    //   required: true,
+    // },
+    renderData: {
+      type: Object,
+      required: true
+    },
+    space: {
+      type: Boolean,
+      default: false
+    }
+  })
 </script>
 
 <style lang="scss" scoped>
-.zdb-table {
-  width: 100%;
-}
+  .zdb-table {
+    width: 100%;
+  }
 </style>
