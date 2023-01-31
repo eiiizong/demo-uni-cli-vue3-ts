@@ -1,9 +1,9 @@
 # eslint 忽略文件名
-*.css
-*.less
-*.scss
 *.jpg
+*.jpge
 *.png
 *.gif
-*.svg
 *vue.d.ts
+
+node_modules
+/dist

@@ -8,24 +8,24 @@
 </template>
 
 <script setup lang="ts">
-import imageBgHeader from './images/bg-header.png'
+  import imageBgHeader from './images/bg-header.png'
 </script>
 
 <style lang="scss" scoped>
-$image-height: 428rpx;
-.home-bg {
-  width: 100%;
-  min-height: 100%;
-  position: relative;
-  .bg {
+  $image-height: 428rpx;
+  .home-bg {
     width: 100%;
-    height: $image-height;
+    min-height: 100%;
+    position: relative;
+    .bg {
+      width: 100%;
+      height: $image-height;
+    }
+    .content {
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
   }
-  .content {
-    width: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
-}
 </style>

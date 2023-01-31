@@ -40,25 +40,25 @@
 <script setup lang="ts"></script>
 
 <style lang="scss" scoped>
-.login-privacy-policy {
-  background-color: #fff;
-  padding: $spacing;
-  color: $color-text;
-  font-size: 32rpx;
-  line-height: 1.4;
-  .agree-title {
-    text-align: center;
-    margin-bottom: $spacing;
-    font-size: 36rpx;
-    font-weight: 700;
-    color: $color-title;
-  }
-  .agree-item {
-    margin-bottom: 20rpx;
-    .p {
-      margin-bottom: 12rpx;
-      text-indent: 2em;
+  .login-privacy-policy {
+    background-color: #fff;
+    padding: $spacing;
+    color: $color-text;
+    font-size: 32rpx;
+    line-height: 1.4;
+    .agree-title {
+      text-align: center;
+      margin-bottom: $spacing;
+      font-size: 36rpx;
+      font-weight: 700;
+      color: $color-title;
+    }
+    .agree-item {
+      margin-bottom: 20rpx;
+      .p {
+        margin-bottom: 12rpx;
+        text-indent: 2em;
+      }
     }
   }
-}
 </style>

@@ -12,15 +12,15 @@ import { request } from '@/server/request'
 const requestLogin = (
   openId: string,
   tel: string,
-  isShowLoading: boolean = true,
-  isShowErrorToast: boolean = true
+  isShowLoading = true,
+  isShowErrorToast = true
 ): Promise<LoginSuccessResult> => {
   const data = {
     openid: openId,
     tel,
     loginId: '510902199507236534',
     idCard: '510902199507236534',
-    userName: '曾小明',
+    userName: '曾小明'
   }
 
   return new Promise((resolve, reject) => {

@@ -27,7 +27,7 @@ const getStorage = (key: string): Promise<GetStorageCallbackResult> => {
       fail(err) {
         console.error('uni.getStorage 接口调用失败 => ', err)
         reject(err)
-      },
+      }
     })
   })
 }

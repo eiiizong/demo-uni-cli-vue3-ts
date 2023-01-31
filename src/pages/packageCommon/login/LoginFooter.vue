@@ -4,15 +4,15 @@
 <script setup lang="ts"></script>
 
 <style lang="scss" scoped>
-.login-footer {
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  text-align: center;
-  font-size: 22rpx;
-  line-height: 1;
-  color: #999999;
-  padding: 44rpx 0;
-}
+  .login-footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    font-size: 22rpx;
+    line-height: 1;
+    color: #999999;
+    padding: 44rpx 0;
+  }
 </style>

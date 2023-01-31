@@ -4,7 +4,7 @@
   import { requestCustomLogin } from '@/server/custom-api'
   import { useStoreUserInfo } from '@/stores/modules'
 
-  onLaunch((e) => {
+  onLaunch(() => {
     const storeUserInfo = useStoreUserInfo()
 
     // 登录
@@ -13,7 +13,7 @@
     })
   })
 
-  onShow((e) => {
+  onShow(() => {
     // console.log('App Show', e)
     checkAppUpdate()
   })
@@ -22,8 +22,8 @@
     // console.log('App Hide')
   })
 
-  onError((err) => {
-    console.log('App error', err)
+  onError(() => {
+    // console.log('App error', err)
   })
 </script>
 <style lang="scss">

@@ -18,43 +18,43 @@
 </template>
 
 <script setup lang="ts">
-import { toRefs } from 'vue'
+  import { toRefs } from 'vue'
 
-import { useStoreUserInfo } from '@/stores/modules'
-import { useJumpLoginPage } from '@/hooks/project'
-import { formatUserName } from '@/utils/format'
+  import { useStoreUserInfo } from '@/stores/modules'
+  import { useJumpLoginPage } from '@/hooks/project'
+  import { formatUserName } from '@/utils/format'
 
-const storeUserInfo = useStoreUserInfo()
+  const storeUserInfo = useStoreUserInfo()
 
-const { userInfo } = toRefs(storeUserInfo)
+  const { userInfo } = toRefs(storeUserInfo)
 </script>
 
 <style lang="scss" scoped>
-.home-header-avatar {
-  width: auto;
-  // padding-left: 42rpx;
-  padding-left: 90rpx;
-  // display: flex;
-  // align-items: center;
-  .avatar {
-    width: 84rpx;
-    height: 84rpx;
-    border-radius: 50%;
-    margin-right: 28rpx;
-  }
-  .info {
-    .no-login,
-    .user-name {
-      font-size: 32rpx;
-      font-weight: 700;
-      line-height: 1;
+  .home-header-avatar {
+    width: auto;
+    // padding-left: 42rpx;
+    padding-left: 90rpx;
+    // display: flex;
+    // align-items: center;
+    .avatar {
+      width: 84rpx;
+      height: 84rpx;
+      border-radius: 50%;
+      margin-right: 28rpx;
     }
-    .user-unit {
-      font-size: 24rpx;
-      line-height: 1;
-      color: rgba(#fff, 0.8);
-      padding-top: 20rpx;
+    .info {
+      .no-login,
+      .user-name {
+        font-size: 32rpx;
+        font-weight: 700;
+        line-height: 1;
+      }
+      .user-unit {
+        font-size: 24rpx;
+        line-height: 1;
+        color: rgba(#fff, 0.8);
+        padding-top: 20rpx;
+      }
     }
   }
-}
 </style>

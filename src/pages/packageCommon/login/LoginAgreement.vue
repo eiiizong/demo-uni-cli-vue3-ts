@@ -1,7 +1,7 @@
 <template>
   <div class="login-agreement">
     <label class="label" for="login_agreement">
-      <checkbox-group @change="handleChangeCheckbox" class="checkbox-group">
+      <checkbox-group class="checkbox-group" @change="handleChangeCheckbox">
         <checkbox id="login_agreement" class="checkbox" :checked="modelValue" value="checkbox" />
       </checkbox-group>
       <div class="icon-checkbox" :class="[modelValue ? 'checked' : '']">
@@ -14,95 +14,93 @@
           >《用户服务协议》</span
         >
         <span>及</span>
-        <span class="link" @click.stop="handleJumpRoute('login-privacy-policy', 'packageCommon')"
-          >《隐私条款》</span
-        >
+        <span class="link" @click.stop="handleJumpRoute('login-privacy-policy', 'packageCommon')">《隐私条款》</span>
       </div>
     </label>
   </div>
 </template>
 <script setup lang="ts">
-import { navigateTo } from '@/utils/uni-api'
-import type {} from '@dcloudio/uni-app'
+  import { navigateTo } from '@/utils/uni-api'
+  import type {} from '@dcloudio/uni-app'
 
-const emit = defineEmits(['update:modelValue'])
-const props = defineProps({
-  modelValue: {
-    type: Boolean,
-    required: true,
-  },
-})
+  const emit = defineEmits(['update:modelValue'])
+  const props = defineProps({
+    modelValue: {
+      type: Boolean,
+      required: true
+    }
+  })
 
-// 协议改变 选择协议
-const handleChangeCheckbox = (event: WechatMiniprogram.CheckboxGroupChange) => {
-  const { value } = event.detail
-  if (value && value.length > 0) {
-    emit('update:modelValue', true)
-  } else {
-    emit('update:modelValue', false)
+  // 协议改变 选择协议
+  const handleChangeCheckbox = (event: WechatMiniprogram.CheckboxGroupChange) => {
+    const { value } = event.detail
+    if (value && value.length > 0) {
+      emit('update:modelValue', true)
+    } else {
+      emit('update:modelValue', false)
+    }
   }
-}
 
-// 跳转路由
-const handleJumpRoute = (name: string, packageName: string) => {
-  navigateTo(name, packageName)
-}
+  // 跳转路由
+  const handleJumpRoute = (name: string, packageName: string) => {
+    navigateTo(name, packageName)
+  }
 </script>
 
 <style lang="scss" scoped>
-.login-agreement {
-  padding-top: 40rpx;
-  .label {
-    display: block;
-    color: $color-text-placeholder;
-    font-weight: 400;
-    line-height: 40rpx;
-    font-size: 24rpx;
-    position: relative;
-    padding-left: 20px;
-    .checkbox {
-      display: none;
-    }
-    .agreement {
-      .link {
-        color: $primary;
+  .login-agreement {
+    padding-top: 40rpx;
+    .label {
+      display: block;
+      color: $color-text-placeholder;
+      font-weight: 400;
+      line-height: 40rpx;
+      font-size: 24rpx;
+      position: relative;
+      padding-left: 20px;
+      .checkbox {
+        display: none;
       }
-    }
-    .icon-checkbox {
-      $size: 24rpx;
-      position: absolute;
-      top: 6rpx;
-      left: 0;
-      width: $size;
-      height: $size;
-      border: 1px solid $color-border;
-      border-radius: 2px;
-      display: flex;
-      transition: all 0.3s;
-      .icon-checkbox_inner {
-        margin: auto;
-        width: 0;
-        height: 10rpx;
-        border: 2px solid #fff;
-        border-radius: 1px;
-        border-top: none;
-        border-right: none;
-        background: transparent;
-        transform: rotate(-45deg);
-        position: relative;
-        top: -2rpx;
-        opacity: 0;
+      .agreement {
+        .link {
+          color: $primary;
+        }
+      }
+      .icon-checkbox {
+        $size: 24rpx;
+        position: absolute;
+        top: 6rpx;
+        left: 0;
+        width: $size;
+        height: $size;
+        border: 1px solid $color-border;
+        border-radius: 2px;
+        display: flex;
         transition: all 0.3s;
-      }
-      &.checked {
-        background-color: $primary;
-        border-color: $primary;
         .icon-checkbox_inner {
-          opacity: 1;
-          width: 18rpx;
+          margin: auto;
+          width: 0;
+          height: 10rpx;
+          border: 2px solid #fff;
+          border-radius: 1px;
+          border-top: none;
+          border-right: none;
+          background: transparent;
+          transform: rotate(-45deg);
+          position: relative;
+          top: -2rpx;
+          opacity: 0;
+          transition: all 0.3s;
+        }
+        &.checked {
+          background-color: $primary;
+          border-color: $primary;
+          .icon-checkbox_inner {
+            opacity: 1;
+            width: 18rpx;
+          }
         }
       }
     }
   }
-}
 </style>

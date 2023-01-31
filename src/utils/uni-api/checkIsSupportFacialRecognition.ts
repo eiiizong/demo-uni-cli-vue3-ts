@@ -55,7 +55,7 @@ const checkIsSupportFacialRecognition = (): Promise<CheckIsSupportFacialRecognit
       },
       fail(err) {
         reject(err)
-      },
+      }
     })
   })
 }

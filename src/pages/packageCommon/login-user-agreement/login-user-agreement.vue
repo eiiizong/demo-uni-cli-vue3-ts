@@ -104,44 +104,44 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
+  import { ref } from 'vue'
 
-const unit = ref('银海')
+  const unit = ref('银海')
 </script>
 <style lang="scss" scoped>
-.login-user-aggreement {
-  background-color: #fff;
-  padding: $spacing;
-  color: $color-text;
-  font-size: 32rpx;
-  line-height: 1.4;
-  .agree-title {
-    text-align: center;
-    margin-bottom: $spacing;
-    font-size: 36rpx;
-    font-weight: 700;
-    color: $color-title;
+  .login-user-aggreement {
+    background-color: #fff;
+    padding: $spacing;
+    color: $color-text;
+    font-size: 32rpx;
+    line-height: 1.4;
+    .agree-title {
+      text-align: center;
+      margin-bottom: $spacing;
+      font-size: 36rpx;
+      font-weight: 700;
+      color: $color-title;
+    }
+    .agree-item {
+      margin-bottom: 20rpx;
+      .h4 {
+        color: tint($color-title, 10%);
+        font-size: 32rpx;
+        line-height: 1.4;
+        padding: 20rpx 0;
+        font-weight: 600;
+      }
+      .h5 {
+        color: tint($color-title, 15%);
+        font-size: 28rpx;
+        line-height: 1.4;
+        padding: 20rpx 0;
+        font-weight: 500;
+      }
+      .p {
+        margin-bottom: 12rpx;
+        text-indent: 2em;
+      }
+    }
   }
-  .agree-item {
-    margin-bottom: 20rpx;
-    .h4 {
-      color: tint($color-title, 10%);
-      font-size: 32rpx;
-      line-height: 1.4;
-      padding: 20rpx 0;
-      font-weight: 600;
-    }
-    .h5 {
-      color: tint($color-title, 15%);
-      font-size: 28rpx;
-      line-height: 1.4;
-      padding: 20rpx 0;
-      font-weight: 500;
-    }
-    .p {
-      margin-bottom: 12rpx;
-      text-indent: 2em;
-    }
-  }
-}
 </style>

@@ -26,35 +26,35 @@
 <script setup lang="ts"></script>
 
 <style lang="scss" scoped>
-.home-header-today-statistics {
-  width: 100%;
-  .toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .left {
-      flex: 1;
-      overflow: hidden;
+  .home-header-today-statistics {
+    width: 100%;
+    .toolbar {
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      .left {
+        flex: 1;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+      }
+      .right {
+        display: flex;
+        align-items: center;
+      }
     }
-    .right {
+    .content {
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      .left {
+        display: flex;
+        align-items: center;
+      }
+      .right {
+        display: flex;
+        align-items: center;
+      }
     }
   }
-  .content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .left {
-      display: flex;
-      align-items: center;
-    }
-    .right {
-      display: flex;
-      align-items: center;
-    }
-  }
-}
 </style>
