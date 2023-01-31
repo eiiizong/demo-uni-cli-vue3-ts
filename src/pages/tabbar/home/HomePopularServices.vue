@@ -22,55 +22,97 @@
 
   import ZdbPanel from '@/components/project/zdb-panel/zdb-panel.vue'
 
-  import { computed } from 'vue'
-  import { navigateTo } from '@/utils/uni-api'
-
   import type { PopularServiceNavItem } from '@/types'
+
+  import { computed, toRefs } from 'vue'
+  import { navigateTo } from '@/utils/uni-api'
+  import { useStoreUserInfo } from '@/stores/modules'
+
+  const { userInfo } = toRefs(useStoreUserInfo())
 
   // 热门服务渲染数据
   const navs = computed<PopularServiceNavItem[]>(() => {
-    const arr: PopularServiceNavItem[] = [
-      {
-        id: 'rydybz',
-        name: '“蓉易贷”一本账',
-        desc: '业务情况，在线总览',
-        pathName: 'bills',
-        packageName: 'packageProject',
-        isAuth: false,
-        disabled: false,
-        imgSrc: imageNav01
-      },
-      {
-        id: 'hzjg',
-        name: '合作机构',
-        desc: '查询合作机构详情',
-        pathName: 'cooperative-institution',
-        packageName: 'packageProject',
-        isAuth: false,
-        disabled: false,
-        imgSrc: imageNav02
-      },
-      {
-        id: 'gzl',
-        name: '工作量',
-        desc: '经办数据、随时查询',
-        pathName: '',
-        packageName: '',
-        isAuth: false,
-        disabled: false,
-        imgSrc: imageNav03
-      },
-      {
-        id: 'ywjs',
-        name: '业务介绍',
-        desc: '详尽了解“蓉易贷”业务',
-        pathName: '',
-        packageName: '',
-        isAuth: false,
-        disabled: false,
-        imgSrc: imageNav04
-      }
-    ]
+    // “蓉易贷”一本账
+    const navRYDYBZ: PopularServiceNavItem = {
+      id: 'rydybz',
+      name: '“蓉易贷”一本账',
+      desc: '业务情况，在线总览',
+      pathName: 'bills',
+      packageName: 'packageProject',
+      isAuth: false,
+      disabled: false,
+      imgSrc: imageNav01
+    }
+    // 进度查询
+    const navJDCX: PopularServiceNavItem = {
+      id: 'jdcx',
+      name: '进度查询',
+      desc: '审批进度，随时查询',
+      pathName: 'bills',
+      packageName: 'packageProject',
+      isAuth: false,
+      disabled: false,
+      imgSrc: imageNav01
+    }
+
+    // 合作机构
+    const navHZJG: PopularServiceNavItem = {
+      id: 'hzjg',
+      name: '合作机构',
+      desc: '查询合作机构详情',
+      pathName: 'cooperative-institution',
+      packageName: 'packageProject',
+      isAuth: false,
+      disabled: false,
+      imgSrc: imageNav02
+    }
+
+    // 工作量
+    const navGZL: PopularServiceNavItem = {
+      id: 'gzl',
+      name: '工作量',
+      desc: '经办数据、随时查询',
+      pathName: '',
+      packageName: '',
+      isAuth: false,
+      disabled: false,
+      imgSrc: imageNav03
+    }
+
+    // 业务介绍
+    const navYEJS: PopularServiceNavItem = {
+      id: 'ywjs',
+      name: '业务介绍',
+      desc: '详尽了解“蓉易贷”业务',
+      pathName: '',
+      packageName: '',
+      isAuth: false,
+      disabled: false,
+      imgSrc: imageNav04
+    }
+
+    const arr: PopularServiceNavItem[] = [navYEJS, navHZJG]
+
+    const { userType } = userInfo.value
+
+    switch (userType) {
+      // 领导
+      case '1':
+        arr.push(navRYDYBZ)
+        break
+      // 经办人
+      case '2':
+        arr.push(navRYDYBZ)
+        arr.push(navGZL)
+        break
+      // 合作机构
+      case '3':
+        arr.push(navJDCX)
+        break
+      default:
+        break
+    }
+
     return arr
   })
 

@@ -3,7 +3,7 @@
     <div class="title">
       <div class="left">{{ title }}</div>
       <div v-if="rightText" class="right" @click="emit('click')">
-        <span>查看更多</span>
+        <span>{{ rightText }}</span>
         <YhIcon name="arrow-right" size="24rpx" />
       </div>
     </div>
@@ -24,7 +24,7 @@
     },
     rightText: {
       type: String,
-      default: () => '查看更多'
+      default: () => ''
     }
   })
 </script>
