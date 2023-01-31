@@ -16,9 +16,7 @@
     </demo-block>
 
     <demo-block title="细边框" padding>
-      <yh-button type="primary" plain hairline custom-style="margin-right:20rpx;"
-        >细边框按钮</yh-button
-      >
+      <yh-button type="primary" plain hairline custom-style="margin-right:20rpx;">细边框按钮</yh-button>
       <yh-button type="info" plain hairline>细边框按钮</yh-button>
     </demo-block>
 
@@ -44,15 +42,13 @@
       <yh-button
         plain
         type="primary"
-        icon="https://wx.qlogo.cn/mmhead/Q3auHgzwzM6Zm26cZtBll0wqkWdwen2wJBo9nDY0QOhI3iaedib0Rq5w/0"
-        >按钮</yh-button
-      >
+        icon="https://wx.qlogo.cn/mmhead/Q3auHgzwzM6Zm26cZtBll0wqkWdwen2wJBo9nDY0QOhI3iaedib0Rq5w/0">
+        按钮
+      </yh-button>
     </demo-block>
 
     <demo-block title="按钮尺寸" padding>
-      <yh-button type="primary" size="large" block custom-style="margin-bottom:20rpx;"
-        >大号按钮</yh-button
-      >
+      <yh-button type="primary" size="large" block custom-style="margin-bottom:20rpx;">大号按钮</yh-button>
       <yh-button type="primary" custom-style="margin-right:20rpx;">普通按钮</yh-button>
       <yh-button type="primary" size="small" custom-style="margin-right:20rpx;">小型按钮</yh-button>
       <yh-button type="primary" size="mini">迷你按钮</yh-button>
@@ -70,53 +66,42 @@
     </demo-block>
 
     <demo-block title="微信开放能力" padding>
-      <yh-button
-        type="primary"
-        block
-        open-type="contact"
-        @contact="onContact"
-        custom-style="margin-bottom: 20rpx;"
-        >打开客服会话
+      <yh-button type="primary" block open-type="contact" custom-style="margin-bottom: 20rpx;" @contact="onContact">
+        打开客服会话
       </yh-button>
-      <yh-button type="primary" block open-type="share" custom-style="margin-bottom: 20rpx;">
-        分享
-      </yh-button>
+      <yh-button type="primary" block open-type="share" custom-style="margin-bottom: 20rpx;"> 分享 </yh-button>
       <yh-button
         type="primary"
         block
         open-type="getPhoneNumber"
-        @getphonenumber="onGetphonenumber"
         custom-style="margin-bottom: 20rpx;"
-      >
+        @getphonenumber="onGetphonenumber">
         获取用户手机号
       </yh-button>
       <yh-button
         type="primary"
         block
         open-type="getUserInfo"
-        getUserProfileDesc="测试描述信息"
-        @getuserinfo="onGetuserinfo"
+        get-user-profile-desc="测试描述信息"
         custom-style="margin-bottom: 20rpx;"
-      >
+        @getuserinfo="onGetuserinfo">
         获取用户信息
       </yh-button>
       <yh-button
         type="primary"
         block
         open-type="launchApp"
-        @launchapp="onLaunchapp"
-        @error="onError"
         custom-style="margin-bottom: 20rpx;"
-      >
+        @launchapp="onLaunchapp"
+        @error="onError">
         打开APP
       </yh-button>
       <yh-button
         type="primary"
         block
         open-type="openSetting"
-        @opensetting="onOpensetting"
         custom-style="margin-bottom: 20rpx;"
-      >
+        @opensetting="onOpensetting">
         打开授权设置页
       </yh-button>
       <yh-button type="primary" block open-type="feedback" custom-style="margin-bottom: 20rpx;">
@@ -126,48 +111,54 @@
         type="primary"
         block
         open-type="chooseAvatar"
-        @chooseavatar="onChooseavatar"
         custom-style="margin-bottom: 20rpx;"
-      >
+        @chooseavatar="onChooseavatar">
         获取用户头像
       </yh-button>
     </demo-block>
   </div>
 </template>
 <script setup lang="ts">
-import DemoBlock from '@/pages/packageDemo/components/demo-block/demo-block.vue'
-import YhButton from '@/components/yh/button/button.vue'
+  import DemoBlock from '@/pages/packageDemo/components/demo-block/demo-block.vue'
+  import YhButton from '@/components/yh/button/button.vue'
 
-const onGetuserinfo = (event: WechatMiniprogram.ButtonGetUserInfo) => {
-  console.log('onGetuserinfo ===', event)
-}
-const onGetphonenumber = (event: WechatMiniprogram.ButtonGetPhoneNumber) => {
-  console.log('onGetphonenumber ===', event)
-}
-const onChooseavatar = (event: any) => {
-  console.log('onChooseavatar ===', event)
-}
-const onLaunchapp = (event: WechatMiniprogram.ButtonLaunchApp) => {
-  console.log('onLaunchapp ===', event)
-}
-const onError = (event: WechatMiniprogram.ButtonError) => {
-  console.log('launchapp onError ===', event)
-}
-const onOpensetting = (event: WechatMiniprogram.ButtonOpenSetting) => {
-  console.log('onOpensetting ===', event)
-}
-const onContact = (event: WechatMiniprogram.ButtonContact) => {
-  console.log('onContact ===', event)
-}
+  const onGetuserinfo = (event: WechatMiniprogram.ButtonGetUserInfo) => {
+    // eslint-disable-next-line
+    console.log('onGetuserinfo ===', event)
+  }
+  const onGetphonenumber = (event: WechatMiniprogram.ButtonGetPhoneNumber) => {
+    // eslint-disable-next-line
+    console.log('onGetphonenumber ===', event)
+  }
+  const onChooseavatar = (event: any) => {
+    // eslint-disable-next-line
+    console.log('onChooseavatar ===', event)
+  }
+  const onLaunchapp = (event: WechatMiniprogram.ButtonLaunchApp) => {
+    // eslint-disable-next-line
+    console.log('onLaunchapp ===', event)
+  }
+  const onError = (event: WechatMiniprogram.ButtonError) => {
+    // eslint-disable-next-line
+    console.log('launchapp onError ===', event)
+  }
+  const onOpensetting = (event: WechatMiniprogram.ButtonOpenSetting) => {
+    // eslint-disable-next-line
+    console.log('onOpensetting ===', event)
+  }
+  const onContact = (event: WechatMiniprogram.ButtonContact) => {
+    // eslint-disable-next-line
+    console.log('onContact ===', event)
+  }
 </script>
 
 <style lang="scss" scoped>
-.demo-button {
-  width: 100%;
-  background-color: #f8f8f8;
-  .row {
-    height: 88rpx;
-    margin-bottom: 30rpx;
+  .demo-button {
+    width: 100%;
+    background-color: #f8f8f8;
+    .row {
+      height: 88rpx;
+      margin-bottom: 30rpx;
+    }
   }
-}
 </style>

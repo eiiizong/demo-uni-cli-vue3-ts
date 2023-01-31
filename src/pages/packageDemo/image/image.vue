@@ -6,7 +6,7 @@
 
     <demo-block title="填充模式" padding>
       <div class="items">
-        <div class="item" v-for="(item, index) in fits" :key="index" span="8">
+        <div v-for="(item, index) in fits" :key="index" class="item" span="8">
           <yh-image :fit="item" width="100%" height="27vw" :src="src" />
           <view class="text">{{ item }}</view>
         </div>
@@ -15,7 +15,7 @@
 
     <demo-block title="圆形图片" padding>
       <div class="items">
-        <div class="item" v-for="(item, index) in fits" :key="index" span="8">
+        <div v-for="(item, index) in fits" :key="index" class="item" span="8">
           <yh-image round :fit="item" width="100%" height="27vw" :src="src" />
           <view class="text">{{ item }}</view>
         </div>
@@ -24,9 +24,7 @@
 
     <demo-block title="加载中提示" padding>
       <div class="items">
-        <div class="item">
-          <yh-image width="100%" height="27vw" /> <view class="text">默认提示</view>
-        </div>
+        <div class="item"><yh-image width="100%" height="27vw" /> <view class="text">默认提示</view></div>
         <div class="item">
           <yh-image width="100%" height="27vw" use-loading-slot>
             <template #loading>
@@ -57,36 +55,36 @@
   </div>
 </template>
 <script setup lang="ts">
-import DemoBlock from '@/pages/packageDemo/components/demo-block/demo-block.vue'
-import YhLoading from '@/components/yh/loading/loading.vue'
-import YhImage from '@/components/yh/image/image.vue'
+  import DemoBlock from '@/pages/packageDemo/components/demo-block/demo-block.vue'
+  import YhLoading from '@/components/yh/loading/loading.vue'
+  import YhImage from '@/components/yh/image/image.vue'
 
-import { ref } from 'vue'
+  import { ref } from 'vue'
 
-const fits = ref(['contain', 'cover', 'fill', 'none', 'scale-down'])
-const src = ref('https://img.yzcdn.cn/vant/cat.jpeg')
+  const fits = ref(['contain', 'cover', 'fill', 'none', 'scale-down'])
+  const src = ref('https://img.yzcdn.cn/vant/cat.jpeg')
 </script>
 
 <style lang="scss" scoped>
-.demo-image {
-  width: 100%;
-  background-color: #fff;
-  .items {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    .item {
-      width: 28%;
-      margin-right: 32rpx;
-      margin-bottom: 20rpx;
+  .demo-image {
+    width: 100%;
+    background-color: #fff;
+    .items {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      .item {
+        width: 28%;
+        margin-right: 32rpx;
+        margin-bottom: 20rpx;
+      }
+    }
+    .text {
+      width: 100%;
+      margin-top: 5px;
+      color: #7d7e80;
+      font-size: 14px;
+      text-align: center;
     }
   }
-  .text {
-    width: 100%;
-    margin-top: 5px;
-    color: #7d7e80;
-    font-size: 14px;
-    text-align: center;
-  }
-}
 </style>

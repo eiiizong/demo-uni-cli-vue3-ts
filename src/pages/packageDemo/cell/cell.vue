@@ -30,12 +30,7 @@
 
     <demo-block title="页面跳转">
       <yh-cell title="单元格" is-link url="/pages/packageDemo/dashboard/dashboard" />
-      <yh-cell
-        title="单元格"
-        is-link
-        url="/pages/packageDemo/dashboard/dashboard"
-        link-type="redirectTo"
-      />
+      <yh-cell title="单元格" is-link url="/pages/packageDemo/dashboard/dashboard" link-type="redirectTo" />
     </demo-block>
 
     <demo-block title="分组标题">
@@ -69,15 +64,15 @@
   </div>
 </template>
 <script setup lang="ts">
-import DemoBlock from '@/pages/packageDemo/components/demo-block/demo-block.vue'
-import YhCellGroup from '@/components/yh/cell-group/cell-group.vue'
-import YhCell from '@/components/yh/cell/cell.vue'
-import YhIcon from '@/components/yh/icon/icon.vue'
+  import DemoBlock from '@/pages/packageDemo/components/demo-block/demo-block.vue'
+  import YhCellGroup from '@/components/yh/cell-group/cell-group.vue'
+  import YhCell from '@/components/yh/cell/cell.vue'
+  import YhIcon from '@/components/yh/icon/icon.vue'
 </script>
 
 <style lang="scss" scoped>
-.demo-cell {
-  width: 100%;
-  background-color: #f8f8f8;
-}
+  .demo-cell {
+    width: 100%;
+    background-color: #f8f8f8;
+  }
 </style>
