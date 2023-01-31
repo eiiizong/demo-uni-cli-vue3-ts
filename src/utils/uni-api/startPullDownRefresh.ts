@@ -10,9 +10,10 @@ const startPullDownRefresh = (): Promise<any> => {
         resolve(res)
       },
       fail(err) {
+        // eslint-disable-next-line no-console
         console.error('uni.startPullDownRefresh 接口调用失败 => ', err)
         reject(err)
-      },
+      }
     })
   })
 }

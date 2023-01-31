@@ -19,7 +19,7 @@ const previewImage = (
   current: string | number,
   urls: string[],
   indicator: 'default' | 'number' | 'none' = 'default',
-  loop: boolean = false,
+  loop = false,
   longPressActions: UniApp.LongPressActionsOptions | undefined = undefined
 ): Promise<any> => {
   return new Promise((resolve, reject) => {
@@ -33,9 +33,10 @@ const previewImage = (
         resolve(res)
       },
       fail(err) {
+        // eslint-disable-next-line no-console
         console.error('uni.previewImage 接口调用失败 => ', err)
         reject(err)
-      },
+      }
     })
   })
 }

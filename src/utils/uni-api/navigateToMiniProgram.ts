@@ -16,7 +16,7 @@
  */
 const navigateToMiniProgram = (
   appId: string,
-  path: string = '',
+  path = '',
   extraData: any = null,
   envVersion: 'release' | 'develop' | 'trial' = 'release'
 ): Promise<UniApp.NavigateToMiniProgramOptions> => {
@@ -30,9 +30,10 @@ const navigateToMiniProgram = (
         resolve(res)
       },
       fail(err) {
+        // eslint-disable-next-line no-console
         console.error('uni.navigateToMiniProgram 接口调用失败 => ', err)
         reject(err)
-      },
+      }
     })
   })
 }

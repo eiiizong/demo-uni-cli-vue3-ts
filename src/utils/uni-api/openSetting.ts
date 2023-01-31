@@ -11,7 +11,7 @@
     // 接口调用完成
   })
  */
-const openSetting = (withSubscriptions: boolean = false): Promise<any> => {
+const openSetting = (withSubscriptions = false): Promise<any> => {
   return new Promise((resolve, reject) => {
     uni.openSetting({
       withSubscriptions,
@@ -19,9 +19,10 @@ const openSetting = (withSubscriptions: boolean = false): Promise<any> => {
         resolve(res)
       },
       fail(err) {
+        // eslint-disable-next-line no-console
         console.error('uni.openSetting 接口调用失败 => ', err)
         reject(err)
-      },
+      }
     })
   })
 }

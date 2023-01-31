@@ -24,7 +24,7 @@ const uploadFile = (
   name: string,
   filePath: string,
   fileType: 'image' | 'video' | 'audio' = 'image',
-  timeout: number = 6000,
+  timeout = 6000,
   files: UniApp.UploadFileOptionFiles[] | undefined = undefined,
   file: File | undefined = undefined,
   header: any = {},
@@ -45,9 +45,10 @@ const uploadFile = (
         resolve(res)
       },
       fail(err) {
+        // eslint-disable-next-line no-console
         console.error('uni.uploadFile 接口调用失败 => ', err)
         reject(err)
-      },
+      }
     })
   })
 }

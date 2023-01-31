@@ -31,9 +31,10 @@ const reLaunch = (
           resolve(res)
         },
         fail(err) {
+          // eslint-disable-next-line no-console
           console.error(`uni.reLaunch 接口调用失败！跳转路径：${url}`, err)
           reject(err)
-        },
+        }
       })
     } else {
       const errMsg = 'reLaunch方法传入的参数name和packageName不能为空，请检查！'

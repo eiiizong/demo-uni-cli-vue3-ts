@@ -28,7 +28,7 @@ const useStoreUserInfo = defineStore('storeUserInfo', () => {
     openId: '',
     sessionKey: '',
     avatarUrl: '',
-    userType: '',
+    userType: ''
   })
 
   /**
@@ -42,7 +42,7 @@ const useStoreUserInfo = defineStore('storeUserInfo', () => {
   function updateStoreUserInfo(data: Store.StoreUserInfo) {
     userInfo.value = {
       ...userInfo.value,
-      ...data,
+      ...data
     }
   }
 

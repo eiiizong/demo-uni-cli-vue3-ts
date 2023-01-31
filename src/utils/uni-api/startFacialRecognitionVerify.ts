@@ -264,7 +264,7 @@ const startFacialRecognitionVerify = (
           showModal(errMsg, '错误提示', false)
         }
         reject(err)
-      },
+      }
     })
   })
 }
