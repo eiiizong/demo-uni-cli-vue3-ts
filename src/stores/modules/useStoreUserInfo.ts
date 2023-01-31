@@ -16,7 +16,7 @@ import { defineStore } from 'pinia'
  */
 const useStoreUserInfo = defineStore('storeUserInfo', () => {
   /**
-   * 设置 userInfo
+   * 设置 userInfo 游客无须登录也可以访问
    */
   const userInfo: Ref<Store.StoreUserInfo> = ref({
     token: '',
