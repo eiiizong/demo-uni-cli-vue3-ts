@@ -9,4 +9,5 @@
 # eslint 忽略文件
 node_modules/*
 dist/*
+src/uni_modules/*
 src/pages/packageDemo/*

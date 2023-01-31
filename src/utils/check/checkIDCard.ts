@@ -39,7 +39,7 @@ const isTrueValidateIdCard = (valueArr: string[]) => {
  * @param {String} errorMsgPrefix 错误信息提醒前缀
  * @returns {IdCardCheckResult}  isOk 校验是否成功  errMsg 校验失败时返回的错误信息
  */
-const checkIDCard = (value: string, errorMsgPrefix: string = '身份证号码'): IdCardCheckResult => {
+const checkIDCard = (value: string, errorMsgPrefix = '身份证号码'): IdCardCheckResult => {
   // 格式化身份证的值 去除空格 将 X 转化为 x
   value = (value + '').trim().toUpperCase()
   const len = value.length
@@ -74,9 +74,7 @@ const checkIDCard = (value: string, errorMsgPrefix: string = '身份证号码'):
       const tempData_day = tempData.getDate()
 
       const isCorrect =
-        tempData_year === Number(year) &&
-        tempData_month === Number(month) &&
-        tempData_day === Number(day)
+        tempData_year === Number(year) && tempData_month === Number(month) && tempData_day === Number(day)
 
       if (!isCorrect) {
         checkResult.isOk = false
@@ -121,9 +119,7 @@ const checkIDCard = (value: string, errorMsgPrefix: string = '身份证号码'):
       const tempData_day = tempData.getDate()
 
       const isCorrect =
-        tempData_year === Number(year) &&
-        tempData_month === Number(month) &&
-        tempData_day === Number(day)
+        tempData_year === Number(year) && tempData_month === Number(month) && tempData_day === Number(day)
 
       if (!isCorrect) {
         checkResult.isOk = false

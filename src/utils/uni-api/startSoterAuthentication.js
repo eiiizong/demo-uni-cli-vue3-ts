@@ -10,22 +10,18 @@
     // error 
   })
  */
-const startSoterAuthentication = (
-  challenge,
-  requestAuthModes = ['fingerPrint'],
-  authContent = ''
-) => {
+const startSoterAuthentication = (challenge, requestAuthModes = ['fingerPrint'], authContent = '') => {
   return new Promise((resolve, reject) => {
     uni.startSoterAuthentication({
       requestAuthModes,
       challenge,
       authContent,
       success(res) {
-        resolve(resolve)
+        resolve(res)
       },
       fail(err) {
         reject(err)
-      },
+      }
     })
   })
 }

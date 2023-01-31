@@ -10,16 +10,17 @@
     // 接口调用完成
   })
  */
-const updateWeChatApp = ():Promise<any> => {
+const updateWeChatApp = (): Promise<any> => {
   return new Promise((resolve, reject) => {
     uni.updateWeChatApp({
       success(res) {
         resolve(res)
       },
       fail(err) {
+        // eslint-disable-next-line no-console
         console.error('uni.updateWeChatApp 接口调用失败 => ', err)
         reject(err)
-      },
+      }
     })
   })
 }

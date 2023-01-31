@@ -13,13 +13,12 @@ const pathResolve = (dir: string): string => {
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd())
-  console.log('当前环境配置字段===>', env)
   return {
     resolve: {
       alias: {
         '@': pathResolve('src') + '/',
-        '~': pathResolve('src') + '/',
-      },
+        '~': pathResolve('src') + '/'
+      }
     },
     css: {
       preprocessorOptions: {
@@ -27,14 +26,14 @@ export default defineConfig(({ mode }) => {
         scss: {
           additionalData: `
             @use "@/assets/styles/variables/index.scss" as *;
-          `,
-        },
-      },
+          `
+        }
+      }
     },
     define: { 'process.env': { ...env } },
     plugins: [uni()],
     build: {
-      sourcemap: true,
-    },
+      sourcemap: true
+    }
   }
 })

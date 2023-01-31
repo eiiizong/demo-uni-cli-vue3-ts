@@ -20,16 +20,17 @@ const switchTab = (name: string): Promise<any> => {
         reject(errMsg)
       })
     } else {
-     const url = `/pages/tabbar/${name}/${name}`
+      const url = `/pages/tabbar/${name}/${name}`
       uni.switchTab({
         url,
         success(res) {
           resolve(res)
         },
         fail(err) {
+          // eslint-disable-next-line no-console
           console.error('uni.switchTab 接口调用失败。跳转路径：${url}`=> ', err)
           reject(err)
-        },
+        }
       })
     }
   })
