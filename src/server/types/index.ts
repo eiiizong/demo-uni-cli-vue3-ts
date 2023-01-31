@@ -37,27 +37,7 @@ declare namespace Api {
     requestId?: string
     serviceSuccess?: boolean
   }
-  /**
-   * getOpenId 接口调用成功返回的数据格式
-   */
-  export interface GetOpenIdResult {
-    openid: string
-    sessionId: string
-    session_key: string
-    wxUserInfo?: {
-      /**
-       * 电话号码
-       */
-      tel: string
-
-      openId: string
-      /**
-       * 用户头像url
-       */
-      portraiturl: string
-      userId: string
-    }
-  }
+ 
   /**
    * 合作机构列表
    */

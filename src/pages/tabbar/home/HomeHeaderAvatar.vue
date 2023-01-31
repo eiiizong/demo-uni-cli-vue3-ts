@@ -6,25 +6,27 @@
       alt="avatar"
     />
     <div class="info">
-      <template v-if="userInfo.user_id">
-        <div class="user-name">{{ userInfo.userName }}</div>
-        <div class="user-unit">单位：{{ userInfo.company || '暂无' }}</div>
+      <template v-if="userInfo.userId">
+        <div class="user-name">{{ formatUserName(userInfo.userName) }}</div>
+        <div class="user-unit">单位：{{ userInfo.unitName || '暂无' }}</div>
       </template>
       <template v-else>
-        <div class="no-login">未登录</div>
+        <div class="no-login" @click="useJumpLoginPage">未登录</div>
       </template>
     </div>
   </view>
 </template>
 
 <script setup lang="ts">
-import { ref, toRefs } from 'vue'
+import { toRefs } from 'vue'
 
 import { useStoreUserInfo } from '@/stores/modules'
+import { useJumpLoginPage } from '@/hooks/project'
+import { formatUserName } from '@/utils/format'
 
 const storeUserInfo = useStoreUserInfo()
 
-const { userInfo } = storeUserInfo
+const { userInfo } = toRefs(storeUserInfo)
 </script>
 
 <style lang="scss" scoped>

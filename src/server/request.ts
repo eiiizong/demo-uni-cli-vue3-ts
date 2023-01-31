@@ -144,9 +144,9 @@ const request = (
             if (code === 200 && resData) {
               const { resultData } = resData
               if (resultData) {
-                const { code, message, token } = resultData
+                const { code, message, token ,data} = resultData
                 if (code === '200') {
-                  resolve(resultData)
+                  resolve(data)
                 } else if (code === '401') {
                   // 登录超时
                   if (!isError) {

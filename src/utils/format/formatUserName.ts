@@ -2,10 +2,10 @@
  * 格式化姓名 张三 => *三 张三三 => 张*三
  * @param {string} value 姓名
  */
-const formatUserName = (value: string): string => {
+const formatUserName = (value?: string): string => {
   let result = ''
-  value = value.trim()
   if (value) {
+    value = value.trim()
     const len = value.length
 
     if (len === 2) {

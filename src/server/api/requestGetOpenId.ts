@@ -1,4 +1,4 @@
-import type { Api } from '@/server/types'
+import type { GetOpenIdSuccessResult } from '@/server/types/api'
 import { request } from '@/server/request'
 
 /**
@@ -12,7 +12,7 @@ const requestGetOpenId = (
   code: string,
   isShowLoading = true,
   isShowErrorToast = true
-): Promise<Api.GetOpenIdResult> => {
+): Promise<GetOpenIdSuccessResult> => {
   const data = {
     code,
     userType: '1',

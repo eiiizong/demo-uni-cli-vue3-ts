@@ -1,1 +1,1 @@
-export { useLogin } from './useLogin'
+export { useJumpLoginPage } from './useJumpLoginPage'

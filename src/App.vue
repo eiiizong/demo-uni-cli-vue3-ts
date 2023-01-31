@@ -9,7 +9,7 @@ onLaunch((e) => {
 
   // 登录
   requestCustomLogin().then((res) => {
-    console.log(res, 987)
+    storeUserInfo.updateStoreUserInfo(res)
   })
 })
 
