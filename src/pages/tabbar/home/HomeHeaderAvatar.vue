@@ -1,10 +1,10 @@
 <template>
   <view class="home-header-avatar">
-    <img
+    <!-- <img
       src="https://wx.qlogo.cn/mmhead/Q3auHgzwzM6Zm26cZtBll0wqkWdwen2wJBo9nDY0QOhI3iaedib0Rq5w/0"
       class="avatar"
       alt="avatar"
-    />
+    /> -->
     <div class="info">
       <template v-if="userInfo.userId">
         <div class="user-name">{{ formatUserName(userInfo.userName) }}</div>
@@ -32,9 +32,10 @@ const { userInfo } = toRefs(storeUserInfo)
 <style lang="scss" scoped>
 .home-header-avatar {
   width: auto;
-  padding-left: 42rpx;
-  display: flex;
-  align-items: center;
+  // padding-left: 42rpx;
+  padding-left: 90rpx;
+  // display: flex;
+  // align-items: center;
   .avatar {
     width: 84rpx;
     height: 84rpx;
