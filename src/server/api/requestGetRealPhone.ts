@@ -14,22 +14,17 @@ const requestGetRealPhone = (
   encryptedData: string,
   iv: string,
   sessionKey: string,
-  isShowLoading: boolean = true,
-  isShowErrorToast: boolean = true
+  isShowLoading = true,
+  isShowErrorToast = true
 ): Promise<GetRealPhoneSuccessResult> => {
   const data = {
     encryptedData,
     iv,
-    session_key: decodeURIComponent(sessionKey),
+    session_key: decodeURIComponent(sessionKey)
   }
 
   return new Promise((resolve, reject) => {
-    request(
-      '/frontRestService/frontLoginRestService/getRealPhone',
-      data,
-      isShowLoading,
-      isShowErrorToast
-    )
+    request('/frontRestService/frontLoginRestService/getRealPhone', data, isShowLoading, isShowErrorToast)
       .then((res) => {
         resolve(res)
       })

@@ -2,8 +2,8 @@
   "name": "demo-uniapp-vite-vue3-ts-pinia-sass",
   "version": "1.0.0",
   "scripts": {
-    "lint": "eslint \"src/**/*.{js,jsx,ts,vue}\"",
-    "lintfix": "eslint \"src/**/*.{js,jsx,ts,vue}\" --fix",
+    "lint": "eslint --ext \".ts,.js,.vue\" --ignore-path .gitignore .",
+    "lintfix": "eslint --fix --ext \".ts,.js,.vue\" --ignore-path .gitignore .",
     "dev:app": "uni -p app",
     "dev:app-android": "uni -p app-android",
     "dev:app-ios": "uni -p app-ios",
@@ -68,9 +68,17 @@
     "@types/crypto-js": "^4.1.1",
     "@types/node": "^18.11.9",
     "@types/wechat-miniprogram": "^3.4.1",
+    "@typescript-eslint/eslint-plugin": "^5.49.0",
+    "@typescript-eslint/parser": "^5.49.0",
     "@vuedx/typescript-plugin-vue": "^0.7.6",
+    "eslint": "^8.33.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-vue": "^9.9.0",
     "miniprogram-api-typings": "latest",
+    "prettier": "^2.8.3",
     "sass": "^1.56.1",
+    "stylelint-config-prettier": "^9.0.4",
     "typescript": "^4.8.3",
     "vite": "^3.1.8"
   }

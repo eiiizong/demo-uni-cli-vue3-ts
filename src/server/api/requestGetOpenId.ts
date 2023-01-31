@@ -16,16 +16,11 @@ const requestGetOpenId = (
   const data = {
     code,
     userType: '1',
-    appIndex: '0',
+    appIndex: '0'
   }
 
   return new Promise((resolve, reject) => {
-    request(
-      '/frontRestService/frontLoginRestService/getOpenId',
-      data,
-      isShowLoading,
-      isShowErrorToast
-    )
+    request('/frontRestService/frontLoginRestService/getOpenId', data, isShowLoading, isShowErrorToast)
       .then((res) => {
         resolve(res)
       })

@@ -1,20 +1,27 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true
+    es2021: true,
+    node: true
   },
   extends: [
+    // 继承eslint推荐的规则集
+    'eslint:recommended',
+    // vue3基本的规则集
     'plugin:vue/vue3-recommended',
+    // typescript的规则集
     'plugin:@typescript-eslint/recommended',
-    'prettier',
-    'plugin:prettier/recommended'
+    // prettier 提供的规则集来覆盖掉eslint
+    'plugin:prettier/recommended' // 新增，必须放在最后面
   ],
+  parser: 'vue-eslint-parser',
+  // 支持ts的最新语法
   parserOptions: {
     ecmaVersion: 'latest',
     parser: '@typescript-eslint/parser',
     sourceType: 'module'
   },
-  plugins: ['@typescript-eslint'],
+  plugins: ['vue', '@typescript-eslint'],
   rules: {
     // 关闭vue文件和组件命名校验
     'vue/multi-word-component-names': 0,
@@ -48,7 +55,8 @@ module.exports = {
     'prettier/prettier': [
       'error',
       {
-        trailingComma: 'none'
+        trailingComma: 'none',
+        endOfLine: 'auto' //不让prettier检测文件每行结束的格式
       }
     ],
     '@typescript-eslint/no-namespace': [
