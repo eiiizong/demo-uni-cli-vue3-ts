@@ -36,7 +36,7 @@ interface ShowActionPopover {
  */
 const showActionSheet = (
   itemList: any[],
-  alertText: string = '',
+  alertText = '',
   itemColor: HBuilderX.ColorString | string = '#000000',
   popover: ShowActionPopover | undefined = undefined
 ): Promise<UniApp.ShowActionSheetRes> => {
@@ -51,9 +51,10 @@ const showActionSheet = (
         resolve(res)
       },
       fail(err) {
+        // eslint-disable-next-line no-console
         isDev && console.error('uni.showActionSheet 接口调用失败 => ', err) // 点击取消按钮也会触发
         reject(err)
-      },
+      }
     })
   })
 }

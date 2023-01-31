@@ -15,13 +15,7 @@
     // 接口调用完成
   })
  */
-const showShareMenu = (
-  title: string = '',
-  content: string = '',
-  imageUrl: string = '',
-  path: string = '',
-  withShareTicket: boolean = false
-): Promise<any> => {
+const showShareMenu = (title = '', content = '', imageUrl = '', path = '', withShareTicket = false): Promise<any> => {
   return new Promise((resolve, reject) => {
     uni.showShareMenu({
       withShareTicket,
@@ -37,7 +31,7 @@ const showShareMenu = (
       // @ts-ignore
       imageUrl,
       // @ts-ignore
-      path,
+      path
     })
   })
 }

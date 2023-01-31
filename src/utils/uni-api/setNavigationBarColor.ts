@@ -33,7 +33,7 @@ const setNavigationBarColor = (
   frontColor: '#ffffff' | '#000000' = '#ffffff',
   animation: NavigationBarAnimation = {
     duration: 0,
-    timingFunc: 'linear',
+    timingFunc: 'linear'
   }
 ): Promise<any> => {
   return new Promise((resolve, reject) => {
@@ -45,9 +45,10 @@ const setNavigationBarColor = (
         resolve(res)
       },
       fail(err) {
+        // eslint-disable-next-line no-console
         console.error('uni.setNavigationBarColor 接口调用失败 => ', err)
         reject(err)
-      },
+      }
     })
   })
 }

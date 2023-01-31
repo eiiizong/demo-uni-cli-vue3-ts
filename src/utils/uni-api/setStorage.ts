@@ -21,9 +21,10 @@ const setStorage = (key: string, data: any): Promise<any> => {
         resolve(res)
       },
       fail(err) {
+        // eslint-disable-next-line no-console
         console.error('uni.setStorage 接口调用失败 => ', err)
         reject(err)
-      },
+      }
     })
   })
 }

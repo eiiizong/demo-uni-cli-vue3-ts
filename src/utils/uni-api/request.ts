@@ -28,12 +28,12 @@ const request = (
   data: string | AnyObject | ArrayBuffer | undefined = {},
   header: any = {},
   method: 'OPTIONS' | 'GET' | 'HEAD' | 'POST' | 'PUT' | 'DELETE' | 'TRACE' | 'CONNECT' = 'GET',
-  timeout: number = 60000,
-  dataType: string = 'json',
-  responseType: string = 'text',
-  sslVerify: boolean = true,
-  withCredentials: boolean = false,
-  firstIpv4: boolean = false
+  timeout = 60000,
+  dataType = 'json',
+  responseType = 'text',
+  sslVerify = true,
+  withCredentials = false,
+  firstIpv4 = false
 ): Promise<UniApp.RequestSuccessCallbackResult> =>
   new Promise((resolve, reject) =>
     uni.request({
@@ -53,7 +53,7 @@ const request = (
       fail(err) {
         console.error('uni.request 接口调用失败 => ', err)
         reject(err)
-      },
+      }
     })
   )
 export { request }
