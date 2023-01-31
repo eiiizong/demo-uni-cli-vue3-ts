@@ -28,8 +28,8 @@ import LoginAgreement from './LoginAgreement.vue'
 import LoginFooter from './LoginFooter.vue'
 
 import { ref, toRefs } from 'vue'
-import { showModal } from '@/utils/uni-api'
-import { requestGetRealPhone } from '@/server/api'
+import { navigateBack, showModal, showToast } from '@/utils/uni-api'
+import { requestGetRealPhone, requestLogin } from '@/server/api'
 import { useStoreUserInfo } from '@/stores/modules'
 
 const storeUserInfo = useStoreUserInfo()
@@ -37,20 +37,30 @@ const { userInfo } = toRefs(storeUserInfo)
 
 // 用户是否同意协议
 const isAgree = ref(false)
-// 用户手机号
-const tel = ref('')
 
 // 获取用户手机号登录
 const onGetPhoneNumber = (event: WechatMiniprogram.ButtonGetPhoneNumber) => {
   console.log('onGetPhoneNumber', event)
+  const { sessionKey, openId } = userInfo.value
   const { errMsg, code, encryptedData, cloudID, iv } = event.detail
   if (errMsg === 'getPhoneNumber:ok') {
-    requestGetRealPhone(encryptedData || '', iv || '', userInfo.value.sessionKey || '').then(
-      (res) => {
-        console.log('res', res)
-        // tel.value = res
-      }
-    )
+    // 获取用户真实手机号
+    requestGetRealPhone(encryptedData || '', iv || '', sessionKey || '').then((res) => {
+      // 登录
+      requestLogin(openId || '', res).then((res) => {
+        storeUserInfo.updateStoreUserInfo({
+          userId: '1',
+          userName: '游客1',
+          tel: '18482160080',
+        })
+        // 提示用户登录成功后返回上一页
+        showToast('登录成功', 'success').then((res) => {
+          setTimeout(() => {
+            navigateBack()
+          }, 1500)
+        })
+      })
+    })
   } else {
     showModal('请点击允许同意')
   }
