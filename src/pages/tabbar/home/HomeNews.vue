@@ -12,8 +12,6 @@
 <script setup lang="ts">
   import imageBgNews from './images/bg-news.png'
   import YhIcon from '@/components/yh/icon/icon.vue'
-
-  import { computed } from 'vue'
 </script>
 
 <style lang="scss" scoped>

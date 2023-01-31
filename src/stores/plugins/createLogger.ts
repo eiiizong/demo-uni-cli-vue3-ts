@@ -9,7 +9,7 @@ const pad = (num: number, maxLength: number) => {
 }
 
 const getFormattedTime = () => {
-  var time = new Date()
+  const time = new Date()
   return (
     ' @ ' +
     pad(time.getHours(), 2) +
@@ -29,11 +29,16 @@ const createLogger = ({ store }: PiniaPluginContext) => {
   store.$subscribe(
     (mutation, state) => {
       const { storeId, type } = mutation
-      var message = 'Store ' + storeId + ' ' + type + getFormattedTime()
+      const message = 'Store ' + storeId + ' ' + type + getFormattedTime()
+      // eslint-disable-next-line no-console
       console.groupCollapsed(message)
+      // eslint-disable-next-line no-console
       console.log('%c mutation.storeId', 'color: #9E9E9E; font-weight: bold', storeId)
+      // eslint-disable-next-line no-console
       console.log('%c mutation.type', 'color: #03A9F4; font-weight: bold', type)
+      // eslint-disable-next-line no-console
       console.log('%c next state', 'color: #4CAF50; font-weight: bold', { ...state })
+      // eslint-disable-next-line no-console
       console.groupEnd()
     },
     // 在组件销毁后依然监听状态的改变

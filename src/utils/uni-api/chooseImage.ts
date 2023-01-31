@@ -16,7 +16,7 @@
   })
  */
 const chooseImage = (
-  count: number = 9,
+  count = 9,
   sizeType: string[] = ['original', 'compressed'],
   sourceType: string[] = ['album', 'camera'],
   extension: string[] = [],
@@ -33,9 +33,10 @@ const chooseImage = (
         resolve(res)
       },
       fail(err) {
+        // eslint-disable-next-line no-console
         console.error('uni.chooseImage 接口调用失败 => ', err)
         reject(err)
-      },
+      }
     })
   })
 }

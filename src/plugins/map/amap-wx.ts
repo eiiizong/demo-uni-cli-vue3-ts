@@ -75,7 +75,7 @@ export interface Tips {
 }
 
 export type TipsArr = Tips[]
-export interface InputtipsRes  extends UniApp.RequestSuccessCallbackResult {
+export interface InputtipsRes extends UniApp.RequestSuccessCallbackResult {
   data: {
     count: string
     info: string
@@ -164,7 +164,7 @@ export interface RegeoRes extends UniApp.RequestSuccessCallbackResult {
   }
 }
 
-export interface WeatherRes  extends UniApp.RequestSuccessCallbackResult {
+export interface WeatherRes extends UniApp.RequestSuccessCallbackResult {
   data: {
     count: string
     info: string
@@ -194,7 +194,7 @@ class AmapWx {
       platform: 'WXJS',
       appname: props.key,
       sdkversion: '1.2.0',
-      logversion: '2.0',
+      logversion: '2.0'
     }
   }
 
@@ -221,12 +221,12 @@ class AmapWx {
               uni.openSetting({
                 success: () => {
                   this.getWxLocation(cb)
-                },
+                }
               })
             }
-          },
+          }
         })
-      },
+      }
     })
   }
   /**
@@ -238,7 +238,7 @@ class AmapWx {
         location: props.location || '',
         querytypes: props.querytypes || '',
         querykeywords: props.querykeywords || '',
-        ...this.requestConfig,
+        ...this.requestConfig
       }
       uni.request({
         url: 'https://restapi.amap.com/v3/place/around',
@@ -246,7 +246,7 @@ class AmapWx {
         method: 'GET',
         header: { 'content-type': 'application/json' },
         success,
-        fail,
+        fail
       })
     })
   }
@@ -258,7 +258,7 @@ class AmapWx {
       const config: RequestConfig & Inputtips = {
         location: props.location || '',
         keywords: props.keywords || '',
-        ...this.requestConfig,
+        ...this.requestConfig
       }
       uni.request({
         url: 'https://restapi.amap.com/v3/assistant/inputtips',
@@ -266,7 +266,7 @@ class AmapWx {
         method: 'GET',
         header: { 'content-type': 'application/json' },
         success,
-        fail,
+        fail
       })
     })
   }
@@ -278,7 +278,7 @@ class AmapWx {
       const config: RequestConfig & { location: string; extensions: string } = {
         location: props.location || '',
         extensions: 'all',
-        ...this.requestConfig,
+        ...this.requestConfig
       }
       uni.request({
         url: 'https://restapi.amap.com/v3/geocode/regeo',
@@ -290,7 +290,7 @@ class AmapWx {
         },
         fail: (err) => {
           reject(err)
-        },
+        }
       })
     })
   }
@@ -301,7 +301,7 @@ class AmapWx {
     return new Promise((resolve, rejects) => {
       const config: RequestConfig & { city: string } = {
         city: props.city,
-        ...this.requestConfig,
+        ...this.requestConfig
       }
       uni.request({
         url: 'https://restapi.amap.com/v3/weather/weatherInfo',
@@ -313,7 +313,7 @@ class AmapWx {
         },
         fail: (err) => {
           rejects(err)
-        },
+        }
       })
     })
   }

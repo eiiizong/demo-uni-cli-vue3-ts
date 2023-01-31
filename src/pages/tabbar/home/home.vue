@@ -26,7 +26,7 @@
   import HomePolicy from './HomePolicy.vue'
 
   import type { Ref } from 'vue'
-  import { ref, computed } from 'vue'
+  import { ref } from 'vue'
   import { onPageScroll, onHide } from '@dcloudio/uni-app'
 
   const scrollTimer: Ref<any> = ref(null)

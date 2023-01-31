@@ -27,9 +27,10 @@ const chooseLocation = (
         resolve(res)
       },
       fail(err) {
+        // eslint-disable-next-line no-console
         console.error('uni.chooseLocation 接口调用失败 => ', err)
         reject(err)
-      },
+      }
     })
   })
 }

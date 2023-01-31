@@ -20,9 +20,10 @@ const navigateBackMiniProgram = (extraData: any = null): Promise<any> => {
         resolve(res)
       },
       fail(err) {
+        // eslint-disable-next-line no-console
         console.error('uni.navigateToMiniProgram 接口调用失败 => ', err)
         reject(err)
-      },
+      }
     })
   })
 }

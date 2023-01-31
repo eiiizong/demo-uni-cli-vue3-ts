@@ -16,19 +16,18 @@ const getAgeByIDCard = (value: string): string => {
     const len = value.length
     if (len != 15 && len != 18) {
       if (isDev) {
+        // eslint-disable-next-line no-console
         console.error('身份证号码只能为15位或18位，其它不合法，请检查！')
       }
     } else {
       let birthday = ''
       // 处理15位的身份证号码从号码中得到生日和性别代码
       if (len === 15) {
-        birthday =
-          '19' + value.substring(6, 2) + '/' + value.substring(8, 2) + '/' + value.substring(10, 2)
+        birthday = '19' + value.substring(6, 2) + '/' + value.substring(8, 2) + '/' + value.substring(10, 2)
       }
       // 处理18位的身份证号码从号码中得到生日和性别代码
       if (len === 18) {
-        birthday =
-          value.substring(6, 4) + '/' + value.substring(10, 2) + '/' + value.substring(12, 2)
+        birthday = value.substring(6, 4) + '/' + value.substring(10, 2) + '/' + value.substring(12, 2)
       }
 
       // 时间字符串里，必须是“/”
@@ -50,6 +49,7 @@ const getAgeByIDCard = (value: string): string => {
     }
   } else {
     if (isDev) {
+      // eslint-disable-next-line no-console
       console.error('身份证号码为空，请检查！')
     }
   }

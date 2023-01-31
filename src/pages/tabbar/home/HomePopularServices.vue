@@ -22,7 +22,7 @@
 
   import ZdbPanel from '@/components/project/zdb-panel/zdb-panel.vue'
 
-  import { ref, computed } from 'vue'
+  import { computed } from 'vue'
   import { navigateTo } from '@/utils/uni-api'
 
   import type { PopularServiceNavItem } from '@/types'

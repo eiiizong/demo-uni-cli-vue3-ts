@@ -13,17 +13,9 @@
   })
  */
 const login = (
-  provider:
-    | 'weixin'
-    | 'qq'
-    | 'sinaweibo'
-    | 'xiaomi'
-    | 'apple'
-    | 'univerify'
-    | undefined = undefined,
+  provider: 'weixin' | 'qq' | 'sinaweibo' | 'xiaomi' | 'apple' | 'univerify' | undefined = undefined,
   scopes: UniApp.LoginScopes | UniApp.LoginScopes[] | undefined = 'auth_base',
-  timeout: number = 6000,
- 
+  timeout = 6000
 ): Promise<UniApp.LoginRes> => {
   return new Promise((resolve, reject) => {
     uni.login({
@@ -34,9 +26,10 @@ const login = (
         resolve(res)
       },
       fail(err) {
+        // eslint-disable-next-line no-console
         console.error('uni.login 接口调用失败 => ', err)
         reject(err)
-      },
+      }
     })
   })
 }

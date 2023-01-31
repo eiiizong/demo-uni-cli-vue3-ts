@@ -19,14 +19,14 @@
   })
 */
 const getLocation = (
-  type: string = 'wgs84',
-  altitude: boolean = false,
-  geocode: boolean = false,
-  highAccuracyExpireTime: number = 4000,
-  timeout: string = '5',
-  cacheTimeout: number = 60,
-  accuracy: string = 'high',
-  isHighAccuracy: boolean = false
+  type = 'wgs84',
+  altitude = false,
+  geocode = false,
+  highAccuracyExpireTime = 4000,
+  timeout = '5',
+  cacheTimeout = 60,
+  accuracy = 'high',
+  isHighAccuracy = false
 ): Promise<UniApp.GetLocationSuccess> => {
   return new Promise((resolve, reject) => {
     uni.getLocation({
@@ -39,6 +39,7 @@ const getLocation = (
         resolve(res)
       },
       fail(err) {
+        // eslint-disable-next-line no-console
         console.error('uni.getLocation 接口调用失败 => ', err)
         reject(err)
       },
@@ -47,7 +48,7 @@ const getLocation = (
       // @ts-ignore
       cacheTimeout,
       // @ts-ignore
-      accuracy,
+      accuracy
     })
   })
 }

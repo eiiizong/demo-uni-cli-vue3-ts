@@ -23,61 +23,62 @@
 </template>
 
 <script setup lang="ts">
-// import { ref } from 'vue'
+  // import { ref } from 'vue'
 
-const props = defineProps({
-  renderData: {
-    type: Object,
-    required: true,
-  },
-})
+  const props = defineProps({
+    renderData: {
+      type: Object,
+      required: true
+    }
+  })
 
-// 查看更多
-const handleView = () => {
-  const { renderData } = props
-  console.log(renderData)
-}
+  // 查看更多
+  const handleView = () => {
+    const { renderData } = props
+    // eslint-disable-next-line no-console
+    console.log(renderData)
+  }
 </script>
 
 <style lang="scss" scoped>
-.list-item {
-  width: 100%;
-  border-radius: 6px;
-  background-color: rgba(255, 255, 255, 1);
-  border: 1px solid rgba(72, 143, 231, 0.2);
-  padding: 0 $spacing;
-  padding-bottom: $spacing;
-
-  .title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 90rpx;
-    border-bottom: 1px solid $color-border;
-    color: $color-text;
-    .left {
-      display: flex;
-      align-items: center;
-    }
-  }
-  .cells {
+  .list-item {
     width: 100%;
-    color: $color-text;
-    padding-top: 20rpx;
-    .cell {
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(72, 143, 231, 0.2);
+    padding: 0 $spacing;
+    padding-bottom: $spacing;
+
+    .title {
       display: flex;
       align-items: center;
-      .key {
-        color: $color-text-placeholder;
-      }
-      .value {
-        flex: 1;
-        overflow: hidden;
+      justify-content: space-between;
+      height: 90rpx;
+      border-bottom: 1px solid $color-border;
+      color: $color-text;
+      .left {
+        display: flex;
+        align-items: center;
       }
     }
+    .cells {
+      width: 100%;
+      color: $color-text;
+      padding-top: 20rpx;
+      .cell {
+        display: flex;
+        align-items: center;
+        .key {
+          color: $color-text-placeholder;
+        }
+        .value {
+          flex: 1;
+          overflow: hidden;
+        }
+      }
+    }
+    .tip {
+      color: $color-danger;
+    }
   }
-  .tip {
-    color: $color-danger;
-  }
-}
 </style>

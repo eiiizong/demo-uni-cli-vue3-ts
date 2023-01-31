@@ -38,16 +38,7 @@ const request = (
   data: any = {},
   isShowLoading = true,
   showErrorToast = true,
-  method:
-    | 'OPTIONS'
-    | 'GET'
-    | 'HEAD'
-    | 'POST'
-    | 'PUT'
-    | 'DELETE'
-    | 'TRACE'
-    | 'CONNECT'
-    | undefined = 'POST',
+  method: 'OPTIONS' | 'GET' | 'HEAD' | 'POST' | 'PUT' | 'DELETE' | 'TRACE' | 'CONNECT' | undefined = 'POST',
   timeout = 60000
 ): Promise<any> => {
   const { userInfo } = useStoreUserInfo()
@@ -58,11 +49,11 @@ const request = (
   // 根据加密情况使用content-type
   if (isOpenDataEncryption) {
     header = {
-      'content-type': 'application/x-www-form-urlencoded',
+      'content-type': 'application/x-www-form-urlencoded'
     }
   } else {
     header = {
-      'content-type': 'application/json;charset=UTF-8',
+      'content-type': 'application/json;charset=UTF-8'
     }
   }
 
@@ -70,7 +61,7 @@ const request = (
   if (userInfo.token) {
     header = {
       ...header,
-      authorization: 'Bearer ' + userInfo.token,
+      authorization: 'Bearer ' + userInfo.token
     }
   }
 
@@ -98,7 +89,7 @@ const request = (
     if (isObject(data)) {
       data = {
         ...data,
-        chb004: '03', // 调用渠道 01 核心系统 02 网厅 03 微信小程序
+        chb004: '03' // 调用渠道 01 核心系统 02 网厅 03 微信小程序
       }
     }
 
@@ -110,7 +101,7 @@ const request = (
 
     uniRequest(url, isOpenDataEncryption ? paramsStr : data, header, method, timeout)
       .then((res) => {
-        let { statusCode, data: _data } = res // 服务器返回的数据
+        const { statusCode, data: _data } = res // 服务器返回的数据
 
         // 请求成功 状态码为 200
         if (statusCode === 200 && _data) {
@@ -144,7 +135,7 @@ const request = (
             if (code === 200 && resData) {
               const { resultData } = resData
               if (resultData) {
-                const { code, message, token ,data} = resultData
+                const { code, message, token, data } = resultData
                 if (code === '200') {
                   resolve(data)
                 } else if (code === '401') {
