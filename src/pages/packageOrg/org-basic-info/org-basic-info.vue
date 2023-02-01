@@ -1,9 +1,9 @@
 <template>
   <view class="org-basic-info">
     <div class="title">详情信息</div>
-    <DetailsInfo />
+    <DetailsInfo :render-data="orgInfo" />
     <div class="title">机构组织</div>
-    <OrgInfo />
+    <OrgInfo :render-data="orgInfo" />
   </view>
 </template>
 
@@ -11,11 +11,17 @@
   import DetailsInfo from './DetailsInfo.vue'
   import OrgInfo from './OrgInfo.vue'
 
-  import { ref, reactive } from 'vue'
+  import { ref } from 'vue'
   import { onLoad } from '@dcloudio/uni-app'
 
+  const orgId = ref('')
+  const orgInfo = ref({})
+
   onLoad((e) => {
-    console.log(e)
+    const { id } = e
+    if (id) {
+      orgId.value = id
+    }
   })
 </script>
 

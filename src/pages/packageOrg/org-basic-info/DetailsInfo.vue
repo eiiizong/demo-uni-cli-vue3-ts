@@ -58,10 +58,13 @@
 </template>
 
 <script setup lang="ts">
-  import { onLoad } from '@dcloudio/uni-app'
+  import type { PropType } from 'vue'
 
-  onLoad((e) => {
-    console.log(e)
+  const props = defineProps({
+    renderData: {
+      type: Object as PropType<any>,
+      required: true
+    }
   })
 </script>
 

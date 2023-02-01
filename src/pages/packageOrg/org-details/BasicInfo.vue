@@ -47,21 +47,25 @@
 <script setup lang="ts">
   import imageBgCard from './images/bg-card.png'
 
-  import { ref, reactive } from 'vue'
-  import { onLoad } from '@dcloudio/uni-app'
+  import type { PropType } from 'vue'
+
   import { navigateTo } from '@/utils/uni-api'
 
-  const orgId = ref('')
-
-  const onClick = () => {
-    navigateTo('org-basic-info', 'packageOrg', { id: orgId.value })
-  }
-
-  onLoad((e) => {
-    if (e.id) {
-      orgId.value = e.id
+  const props = defineProps({
+    orgId: {
+      type: String,
+      required: true
+    },
+    renderData: {
+      type: Object as PropType<any>,
+      required: true
     }
   })
+
+  const onClick = () => {
+    const { orgId } = props
+    navigateTo('org-basic-info', 'packageOrg', { id: orgId })
+  }
 </script>
 
 <style lang="scss" scoped>
