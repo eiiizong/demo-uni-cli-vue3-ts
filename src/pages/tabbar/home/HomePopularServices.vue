@@ -60,8 +60,8 @@
       id: 'hzjg',
       name: '合作机构',
       desc: '查询合作机构详情',
-      pathName: 'cooperative-institution',
-      packageName: 'packageProject',
+      pathName: 'org-list',
+      packageName: 'packageOrg',
       isAuth: false,
       disabled: false,
       imgSrc: imageNav02

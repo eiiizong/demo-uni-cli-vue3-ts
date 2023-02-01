@@ -6,7 +6,6 @@
       "style": {
         "navigationBarTitleText": "首页",
         "backgroundColorTop": "#203f9a",
-        "backgroundColorBottom": "#f3f4f9",
         "navigationStyle": "custom",
         "enablePullDownRefresh": false
       }
