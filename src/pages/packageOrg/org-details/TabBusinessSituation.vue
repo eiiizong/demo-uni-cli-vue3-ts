@@ -16,7 +16,8 @@
 <script setup lang="ts">
   import ZdbTitle from '@/components/project/zdb-title/zdb-title.vue'
   import ZdbTable from '@/components/project/zdb-table/zdb-table.vue'
-  import { ref, reactive } from 'vue'
+
+  import { ref } from 'vue'
 
   const tabelData01 = ref([
     {

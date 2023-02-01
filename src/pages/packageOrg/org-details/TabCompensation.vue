@@ -1,9 +1,9 @@
 <template>
   <view class="tab-compensation">
     <ZdbTable :render-list="tabelData" />
-    <ZdbTitle title="补贴申报记录" />
+    <ZdbTitle title="补偿申报记录" />
     <div class="card-wrapper">
-      <div v-for="item in [{}]" class="item">
+      <div v-for="item in [{ id: '1' }]" :key="item.id" class="item">
         <ZdbCardApply :render-data="item" />
       </div>
     </div>
@@ -15,7 +15,7 @@
   import ZdbTable from '@/components/project/zdb-table/zdb-table.vue'
   import ZdbCardApply from '@/components/project/zdb-card-apply/zdb-card-apply.vue'
 
-  import { ref, reactive } from 'vue'
+  import { ref } from 'vue'
 
   const tabelData = ref([
     {

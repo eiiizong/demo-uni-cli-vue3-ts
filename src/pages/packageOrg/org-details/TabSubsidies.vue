@@ -3,11 +3,10 @@
     <ZdbTable :render-list="tabelData" />
     <ZdbTitle title="补贴申报记录" />
     <div class="card-wrapper">
-      <div v-for="item in [{}]" class="item">
+      <div v-for="item in [{ id: '1' }]" :key="item.id" class="item">
         <ZdbCardApply :render-data="item" />
       </div>
     </div>
-    s
   </view>
 </template>
 
@@ -16,7 +15,7 @@
   import ZdbTable from '@/components/project/zdb-table/zdb-table.vue'
   import ZdbCardApply from '@/components/project/zdb-card-apply/zdb-card-apply.vue'
 
-  import { ref, reactive } from 'vue'
+  import { ref } from 'vue'
 
   const tabelData = ref([
     {
