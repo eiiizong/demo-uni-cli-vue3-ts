@@ -1,7 +1,7 @@
 <template>
-  <view class="org-list" :class="userInfo.userType !== '2' ? 'no-button' : ''">
+  <view class="org-list" :class="userInfo.userType !== '4' ? 'no-button' : ''">
     <InstiutionList :render-list="orgList" />
-    <MyInstiution v-if="userInfo.userType === '2'" />
+    <MyInstiution v-if="userInfo.userType === '4'" />
   </view>
 </template>
 
