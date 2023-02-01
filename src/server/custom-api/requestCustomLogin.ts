@@ -13,7 +13,7 @@ const requestCustomLogin = (
   isShowNotLoggedInPrompt = true,
   isShowLoading = true,
   isShowErrorToast = true
-): Promise<Store.StoreUserInfo> => {
+): Promise<Store.UserInfo> => {
   return new Promise((resolve, reject) => {
     login()
       .then((res) => {

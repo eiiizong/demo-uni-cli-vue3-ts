@@ -48,12 +48,10 @@
         requestLogin(openId || '', res).then((res) => {
           storeUserInfo.updateStoreUserInfo({
             userId: '1',
-            userName: '游客1',
-            tel: '18482160080',
-            userType: '0'
+            userName: '游客1'
           })
           // 提示用户登录成功后返回上一页
-          showToast('登录成功', 'success').then((res) => {
+          showToast('登录成功', 'success').then(() => {
             setTimeout(() => {
               navigateBack()
             }, 1500)

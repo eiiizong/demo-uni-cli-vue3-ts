@@ -98,16 +98,16 @@
 
     switch (userType) {
       // 领导
-      case '1':
+      case '2':
         arr.push(navRYDYBZ)
         break
       // 经办人
-      case '2':
+      case '3':
         arr.push(navRYDYBZ)
         arr.push(navGZL)
         break
       // 合作机构
-      case '3':
+      case '4':
         arr.push(navJDCX)
         break
       default:

@@ -18,18 +18,7 @@ const useStoreUserInfo = defineStore('storeUserInfo', () => {
   /**
    * 设置 userInfo 游客无须登录也可以访问
    */
-  const userInfo: Ref<Store.StoreUserInfo> = ref({
-    token: '',
-    userId: '',
-    userName: '',
-    idCard: '',
-    unitName: '',
-    tel: '',
-    openId: '',
-    sessionKey: '',
-    avatarUrl: '',
-    userType: ''
-  })
+  const userInfo: Ref<Store.UserInfo> = ref({})
 
   /**
    * 获取 userInfo
@@ -39,7 +28,7 @@ const useStoreUserInfo = defineStore('storeUserInfo', () => {
   /**
    * 更新 userInfo
    */
-  function updateStoreUserInfo(data: Store.StoreUserInfo) {
+  function updateStoreUserInfo(data: Store.UserInfo) {
     userInfo.value = {
       ...userInfo.value,
       ...data

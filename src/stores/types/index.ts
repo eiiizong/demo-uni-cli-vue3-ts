@@ -1,9 +1,9 @@
 // 全局状态管理类型
-namespace Store {
+declare namespace Store {
   /**
    * store 用户信息
    */
-  export interface StoreUserInfo {
+  export interface UserInfo {
     /**
      * 用户唯一token
      */
@@ -47,7 +47,7 @@ namespace Store {
     /**
      * 用户类型 0 未登录用户 1 游客 2 领导 3 经办人 4 合作机构
      */
-    userType?: string
+    userType?: '0' | '1' | '2' | '3' | '4'
   }
 }
 

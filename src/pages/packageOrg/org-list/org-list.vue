@@ -1,127 +1,53 @@
 <template>
-  <view class="org-list">
-    <InstiutionList :render-list="customData.queryResultList" v-model="tabId"></InstiutionList>
-    <MyInstiution></MyInstiution>
+  <view class="org-list" :class="userInfo.userType !== '2' ? 'no-button' : ''">
+    <InstiutionList :render-list="orgList" />
+    <MyInstiution v-if="userInfo.userType === '2'" />
   </view>
 </template>
 
 <script setup lang="ts">
-import MyInstiution from './MyInstiution.vue'
-import InstiutionList from './InstiutionList.vue'
+  import MyInstiution from './MyInstiution.vue'
+  import InstiutionList from './InstiutionList.vue'
 
-import type { Api } from '@/server/types'
-import type { Ref } from 'vue'
+  import { toRefs, computed } from 'vue'
+  import { useStoreUserInfo } from '@/stores/modules'
 
-import { ref, reactive } from 'vue'
-import { onLoad } from '@dcloudio/uni-app'
-import { useStoreUserInfo } from '@/stores/modules'
+  const storeUserInfo = useStoreUserInfo()
 
-interface CustomData {
-  queryResultList: Api.AAA_01_Result[]
-}
+  const { userInfo } = toRefs(storeUserInfo)
 
-const storeUserInfo = useStoreUserInfo()
-
-const tabId = ref('12')
-
-const customData = reactive<CustomData>({
-  queryResultList: [
-    {
-      id: '12',
-      name: '担保公司1',
-      list: [
-        {
-          id: '123',
-          name: '测试机构',
-        },
-        {
-          id: '1234',
-          name: '测试机构',
-        },
-        {
-          id: '1243',
-          name: '测试机构',
-        },
-      ],
-    },
-    {
-      id: '123',
-      name: '担保公司2',
-      list: [
-        {
-          id: '12345',
-          name: '测试机构22',
-        },
-      ],
-    },
-    {
-      id: '1278',
-      name: '担保公司1',
-      list: [
-        {
-          id: '123',
-          name: '测试机构',
-        },
-        {
-          id: '1234',
-          name: '测试机构',
-        },
-        {
-          id: '1243',
-          name: '测试机构',
-        },
-      ],
-    },
-    {
-      id: '12356',
-      name: '担保公司2',
-      list: [
-        {
-          id: '12345',
-          name: '测试机构22',
-        },
-      ],
-    },
-    {
-      id: '1209',
-      name: '担保公司1',
-      list: [
-        {
-          id: '123',
-          name: '测试机构',
-        },
-        {
-          id: '1234',
-          name: '测试机构',
-        },
-        {
-          id: '1243',
-          name: '测试机构',
-        },
-      ],
-    },
-    {
-      id: '12399',
-      name: '担保公司2',
-      list: [
-        {
-          id: '12345',
-          name: '测试机构22',
-        },
-      ],
-    },
-  ],
-})
-
-onLoad((e) => {
-  console.log(e)
-})
+  interface OrgList {
+    id: string
+    name: string
+    list: any[]
+  }
+  const orgList = computed<OrgList[]>(() => {
+    let arr = []
+    for (let i = 0; i < 10; i++) {
+      let item: OrgList = {
+        id: i + 1 + '',
+        name: '机构名称' + (i + 1),
+        list: []
+      }
+      for (let j = 0; j < 10; j++) {
+        item.list.push({
+          id: i + 1 + '_' + j,
+          name: '测试银行' + (j + 1)
+        })
+      }
+      arr.push(item)
+    }
+    return []
+  })
 </script>
 
 <style lang="scss" scoped>
-.org-list {
-  width: 100%;
-  padding-bottom: 184rpx;
-  position: relative;
-}
+  .org-list {
+    width: 100%;
+    padding-bottom: 184rpx;
+    position: relative;
+    &.no-button {
+      padding-bottom: $spacing;
+    }
+  }
 </style>
