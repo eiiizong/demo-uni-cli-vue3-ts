@@ -2,16 +2,6 @@
  * api 数据类型定义
  */
 declare namespace Api {
-  type Rows<T extends any> = {
-    data: T
-    success: number
-  }
-
-  interface AAA_01_List {
-    id: string
-    name: string
-  }
-
   /**
    * 接口调用错误
    */
@@ -37,14 +27,16 @@ declare namespace Api {
     requestId?: string
     serviceSuccess?: boolean
   }
- 
+
+  interface B001_ItemList {
+    id: string
+    name: string
+  }
   /**
    * 合作机构列表
    */
-  export interface AAA_01_Result {
-    id: string
-    name: string
-    list: AAA_01_List[]
+  export interface B001_SuccessResultItem extends B001_ItemList {
+    list: B001_ItemList[]
   }
 }
 

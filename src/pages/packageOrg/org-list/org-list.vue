@@ -37,14 +37,15 @@
       }
       arr.push(item)
     }
-    return []
+    return arr
   })
 </script>
 
 <style lang="scss" scoped>
   .org-list {
     width: 100%;
-    padding-bottom: 184rpx;
+    padding: 16rpx 0;
+    padding-bottom: 154rpx + 16rpx;
     position: relative;
     &.no-button {
       padding-bottom: $spacing;

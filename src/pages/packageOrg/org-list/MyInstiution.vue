@@ -13,18 +13,28 @@
 <script setup lang="ts">
   import YhButton from '@/components/yh/button/button.vue'
 
+  import { toRefs } from 'vue'
+  import { navigateTo } from '@/utils/uni-api'
+  import { useStoreUserInfo } from '@/stores/modules'
+
+  const storeUserInfo = useStoreUserInfo()
+  const { userInfo } = toRefs(storeUserInfo)
+
   // 监听点击事件
-  const onClick = () => {}
+  const onClick = () => {
+    navigateTo('org-details', 'packageOrg', { id: userInfo.value.userId })
+  }
 </script>
 
 <style lang="scss" scoped>
   .my-instiuition {
     width: 100%;
-    position: absolute;
+    position: fixed;
     left: 0;
     width: 100%;
-    bottom: 54rpx;
-    padding: 0 $spacing;
+    bottom: 0;
+    padding: 16rpx $spacing 54rpx;
+    background-color: $color-page;
     ::v-deep {
       .custom-button {
         height: 100rpx;
