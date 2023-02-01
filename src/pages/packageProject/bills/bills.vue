@@ -1,6 +1,6 @@
 <template>
   <BillBg class="bills">
-    <BillHearder :backgorund-color="navBarBackgroundColor" />
+    <BillHearder :backgorund-color="navBarBackgroundColor" :color="color" />
     <div class="main">
       <BillCompare />
       <BillTotal />
@@ -23,6 +23,7 @@
 
   const scrollTimer: Ref<any> = ref(null)
   const navBarBackgroundColor = ref('transparent')
+  const color = ref('#ffffff')
 
   const getData = () => {
     console.log('navBarBackgroundColor', navBarBackgroundColor)
@@ -42,7 +43,7 @@
     scrollTimer.value && clearTimeout(scrollTimer.value)
     scrollTimer.value = setTimeout(() => {
       if (scrollTop > 10) {
-        navBarBackgroundColor.value = 'rgba(88,88,88,0.46)'
+        navBarBackgroundColor.value = '#395fce'
       } else {
         navBarBackgroundColor.value = 'transparent'
       }

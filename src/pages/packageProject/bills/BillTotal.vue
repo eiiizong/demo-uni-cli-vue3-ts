@@ -2,8 +2,10 @@
   <view class="bill-total">
     <div class="total">
       <div class="img-wrapper">
-        <img class="icon" :src="imageIcon02" alt="" />
-        <div class="text">正常</div>
+        <img v-if="wranType === '1'" class="icon" :src="imageIcon01" alt="" />
+        <img v-if="wranType === '2'" class="icon" :src="imageIcon02" alt="" />
+        <img v-if="wranType === '3'" class="icon" :src="imageIcon03" alt="" />
+        <div class="text">{{ wranType === '1' ? '正常' : wranType === '2' ? '预警' : '叫停' }}</div>
       </div>
       <div class="info">
         <div class="key">风险资金池</div>
@@ -39,7 +41,12 @@
 <script setup lang="ts">
   import imageIcon01 from './images/icon-01.png'
   import imageIcon02 from './images/icon-02.png'
-  import { ref, reactive, onMounted } from 'vue'
+  import imageIcon03 from './images/icon-03.png'
+
+  import { ref } from 'vue'
+
+  // 1 正常 2 预警 3 叫停
+  const wranType = ref('1')
 </script>
 
 <style lang="scss" scoped>

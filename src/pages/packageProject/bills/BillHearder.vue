@@ -1,6 +1,6 @@
 <template>
   <view class="bill-header">
-    <YhNavBar title="蓉易贷一本帐" :background-color="backgorundColor" color="#fff" left-arrow :border="false" />
+    <YhNavBar title="蓉易贷一本帐" :background-color="backgorundColor" :color="color" left-arrow :border="false" />
     <div class="toolbar">
       <div class="key">当前截至累计:</div>
       <div class="tabs">
@@ -52,6 +52,10 @@
 
   const props = defineProps({
     backgorundColor: {
+      type: String,
+      required: true
+    },
+    color: {
       type: String,
       required: true
     }
