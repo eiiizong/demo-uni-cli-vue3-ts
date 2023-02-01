@@ -10,9 +10,9 @@
       <div class="d-f">我同意蓉易贷平台收集、保存、使用/转交我所提交的信息用于快捷登录</div>
       <div class="agreement d-f ai-c">
         <span>查看</span>
-        <span class="link" @click.stop="handleJumpRoute('login-user-agreement', 'packageCommon')"
-          >《用户服务协议》</span
-        >
+        <span class="link" @click.stop="handleJumpRoute('login-user-agreement', 'packageCommon')">
+          《用户服务协议》
+        </span>
         <span>及</span>
         <span class="link" @click.stop="handleJumpRoute('login-privacy-policy', 'packageCommon')">《隐私条款》</span>
       </div>

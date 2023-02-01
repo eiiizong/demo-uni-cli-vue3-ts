@@ -1,5 +1,5 @@
 import { Store } from '@/stores/types'
-import { login, showModal, navigateTo } from '@/utils/uni-api'
+import { login, showModal } from '@/utils/uni-api'
 import { requestGetOpenId } from '@/server/api'
 import { useJumpLoginPage } from '@/hooks/project'
 
@@ -10,9 +10,9 @@ import { useJumpLoginPage } from '@/hooks/project'
  * @param {boolean} [isShowErrorToast=true] 是否显示接口调用错误提示。默认值 true。
  */
 const requestCustomLogin = (
-  isShowNotLoggedInPrompt: boolean = true,
-  isShowLoading: boolean = true,
-  isShowErrorToast: boolean = true
+  isShowNotLoggedInPrompt = true,
+  isShowLoading = true,
+  isShowErrorToast = true
 ): Promise<Store.StoreUserInfo> => {
   return new Promise((resolve, reject) => {
     login()
@@ -36,32 +36,28 @@ const requestCustomLogin = (
                   userType,
                   tel,
                   avatarUrl: portraiturl,
-                  token,
+                  token
                 })
               } else {
                 if (isShowNotLoggedInPrompt) {
                   if (!openid) {
                     showModal('openid 获取失败，请联系管理员！')
                   } else {
-                    showModal(
-                      '检测到您还未进行登录验证，点击确定按钮进行登录验证！',
-                      '未登录提示',
-                      true
-                    )
-                      .then((res) => {
+                    showModal('检测到您还未进行登录验证，点击确定按钮进行登录验证！', '未登录提示', true)
+                      .then(() => {
                         useJumpLoginPage()
                       })
                       .finally(() => {
                         resolve({
                           sessionKey: encodeURIComponent(session_key),
-                          openId: openid,
+                          openId: openid
                         })
                       })
                   }
                 } else {
                   resolve({
                     sessionKey: encodeURIComponent(session_key),
-                    openId: openid,
+                    openId: openid
                   })
                 }
               }

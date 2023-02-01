@@ -91,6 +91,7 @@
       imgSrc: imageNav04
     }
 
+    // 默认为游客访问内容
     const arr: PopularServiceNavItem[] = [navYEJS, navHZJG]
 
     const { userType } = userInfo.value

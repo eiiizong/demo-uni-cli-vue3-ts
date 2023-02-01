@@ -51,13 +51,17 @@
         {
           "path": "login-privacy-policy/login-privacy-policy",
           "style": {
-            "navigationBarTitleText": "隐私协议"
+            "navigationBarTitleText": "隐私协议",
+            "backgroundColorTop": "#ffffff",
+            "backgroundColorBottom": "#ffffff"
           }
         },
         {
           "path": "login-user-agreement/login-user-agreement",
           "style": {
-            "navigationBarTitleText": "用户协议"
+            "navigationBarTitleText": "用户协议",
+            "backgroundColorTop": "#ffffff",
+            "backgroundColorBottom": "#ffffff"
           }
         }
       ]

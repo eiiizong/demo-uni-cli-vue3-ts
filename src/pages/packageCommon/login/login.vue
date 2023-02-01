@@ -39,7 +39,6 @@
 
   // 获取用户手机号登录
   const onGetPhoneNumber = (event: WechatMiniprogram.ButtonGetPhoneNumber) => {
-    console.log('onGetPhoneNumber', event)
     const { sessionKey, openId } = userInfo.value
     const { errMsg, code, encryptedData, cloudID, iv } = event.detail
     if (errMsg === 'getPhoneNumber:ok') {
@@ -50,7 +49,8 @@
           storeUserInfo.updateStoreUserInfo({
             userId: '1',
             userName: '游客1',
-            tel: '18482160080'
+            tel: '18482160080',
+            userType: '0'
           })
           // 提示用户登录成功后返回上一页
           showToast('登录成功', 'success').then((res) => {

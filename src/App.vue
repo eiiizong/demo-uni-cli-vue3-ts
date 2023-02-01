@@ -10,6 +10,10 @@
     // 登录
     requestCustomLogin().then((res) => {
       storeUserInfo.updateStoreUserInfo(res)
+
+      setTimeout(() => {
+        storeUserInfo.updateStoreUserInfo({ userType: '2' })
+      }, 2000)
     })
   })
 
