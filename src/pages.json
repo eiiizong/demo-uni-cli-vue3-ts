@@ -37,6 +37,19 @@
   ],
   "subPackages": [
     {
+      "root": "pages/packageBusiness",
+      "pages": [
+        {
+          "path": "business-intro/business-intro",
+          "style": {
+            "navigationBarTitleText": "业务介绍",
+            "backgroundColorTop": "#ffffff",
+            "backgroundColorBottom": "#ffffff"
+          }
+        }
+      ]
+    },
+    {
       "root": "pages/packageCommon",
       "pages": [
         {
@@ -200,13 +213,13 @@
   ],
   "globalStyle": {
     "backgroundColor": "#f5f5f5",
-    "navigationBarBackgroundColor": "#2f54d4",
-    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#f8f8f8",
+    "navigationBarTextStyle": "black",
     "navigationBarTitleText": "demo-uni-cli-vue3-ts",
     "enablePullDownRefresh": false,
     "backgroundTextStyle": "light",
-    "backgroundColorTop": "#f0f3f9",
-    "backgroundColorBottom": "#f0f3f9",
+    "backgroundColorTop": "#f5f5f5",
+    "backgroundColorBottom": "#f5f5f5",
     "navigationStyle": "default",
     "onReachBottomDistance": -60, // 安卓和工具不支持负数
     "h5": {
@@ -220,6 +233,11 @@
       {
         "name": "packageDemo-dashboard",
         "path": "pages/packageDemo/dashboard/dashboard",
+        "query": ""
+      },
+      {
+        "name": "packageBusiness-business-intro",
+        "path": "pages/packageBusiness/business-intro/business-intro",
         "query": ""
       },
       {

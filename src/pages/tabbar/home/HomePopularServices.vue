@@ -84,8 +84,8 @@
       id: 'ywjs',
       name: '业务介绍',
       desc: '详尽了解“蓉易贷”业务',
-      pathName: '',
-      packageName: '',
+      pathName: 'business-intro',
+      packageName: 'packageBusiness',
       isAuth: false,
       disabled: false,
       imgSrc: imageNav04
