@@ -46,50 +46,47 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
-import { onLoad } from '@dcloudio/uni-app'
-import { useStoreUserInfo } from '@/stores/modules'
+  import { ref, reactive } from 'vue'
+  import { onLoad } from '@dcloudio/uni-app'
 
-const storeUserInfo = useStoreUserInfo()
-
-onLoad((e) => {
-  console.log(e)
-})
+  onLoad((e) => {
+    console.log(e)
+  })
 </script>
 
 <style lang="scss" scoped>
-.org-info {
-  width: 100%;
-  .cell-wrapper {
-    border-radius: 16rpx;
-    background-color: #fff;
-    padding: 34rpx 24rpx;
-    margin-bottom: $spacing;
-    .cell {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: #b2bbc7;
-      font-size: 28rpx;
-      line-height: 40rpx;
-      margin-bottom: 24rpx;
-      .key {
-        padding-right: 20rpx;
-      }
-      .value {
-        color: #000000;
-      }
-      &.border {
-        border-bottom: 1px solid $color-border;
-        padding-bottom: 18rpx;
+  .org-info {
+    width: 100%;
+    .cell-wrapper {
+      border-radius: 16rpx;
+      background-color: #fff;
+      padding: 34rpx 24rpx;
+      margin-bottom: $spacing;
+      .cell {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #b2bbc7;
+        font-size: 28rpx;
+        line-height: 40rpx;
+        margin-bottom: 24rpx;
+        .key {
+          padding-right: 20rpx;
+        }
+        .value {
+          color: #000000;
+        }
+        &.border {
+          border-bottom: 1px solid $color-border;
+          padding-bottom: 18rpx;
+        }
+        &:last-child {
+          margin-bottom: 0;
+        }
       }
       &:last-child {
         margin-bottom: 0;
       }
     }
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
-}
 </style>

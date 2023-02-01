@@ -9,6 +9,7 @@
   import MyInstiution from './MyInstiution.vue'
   import InstiutionList from './InstiutionList.vue'
 
+  import type { Api } from '@/server/types'
   import { toRefs, computed } from 'vue'
   import { useStoreUserInfo } from '@/stores/modules'
 
@@ -16,15 +17,10 @@
 
   const { userInfo } = toRefs(storeUserInfo)
 
-  interface OrgList {
-    id: string
-    name: string
-    list: any[]
-  }
-  const orgList = computed<OrgList[]>(() => {
+  const orgList = computed<Api.B001_SuccessResultItem[]>(() => {
     let arr = []
     for (let i = 0; i < 10; i++) {
-      let item: OrgList = {
+      let item: Api.B001_SuccessResultItem = {
         id: i + 1 + '',
         name: '机构名称' + (i + 1),
         list: []
