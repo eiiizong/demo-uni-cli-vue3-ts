@@ -1,6 +1,6 @@
 <template>
   <view class="home-policy">
-    <ZdbPanel title="政策文件">
+    <ZdbPanel title="政策文件" right-text="查看更多" @click="onClick">
       <div class="items">
         <div v-for="item in navs" :key="item.chi050" class="item">
           <ZdbCardPolicy :render-data="item" />
@@ -15,6 +15,7 @@
   import ZdbCardPolicy from '@/components/project/zdb-card-policy/zdb-card-policy.vue'
 
   import { ref } from 'vue'
+  import { navigateTo } from '@/utils/uni-api'
 
   const navs = ref([
     {
@@ -58,6 +59,11 @@
       yab003_desc: '东兴区'
     }
   ])
+
+  // 路由跳转
+  const onClick = () => {
+    navigateTo('query-policy', 'packageProject')
+  }
 </script>
 
 <style lang="scss" scoped>

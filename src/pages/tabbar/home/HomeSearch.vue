@@ -1,5 +1,5 @@
 <template>
-  <view class="home-search" @click="onJumpRoute">
+  <view class="home-search" @click="onClick">
     <YhIcon name="search" size="26rpx" />
     <div class="placeholder">搜政策</div>
   </view>
@@ -10,11 +10,11 @@
   import { navigateTo } from '@/utils/uni-api'
 
   // 路由跳转
-  const onJumpRoute = () => {
-    navigateTo('query-policy', 'packageProject')
+  const onClick = () => {
+    navigateTo('query-policy', 'packageProject', { focus: true })
   }
 </script>
-
+s
 <style lang="scss" scoped>
   .home-search {
     width: 100%;

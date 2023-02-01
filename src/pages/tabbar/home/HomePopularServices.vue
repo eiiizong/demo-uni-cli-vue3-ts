@@ -127,6 +127,7 @@
 <style lang="scss" scoped>
   .home-popular-services {
     width: 100%;
+    background-color: #fff;
     .navs {
       width: 100%;
       display: flex;

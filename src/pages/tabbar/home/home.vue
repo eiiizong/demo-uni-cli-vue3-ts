@@ -63,7 +63,6 @@
   .main {
     flex: 1;
     overflow: hidden;
-    background-color: #fff;
     border-top-left-radius: 48rpx;
   }
 </style>
