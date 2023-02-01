@@ -4,14 +4,17 @@
       <img :src="imageBgNews" alt="" class="bg" />
       <div class="content">头条</div>
     </div>
-    <div class="text">最新！成都中小担：全力实势产业建圈强链链最新！成都中小担：全力实势产业建圈强链链...</div>
-    <YhIcon name="arrow-right" size="24rpx" />
+    <div class="text-wrapper">
+      <div class="text">最新！成都中小担：全力实势产业建圈强链链最新，哈哈哈哈哈十分大方啊沙发上啊沙发上发呆！</div>
+    </div>
+
+    <!-- <YhIcon name="arrow-right" size="24rpx" /> -->
   </view>
 </template>
 
 <script setup lang="ts">
   import imageBgNews from './images/bg-news.png'
-  import YhIcon from '@/components/yh/icon/icon.vue'
+  // import YhIcon from '@/components/yh/icon/icon.vue'
 </script>
 
 <style lang="scss" scoped>
@@ -47,11 +50,13 @@
         justify-content: center;
       }
     }
-    .text {
+    .text-wrapper {
       flex: 1;
       overflow: hidden;
-      @include textOverflow();
-      margin-right: 10rpx;
+      .text {
+        white-space: nowrap;
+        // @include textOverflow();
+      }
     }
   }
 </style>
