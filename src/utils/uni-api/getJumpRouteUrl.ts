@@ -25,9 +25,9 @@ const getJumpRouteUrl = (name: string, packageName: string, params: CustomUniApp
       if (params) {
         // 对象 Object
         if (Object.prototype.toString.call(params) === '[object Object]') {
-          for (let item in params) {
+          for (const item in params) {
             let value = params[item]
-            if (!!value) {
+            if (value) {
               if (Object.prototype.toString.call(value) === '[object Object]') {
                 value = JSON.stringify(value)
               }

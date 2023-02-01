@@ -41,7 +41,8 @@ interface StartFacialRecognitionVerifyeOptions {
    */
   complete?: (result: any) => void
 }
-namespace CustomUniApp {
+
+declare namespace CustomUniApp {
   export interface Uni {
     startFacialRecognitionVerify(options?: StartFacialRecognitionVerifyeOptions): void
   }

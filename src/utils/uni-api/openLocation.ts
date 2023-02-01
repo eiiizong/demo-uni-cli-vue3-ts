@@ -15,13 +15,7 @@
      // 接口调用完成
    })
  */
-const openLocation = (
-  latitude: number,
-  longitude: number,
-  name: string,
-  address: string,
-  scale: number = 18
-): Promise<any> => {
+const openLocation = (latitude: number, longitude: number, name: string, address: string, scale = 18): Promise<any> => {
   return new Promise((resolve, reject) => {
     uni.openLocation({
       latitude,
@@ -33,9 +27,10 @@ const openLocation = (
         resolve(res)
       },
       fail(err) {
+        // eslint-disable-next-line no-console
         console.error('uni.openLocation 接口调用失败 => ', err)
         reject(err)
-      },
+      }
     })
   })
 }

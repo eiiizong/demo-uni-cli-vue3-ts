@@ -45,9 +45,7 @@ const getLocation = (
       },
       // @ts-ignore
       timeout,
-      // @ts-ignore
       cacheTimeout,
-      // @ts-ignore
       accuracy
     })
   })

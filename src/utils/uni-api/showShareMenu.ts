@@ -23,14 +23,14 @@ const showShareMenu = (title = '', content = '', imageUrl = '', path = '', withS
         resolve(res)
       },
       fail(err) {
+        // eslint-disable-next-line no-console
         console.error('uni.showShareMenu 接口调用失败 => ', err)
         reject(err)
       },
       // @ts-ignore
       title,
-      // @ts-ignore
       imageUrl,
-      // @ts-ignore
+      content,
       path
     })
   })

@@ -22,7 +22,7 @@ const showToast = (
   mask = true,
   duration = 1500,
   position: 'top' | 'center' | 'bottom' = 'center',
-  image: string = ''
+  image = ''
 ): Promise<any> =>
   new Promise((resolve, reject) => {
     uni.showToast({
@@ -36,9 +36,10 @@ const showToast = (
         resolve(res)
       },
       fail(err) {
+        // eslint-disable-next-line no-console
         console.error('showToast 接口调用失败 => ', err)
         reject(err)
-      },
+      }
     })
   })
 
