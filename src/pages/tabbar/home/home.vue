@@ -38,7 +38,7 @@
     scrollTimer.value && clearTimeout(scrollTimer.value)
     scrollTimer.value = setTimeout(() => {
       if (scrollTop > 10) {
-        navBarBackgroundColor.value = '#2f54d4'
+        navBarBackgroundColor.value = '#081a4d'
       } else {
         navBarBackgroundColor.value = 'transparent'
       }
