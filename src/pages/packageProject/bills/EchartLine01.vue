@@ -2,7 +2,7 @@
   <qiun-data-charts
     class="echart"
     type="area"
-    canvas-id="echart_line_01"
+    canvas-id="OSNJlWOeODqfMVYbybuCSSZFBjryAXeJ"
     :canvas2d="true"
     :opts="opts"
     :chart-data="chartData" />
@@ -21,28 +21,31 @@
   const chartData = ref({})
 
   const opts = ref({
-    color: ['#2661ff'],
-    padding: [4, 4, 0, 4],
+    color: ['#1890FF'],
+    padding: [4, 4, 4, 4],
+    background: '#f0f0ff',
     enableScroll: false,
-    dataLabel: false,
+    canvas2d: true,
     dataPointShape: false,
+    dataLabel: false,
     legend: {
       show: false
     },
+
     xAxis: {
       disabled: true,
       axisLine: false,
+      lineHeight: 0,
+      fontSize: 0,
       disableGrid: true,
-      min: 0
+      labelCount: 7
     },
     yAxis: {
-      disabled: true,
-      disableGrid: true,
       gridType: 'dash',
-      dashLength: 1,
-      min: 0
+      dashLength: 2,
+      disabled: true,
+      disableGrid: true
     },
-
     extra: {
       area: {
         type: 'straight',
@@ -50,11 +53,10 @@
         addLine: true,
         width: 2,
         gradient: false,
-        activeType: 'none'
+        activeType: 'hollow'
       },
       tooltip: {
         showBox: false,
-        showArrow: false,
         splitLine: false
       }
     }
@@ -65,10 +67,11 @@
     setTimeout(() => {
       // 模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
       let res = {
+        categories: ['2018', '2019', '2020', '2021', '2022', '2023', '2024'],
         series: [
           {
-            name: '',
-            data: [12, 44, 35, 40, 55, 45, 33]
+            name: '成交量A',
+            data: [35, 8, 25, 37, 30, 20, 30]
           }
         ]
       }
@@ -89,6 +92,5 @@
   .echart {
     width: 100%;
     height: 100%;
-    background-color: #f0f;
   }
 </style>

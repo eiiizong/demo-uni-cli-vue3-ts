@@ -146,10 +146,7 @@
         }
       }
     }
-    .echart {
-      width: 236rpx;
-      height: 120rpx + 40rpx;
-    }
+
     .left {
       flex: 1;
       overflow: hidden;
@@ -194,7 +191,13 @@
       }
     }
     .right {
-      width: 236rpx;
+      .compare-result {
+        font-size: 24rpx;
+      }
+      .echart {
+        width: 236rpx;
+        height: 120rpx;
+      }
     }
   }
 </style>
