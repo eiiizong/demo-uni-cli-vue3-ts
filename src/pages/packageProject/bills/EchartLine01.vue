@@ -1,5 +1,11 @@
 <template>
-  <qiun-data-charts class="echart" type="area" :opts="opts" :chart-data="chartData" />
+  <qiun-data-charts
+    class="echart"
+    type="area"
+    canvas-id="echart_line_01"
+    :canvas2d="true"
+    :opts="opts"
+    :chart-data="chartData" />
 </template>
 
 <script setup lang="ts">
