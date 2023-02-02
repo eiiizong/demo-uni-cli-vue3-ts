@@ -21,10 +21,11 @@
   const chartData = ref({})
 
   const opts = ref({
-    color: ['#eca02d'],
-    padding: [2, 2, 2, 2],
+    color: ['#2661ff'],
+    padding: [4, 4, 0, 4],
     enableScroll: false,
     dataLabel: false,
+    dataPointShape: false,
     legend: {
       show: false
     },
@@ -67,7 +68,7 @@
         series: [
           {
             name: '',
-            data: [15, 45, 15, 45, 15, 45, 40]
+            data: [12, 44, 35, 40, 55, 45, 33]
           }
         ]
       }
