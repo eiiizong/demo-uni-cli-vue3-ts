@@ -22,8 +22,7 @@
 
   const opts = ref({
     color: ['#1890FF'],
-    padding: [4, 4, 4, 4],
-    background: '#f0f0ff',
+    padding: [0, 0, 0, 0],
     enableScroll: false,
     canvas2d: true,
     dataPointShape: false,
@@ -35,9 +34,10 @@
     xAxis: {
       disabled: true,
       axisLine: false,
+      disableGrid: true,
       lineHeight: 0,
       fontSize: 0,
-      disableGrid: true,
+      titleFontSize: 0,
       labelCount: 7
     },
     yAxis: {
@@ -71,7 +71,7 @@
         series: [
           {
             name: '成交量A',
-            data: [35, 8, 25, 37, 30, 20, 30]
+            data: [35, 18, 25, 37, 30, 20, 30]
           }
         ]
       }

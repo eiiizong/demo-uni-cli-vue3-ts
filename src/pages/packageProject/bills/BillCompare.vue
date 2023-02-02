@@ -15,7 +15,7 @@
       </div>
       <div class="right">
         <div class="compare-result">
-          <div class="iconimg"></div>
+          <img class="img" :src="imageIconDown" alt="" />
           <div class="value Impact">2.5%</div>
         </div>
         <div class="echart">
@@ -39,7 +39,7 @@
       </div>
       <div class="right">
         <div class="compare-result">
-          <div class="iconimg"></div>
+          <img class="img" :src="imageIconUp" alt="" />
           <div class="value Impact">2.5%</div>
         </div>
         <div class="echart"></div>
@@ -60,7 +60,7 @@
       </div>
       <div class="right">
         <div class="compare-result">
-          <div class="iconimg"></div>
+          <img class="img" :src="imageIconUp" alt="" />
           <div class="value Impact">2.5%</div>
         </div>
         <div class="echart"></div>
@@ -81,7 +81,7 @@
       </div>
       <div class="right">
         <div class="compare-result">
-          <div class="iconimg"></div>
+          <img class="img" :src="imageIconUp" alt="" />
           <div class="value Impact">2.5%</div>
         </div>
         <div class="echart"></div>
@@ -91,6 +91,9 @@
 </template>
 
 <script setup lang="ts">
+  import imageIconDown from './images/icon-down.png'
+  import imageIconUp from './images/icon-up.png'
+
   import EchartLine01 from './EchartLine01.vue'
   // import { ref, onMounted } from 'vue'
 </script>
@@ -191,8 +194,23 @@
       }
     }
     .right {
+      padding-top: 64rpx;
       .compare-result {
-        font-size: 24rpx;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-bottom: 8rpx;
+        .img {
+          width: 22rpx;
+          height: 14rpx;
+          margin-right: 8rpx;
+        }
+        .value {
+          font-size: 32rpx;
+          line-height: 36rpx;
+          color: #a7b4d9;
+          font-weight: 500;
+        }
       }
       .echart {
         width: 236rpx;
