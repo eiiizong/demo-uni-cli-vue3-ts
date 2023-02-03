@@ -208,6 +208,29 @@
           }
         }
       ]
+    },
+    {
+      "root": "pages/packageWorkload",
+      "pages": [
+        {
+          "path": "search-statistics-object/search-statistics-object",
+          "style": {
+            "navigationBarTitleText": "搜索统计对象"
+          }
+        },
+        {
+          "path": "switch-statistics-object/switch-statistics-object",
+          "style": {
+            "navigationBarTitleText": "切换统计对象"
+          }
+        },
+        {
+          "path": "wordload/wordload",
+          "style": {
+            "navigationBarTitleText": "工作量"
+          }
+        }
+      ]
     }
   ],
   "globalStyle": {
@@ -267,6 +290,11 @@
       {
         "name": "packageOrg-org-list",
         "path": "pages/packageOrg/org-list/org-list",
+        "query": ""
+      },
+      {
+        "name": "packageWorkload-workload",
+        "path": "pages/packageWorkload/wordload/wordload",
         "query": ""
       }
     ]

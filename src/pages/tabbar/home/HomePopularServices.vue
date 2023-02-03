@@ -72,8 +72,8 @@
       id: 'gzl',
       name: '工作量',
       desc: '经办数据、随时查询',
-      pathName: '',
-      packageName: '',
+      pathName: 'workload',
+      packageName: 'packageWorkload',
       isAuth: false,
       disabled: false,
       imgSrc: imageNav03
@@ -99,7 +99,7 @@
     switch (userType) {
       // 领导
       case '2':
-        arr.push(navRYDYBZ)
+        arr.push(navRYDYBZ, navGZL)
         break
       // 经办人
       case '3':
