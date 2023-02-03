@@ -225,7 +225,7 @@
           }
         },
         {
-          "path": "wordload/wordload",
+          "path": "workload/workload",
           "style": {
             "navigationBarTitleText": "工作量"
           }
@@ -294,7 +294,7 @@
       },
       {
         "name": "packageWorkload-workload",
-        "path": "pages/packageWorkload/wordload/wordload",
+        "path": "pages/packageWorkload/workload/workload",
         "query": ""
       }
     ]

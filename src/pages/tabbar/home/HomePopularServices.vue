@@ -39,7 +39,7 @@
       desc: '业务情况，在线总览',
       pathName: 'bills',
       packageName: 'packageProject',
-      isAuth: false,
+      isAuth: true,
       disabled: false,
       imgSrc: imageNav01
     }
@@ -50,7 +50,7 @@
       desc: '审批进度，随时查询',
       pathName: 'bills',
       packageName: 'packageProject',
-      isAuth: false,
+      isAuth: true,
       disabled: false,
       imgSrc: imageNav01
     }
@@ -74,7 +74,7 @@
       desc: '经办数据、随时查询',
       pathName: 'workload',
       packageName: 'packageWorkload',
-      isAuth: false,
+      isAuth: true,
       disabled: false,
       imgSrc: imageNav03
     }
