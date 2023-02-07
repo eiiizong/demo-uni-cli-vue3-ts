@@ -11,7 +11,7 @@
     // requestCustomLogin().then((res) => {
     //   storeUserInfo.updateStoreUserInfo(res)
     // })
-    storeUserInfo.updateStoreUserInfo({ userType: '0' })
+    storeUserInfo.updateStoreUserInfo({ userType: '2' })
   })
 
   onShow(() => {

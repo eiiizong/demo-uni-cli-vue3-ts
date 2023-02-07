@@ -101,6 +101,8 @@
       case '2':
         arr.push(navRYDYBZ)
         arr.push(navGZL)
+        // 以下权限为测试使用
+        arr.push(navJDCX)
         break
       // 经办人
       case '3':
@@ -112,9 +114,6 @@
         arr.push(navJDCX)
         break
       default:
-        arr.push(navRYDYBZ)
-        arr.push(navGZL)
-        arr.push(navJDCX)
         break
     }
 
