@@ -1,20 +1,17 @@
 <script setup lang="ts">
   import { onLaunch, onShow, onHide, onError } from '@dcloudio/uni-app'
   import { checkAppUpdate } from '@/utils/check'
-  import { requestCustomLogin } from '@/server/custom-api'
+  // import { requestCustomLogin } from '@/server/custom-api'
   import { useStoreUserInfo } from '@/stores/modules'
 
   onLaunch(() => {
     const storeUserInfo = useStoreUserInfo()
 
-    // 登录
-    requestCustomLogin().then((res) => {
-      storeUserInfo.updateStoreUserInfo(res)
-
-      setTimeout(() => {
-        storeUserInfo.updateStoreUserInfo({ userType: '0' })
-      }, 2000)
-    })
+    // // 登录
+    // requestCustomLogin().then((res) => {
+    //   storeUserInfo.updateStoreUserInfo(res)
+    // })
+    storeUserInfo.updateStoreUserInfo({ userType: '0' })
   })
 
   onShow(() => {
