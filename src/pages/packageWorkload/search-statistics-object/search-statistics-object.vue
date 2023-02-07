@@ -1,8 +1,11 @@
 <template>
-  <view class="institution-details">
+  <view class="search-statistics-object">
     <QueryCondition />
     <QueryResult />
-    <YhButton>确定</YhButton>
+
+    <div class="button-wrapper">
+      <YhButton type="primary" block>确定</YhButton>
+    </div>
   </view>
 </template>
 
@@ -13,7 +16,10 @@
 </script>
 
 <style lang="scss" scoped>
-  .institution-details {
+  .search-statistics-object {
     width: 100%;
+    .button-wrapper {
+      padding: $spacing;
+    }
   }
 </style>

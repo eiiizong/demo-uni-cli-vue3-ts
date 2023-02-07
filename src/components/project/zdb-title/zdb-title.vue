@@ -27,6 +27,6 @@
     font-size: 32rpx;
     line-height: 44rpx;
     color: #333333;
-    padding: 20rpx 0;
+    padding: 20rpx $spacing;
   }
 </style>
