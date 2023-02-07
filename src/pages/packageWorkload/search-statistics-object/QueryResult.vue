@@ -10,7 +10,7 @@
     </div>
     <div class="wrapper">
       <ZdbTitle title="当前对象" />
-      <CardItem @clcik="onClick" />
+      <CardItem @clcik="emit('showPopup')" />
     </div>
   </view>
 </template>
@@ -21,6 +21,7 @@
 
   import { ref } from 'vue'
 
+  const emit = defineEmits(['showPopup'])
   const props = defineProps({
     value: {
       type: String,
@@ -37,9 +38,9 @@
     }
   ])
 
-  const onClick = () => {
-    console.log('12')
-  }
+  // const onClick = () => {
+  //   console.log('12')
+  // }
 </script>
 
 <style lang="scss" scoped>

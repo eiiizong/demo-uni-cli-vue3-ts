@@ -1,8 +1,33 @@
 <template>
-  <YhPopup round position="bottom" custom-style="height: 80%" :show="modelValue">
+  <YhPopup
+    round
+    position="bottom"
+    custom-style="height: 80%"
+    closeable
+    close-icon="close"
+    :show="modelValue"
+    @close="emit('update:modelValue', false)">
     <view class="select-wrapper">
-      <div class="header-tip">
-        <div class="title">地区选择</div>
+      <div class="tool-tip">
+        <div class="title">{{ title }}</div>
+      </div>
+      <div class="tool-selected">
+        <scroll-view
+          scroll-x
+          enable-flex
+          scroll-with-animation
+          class="scroll-view"
+          :scroll-into-view="toolbarScrollIntoView">
+          <div
+            v-for="(item, index) in selectedAddressArr"
+            :id="'toolbar_' + index"
+            :key="item[idKey]"
+            class="scroll-view-item"
+            :class="index === currentSelectedLevel ? 'active' : ''"
+            @click.stop="handleClickScrollViewItem(index)">
+            <span>{{ item[renderKey] }}</span>
+          </div>
+        </scroll-view>
       </div>
     </view>
   </YhPopup>
@@ -11,6 +36,8 @@
 <script lang="ts" setup>
   import YhPopup from '@/components/yh/popup/popup.vue'
   // import YhIcon from '@/components/yh/icon/icon.vue'
+
+  import { ref } from 'vue'
 
   const emit = defineEmits(['update:modelValue'])
 
@@ -23,13 +50,40 @@
       required: true
     },
     /**
-     * 选择类型 org 组织 address 地址
+     * 类型 org 组织选择 address 地址选择
      */
     type: {
       type: String,
       default: () => 'org'
+    },
+    /**
+     * 标题
+     */
+    title: {
+      type: String,
+      default: () => '地区选择'
+    },
+    /**
+     * 标题
+     */
+    idKey: {
+      type: String,
+      default: () => ''
+    },
+    /**
+     * 标题
+     */
+    renderKey: {
+      type: String,
+      default: () => ''
     }
   })
+
+  const selectedAddressArr = ref([])
+  const currentSelectedLevel = ref(1)
+
+  const toolbarScrollIntoView = () => {}
+  const handleClickScrollViewItem = () => {}
 </script>
 
 <style lang="scss" scoped>
@@ -46,13 +100,7 @@
     }
   }
 
-  scroll-view,
-  view {
-    box-sizing: border-box;
-    box-sizing: -webkit-border-box;
-  }
-
-  .ez-select-address-wrapper {
+  .select-wrapper {
     width: 100%;
     background-color: #fff;
     color: #333;
@@ -61,7 +109,7 @@
     border-top-right-radius: $border-radius;
   }
 
-  .header-tip {
+  .tool-tip {
     text-align: center;
     line-height: 80rpx;
     font-size: 28rpx;
@@ -70,20 +118,11 @@
     .title {
       font-weight: 500;
     }
-
-    .iconfont-close {
-      position: absolute;
-      top: 0;
-      right: 0;
-      line-height: 80rpx;
-      padding: 0 32rpx;
-      color: $primary;
-    }
   }
 
-  .toolbar {
+  .tool-selected {
     width: 100%;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid $color-border;
 
     .scroll-view {
       width: 100%;

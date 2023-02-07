@@ -1,7 +1,7 @@
 <template>
   <view class="search-statistics-object">
     <QueryCondition />
-    <QueryResult />
+    <QueryResult @show-popup="isShowPopup = true" />
 
     <div class="button-wrapper">
       <YhButton type="primary" block>确定</YhButton>
