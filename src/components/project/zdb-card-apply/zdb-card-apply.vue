@@ -20,7 +20,7 @@
       </div>
       <div class="footer">
         <div class="left">如需查看数据详情，登录“蓉易贷”网站端</div>
-        <div class="right">
+        <div class="right" @click="onClick">
           <span>流程一览</span>
           <YhIcon name="arrow-right" size="20rpx" />
         </div>
@@ -35,6 +35,7 @@
   import YhIcon from '@/components/yh/icon/icon.vue'
 
   import type { PropType } from 'vue'
+  import { navigateTo } from '@/utils/uni-api'
 
   interface Item {
     id?: string
@@ -50,6 +51,10 @@
       required: true
     }
   })
+
+  const onClick = () => {
+    navigateTo('process-details', 'packageProcess')
+  }
 </script>
 
 <style lang="scss" scoped>
