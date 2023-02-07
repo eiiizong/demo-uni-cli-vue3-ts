@@ -8,7 +8,7 @@
 <script setup lang="ts">
   import imagesNoData from './images/no-data.png'
 
-  defineProps({
+  const props = defineProps({
     tip: {
       type: String,
       default: () => '暂无相关数据'

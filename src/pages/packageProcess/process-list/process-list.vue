@@ -1,24 +1,28 @@
 <template>
   <view class="process-list">
-    <div class="content">
+    <div v-if="customData.queryResultList.length > 0" class="content">
       <div class="lists">
         <div v-for="item in customData.queryResultList" :key="item.id" class="list">
-          <ListItem />
+          <ZdbCardApply :render-data="item" />
         </div>
       </div>
     </div>
-    <div class="content-no">
-      <ZdbNoData />
-    </div>
-    <ZdbLoadMore :is-load-over="customData.isLoadOver" />
+    <template v-else>
+      <ZdbNoData v-if="customData.isRequestOver" />
+    </template>
+    <template v-if="customData.isMultiplePages">
+      <ZdbLoadMore :is-load-over="customData.isLoadOver" />
+    </template>
   </view>
 </template>
 
 <script setup lang="ts">
-  import { reactive } from 'vue'
   import ZdbNoData from '@/components/project/zdb-no-data/zdb-no-data.vue'
   import ZdbLoadMore from '@/components/project/zdb-load-more/zdb-load-more.vue'
-  import ListItem from './ListItem.vue'
+  import ZdbCardApply from '@/components/project/zdb-card-apply/zdb-card-apply.vue'
+
+  import { reactive } from 'vue'
+  import { onLoad } from '@dcloudio/uni-app'
 
   const queryInfo = reactive({
     pageNo: 1,
@@ -26,10 +30,24 @@
   })
 
   const customData = reactive({
-    queryResultList: [1, 23], // 数据查询结果
-    isRequestOver: false, // 是否请求完成 控制no-data组件在未请求完成时显示
-    isLoadOver: false, // 是否加载完成
-    isMultiplePages: false // 是否多页
+    // 查询结果数据
+    queryResultList: [{ id: '1' }, { id: '2' }, { id: '3' }, { id: '4' }, { id: '5' }, { id: '6' }], // 数据查询结果
+    // 是否请求完成 控制 no-data 组件在未请求完成时不显示
+    isRequestOver: false,
+    // 数据是否存在多页，不止一页
+    isMultiplePages: false,
+    // 当数据不止一页时是否加载完成
+    isLoadOver: false
+  })
+
+  // 查询数据
+  const queryData = () => {
+    const { pageNo, pageSize } = queryInfo
+    console.log(pageNo, pageSize)
+  }
+
+  onLoad(() => {
+    queryData()
   })
 </script>
 
@@ -37,6 +55,9 @@
   .process-list {
     width: 100%;
     padding: $spacing;
+    min-height: 100%;
+    min-height: 100vh;
+    background-color: #fff;
     .list {
       margin-bottom: $spacing;
       &:last-child {
