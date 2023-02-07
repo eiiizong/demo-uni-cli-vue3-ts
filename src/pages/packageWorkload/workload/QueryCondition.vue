@@ -3,7 +3,7 @@
     <div class="input-wrapper">
       <div class="label">统计对象</div>
       <div class="value">
-        <div class="input">哈哈</div>
+        <div class="input" @click="onClickSelect">哈哈</div>
       </div>
     </div>
     <div class="input-wrapper">
@@ -28,12 +28,17 @@
 </template>
 
 <script setup lang="ts">
+  import { navigateTo } from '@/utils/uni-api'
   const props = defineProps({
     value: {
       type: String,
       default: ''
     }
   })
+
+  const onClickSelect = () => {
+    navigateTo('search-statistics-object', 'packageWorkload')
+  }
 </script>
 
 <style lang="scss" scoped>
