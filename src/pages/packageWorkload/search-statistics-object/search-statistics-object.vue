@@ -6,13 +6,20 @@
     <div class="button-wrapper">
       <YhButton type="primary" block>确定</YhButton>
     </div>
+    <ZdbSelectOrg v-model="isShowPopup" />
   </view>
 </template>
 
 <script setup lang="ts">
   import YhButton from '@/components/yh/button/button.vue'
+  import ZdbSelectOrg from '@/components/project/zdb-select-org/zdb-select-org.vue'
+
   import QueryCondition from './QueryCondition.vue'
   import QueryResult from './QueryResult.vue'
+
+  import { ref } from 'vue'
+
+  const isShowPopup = ref(true)
 </script>
 
 <style lang="scss" scoped>

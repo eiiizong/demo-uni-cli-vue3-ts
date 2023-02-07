@@ -323,7 +323,8 @@
       } else {
         leave()
       }
-    }
+    },
+    { immediate: true }
   )
 </script>
 

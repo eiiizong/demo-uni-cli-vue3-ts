@@ -172,7 +172,6 @@
         transitionEnded.value = false
         classes.value = classNames['enter-to']
       })
-      .catch(() => {})
   }
 
   // 离开
@@ -200,7 +199,6 @@
         setTimeout(() => onTransitionEnd(), current_duration)
         classes.value = classNames['leave-to']
       })
-      .catch(() => {})
   }
 
   watch(
@@ -211,7 +209,8 @@
       } else {
         leave()
       }
-    }
+    },
+    { immediate: true }
   )
 </script>
 
