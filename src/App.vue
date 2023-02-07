@@ -12,7 +12,7 @@
       storeUserInfo.updateStoreUserInfo(res)
 
       setTimeout(() => {
-        storeUserInfo.updateStoreUserInfo({ userType: '2' })
+        storeUserInfo.updateStoreUserInfo({ userType: '0' })
       }, 2000)
     })
   })

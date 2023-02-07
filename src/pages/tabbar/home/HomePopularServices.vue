@@ -48,8 +48,8 @@
       id: 'jdcx',
       name: '进度查询',
       desc: '审批进度，随时查询',
-      pathName: 'bills',
-      packageName: 'packageProject',
+      pathName: 'process-list',
+      packageName: 'packageProcess',
       isAuth: true,
       disabled: false,
       imgSrc: imageNav01
@@ -99,7 +99,8 @@
     switch (userType) {
       // 领导
       case '2':
-        arr.push(navRYDYBZ, navGZL)
+        arr.push(navRYDYBZ)
+        arr.push(navGZL)
         break
       // 经办人
       case '3':
@@ -111,6 +112,9 @@
         arr.push(navJDCX)
         break
       default:
+        arr.push(navRYDYBZ)
+        arr.push(navGZL)
+        arr.push(navJDCX)
         break
     }
 

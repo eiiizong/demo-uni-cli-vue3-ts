@@ -1,5 +1,5 @@
 <template>
-  <view class="bills"> bills </view>
+  <view class="process-list"> process-list </view>
 </template>
 
 <script setup lang="ts">
@@ -7,7 +7,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .bills {
+  .process-list {
     width: 100%;
   }
 </style>
