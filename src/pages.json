@@ -9,29 +9,6 @@
         "navigationStyle": "custom",
         "enablePullDownRefresh": false
       }
-    },
-    {
-      "path": "pages/tabbar/bills/bills",
-      "style": {
-        "navigationBarTitleText": "蓉易贷一本账",
-        "backgroundColorTop": "#2f54d4",
-        "enablePullDownRefresh": false
-      }
-    },
-    {
-      "path": "pages/tabbar/process/process",
-      "style": {
-        "navigationBarTitleText": "进度查询",
-        "backgroundColorTop": "#2f54d4",
-        "enablePullDownRefresh": true
-      }
-    },
-    {
-      "path": "pages/tabbar/supervise/supervise",
-      "style": {
-        "navigationBarTitleText": "督办",
-        "backgroundColorTop": "#2f54d4"
-      }
     }
   ],
   "subPackages": [
@@ -193,12 +170,6 @@
           "style": {
             "navigationBarTitleText": "进度查询"
           }
-        },
-        {
-          "path": "org-list/org-list",
-          "style": {
-            "navigationBarTitleText": "合作机构"
-          }
         }
       ]
     },
@@ -293,11 +264,6 @@
       {
         "name": "packageCommon-login",
         "path": "pages/packageCommon/login/login",
-        "query": ""
-      },
-      {
-        "name": "tabbar-process",
-        "path": "pages/tabbar/process/process",
         "query": ""
       },
       {
