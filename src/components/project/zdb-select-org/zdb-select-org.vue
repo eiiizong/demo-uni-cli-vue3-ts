@@ -156,9 +156,23 @@
   })
 
   // 更新数据
-  const updateRequestStatusList = (data: any) => {
+  const updateRequestStatusList = (isLoading = true, isError = false) => {
     const index = currentSelectedLevel.value - 1
-    requestStatusList.value[index] = { ...data }
+    // 默认状态
+    let defaultRequestStatusObj = {
+      isLoading, // 是否在加载中
+      isError, // 是否加载数据失败
+      errMsg: '', // 数据失败时的提示
+      isHaveData: false // 是否已经存在数据
+    }
+
+    if (isLoading) {
+      defaultRequestStatusObj.isHaveData = false
+    } else {
+      defaultRequestStatusObj.isHaveData = true
+    }
+
+    requestStatusList.value[index] = { ...defaultRequestStatusObj }
 
     console.log('updateRequestStatusList', requestStatusList.value)
   }
@@ -186,18 +200,32 @@
     console.log('updateSelectedList', selectedList.value)
   }
 
+  // 通过数据筛选必要的字段
+  const getDataByIncludesKey = (data: any[]) => {
+    const { includesKey } = props
+
+    const arr = []
+
+    for (let i = 0, len = data.length; i < len; i++) {
+      const item = data[i]
+
+      let tempObj: any = {}
+      for (let key in item) {
+        if (includesKey.includes(key)) {
+          tempObj[key] = item[key]
+        }
+      }
+      arr.push(tempObj)
+    }
+    return arr
+  }
+
   /**
    *  请求数据
    */
   const requestData = () => {
-    const { idKey, renderKey, includesKey } = props
-    // 默认状态
-    let defaultRequestStatusObj = {
-      isLoading: true, // 是否在加载中
-      isError: false, // 是否加载数据失败
-      errMsg: '', // 数据失败时的提示
-      isHaveData: false // 是否已经存在数据
-    }
+    const { idKey, renderKey } = props
+
     // 提前加入空数据 防止没有加载中动画
     updateRenderSelectedList([])
     // 提前加入默认数据，提示用户选择
@@ -206,32 +234,19 @@
       [renderKey]: '请选择'
     })
     // 提前加入数据请求状态默认数据，防止没有加载中动画
-    updateRequestStatusList(defaultRequestStatusObj)
+    updateRequestStatusList()
 
     // 模拟数据请求
     setTimeout(() => {
       const data = [...orgList]
 
-      const arr = []
+      const arr = getDataByIncludesKey(data)
 
-      for (let i = 0, len = data.length; i < len; i++) {
-        const item = data[i]
-
-        let tempObj = {}
-        for (let key in item) {
-          if (includesKey.includes(key)) {
-            tempObj[key] = item[key]
-          }
-        }
-        arr.push(tempObj)
-      }
       updateRenderAllData(data)
       updateRenderSelectedList(arr)
 
       // 请求成功改变数据
-      defaultRequestStatusObj.isLoading = false
-      defaultRequestStatusObj.isHaveData = true
-      updateRequestStatusList(defaultRequestStatusObj)
+      updateRequestStatusList(false)
     }, 4000)
   }
 
@@ -240,7 +255,48 @@
     currentSelectedLevel.value = index + 1
   }
 
-  const onCilckSwiperScrollViewItem = () => {}
+  const onCilckSwiperScrollViewItem = (swiperIndex: number, swiperScrollViewIndex: number) => {
+    const { idKey, renderKey } = props
+    const index = currentSelectedLevel.value - 1
+    const allData = renderAllData.value[index]
+
+    const data = renderSelectedList.value[swiperIndex][swiperScrollViewIndex]
+
+    // 开始查找下一级数据
+    let newList: any[] = []
+    let isHaveChildren = false
+    for (let i = 0, len = allData.length; i < len; i++) {
+      const item = allData[i]
+
+      if (item[idKey] === data[idKey]) {
+        isHaveChildren = true
+        newList = [...(item.children || [])]
+        break
+      }
+    }
+
+    // 更新选择的数据
+    updateSelectedList(data)
+
+    // 不存在下一级了
+    if (!isHaveChildren) {
+      emit('update:modelValue', false)
+    } else {
+      currentSelectedLevel.value = index + 1
+      updateRequestStatusList()
+      // 提前加入默认数据，提示用户选择
+      updateSelectedList({
+        [idKey]: 'select',
+        [renderKey]: '请选择'
+      })
+      // 处理下一层逻辑
+      setTimeout(() => {
+        updateRenderAllData(newList)
+
+        updateRenderSelectedList(getDataByIncludesKey(newList))
+      }, 100)
+    }
+  }
 
   const onChangeSwiper = (e) => {
     console.log('onChangeSwiper', e)
