@@ -89,7 +89,7 @@
   import { ref, computed, onMounted } from 'vue'
   import orgList from './json/org'
 
-  const emit = defineEmits(['update:modelValue'])
+  const emit = defineEmits(['update:modelValue', 'change'])
 
   const props = defineProps({
     /**
@@ -136,17 +136,25 @@
     }
   })
 
-  // 已经选择的数据 [{},{}]
+  /**
+   *  已经选择的数据。格式如下：[{},{}]。
+   */
   const selectedList = ref<any[]>([])
-
-  // 全部渲染数据 格式如下：{'1':[]}
+  /**
+   * 全部渲染数据。格式如下：{'0':[],'1':[]}。
+   */
   const renderAllData = ref<any>({})
-  // 已经选择的渲染数据
+  /**
+   *  已经选择的渲染数据，该数据只包括includesKey中的字段。格式如下：[[{},{}],[{},{}]]。
+   */
   const renderSelectedList = ref<any[]>([])
-
+  /**
+   *  每一级请求状态数据。格式如下：[{},{}]。
+   */
   const requestStatusList = ref<any[]>([])
-
-  // 当前选择层级
+  /**
+   * 当前选择的层级 从1开始
+   */
   const currentSelectedLevel = ref(1)
 
   //
@@ -155,7 +163,11 @@
     return str + currentSelectedLevel.value
   })
 
-  // 更新数据
+  /**
+   * 更新 requestStatusList 数据
+   * @param isLoading 是否正在加载中
+   * @param isError 是否加载错误
+   */
   const updateRequestStatusList = (isLoading = true, isError = false) => {
     const index = currentSelectedLevel.value - 1
     // 默认状态
@@ -166,9 +178,8 @@
       isHaveData: false // 是否已经存在数据
     }
 
-    if (isLoading) {
-      defaultRequestStatusObj.isHaveData = false
-    } else {
+    // 加载完成 并且未报错
+    if (!isLoading && !isError) {
       defaultRequestStatusObj.isHaveData = true
     }
 
@@ -177,7 +188,10 @@
     console.log('updateRequestStatusList', requestStatusList.value)
   }
 
-  // 更新数据
+  /**
+   * 更新 renderSelectedList 已经选择的渲染数据
+   * @param data
+   */
   const updateRenderSelectedList = (data: any) => {
     const index = currentSelectedLevel.value - 1
     renderSelectedList.value[index] = { ...data }
@@ -197,7 +211,35 @@
   const updateSelectedList = (data: any) => {
     const index = currentSelectedLevel.value - 1
     selectedList.value[index] = { ...data }
-    console.log('updateSelectedList', selectedList.value)
+    console.log('updateSelectedList====', selectedList.value)
+  }
+
+  // 数据响应之前更新数据
+  const updataBeforeRequestResponse = () => {
+    const { idKey, renderKey } = props
+
+    // 提前加入空数据，渲染出下一级swiper
+    updateRenderSelectedList([])
+    // 提前加入默认数据，提示用户选择
+    updateSelectedList({
+      [idKey]: 'select',
+      [renderKey]: '请选择'
+    })
+    // 提前加入数据请求状态默认数据，防止没有加载中动画
+    updateRequestStatusList()
+  }
+
+  /**
+   * 数据响应之后更新数据
+   * @param allData 响应成功后的全部数据，包括children
+   * @param data 响应成功后筛选的数据，只包括includesKey中的数据
+   * @param isError 是否请求错误 默认false
+   */
+  const updataAfterRequestResponse = (allData: any[], data: any[], isError = false) => {
+    updateRenderAllData(allData)
+    updateRenderSelectedList(data)
+    // 请求成功改变数据
+    updateRequestStatusList(false, isError)
   }
 
   // 通过数据筛选必要的字段
@@ -224,29 +266,12 @@
    *  请求数据
    */
   const requestData = () => {
-    const { idKey, renderKey } = props
-
-    // 提前加入空数据 防止没有加载中动画
-    updateRenderSelectedList([])
-    // 提前加入默认数据，提示用户选择
-    updateSelectedList({
-      [idKey]: 'select',
-      [renderKey]: '请选择'
-    })
-    // 提前加入数据请求状态默认数据，防止没有加载中动画
-    updateRequestStatusList()
+    updataBeforeRequestResponse()
 
     // 模拟数据请求
     setTimeout(() => {
-      const data = [...orgList]
-
-      const arr = getDataByIncludesKey(data)
-
-      updateRenderAllData(data)
-      updateRenderSelectedList(arr)
-
-      // 请求成功改变数据
-      updateRequestStatusList(false)
+      const data = getDataByIncludesKey(orgList)
+      updataAfterRequestResponse(orgList, data, false)
     }, 4000)
   }
 
@@ -256,7 +281,7 @@
   }
 
   const onCilckSwiperScrollViewItem = (swiperIndex: number, swiperScrollViewIndex: number) => {
-    const { idKey, renderKey } = props
+    const { idKey } = props
     const index = currentSelectedLevel.value - 1
     const allData = renderAllData.value[index]
 
@@ -283,18 +308,13 @@
       emit('update:modelValue', false)
     } else {
       currentSelectedLevel.value = index + 1
-      updateRequestStatusList()
-      // 提前加入默认数据，提示用户选择
-      updateSelectedList({
-        [idKey]: 'select',
-        [renderKey]: '请选择'
-      })
+      updataBeforeRequestResponse()
+
       // 处理下一层逻辑
       setTimeout(() => {
-        updateRenderAllData(newList)
-
-        updateRenderSelectedList(getDataByIncludesKey(newList))
-      }, 100)
+        const data = getDataByIncludesKey(newList)
+        updataAfterRequestResponse(newList, data, false)
+      }, 300)
     }
   }
 
