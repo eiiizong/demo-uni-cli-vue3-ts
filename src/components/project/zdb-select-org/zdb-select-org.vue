@@ -28,13 +28,13 @@
         </div>
       </div>
       <div class="swiper-wrapper">
-        <!-- <swiper class="swiper" :current="currentSelectedLevel" @change="changeSwiper">
-          <template v-for="(swiperItme, swiperIndex) in renderDataArr" :key="swiperIndex">
+        <swiper class="swiper" :current="currentSelectedLevel" @change="onChangeSwiper">
+          <template v-for="swiperItme in renderSelectedList" :key="swiperItme[idKey]">
             <swiper-item class="swiper-item">
               <view class="swiper-item-content"> 122 </view>
             </swiper-item>
           </template>
-        </swiper> -->
+        </swiper>
       </div>
     </view>
   </YhPopup>
@@ -84,16 +84,23 @@
     renderKey: {
       type: String,
       default: () => 'orgname'
+    },
+    /**
+     * 显示的数据包含的字段
+     */
+    includesKey: {
+      type: Array,
+      default: () => ['orgtype', 'orgname', 'orgid']
     }
   })
 
   // 已经选择的数据
   const selectedList = ref([])
 
-  // 渲染数据
-  const renderAllList = ref([])
+  // 全部渲染数据 保存接口一次性返回的数据
+  const renderAllList = ref<any[]>([])
   // 已经选择的渲染数据
-  const renderSelectList = ref([])
+  const renderSelectedList = ref<any[]>([])
 
   // 当前选择层级
   const currentSelectedLevel = ref(1)
@@ -104,18 +111,58 @@
     return str + currentSelectedLevel.value
   })
 
+  // 更新数据
+  const updateRenderSelectedList = (data: any[]) => {
+    const index = currentSelectedLevel.value
+    renderSelectedList.value[index] = data
+
+    console.log('updateRenderSelectedList', renderSelectedList.value)
+  }
+
   /**
    *  请求数据
    */
   const requestData = () => {
+    // 默认状态
+    let defaultRequestStatusObj = {
+      isLoading: true, // 是否在加载中
+      isError: false, // 是否加载数据失败
+      errMsg: '', // 数据失败时的提示
+      isHaveData: false // 是否已经存在数据
+    }
+    // 提前加入空数据 防止没有加载中动画
+    updateRenderSelectedList([])
+
+    // 模拟数据请求
     setTimeout(() => {
-      console.log('orgList', orgList)
+      const { includesKey } = props
+      const data = [...orgList]
+
+      const arr = []
+
+      for (let i = 0, len = data.length; i < len; i++) {
+        const item = data[i]
+
+        let tempObj = {}
+        for (let key in item) {
+          if (includesKey.includes(key)) {
+            tempObj[key] = item[key]
+          }
+        }
+        arr.push(tempObj)
+      }
+
+      renderAllList.value = [...data]
+      updateRenderSelectedList(arr)
     }, 2000)
   }
 
   // 点击事件
   const onClickToolbarScrollViewItem = (index: number) => {}
 
+  const onChangeSwiper = (e) => {
+    console.log('onChangeSwiper', e)
+  }
   // 关闭弹窗事件
   const onClosePopup = () => {
     emit('update:modelValue', false)
