@@ -328,6 +328,21 @@
         "name": "packageProcess-process-list",
         "path": "pages/packageProcess/process-list/process-list",
         "query": ""
+      },
+      {
+        "name": "packageForm-financing",
+        "path": "pages/packageForm/financing/financing",
+        "query": ""
+      },
+      {
+        "name": "packageForm-whitelist-apply",
+        "path": "pages/packageForm/whitelist-apply/whitelist-apply",
+        "query": ""
+      },
+      {
+        "name": "packageForm-whitelist-feedback",
+        "path": "pages/packageForm/whitelist-feedback/whitelist-feedback",
+        "query": ""
       }
     ]
   }
