@@ -20,7 +20,7 @@
               :id="'toolbar_' + index"
               :key="item[idKey]"
               class="scroll-view-item"
-              :class="index + 1 === currentSelectedLevel ? 'active' : ''"
+              :class="index === currentSelectedLevel ? 'active' : ''"
               @click.stop="onClickToolbarScrollViewItem(index)">
               <div class="text">{{ item[renderKey] }}</div>
             </div>
@@ -153,9 +153,9 @@
    */
   const requestStatusList = ref<any[]>([])
   /**
-   * 当前选择的层级 从1开始
+   * 当前选择的层级 从0开始
    */
-  const currentSelectedLevel = ref(1)
+  const currentSelectedLevel = ref(0)
 
   //
   const toolbarScrollIntoView = computed(() => {
@@ -169,7 +169,7 @@
    * @param isError 是否加载错误
    */
   const updateRequestStatusList = (isLoading = true, isError = false) => {
-    const index = currentSelectedLevel.value - 1
+    const index = currentSelectedLevel.value
     // 默认状态
     let defaultRequestStatusObj = {
       isLoading, // 是否在加载中
@@ -193,7 +193,7 @@
    * @param data
    */
   const updateRenderSelectedList = (data: any) => {
-    const index = currentSelectedLevel.value - 1
+    const index = currentSelectedLevel.value
     renderSelectedList.value[index] = { ...data }
 
     console.log('updateRenderSelectedList', renderSelectedList.value)
@@ -201,7 +201,7 @@
 
   // 更新数据
   const updateRenderAllData = (data: any[]) => {
-    const index = currentSelectedLevel.value - 1
+    const index = currentSelectedLevel.value
     renderAllData.value[index] = [...data]
 
     console.log('updateRenderAllData', renderAllData.value)
@@ -209,9 +209,9 @@
 
   // 更新数据
   const updateSelectedList = (data: any) => {
-    const index = currentSelectedLevel.value - 1
+    const index = currentSelectedLevel.value
     selectedList.value[index] = { ...data }
-    console.log('updateSelectedList====', selectedList.value)
+    console.log('updateSelectedList====', selectedList.value, data)
   }
 
   // 数据响应之前更新数据
@@ -282,7 +282,7 @@
 
   const onCilckSwiperScrollViewItem = (swiperIndex: number, swiperScrollViewIndex: number) => {
     const { idKey } = props
-    const index = currentSelectedLevel.value - 1
+    const index = currentSelectedLevel.value
     const allData = renderAllData.value[index]
 
     const data = renderSelectedList.value[swiperIndex][swiperScrollViewIndex]
@@ -318,14 +318,17 @@
     }
   }
 
+  // swiper change
   const onChangeSwiper = (e) => {
     console.log('onChangeSwiper', e)
   }
+
   // 关闭弹窗事件
   const onClosePopup = () => {
     emit('update:modelValue', false)
   }
 
+  // 重试按钮
   const onClickRetry = () => {}
 
   onMounted(() => {
