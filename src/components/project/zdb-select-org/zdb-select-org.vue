@@ -178,7 +178,7 @@
 
     requestStatusList.value[index] = { ...defaultRequestStatusObj }
 
-    console.log('updateRequestStatusList', requestStatusList.value)
+    // console.log('updateRequestStatusList', requestStatusList.value)
   }
 
   /**
@@ -206,7 +206,7 @@
     // 更换数据
     renderSelectedList.value = [...newList]
 
-    console.log('updateRenderSelectedList', renderSelectedList.value)
+    // console.log('updateRenderSelectedList', renderSelectedList.value)
   }
 
   // 更新数据
@@ -214,7 +214,7 @@
     const index = currentSelectedLevel.value
     renderAllData.value[index] = [...data]
 
-    console.log('updateRenderAllData', renderAllData.value)
+    // console.log('updateRenderAllData', renderAllData.value)
   }
 
   // 更新数据
@@ -239,7 +239,7 @@
     // 更换数据
     selectedList.value = [...newList]
 
-    console.log('updateSelectedList====', selectedList.value, data)
+    // console.log('updateSelectedList====', selectedList.value, data)
   }
 
   // 数据响应之前更新数据
@@ -336,6 +336,7 @@
     setTimeout(() => {
       // 不存在下一级了
       if (!isHaveChildren) {
+        emit('change', selectedList.value)
         emit('update:modelValue', false)
       } else {
         currentSelectedLevel.value = index + 1
@@ -363,7 +364,7 @@
 
   // 重试按钮
   const onClickRetry = (index: number) => {
-    console.log('onClickRetry', index)
+    // console.log('onClickRetry', index)
   }
 
   onMounted(() => {

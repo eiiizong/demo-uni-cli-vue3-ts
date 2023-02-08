@@ -6,7 +6,7 @@
     <div class="button-wrapper">
       <YhButton type="primary" block>确定</YhButton>
     </div>
-    <ZdbSelectOrg v-model="isShowPopup" />
+    <ZdbSelectOrg v-model="isShowPopup" @change="onChangeSelectOrg" />
   </view>
 </template>
 
@@ -20,6 +20,10 @@
   import { ref } from 'vue'
 
   const isShowPopup = ref(true)
+
+  const onChangeSelectOrg = (data: any[]) => {
+    console.log('data', data)
+  }
 </script>
 
 <style lang="scss" scoped>
