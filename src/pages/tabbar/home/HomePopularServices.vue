@@ -15,10 +15,14 @@
 </template>
 
 <script setup lang="ts">
-  import imageNav01 from './images/nav-01.png'
-  import imageNav02 from './images/nav-02.png'
-  import imageNav03 from './images/nav-03.png'
-  import imageNav04 from './images/nav-04.png'
+  import imageNavBMDSQ from './images/nav-bmdsq.png'
+  import imageNavWYRZ from './images/nav-wyrz.png'
+  import imageNavYWJS from './images/nav-ywjs.png'
+  import imageNavHZJG from './images/nav-hzjg.png'
+  import imageNavBMDFK from './images/nav-bmdfk.png'
+  import imageNavRYDYBZ from './images/nav-rydybz.png'
+  import imageNavGZL from './images/nav-gzl.png'
+  import imageNavSPJDCX from './images/nav-spjdcx.png'
 
   import ZdbPanel from '@/components/project/zdb-panel/zdb-panel.vue'
 
@@ -41,7 +45,7 @@
       packageName: 'packageProject',
       isAuth: true,
       disabled: false,
-      imgSrc: imageNav01
+      imgSrc: imageNavRYDYBZ
     }
     // 进度查询
     const navJDCX: PopularServiceNavItem = {
@@ -52,7 +56,7 @@
       packageName: 'packageProcess',
       isAuth: true,
       disabled: false,
-      imgSrc: imageNav01
+      imgSrc: imageNavSPJDCX
     }
 
     // 合作机构
@@ -64,7 +68,7 @@
       packageName: 'packageOrg',
       isAuth: false,
       disabled: false,
-      imgSrc: imageNav02
+      imgSrc: imageNavHZJG
     }
 
     // 工作量
@@ -76,7 +80,7 @@
       packageName: 'packageWorkload',
       isAuth: true,
       disabled: false,
-      imgSrc: imageNav03
+      imgSrc: imageNavGZL
     }
 
     // 业务介绍
@@ -88,7 +92,43 @@
       packageName: 'packageBusiness',
       isAuth: false,
       disabled: false,
-      imgSrc: imageNav04
+      imgSrc: imageNavYWJS
+    }
+
+    // 白名单申请
+    const navBMDSQ: PopularServiceNavItem = {
+      id: 'bmdsq',
+      name: '白名单申请',
+      desc: '快速申请加入白名单',
+      pathName: 'whitelist-apply',
+      packageName: 'packageForm',
+      isAuth: true,
+      disabled: false,
+      imgSrc: imageNavBMDSQ
+    }
+
+    // 我要融资
+    const navWYRZ: PopularServiceNavItem = {
+      id: 'wyrz',
+      name: '我要融资',
+      desc: '快速融资入口',
+      pathName: 'financing',
+      packageName: 'packageForm',
+      isAuth: true,
+      disabled: false,
+      imgSrc: imageNavWYRZ
+    }
+
+    // 白名单反馈
+    const navBMDFK: PopularServiceNavItem = {
+      id: 'bmdfk',
+      name: '白名单反馈',
+      desc: '一键监督白名单企业',
+      pathName: 'whitelist-feedback',
+      packageName: 'packageForm',
+      isAuth: true,
+      disabled: false,
+      imgSrc: imageNavBMDFK
     }
 
     // 默认为游客访问内容
@@ -103,6 +143,9 @@
         arr.push(navGZL)
         // 以下权限为测试使用
         arr.push(navJDCX)
+        arr.push(navBMDSQ)
+        arr.push(navWYRZ)
+        arr.push(navBMDFK)
         break
       // 经办人
       case '3':

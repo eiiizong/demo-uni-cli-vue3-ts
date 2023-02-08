@@ -134,6 +134,29 @@
       ]
     },
     {
+      "root": "pages/packageForm",
+      "pages": [
+        {
+          "path": "financing/financing",
+          "style": {
+            "navigationBarTitleText": "我要融资"
+          }
+        },
+        {
+          "path": "whitelist-apply/whitelist-apply",
+          "style": {
+            "navigationBarTitleText": "白名单申请"
+          }
+        },
+        {
+          "path": "whitelist-feedback/whitelist-feedback",
+          "style": {
+            "navigationBarTitleText": "白名单反馈"
+          }
+        }
+      ]
+    },
+    {
       "root": "pages/packageOrg",
       "pages": [
         {
