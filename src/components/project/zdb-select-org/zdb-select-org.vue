@@ -150,7 +150,6 @@
    */
   const currentSelectedLevel = ref(0)
 
-  //
   const toolbarScrollIntoView = computed(() => {
     let str = 'toolbar_'
     return str + currentSelectedLevel.value
@@ -160,14 +159,15 @@
    * 更新 requestStatusList 数据
    * @param isLoading 是否正在加载中
    * @param isError 是否加载错误
+   * @param errMsg 错误信息
    */
-  const updateRequestStatusList = (isLoading = true, isError = false) => {
+  const updateRequestStatusList = (isLoading = true, isError = false, errMsg = '') => {
     const index = currentSelectedLevel.value
     // 默认状态
     let defaultRequestStatusObj = {
       isLoading, // 是否在加载中
       isError, // 是否加载数据失败
-      errMsg: '', // 数据失败时的提示
+      errMsg, // 数据失败时的提示
       isHaveData: false // 是否已经存在数据
     }
 
@@ -262,12 +262,13 @@
    * @param allData 响应成功后的全部数据，包括children
    * @param data 响应成功后筛选的数据，只包括includesKey中的数据
    * @param isError 是否请求错误 默认false
+   * @param errMsg 错误信息
    */
-  const updataAfterRequestResponse = (allData: any[], data: any[], isError = false) => {
+  const updataAfterRequestResponse = (allData: any[], data: any[], isError = false, errMsg = '') => {
     updateRenderAllData(allData)
     updateRenderSelectedList(data)
     // 请求成功改变数据
-    updateRequestStatusList(false, isError)
+    updateRequestStatusList(false, isError, errMsg)
   }
 
   // 通过数据筛选必要的字段
@@ -364,7 +365,11 @@
 
   // 重试按钮
   const onClickRetry = (index: number) => {
-    // console.log('onClickRetry', index)
+    if (index === 0) {
+      requestData()
+    }
+
+    // 其他情况暂未处理
   }
 
   onMounted(() => {

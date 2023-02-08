@@ -19,7 +19,7 @@
 
   import { ref } from 'vue'
 
-  const isShowPopup = ref(true)
+  const isShowPopup = ref(false)
 
   const onChangeSelectOrg = (data: any[]) => {
     console.log('data', data)
