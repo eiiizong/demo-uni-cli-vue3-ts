@@ -1,5 +1,5 @@
 <template>
-  <YhPopup round position="bottom" custom-style="height: 80%" :close-on-click-overlay="false" :show="modelValue">
+  <YhPopup round position="bottom" :close-on-click-overlay="false" :show="modelValue">
     <view class="content-wrapper">
       <div class="toolbar-wrapper">
         <div class="title-wrapper">
@@ -20,18 +20,58 @@
               :id="'toolbar_' + index"
               :key="item[idKey]"
               class="scroll-view-item"
-              :class="index === currentSelectedLevel ? 'active' : ''"
+              :class="index + 1 === currentSelectedLevel ? 'active' : ''"
               @click.stop="onClickToolbarScrollViewItem(index)">
-              <span>{{ item[renderKey] }}</span>
+              <div class="text">{{ item[renderKey] }}</div>
             </div>
           </scroll-view>
         </div>
       </div>
       <div class="swiper-wrapper">
         <swiper class="swiper" :current="currentSelectedLevel" @change="onChangeSwiper">
-          <template v-for="swiperItme in renderSelectedList" :key="swiperItme[idKey]">
+          <template v-for="(swiperItme, swiperIndex) in renderSelectedList" :key="swiperIndex">
             <swiper-item class="swiper-item">
-              <view class="swiper-item-content"> 122 </view>
+              <view class="swiper-item-content">
+                <scroll-view
+                  v-if="requestStatusList[swiperIndex] && requestStatusList[swiperIndex].isHaveData"
+                  scroll-y
+                  class="swiper-scroll-view">
+                  <template
+                    v-for="(swiperScrollViewItme, swiperScrollViewIndex) in swiperItme"
+                    :key="swiperScrollViewIndex">
+                    <div
+                      :id="swiperScrollViewIndex + ''"
+                      class="swiper-scroll-view-item"
+                      :class="[
+                        selectedList[swiperIndex] && selectedList[swiperIndex][idKey] === swiperScrollViewItme[idKey]
+                          ? 'active'
+                          : ''
+                      ]"
+                      @click.stop="onCilckSwiperScrollViewItem(swiperIndex, swiperScrollViewIndex)">
+                      <span>{{ swiperScrollViewItme[renderKey] }}</span>
+                      <i
+                        v-show="selectedList[swiperIndex][idKey] === swiperScrollViewItme[idKey]"
+                        class="iconfont iconfont-hook"></i>
+                    </div>
+                  </template>
+                </scroll-view>
+                <!-- 加载中 -->
+                <div v-if="requestStatusList[swiperIndex] && requestStatusList[swiperIndex].isLoading" class="loading">
+                  <YhLoading vertical>数据加载中</YhLoading>
+                </div>
+                <!-- 暂无数据 或者请求数据失败 -->
+                <div v-if="requestStatusList[swiperIndex] && requestStatusList[swiperIndex].isError" class="error">
+                  <p class="tip">{{ requestStatusList[swiperIndex].errMsg }}</p>
+                  <!-- <YhButton
+                    width="180rpx"
+                    height="60rpx"
+                    type="primary"
+                    size="small"
+                    @click.stop="onClickRetry(swiperIndex)">
+                    重试
+                  </YhButton> -->
+                </div>
+              </view>
             </swiper-item>
           </template>
         </swiper>
@@ -43,6 +83,8 @@
 <script lang="ts" setup>
   import YhPopup from '@/components/yh/popup/popup.vue'
   import YhIcon from '@/components/yh/icon/icon.vue'
+  import YhLoading from '@/components/yh/loading/loading.vue'
+  // import YhButton from '@/components/yh/button/button.vue'
 
   import { ref, computed, onMounted } from 'vue'
   import orgList from './json/org'
@@ -76,7 +118,7 @@
      */
     idKey: {
       type: String,
-      default: () => 'orgnid'
+      default: () => 'orgid'
     },
     /**
      * 标题
@@ -94,13 +136,15 @@
     }
   })
 
-  // 已经选择的数据
-  const selectedList = ref([])
+  // 已经选择的数据 [{},{}]
+  const selectedList = ref<any[]>([])
 
-  // 全部渲染数据 保存接口一次性返回的数据
-  const renderAllList = ref<any[]>([])
+  // 全部渲染数据 格式如下：{'1':[]}
+  const renderAllData = ref<any>({})
   // 已经选择的渲染数据
   const renderSelectedList = ref<any[]>([])
+
+  const requestStatusList = ref<any[]>([])
 
   // 当前选择层级
   const currentSelectedLevel = ref(1)
@@ -112,17 +156,41 @@
   })
 
   // 更新数据
-  const updateRenderSelectedList = (data: any[]) => {
-    const index = currentSelectedLevel.value
-    renderSelectedList.value[index] = data
+  const updateRequestStatusList = (data: any) => {
+    const index = currentSelectedLevel.value - 1
+    requestStatusList.value[index] = { ...data }
+
+    console.log('updateRequestStatusList', requestStatusList.value)
+  }
+
+  // 更新数据
+  const updateRenderSelectedList = (data: any) => {
+    const index = currentSelectedLevel.value - 1
+    renderSelectedList.value[index] = { ...data }
 
     console.log('updateRenderSelectedList', renderSelectedList.value)
+  }
+
+  // 更新数据
+  const updateRenderAllData = (data: any[]) => {
+    const index = currentSelectedLevel.value - 1
+    renderAllData.value[index] = [...data]
+
+    console.log('updateRenderAllData', renderAllData.value)
+  }
+
+  // 更新数据
+  const updateSelectedList = (data: any) => {
+    const index = currentSelectedLevel.value - 1
+    selectedList.value[index] = { ...data }
+    console.log('updateSelectedList', selectedList.value)
   }
 
   /**
    *  请求数据
    */
   const requestData = () => {
+    const { idKey, renderKey, includesKey } = props
     // 默认状态
     let defaultRequestStatusObj = {
       isLoading: true, // 是否在加载中
@@ -132,10 +200,16 @@
     }
     // 提前加入空数据 防止没有加载中动画
     updateRenderSelectedList([])
+    // 提前加入默认数据，提示用户选择
+    updateSelectedList({
+      [idKey]: 'select',
+      [renderKey]: '请选择'
+    })
+    // 提前加入数据请求状态默认数据，防止没有加载中动画
+    updateRequestStatusList(defaultRequestStatusObj)
 
     // 模拟数据请求
     setTimeout(() => {
-      const { includesKey } = props
       const data = [...orgList]
 
       const arr = []
@@ -151,14 +225,22 @@
         }
         arr.push(tempObj)
       }
-
-      renderAllList.value = [...data]
+      updateRenderAllData(data)
       updateRenderSelectedList(arr)
-    }, 2000)
+
+      // 请求成功改变数据
+      defaultRequestStatusObj.isLoading = false
+      defaultRequestStatusObj.isHaveData = true
+      updateRequestStatusList(defaultRequestStatusObj)
+    }, 4000)
   }
 
   // 点击事件
-  const onClickToolbarScrollViewItem = (index: number) => {}
+  const onClickToolbarScrollViewItem = (index: number) => {
+    currentSelectedLevel.value = index + 1
+  }
+
+  const onCilckSwiperScrollViewItem = () => {}
 
   const onChangeSwiper = (e) => {
     console.log('onChangeSwiper', e)
@@ -167,6 +249,9 @@
   const onClosePopup = () => {
     emit('update:modelValue', false)
   }
+
+  const onClickRetry = () => {}
+
   onMounted(() => {
     requestData()
   })
@@ -175,6 +260,8 @@
 <style lang="scss" scoped>
   $border-radius: 16rpx;
   $toolbar-height: 80rpx;
+  $content-height: 700rpx;
+  $content-height-vh: 70vh;
 
   @keyframes spin {
     0% {
@@ -223,6 +310,7 @@
         flex-wrap: nowrap;
         display: flex;
         height: $toolbar-height;
+        box-sizing: border-box;
 
         .scroll-view-items {
           min-width: 100%;
@@ -237,7 +325,7 @@
           padding: 0 32rpx;
           white-space: nowrap;
 
-          span {
+          .text {
             line-height: $toolbar-height;
             position: relative;
             transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -276,8 +364,8 @@
   .swiper-wrapper {
     .swiper {
       width: 100%;
-      height: 800rpx;
-      height: 60vh;
+      height: $content-height;
+      height: $content-height-vh;
 
       .swiper-item {
         width: 100%;
@@ -337,17 +425,6 @@
         @include centerPositionTransform();
         color: $primary;
         text-align: center;
-
-        p {
-          font-size: 30rpx;
-          padding-top: 20px;
-          font-weight: 500;
-        }
-
-        .iconfont-loading {
-          font-size: 80rpx;
-          animation: spin 2s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
-        }
       }
 
       .error {
