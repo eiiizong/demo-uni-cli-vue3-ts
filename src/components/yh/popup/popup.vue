@@ -44,32 +44,44 @@
     'after-leave'
   ])
   const props = defineProps({
-    // 是否显示弹出层
+    /**
+     * 是否显示弹出层，默认false
+     */
     show: {
       type: Boolean,
       default: () => false
     },
-    // z-index 层级
+    /**
+     * z-index 层级，默认9999
+     */
     zIndex: {
       type: Number,
       default: () => 9999
     },
-    // 是否显示遮罩层
+    /**
+     * 是否显示遮罩层，默认true
+     */
     overlay: {
       type: Boolean,
       default: () => true
     },
-    // 动画名称
+    /**
+     * 动画名称
+     */
     transition: {
       type: String,
       default: () => ''
     },
-    // 弹出位置，可选值为 top bottom right left
+    /**
+     * 弹出位置，可选值为 top bottom right left center（默认）
+     */
     position: {
       type: String,
       default: () => 'center'
     },
-    // 动画时长，单位为毫秒
+    /**
+     * 动画时长，单位为毫秒 默认进入300离开300
+     */
     duration: {
       type: [Object],
       default: () => {
@@ -79,57 +91,79 @@
         }
       }
     },
-    // 是否显示圆角
+    /**
+     * 是否显示圆角
+     */
     round: {
       type: Boolean,
       default: () => false
     },
-    // 自定义弹出层样式
+    /**
+     * 自定义弹出层样式
+     */
     customStyle: {
       type: String,
       default: () => ''
     },
-    // icon自定义样式
+    /**
+     * icon自定义样式
+     */
     iconStyle: {
       type: String,
       default: () => ''
     },
-    // 自定义遮罩层样式
+    /**
+     * 自定义遮罩层样式
+     */
     overlayStyle: {
       type: String,
       default: () => ''
     },
-    // 是否在点击遮罩层后关闭
+    /**
+     * 是否在点击遮罩层后关闭 默认true
+     */
     closeOnClickOverlay: {
       type: Boolean,
       default: () => true
     },
-    // 是否显示关闭图标
+    /**
+     * 是否显示关闭图标 默认false
+     */
     closeable: {
       type: Boolean,
       default: () => false
     },
-    // 关闭图标名称或图片链接
+    /**
+     * 关闭图标名称或图片链接 默认 close_round
+     */
     closeIcon: {
       type: String,
       default: () => 'close_round'
     },
-    // 关闭图标展示位置
+    /**
+     * 关闭图标展示位置 默认top-right
+     */
     closeIconPosition: {
       type: String,
       default: () => 'top-right'
     },
-    // 是否为 iPhoneX 留出底部安全距离
+    /**
+     * 是否为 iPhoneX 留出底部安全距离 默认true
+     */
     safeAreaInsetBottom: {
       type: Boolean,
       default: () => true
     },
-    // 是否留出顶部安全距离（状态栏高度）
+    /**
+     * 是否留出顶部安全距离（状态栏高度）默认false
+     */
     safeAreaInsetTop: {
       type: Boolean,
       default: () => false
     },
-    // 是否锁定背景滚动
+    /**
+     * 是否锁定背景滚动 默认 true
+     */
     lockScroll: {
       type: Boolean,
       default: () => true
@@ -223,12 +257,16 @@
     str = transition || position
 
     if (transition === 'none') {
-      currentDuration.value = 0
+      updateCurrentDuration(0)
     }
     return str
   })
 
   const nextTick = () => new Promise((resolve) => setTimeout(resolve, 1000 / 30))
+
+  const updateCurrentDuration = (val: number) => {
+    currentDuration.value = val
+  }
 
   const getClassNames = (name: string) => {
     const { enterClass, enterActiveClass, enterToClass, leaveActiveClass, leaveClass, leaveToClass } = props
@@ -285,7 +323,6 @@
         transitionEnded.value = false
         classes.value = classNames['enter-to']
       })
-      .catch(() => {})
   }
 
   const leave = () => {
@@ -312,7 +349,6 @@
         setTimeout(() => onTransitionEnd(), current_duration)
         classes.value = classNames['leave-to']
       })
-      .catch(() => {})
   }
 
   watch(

@@ -1,33 +1,40 @@
 <template>
-  <YhPopup
-    round
-    position="bottom"
-    custom-style="height: 80%"
-    closeable
-    close-icon="close"
-    :show="modelValue"
-    @close="emit('update:modelValue', false)">
-    <view class="select-wrapper">
-      <div class="tool-tip">
-        <div class="title">{{ title }}</div>
-      </div>
-      <div class="tool-selected">
-        <scroll-view
-          scroll-x
-          enable-flex
-          scroll-with-animation
-          class="scroll-view"
-          :scroll-into-view="toolbarScrollIntoView">
-          <div
-            v-for="(item, index) in selectedAddressArr"
-            :id="'toolbar_' + index"
-            :key="item[idKey]"
-            class="scroll-view-item"
-            :class="index === currentSelectedLevel ? 'active' : ''"
-            @click.stop="handleClickScrollViewItem(index)">
-            <span>{{ item[renderKey] }}</span>
+  <YhPopup round position="bottom" custom-style="height: 80%" :close-on-click-overlay="false" :show="modelValue">
+    <view class="content-wrapper">
+      <div class="toolbar-wrapper">
+        <div class="title-wrapper">
+          <div class="title">{{ title }}</div>
+          <div class="close" @click="onClosePopup">
+            <YhIcon name="close" size="32rpx" color="#f00" />
           </div>
-        </scroll-view>
+        </div>
+        <div class="scroll-view-wrapper">
+          <scroll-view
+            scroll-x
+            enable-flex
+            scroll-with-animation
+            class="scroll-view"
+            :scroll-into-view="toolbarScrollIntoView">
+            <div
+              v-for="(item, index) in selectedList"
+              :id="'toolbar_' + index"
+              :key="item[idKey]"
+              class="scroll-view-item"
+              :class="index === currentSelectedLevel ? 'active' : ''"
+              @click.stop="onClickToolbarScrollViewItem(index)">
+              <span>{{ item[renderKey] }}</span>
+            </div>
+          </scroll-view>
+        </div>
+      </div>
+      <div class="swiper-wrapper">
+        <!-- <swiper class="swiper" :current="currentSelectedLevel" @change="changeSwiper">
+          <template v-for="(swiperItme, swiperIndex) in renderDataArr" :key="swiperIndex">
+            <swiper-item class="swiper-item">
+              <view class="swiper-item-content"> 122 </view>
+            </swiper-item>
+          </template>
+        </swiper> -->
       </div>
     </view>
   </YhPopup>
@@ -35,9 +42,10 @@
 
 <script lang="ts" setup>
   import YhPopup from '@/components/yh/popup/popup.vue'
-  // import YhIcon from '@/components/yh/icon/icon.vue'
+  import YhIcon from '@/components/yh/icon/icon.vue'
 
-  import { ref } from 'vue'
+  import { ref, computed, onMounted } from 'vue'
+  import orgList from './json/org'
 
   const emit = defineEmits(['update:modelValue'])
 
@@ -68,22 +76,53 @@
      */
     idKey: {
       type: String,
-      default: () => ''
+      default: () => 'orgnid'
     },
     /**
      * 标题
      */
     renderKey: {
       type: String,
-      default: () => ''
+      default: () => 'orgname'
     }
   })
 
-  const selectedAddressArr = ref([])
+  // 已经选择的数据
+  const selectedList = ref([])
+
+  // 渲染数据
+  const renderAllList = ref([])
+  // 已经选择的渲染数据
+  const renderSelectList = ref([])
+
+  // 当前选择层级
   const currentSelectedLevel = ref(1)
 
-  const toolbarScrollIntoView = () => {}
-  const handleClickScrollViewItem = () => {}
+  //
+  const toolbarScrollIntoView = computed(() => {
+    let str = 'toolbar_'
+    return str + currentSelectedLevel.value
+  })
+
+  /**
+   *  请求数据
+   */
+  const requestData = () => {
+    setTimeout(() => {
+      console.log('orgList', orgList)
+    }, 2000)
+  }
+
+  // 点击事件
+  const onClickToolbarScrollViewItem = (index: number) => {}
+
+  // 关闭弹窗事件
+  const onClosePopup = () => {
+    emit('update:modelValue', false)
+  }
+  onMounted(() => {
+    requestData()
+  })
 </script>
 
 <style lang="scss" scoped>
@@ -100,7 +139,7 @@
     }
   }
 
-  .select-wrapper {
+  .content-wrapper {
     width: 100%;
     background-color: #fff;
     color: #333;
@@ -109,68 +148,77 @@
     border-top-right-radius: $border-radius;
   }
 
-  .tool-tip {
-    text-align: center;
-    line-height: 80rpx;
-    font-size: 28rpx;
-    position: relative;
+  .toolbar-wrapper {
+    .title-wrapper {
+      text-align: center;
+      line-height: 80rpx;
+      font-size: 32rpx;
+      position: relative;
 
-    .title {
-      font-weight: 500;
-    }
-  }
-
-  .tool-selected {
-    width: 100%;
-    border-bottom: 1px solid $color-border;
-
-    .scroll-view {
-      width: 100%;
-      flex-wrap: nowrap;
-      display: flex;
-      height: $toolbar-height;
-
-      .scroll-view-items {
-        min-width: 100%;
-        display: flex;
-        align-items: center;
-        height: $toolbar-height;
+      .title {
+        font-weight: 700;
       }
+      .close {
+        position: absolute;
+        right: $spacing - 20rpx;
+        top: 50%;
+        padding: 20rpx;
+        transform: translateY(-50%);
+      }
+    }
 
-      .scroll-view-item {
+    .scroll-view-wrapper {
+      width: 100%;
+      border-bottom: 1px solid $color-border;
+
+      .scroll-view {
+        width: 100%;
+        flex-wrap: nowrap;
         display: flex;
-        font-size: 32rpx;
-        padding: 0 32rpx;
-        white-space: nowrap;
+        height: $toolbar-height;
 
-        span {
-          line-height: $toolbar-height;
-          position: relative;
-          transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-
-          &::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 100%;
-            opacity: 0;
-            transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-            height: 2px;
-            // border-radius: 1px;
-            background-color: $primary;
-          }
+        .scroll-view-items {
+          min-width: 100%;
+          display: flex;
+          align-items: center;
+          height: $toolbar-height;
         }
 
-        &.active {
-          color: $primary;
+        .scroll-view-item {
+          display: flex;
+          font-size: 32rpx;
+          padding: 0 32rpx;
+          white-space: nowrap;
 
           span {
-            font-weight: 700;
+            line-height: $toolbar-height;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 
             &::after {
-              bottom: 0;
-              opacity: 1;
+              content: '';
+              position: absolute;
+              bottom: -4px;
+              left: 0;
+              width: 100%;
+              opacity: 0;
+              transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+              height: 2px;
+              // border-radius: 1px;
+              background-color: $primary;
+            }
+          }
+
+          &.active {
+            color: $primary;
+
+            span {
+              font-weight: 700;
+
+              &::after {
+                bottom: 0;
+                opacity: 1;
+              }
             }
           }
         }
@@ -178,91 +226,93 @@
     }
   }
 
-  .swiper {
-    width: 100%;
-    height: 800rpx;
-    height: 60vh;
-
-    .swiper-item {
+  .swiper-wrapper {
+    .swiper {
       width: 100%;
-      height: 100%;
+      height: 800rpx;
+      height: 60vh;
 
-      .swiper-item-content {
+      .swiper-item {
         width: 100%;
         height: 100%;
 
-        .swiper-scroll-view {
+        .swiper-item-content {
           width: 100%;
           height: 100%;
-          position: relative;
+
+          .swiper-scroll-view {
+            width: 100%;
+            height: 100%;
+            position: relative;
+          }
         }
       }
-    }
 
-    .swiper-scroll-view-item {
-      padding: 0 32rpx;
-      line-height: 72rpx;
-      color: #333;
-      font-size: 28rpx;
-      display: flex;
-      align-items: center;
-      &.city_511300 {
-        font-size: 34rpx;
-        font-weight: 600;
-      }
-      .iconfont-hook {
-        padding-left: 32rpx;
-        font-size: 0;
-        transition: all 3s cubic-bezier(0.645, 0.045, 0.355, 1);
-        opacity: 0;
-        transform: scale(0);
-      }
-
-      &.active {
-        color: $primary;
-
+      .swiper-scroll-view-item {
+        padding: 0 32rpx;
+        line-height: 72rpx;
+        color: #333;
+        font-size: 28rpx;
+        display: flex;
+        align-items: center;
+        &.city_511300 {
+          font-size: 34rpx;
+          font-weight: 600;
+        }
         .iconfont-hook {
-          font-size: 28rpx;
-          opacity: 1;
-          transform: scale(1);
+          padding-left: 32rpx;
+          font-size: 0;
+          transition: all 3s cubic-bezier(0.645, 0.045, 0.355, 1);
+          opacity: 0;
+          transform: scale(0);
+        }
+
+        &.active {
+          color: $primary;
+
+          .iconfont-hook {
+            font-size: 28rpx;
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        &:first-child {
+          padding-top: 20rpx;
+        }
+
+        &:last-child {
+          padding-bottom: 20rpx;
         }
       }
 
-      &:first-child {
-        padding-top: 20rpx;
+      .loading {
+        @include centerPositionTransform();
+        color: $primary;
+        text-align: center;
+
+        p {
+          font-size: 30rpx;
+          padding-top: 20px;
+          font-weight: 500;
+        }
+
+        .iconfont-loading {
+          font-size: 80rpx;
+          animation: spin 2s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
       }
 
-      &:last-child {
-        padding-bottom: 20rpx;
-      }
-    }
+      .error {
+        @include centerPositionTransform();
+        text-align: center;
+        white-space: pre-wrap;
 
-    .loading {
-      @include centerPositionTransform();
-      color: $primary;
-      text-align: center;
-
-      p {
-        font-size: 30rpx;
-        padding-top: 20px;
-        font-weight: 500;
-      }
-
-      .iconfont-loading {
-        font-size: 80rpx;
-        animation: spin 2s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
-      }
-    }
-
-    .error {
-      @include centerPositionTransform();
-      text-align: center;
-      white-space: pre-wrap;
-
-      .tip {
-        font-size: 26rpx;
-        padding-bottom: 64rpx;
-        color: #666;
+        .tip {
+          font-size: 26rpx;
+          padding-bottom: 64rpx;
+          color: #666;
+        }
       }
     }
   }
