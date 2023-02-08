@@ -1,15 +1,19 @@
 <template>
   <view class="home-popular-services">
-    <ZdbPanel title="热门服务">
-      <div class="navs">
-        <div v-for="item in navs" :key="item.id" class="nav" @click="onJumpRoute(item)">
-          <img :src="item.imgSrc" alt="" class="bg" />
-          <div class="content">
-            <div class="key">{{ item.name }}</div>
-            <div class="desc">{{ item.desc }}</div>
+    <ZdbPanel title="热门服务" :space="false">
+      <swiper class="swiper" indicator-dots circular indicator-color="#a288ff" indicator-active-color="#6c46da">
+        <swiper-item v-for="(item, index) in navs" :key="index" class="swiper-item">
+          <div class="navs">
+            <div v-for="itemNav in item" :key="itemNav.id" class="nav" @click="onJumpRoute(itemNav)">
+              <img :src="itemNav.imgSrc" alt="" class="bg" />
+              <div class="content">
+                <div class="key">{{ itemNav.name }}</div>
+                <div class="desc">{{ itemNav.desc }}</div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </swiper-item>
+      </swiper>
     </ZdbPanel>
   </view>
 </template>
@@ -35,7 +39,7 @@
   const { userInfo } = toRefs(useStoreUserInfo())
 
   // 热门服务渲染数据
-  const navs = computed<PopularServiceNavItem[]>(() => {
+  const navs = computed<PopularServiceNavItem[][]>(() => {
     // “蓉易贷”一本账
     const navRYDYBZ: PopularServiceNavItem = {
       id: 'rydybz',
@@ -48,7 +52,7 @@
       imgSrc: imageNavRYDYBZ
     }
     // 进度查询
-    const navJDCX: PopularServiceNavItem = {
+    const navSPJDCX: PopularServiceNavItem = {
       id: 'jdcx',
       name: '进度查询',
       desc: '审批进度，随时查询',
@@ -84,7 +88,7 @@
     }
 
     // 业务介绍
-    const navYEJS: PopularServiceNavItem = {
+    const navYWJS: PopularServiceNavItem = {
       id: 'ywjs',
       name: '业务介绍',
       desc: '详尽了解“蓉易贷”业务',
@@ -132,29 +136,49 @@
     }
 
     // 默认为游客访问内容
-    const arr: PopularServiceNavItem[] = [navYEJS, navHZJG]
+    const arr: PopularServiceNavItem[][] = [[], []]
 
     const { userType } = userInfo.value
 
     switch (userType) {
+      // 游客
+      case '1':
+        arr[0].push(navBMDSQ)
+        arr[0].push(navWYRZ)
+        arr[0].push(navYWJS)
+        arr[0].push(navHZJG)
+        arr[1].push(navBMDFK)
+        break
       // 领导
       case '2':
-        arr.push(navRYDYBZ)
-        arr.push(navGZL)
-        // 以下权限为测试使用
-        arr.push(navJDCX)
-        arr.push(navBMDSQ)
-        arr.push(navWYRZ)
-        arr.push(navBMDFK)
+        arr[0].push(navRYDYBZ)
+        arr[0].push(navGZL)
+        arr[0].push(navBMDFK)
+        arr[0].push(navHZJG)
+        arr[1].push(navBMDSQ)
+        arr[1].push(navWYRZ)
+        arr[1].push(navYWJS)
+        // 其他权限 测试使用
+        arr[1].push(navSPJDCX)
         break
       // 经办人
       case '3':
-        arr.push(navRYDYBZ)
-        arr.push(navGZL)
+        arr[0].push(navRYDYBZ)
+        arr[0].push(navGZL)
+        arr[0].push(navBMDFK)
+        arr[0].push(navHZJG)
+        arr[1].push(navBMDSQ)
+        arr[1].push(navWYRZ)
+        arr[1].push(navYWJS)
         break
       // 合作机构
       case '4':
-        arr.push(navJDCX)
+        arr[0].push(navHZJG)
+        arr[0].push(navSPJDCX)
+        arr[0].push(navYWJS)
+        arr[0].push(navBMDFK)
+        arr[1].push(navBMDSQ)
+        arr[1].push(navWYRZ)
         break
       default:
         break
@@ -174,6 +198,15 @@
   .home-popular-services {
     width: 100%;
     background-color: #fff;
+    .swiper {
+      width: 100%;
+      height: 456rpx + 30rpx;
+
+      .swiper-item {
+        width: 100%;
+        padding: 0 $spacing;
+      }
+    }
     .navs {
       width: 100%;
       display: flex;

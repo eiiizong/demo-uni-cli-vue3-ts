@@ -7,7 +7,7 @@
         <YhIcon name="arrow-right" size="24rpx" />
       </div>
     </div>
-    <div class="content">
+    <div class="content" :class="space ? 'space' : ''">
       <slot></slot>
     </div>
   </view>
@@ -18,13 +18,26 @@
 
   const emit = defineEmits(['click'])
   const props = defineProps({
+    /**
+     * 标题
+     */
     title: {
       type: String,
       required: true
     },
+    /**
+     * 右边查看更多
+     */
     rightText: {
       type: String,
       default: () => ''
+    },
+    /**
+     * 是否显示content内的间距，默认true
+     */
+    space: {
+      type: Boolean,
+      default: () => true
     }
   })
 </script>
@@ -52,7 +65,9 @@
       }
     }
     .content {
-      padding: 0 $spacing;
+      &.space {
+        padding: 0 $spacing;
+      }
     }
   }
 </style>
