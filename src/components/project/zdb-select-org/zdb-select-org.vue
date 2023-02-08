@@ -48,10 +48,10 @@
                           : ''
                       ]"
                       @click.stop="onCilckSwiperScrollViewItem(swiperIndex, swiperScrollViewIndex)">
-                      <span>{{ swiperScrollViewItme[renderKey] }}</span>
-                      <i
-                        v-show="selectedList[swiperIndex][idKey] === swiperScrollViewItme[idKey]"
-                        class="iconfont iconfont-hook"></i>
+                      <span class="text">{{ swiperScrollViewItme[renderKey] }}</span>
+                      <div v-show="selectedList[swiperIndex][idKey] === swiperScrollViewItme[idKey]" class="icon">
+                        <YhIcon name="tick" size="30rpx" />
+                      </div>
                     </div>
                   </template>
                 </scroll-view>
@@ -62,14 +62,7 @@
                 <!-- 暂无数据 或者请求数据失败 -->
                 <div v-if="requestStatusList[swiperIndex] && requestStatusList[swiperIndex].isError" class="error">
                   <p class="tip">{{ requestStatusList[swiperIndex].errMsg }}</p>
-                  <!-- <YhButton
-                    width="180rpx"
-                    height="60rpx"
-                    type="primary"
-                    size="small"
-                    @click.stop="onClickRetry(swiperIndex)">
-                    重试
-                  </YhButton> -->
+                  <YhButton type="primary" size="small" @click.stop="onClickRetry(swiperIndex)"> 重试 </YhButton>
                 </div>
               </view>
             </swiper-item>
@@ -84,7 +77,7 @@
   import YhPopup from '@/components/yh/popup/popup.vue'
   import YhIcon from '@/components/yh/icon/icon.vue'
   import YhLoading from '@/components/yh/loading/loading.vue'
-  // import YhButton from '@/components/yh/button/button.vue'
+  import YhButton from '@/components/yh/button/button.vue'
 
   import { ref, computed, onMounted } from 'vue'
   import orgList from './json/org'
@@ -194,7 +187,24 @@
    */
   const updateRenderSelectedList = (data: any) => {
     const index = currentSelectedLevel.value
-    renderSelectedList.value[index] = { ...data }
+
+    const oldData = renderSelectedList.value
+
+    const newList = []
+
+    // 筛选之前的数据
+    for (let i = 0, len = oldData.length; i < len; i++) {
+      const item = oldData[i]
+      if (i < index) {
+        newList.push(item)
+      } else {
+        break
+      }
+    }
+    // 加入最新数据
+    newList.push(data)
+    // 更换数据
+    renderSelectedList.value = [...newList]
 
     console.log('updateRenderSelectedList', renderSelectedList.value)
   }
@@ -210,7 +220,25 @@
   // 更新数据
   const updateSelectedList = (data: any) => {
     const index = currentSelectedLevel.value
-    selectedList.value[index] = { ...data }
+
+    const oldData = selectedList.value
+
+    const newList = []
+
+    // 筛选之前的数据
+    for (let i = 0, len = oldData.length; i < len; i++) {
+      const item = oldData[i]
+      if (i < index) {
+        newList.push(item)
+      } else {
+        break
+      }
+    }
+    // 加入最新数据
+    newList.push(data)
+    // 更换数据
+    selectedList.value = [...newList]
+
     console.log('updateSelectedList====', selectedList.value, data)
   }
 
@@ -277,9 +305,10 @@
 
   // 点击事件
   const onClickToolbarScrollViewItem = (index: number) => {
-    currentSelectedLevel.value = index + 1
+    currentSelectedLevel.value = index
   }
 
+  // 选择某一级的某个item
   const onCilckSwiperScrollViewItem = (swiperIndex: number, swiperScrollViewIndex: number) => {
     const { idKey } = props
     const index = currentSelectedLevel.value
@@ -293,7 +322,7 @@
     for (let i = 0, len = allData.length; i < len; i++) {
       const item = allData[i]
 
-      if (item[idKey] === data[idKey]) {
+      if (item[idKey] === data[idKey] && item.children && item.children.length > 0) {
         isHaveChildren = true
         newList = [...(item.children || [])]
         break
@@ -303,24 +332,28 @@
     // 更新选择的数据
     updateSelectedList(data)
 
-    // 不存在下一级了
-    if (!isHaveChildren) {
-      emit('update:modelValue', false)
-    } else {
-      currentSelectedLevel.value = index + 1
-      updataBeforeRequestResponse()
+    // 延时 暂时显示动画
+    setTimeout(() => {
+      // 不存在下一级了
+      if (!isHaveChildren) {
+        emit('update:modelValue', false)
+      } else {
+        currentSelectedLevel.value = index + 1
+        updataBeforeRequestResponse()
 
-      // 处理下一层逻辑
-      setTimeout(() => {
-        const data = getDataByIncludesKey(newList)
-        updataAfterRequestResponse(newList, data, false)
-      }, 300)
-    }
+        // 处理下一层逻辑
+        setTimeout(() => {
+          const data = getDataByIncludesKey(newList)
+          updataAfterRequestResponse(newList, data, false)
+        }, 300)
+      }
+    }, 300)
   }
 
   // swiper change
-  const onChangeSwiper = (e) => {
-    console.log('onChangeSwiper', e)
+  const onChangeSwiper = (e: WechatMiniprogram.SwiperChange) => {
+    const { current } = e.detail
+    currentSelectedLevel.value = current
   }
 
   // 关闭弹窗事件
@@ -329,7 +362,9 @@
   }
 
   // 重试按钮
-  const onClickRetry = () => {}
+  const onClickRetry = (index: number) => {
+    console.log('onClickRetry', index)
+  }
 
   onMounted(() => {
     requestData()
@@ -341,16 +376,6 @@
   $toolbar-height: 80rpx;
   $content-height: 700rpx;
   $content-height-vh: 70vh;
-
-  @keyframes spin {
-    0% {
-      transform: rotate(0);
-    }
-
-    100% {
-      transform: rotate(360deg);
-    }
-  }
 
   .content-wrapper {
     width: 100%;
@@ -469,26 +494,18 @@
         font-size: 28rpx;
         display: flex;
         align-items: center;
-        &.city_511300 {
-          font-size: 34rpx;
-          font-weight: 600;
+
+        .text {
+          flex: 1;
+          overflow: hidden;
+          @include textOverflow();
         }
-        .iconfont-hook {
-          padding-left: 32rpx;
-          font-size: 0;
-          transition: all 3s cubic-bezier(0.645, 0.045, 0.355, 1);
-          opacity: 0;
-          transform: scale(0);
+        .icon {
+          padding-left: 20rpx;
         }
 
         &.active {
           color: $primary;
-
-          .iconfont-hook {
-            font-size: 28rpx;
-            opacity: 1;
-            transform: scale(1);
-          }
         }
 
         &:first-child {
