@@ -16,7 +16,7 @@
       <div class="input-wrapper required">
         <div class="key">统一社会信用代码</div>
         <div class="value">
-          <input v-model="formData.a3" type="text" class="input" maxlength="20" placeholder="请输入统一社会信用代码" />
+          <input v-model="formData.a3" type="text" class="input" maxlength="20" placeholder="请输入" />
         </div>
       </div>
       <div class="input-wrapper required">
@@ -24,40 +24,45 @@
         <div class="value">
           <picker class="picker">
             <div class="picker-content">
-              <div class="picker-value" v-if="formData.a5"></div>
-              <div class="picker-placeholder" v-else>请选择纳税地</div>
+              <div v-if="formData.a5" class="picker-value"></div>
+              <div v-else class="picker-placeholder">请选择纳税地</div>
             </div>
           </picker>
         </div>
       </div>
-      <div class="input-wrapper required">
+      <div class="input-wrapper textarea-wrapper required">
         <div class="key">贷款用途</div>
         <div class="value">
-          <input v-model="formData.a5" type="text" class="input" placeholder="请输入单位名称" />
+          <textarea v-model="formData.a5" class="textarea" maxlength="140" placeholder="请输入贷款用途"></textarea>
         </div>
       </div>
       <div class="input-wrapper required">
         <div class="key">融资期限</div>
         <div class="value">
-          <input v-model="formData.a6" type="number" class="input" placeholder="请输入融资期限（单位：年，小于2年）" />
+          <input
+            v-model="formData.a6"
+            type="digit"
+            class="input"
+            maxlength="20"
+            placeholder="请输入融资期限(单位：年)" />
         </div>
       </div>
       <div class="input-wrapper required">
         <div class="key">拟申请额度</div>
         <div class="value">
-          <input v-model="formData.a7" type="text" class="input" placeholder="请输入拟申请额度" />
+          <input v-model="formData.a7" type="digit" class="input" maxlength="20" placeholder="请输入金额(单位：万元)" />
         </div>
       </div>
       <div class="input-wrapper required">
         <div class="key">联系人</div>
         <div class="value">
-          <input v-model="formData.a8" type="text" class="input" placeholder="请输入联系人" />
+          <input v-model="formData.a8" type="text" class="input" maxlength="20" placeholder="请输入联系人" />
         </div>
       </div>
       <div class="input-wrapper required">
         <div class="key">联系方式</div>
         <div class="value">
-          <input v-model="formData.a9" type="text" class="input" placeholder="请输入联系方式" />
+          <input v-model="formData.a9" type="number" class="input" maxlength="20" placeholder="请输入联系方式" />
         </div>
       </div>
     </div>
@@ -86,6 +91,12 @@
 </script>
 
 <style lang="scss" scoped>
+  $color-key: #3d424d;
+  $color-value: #a1a7b3;
+  $input-height: 82rpx;
+  $input-font-size: 30rpx;
+  $input-line-height: 42rpx;
+
   .financing {
     width: 100%;
     padding: $spacing;
@@ -95,6 +106,8 @@
       box-shadow: 0rpx 2rpx 24rpx 0rpx rgba(8, 76, 192, 0.06);
       border-radius: 16rpx;
       padding: 20rpx 40rpx;
+      font-size: $input-font-size;
+      line-height: $input-line-height;
       .input-wrapper {
         width: 100%;
         display: flex;
@@ -103,28 +116,52 @@
         border-bottom: 1px solid $color-border;
 
         .key {
-          font-size: 30rpx;
-          font-weight: 400;
-          color: #3d424d;
-          line-height: 42rpx;
-          padding: 32rpx 0;
+          font-weight: 500;
+          color: $color-key;
+          padding: calc(($input-height - 2rpx - $input-line-height) / 2) 0;
           position: relative;
           padding-left: 16rpx;
         }
         .value {
           flex: 1;
           overflow: hidden;
+          min-height: $input-height;
           display: flex;
           margin-left: 30rpx;
         }
         .input {
           display: block;
           width: 100%;
-          font-size: 30rpx;
+          height: $input-height;
+          font-weight: 500;
           text-align: right;
-          line-height: 1.4;
-          color: #9b9b9f;
+          color: $color-value;
+          padding: calc(($input-height - 2rpx - $input-line-height) / 2) 0;
+          font-size: $input-font-size;
+          line-height: $input-line-height;
         }
+        .picker {
+          width: 100%;
+          .picker-content {
+            width: 100%;
+            min-height: $input-height;
+            padding: calc(($input-height - 2rpx - $input-line-height) / 2) 0;
+          }
+          .picker-value,
+          .picker-placeholder {
+            width: 100%;
+            text-align: right;
+            font-weight: 500;
+            transition: all 0.3s;
+          }
+          .picker-value {
+            color: $color-value;
+          }
+          .picker-placeholder {
+            color: #7a7a7a;
+          }
+        }
+
         &.required {
           .key {
             &::before {
@@ -136,6 +173,31 @@
               transform: translateY(-50%);
               margin-top: -4rpx;
             }
+          }
+        }
+        &.textarea-wrapper {
+          display: block;
+          padding-bottom: 20rpx;
+          .key {
+            width: 100%;
+          }
+          .value {
+            display: block;
+            width: 100%;
+            margin: 0;
+          }
+          .textarea {
+            width: 100%;
+            height: 200rpx;
+            border: 1px solid $color-border;
+            border-radius: 4rpx;
+            padding: 8rpx 12rpx;
+            font-weight: 500;
+            color: $color-value;
+            font-size: 30rpx;
+            line-height: 36rpx;
+            background-color: $color-page;
+            text-align: left;
           }
         }
       }
