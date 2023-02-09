@@ -1,0 +1,126 @@
+@use '../variables/index.scss' as *;
+
+$color-key: #3d424d;
+$color-value: #a1a7b3;
+$input-height: 102rpx;
+$input-font-size: 30rpx;
+$input-line-height: 42rpx;
+
+.custom-form-page {
+  width: 100%;
+  padding: $spacing;
+  .form-wrapper {
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0rpx 2rpx 24rpx 0rpx rgba(8, 76, 192, 0.06);
+    border-radius: 16rpx;
+    padding: 20rpx 40rpx;
+    font-size: $input-font-size;
+    line-height: $input-line-height;
+    .input-wrapper {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid $color-border;
+
+      .key {
+        font-weight: 500;
+        color: $color-key;
+        padding: calc(($input-height - 2rpx - $input-line-height) / 2) 0;
+        position: relative;
+        padding-left: 16rpx;
+      }
+      .value {
+        flex: 1;
+        overflow: hidden;
+        min-height: $input-height;
+        display: flex;
+        margin-left: 30rpx;
+      }
+      .input {
+        display: block;
+        width: 100%;
+        height: $input-height;
+        font-weight: 500;
+        text-align: right;
+        color: $color-value;
+        padding: calc(($input-height - 2rpx - $input-line-height) / 2) 0;
+        font-size: $input-font-size;
+        line-height: $input-line-height;
+      }
+      .picker {
+        width: 100%;
+        .picker-content {
+          width: 100%;
+          min-height: $input-height;
+          padding: calc(($input-height - 2rpx - $input-line-height) / 2) 0;
+          padding-right: 40rpx;
+          position: relative;
+        }
+        .picker-value,
+        .picker-placeholder {
+          width: 100%;
+          text-align: right;
+          font-weight: 500;
+          transition: all 0.3s;
+        }
+        .picker-value {
+          color: $color-value;
+        }
+        .picker-placeholder {
+          color: #7a7a7a;
+        }
+        .picker-icon {
+          color: #7a7a7a;
+          position: absolute;
+          top: 50%;
+          right: 0;
+          transform: translateY(-50%);
+        }
+      }
+
+      &.required {
+        .key {
+          &::before {
+            content: '*';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            color: #f00;
+            transform: translateY(-50%);
+            margin-top: -4rpx;
+          }
+        }
+      }
+      &.textarea-wrapper {
+        display: block;
+        padding-bottom: 20rpx;
+        .key {
+          width: 100%;
+        }
+        .value {
+          display: block;
+          width: 100%;
+          margin: 0;
+        }
+        .textarea {
+          width: 100%;
+          height: 200rpx;
+          border: 1px solid $color-border;
+          border-radius: 4rpx;
+          padding: 8rpx 12rpx;
+          font-weight: 500;
+          color: $color-value;
+          font-size: 30rpx;
+          line-height: 36rpx;
+          background-color: $color-page;
+          text-align: left;
+        }
+      }
+    }
+  }
+  .button-wrapper {
+    padding-top: $spacing;
+  }
+}

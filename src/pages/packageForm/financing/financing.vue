@@ -1,5 +1,5 @@
 <template>
-  <div class="financing">
+  <div class="financing custom-form-page">
     <div class="form-wrapper">
       <div class="input-wrapper required">
         <div class="key">融资主体名称</div>
@@ -22,10 +22,17 @@
       <div class="input-wrapper required">
         <div class="key">缴税地</div>
         <div class="value">
-          <picker class="picker">
+          <picker
+            class="picker"
+            mode="selector"
+            range-key="name"
+            :range="pickerRange"
+            :value="pickerValue"
+            @change="onChangePicker">
             <div class="picker-content">
-              <div v-if="formData.a5" class="picker-value"></div>
+              <div v-if="pickerValue" class="picker-value">{{ formData.a4_desc }}</div>
               <div v-else class="picker-placeholder">请选择纳税地</div>
+              <YhIcon class="picker-icon" color="#7a7a7a" name="picker" size="28rpx" />
             </div>
           </picker>
         </div>
@@ -74,136 +81,41 @@
 </template>
 <script setup lang="ts">
   import YhButton from '@/components/yh/button/button.vue'
+  import YhIcon from '@/components/yh/icon/icon.vue'
 
-  import { reactive } from 'vue'
+  import { reactive, ref } from 'vue'
 
   const formData = reactive({
     a1: '',
     a2: '',
     a3: '',
     a4: '',
+    a4_desc: '',
     a5: '',
     a6: '',
     a7: '',
     a8: '',
     a9: ''
   })
+
+  const pickerValue = ref('')
+  const pickerRange = ref([
+    {
+      id: '0',
+      name: '测试1'
+    },
+    {
+      id: '1',
+      name: '测试2'
+    }
+  ])
+
+  const onChangePicker = (event: WechatMiniprogram.PickerChange) => {
+    const { value } = event.detail
+    pickerValue.value = value as string
+    formData.a4_desc = pickerRange.value[Number(value)].name
+    console.log('value', value)
+  }
 </script>
 
-<style lang="scss" scoped>
-  $color-key: #3d424d;
-  $color-value: #a1a7b3;
-  $input-height: 82rpx;
-  $input-font-size: 30rpx;
-  $input-line-height: 42rpx;
-
-  .financing {
-    width: 100%;
-    padding: $spacing;
-    .form-wrapper {
-      width: 100%;
-      background-color: #ffffff;
-      box-shadow: 0rpx 2rpx 24rpx 0rpx rgba(8, 76, 192, 0.06);
-      border-radius: 16rpx;
-      padding: 20rpx 40rpx;
-      font-size: $input-font-size;
-      line-height: $input-line-height;
-      .input-wrapper {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        border-bottom: 1px solid $color-border;
-
-        .key {
-          font-weight: 500;
-          color: $color-key;
-          padding: calc(($input-height - 2rpx - $input-line-height) / 2) 0;
-          position: relative;
-          padding-left: 16rpx;
-        }
-        .value {
-          flex: 1;
-          overflow: hidden;
-          min-height: $input-height;
-          display: flex;
-          margin-left: 30rpx;
-        }
-        .input {
-          display: block;
-          width: 100%;
-          height: $input-height;
-          font-weight: 500;
-          text-align: right;
-          color: $color-value;
-          padding: calc(($input-height - 2rpx - $input-line-height) / 2) 0;
-          font-size: $input-font-size;
-          line-height: $input-line-height;
-        }
-        .picker {
-          width: 100%;
-          .picker-content {
-            width: 100%;
-            min-height: $input-height;
-            padding: calc(($input-height - 2rpx - $input-line-height) / 2) 0;
-          }
-          .picker-value,
-          .picker-placeholder {
-            width: 100%;
-            text-align: right;
-            font-weight: 500;
-            transition: all 0.3s;
-          }
-          .picker-value {
-            color: $color-value;
-          }
-          .picker-placeholder {
-            color: #7a7a7a;
-          }
-        }
-
-        &.required {
-          .key {
-            &::before {
-              content: '*';
-              position: absolute;
-              top: 50%;
-              left: 0;
-              color: #f00;
-              transform: translateY(-50%);
-              margin-top: -4rpx;
-            }
-          }
-        }
-        &.textarea-wrapper {
-          display: block;
-          padding-bottom: 20rpx;
-          .key {
-            width: 100%;
-          }
-          .value {
-            display: block;
-            width: 100%;
-            margin: 0;
-          }
-          .textarea {
-            width: 100%;
-            height: 200rpx;
-            border: 1px solid $color-border;
-            border-radius: 4rpx;
-            padding: 8rpx 12rpx;
-            font-weight: 500;
-            color: $color-value;
-            font-size: 30rpx;
-            line-height: 36rpx;
-            background-color: $color-page;
-            text-align: left;
-          }
-        }
-      }
-    }
-    .button-wrapper {
-      padding-top: $spacing;
-    }
-  }
-</style>
+<style lang="scss" scoped></style>
