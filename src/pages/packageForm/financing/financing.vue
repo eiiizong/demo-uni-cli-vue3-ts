@@ -1,12 +1,13 @@
 <template>
   <div class="financing custom-form-page">
     <div class="form-wrapper">
-      <div class="input-wrapper required">
-        <div class="key">融资主体名称</div>
-        <div class="value">
-          <input v-model="formData.a1" type="text" class="input" maxlength="20" placeholder="请输入单位名称" />
-        </div>
-      </div>
+      <ZdbFormInput
+        v-model="formData.a1"
+        required
+        type="text"
+        maxlength="20"
+        label="融资主体名称"
+        placeholder="请输入单位名称" />
       <div class="input-wrapper required">
         <div class="key">合作银行</div>
         <div class="value">
@@ -19,7 +20,8 @@
           <input v-model="formData.a3" type="text" class="input" maxlength="20" placeholder="请输入" />
         </div>
       </div>
-      <div class="input-wrapper required">
+      <ZdbFormPicker v-model="formData.a5" required label="缴税地" placeholder="请选择纳税地" />
+      <!-- <div class="input-wrapper required">
         <div class="key">缴税地</div>
         <div class="value">
           <picker
@@ -36,13 +38,8 @@
             </div>
           </picker>
         </div>
-      </div>
-      <div class="input-wrapper textarea-wrapper required">
-        <div class="key">贷款用途</div>
-        <div class="value">
-          <textarea v-model="formData.a5" class="textarea" maxlength="140" placeholder="请输入贷款用途"></textarea>
-        </div>
-      </div>
+      </div> -->
+      <ZdbFormTextarea v-model="formData.a5" required maxlength="140" label="贷款用途" placeholder="请输入贷款用途" />
       <div class="input-wrapper required">
         <div class="key">融资期限</div>
         <div class="value">
@@ -81,7 +78,10 @@
 </template>
 <script setup lang="ts">
   import YhButton from '@/components/yh/button/button.vue'
-  import YhIcon from '@/components/yh/icon/icon.vue'
+
+  import ZdbFormInput from '@/components/project/zdb-form-input/zdb-form-input.vue'
+  import ZdbFormTextarea from '@/components/project/zdb-form-textarea/zdb-form-textarea.vue'
+  import ZdbFormPicker from '@/components/project/zdb-form-picker/zdb-form-picker.vue'
 
   import { reactive, ref } from 'vue'
 
@@ -109,13 +109,6 @@
       name: '测试2'
     }
   ])
-
-  const onChangePicker = (event: WechatMiniprogram.PickerChange) => {
-    const { value } = event.detail
-    pickerValue.value = value as string
-    formData.a4_desc = pickerRange.value[Number(value)].name
-    console.log('value', value)
-  }
 </script>
 
 <style lang="scss" scoped></style>
