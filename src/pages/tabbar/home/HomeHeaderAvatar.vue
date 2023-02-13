@@ -11,7 +11,7 @@
         <div class="user-unit">单位：{{ userInfo.unitName || '暂无' }}</div>
       </template>
       <template v-else>
-        <div class="no-login" @click="useJumpLoginPage">未登录</div>
+        <div class="no-login" @click="useJumpLoginPage">去登录</div>
       </template>
     </div>
   </view>
