@@ -4,8 +4,10 @@
       <img :src="imageBgNews" alt="" class="bg" />
       <div class="content">头条</div>
     </div>
-    <div class="text-wrapper">
-      <div class="text">最新！成都中小担：全力实势产业建圈强链链最新，哈哈哈哈哈十分大方啊沙发上啊沙发上发呆！</div>
+    <div id="scroll_text_wrapper" class="text-wrapper">
+      <div id="scroll_text" class="text" :style="scrollTextStyle">
+        最新！成都中小担保公司：银海全力实势产业建圈强强联盒!
+      </div>
     </div>
 
     <!-- <YhIcon name="arrow-right" size="24rpx" /> -->
@@ -14,7 +16,73 @@
 
 <script setup lang="ts">
   import imageBgNews from './images/bg-news.png'
-  // import YhIcon from '@/components/yh/icon/icon.vue'
+
+  import { ref, onMounted, computed, nextTick, onUnmounted, getCurrentInstance } from 'vue'
+
+  const instance = getCurrentInstance()
+
+  // 滚动定时器
+  const timer = ref<any>(null)
+  // 滚动定时器
+  const timerNum = ref(0)
+
+  // 滚动的字体
+  const scrollTextStyle = computed(() => {
+    let str = ''
+    str += `left: ${timerNum.value}px; `
+    return str
+  })
+
+  // 滚动字体
+  const scrollText = (scrollWrapperId: string, scrollId: string, step = 2, delay = 300) => {
+    nextTick(() => {
+      uni
+        .createSelectorQuery()
+        .in(instance)
+        .select('#' + scrollWrapperId)
+        .boundingClientRect()
+        .exec((res) => {
+          const wrapperDom = res[0]
+          if (!wrapperDom) {
+            return
+          }
+
+          const { width: wrapperWidth } = wrapperDom
+
+          uni
+            .createSelectorQuery()
+            .in(instance)
+            .select('#' + scrollId)
+            .boundingClientRect()
+            .exec((res) => {
+              const dom = res[0]
+              if (!dom) {
+                return
+              }
+
+              const { width } = dom
+
+              if (width < wrapperWidth) {
+                return
+              }
+              timer.value = setInterval(() => {
+                timerNum.value = timerNum.value - step
+                if (-timerNum.value >= width) {
+                  timerNum.value = wrapperWidth
+                }
+              }, delay)
+            })
+        })
+    })
+  }
+
+  onMounted(() => {
+    scrollText('scroll_text_wrapper', 'scroll_text', 2, 100)
+  })
+
+  onUnmounted(() => {
+    timer.value && clearImmediate(timer.value)
+  })
 </script>
 
 <style lang="scss" scoped>
@@ -52,10 +120,15 @@
     }
     .text-wrapper {
       flex: 1;
+      height: 100%;
       overflow: hidden;
+      position: relative;
       .text {
         white-space: nowrap;
-        // @include textOverflow();
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
       }
     }
   }

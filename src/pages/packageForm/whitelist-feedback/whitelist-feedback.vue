@@ -14,15 +14,15 @@
         </div>
       </div>
       <div class="input-wrapper textarea-wrapper required">
-        <div class="key">贷款用途</div>
+        <div class="key">意见反馈</div>
         <div class="value">
-          <textarea v-model="formData.a6" class="textarea" maxlength="140" placeholder="请输入贷款用途"></textarea>
+          <textarea v-model="formData.a6" class="textarea" maxlength="140" placeholder="请输入意见反馈"></textarea>
         </div>
       </div>
       <div class="input-wrapper required">
-        <div class="key">意见反馈</div>
+        <div class="key">联系方式</div>
         <div class="value">
-          <input v-model="formData.a9" type="number" class="input" maxlength="20" placeholder="请输入意见反馈" />
+          <input v-model="formData.a9" type="number" class="input" maxlength="11" placeholder="请输入联系方式" />
         </div>
       </div>
     </div>
