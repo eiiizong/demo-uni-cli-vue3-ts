@@ -48,7 +48,7 @@
       <ZdbFormInput
         v-model="formData.a7"
         required
-        type="text"
+        type="number"
         maxlength="11"
         label="联系方式"
         placeholder="请输入联系方式" />

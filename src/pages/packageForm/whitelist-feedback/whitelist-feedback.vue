@@ -1,30 +1,22 @@
 <template>
   <div class="whitelist-feedback custom-form-page">
     <div class="form-wrapper">
-      <div class="input-wrapper required">
-        <div class="key">填报单位</div>
-        <div class="value">
-          <input v-model="formData.a1" type="text" class="input" maxlength="20" placeholder="请输入填报单位" />
-        </div>
-      </div>
-      <div class="input-wrapper textarea-wrapper required">
-        <div class="key">问题描述</div>
-        <div class="value">
-          <textarea v-model="formData.a5" class="textarea" maxlength="140" placeholder="请输入问题描述"></textarea>
-        </div>
-      </div>
-      <div class="input-wrapper textarea-wrapper required">
-        <div class="key">意见反馈</div>
-        <div class="value">
-          <textarea v-model="formData.a6" class="textarea" maxlength="140" placeholder="请输入意见反馈"></textarea>
-        </div>
-      </div>
-      <div class="input-wrapper required">
-        <div class="key">联系方式</div>
-        <div class="value">
-          <input v-model="formData.a9" type="number" class="input" maxlength="11" placeholder="请输入联系方式" />
-        </div>
-      </div>
+      <ZdbFormInput
+        v-model="formData.a1"
+        required
+        type="text"
+        maxlength="20"
+        label="填报单位"
+        placeholder="请输入填报单位" />
+      <ZdbFormTextarea v-model="formData.a2" required maxlength="140" label="问题描述" placeholder="请输入问题描述" />
+      <ZdbFormTextarea v-model="formData.a3" required maxlength="140" label="意见反馈" placeholder="请输入意见反馈" />
+      <ZdbFormInput
+        v-model="formData.a4"
+        required
+        type="number"
+        maxlength="11"
+        label="联系方式"
+        placeholder="请输入联系方式" />
     </div>
 
     <div class="button-wrapper">
@@ -35,19 +27,16 @@
 <script setup lang="ts">
   import YhButton from '@/components/yh/button/button.vue'
 
+  import ZdbFormInput from '@/components/project/zdb-form-input/zdb-form-input.vue'
+  import ZdbFormTextarea from '@/components/project/zdb-form-textarea/zdb-form-textarea.vue'
+
   import { reactive } from 'vue'
 
   const formData = reactive({
     a1: '',
     a2: '',
     a3: '',
-    a4: '',
-    a4_desc: '',
-    a5: '',
-    a6: '',
-    a7: '',
-    a8: '',
-    a9: ''
+    a4: ''
   })
 </script>
 
