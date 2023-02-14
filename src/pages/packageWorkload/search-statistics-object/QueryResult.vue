@@ -10,7 +10,7 @@
     </div>
     <div v-else class="wrapper">
       <ZdbTitle title="当前对象" :space="false" />
-      <CardItem :render-data="workloadQueryInfo" @clcik="emit('showPopup')" />
+      <CardItem :render-data="workloadQueryInfo" show-link @clcik="emit('showPopup')" />
     </div>
   </view>
 </template>

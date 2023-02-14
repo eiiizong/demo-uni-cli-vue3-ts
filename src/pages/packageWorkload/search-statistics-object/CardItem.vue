@@ -3,7 +3,7 @@
     <div class="name">
       <img :src="image01" alt="" class="img" />
       <div class="left">{{ renderData.userName || '1233' }}</div>
-      <div class="right">
+      <div v-if="showLink" class="right">
         <YhIcon name="arrow-right" size="30rpx" />
       </div>
     </div>
@@ -26,10 +26,16 @@
 
   const emit = defineEmits(['clcik'])
   const props = defineProps({
-    value: {
-      type: String,
-      default: ''
+    /**
+     * 是否显示可点击箭头 默认false
+     */
+    showLink: {
+      type: Boolean,
+      default: () => false
     },
+    /**
+     * 渲染数据
+     */
     renderData: {
       type: Object as PropType<Store.WorkloadQueryInfo>,
       required: true
