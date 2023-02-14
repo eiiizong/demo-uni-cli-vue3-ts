@@ -1,150 +1,105 @@
 <template>
   <div class="whitelist-apply custom-form-page">
     <div class="form-wrapper">
-      <div class="input-wrapper required">
-        <div class="key">借款人</div>
-        <div class="value">
-          <input v-model="formData.a1" type="text" class="input" maxlength="20" placeholder="请输入借款人" />
-        </div>
-      </div>
-      <div class="input-wrapper required">
-        <div class="key">经营主体</div>
-        <div class="value">
-          <input v-model="formData.a2" type="text" class="input" maxlength="20" placeholder="请输入经营主体" />
-        </div>
-      </div>
-      <div class="input-wrapper required">
-        <div class="key">所属行业</div>
-        <div class="value">
-          <picker
-            class="picker"
-            mode="selector"
-            range-key="name"
-            :range="pickerRange"
-            :value="pickerValue"
-            @change="onChangePicker">
-            <div class="picker-content">
-              <div v-if="pickerValue" class="picker-value">{{ formData.a4_desc }}</div>
-              <div v-else class="picker-placeholder">请选择所属行业</div>
-              <YhIcon class="picker-icon" color="#7a7a7a" name="picker" size="28rpx" />
-            </div>
-          </picker>
-        </div>
-      </div>
-      <div class="input-wrapper required">
-        <div class="key">注册地址</div>
-        <div class="value">
-          <input v-model="formData.a3" type="text" class="input" maxlength="20" placeholder="请输入注册地址" />
-        </div>
-      </div>
-      <div class="input-wrapper required">
-        <div class="key">缴税地</div>
-        <div class="value">
-          <picker
-            class="picker"
-            mode="selector"
-            range-key="name"
-            :range="pickerRange"
-            :value="pickerValue"
-            @change="onChangePicker">
-            <div class="picker-content">
-              <div v-if="pickerValue" class="picker-value">{{ formData.a4_desc }}</div>
-              <div v-else class="picker-placeholder">请选择缴税地</div>
-              <YhIcon class="picker-icon" color="#7a7a7a" name="picker" size="28rpx" />
-            </div>
-          </picker>
-        </div>
-      </div>
-      <div class="input-wrapper required">
-        <div class="key">联系人</div>
-        <div class="value">
-          <input v-model="formData.a8" type="text" class="input" maxlength="20" placeholder="请输入联系人" />
-        </div>
-      </div>
-      <div class="input-wrapper required">
-        <div class="key">联系方式</div>
-        <div class="value">
-          <input v-model="formData.a9" type="number" class="input" maxlength="20" placeholder="请输入联系方式" />
-        </div>
-      </div>
+      <ZdbFormInput
+        v-model="formData.a1"
+        required
+        type="text"
+        maxlength="20"
+        label="借款人"
+        placeholder="请输入借款人" />
+      <ZdbFormInput
+        v-model="formData.a2"
+        required
+        type="text"
+        maxlength="20"
+        label="经营主体"
+        placeholder="请输入您的经营主体" />
+      <ZdbFormPicker
+        v-model="formData.a3"
+        required
+        :range="pickerRange"
+        range-key="name"
+        range-value="id"
+        label="所属行业"
+        placeholder="请选择所属行业" />
+      <ZdbFormInput
+        v-model="formData.a4"
+        required
+        type="text"
+        maxlength="20"
+        label="注册地址"
+        placeholder="请输入注册地址" />
+      <ZdbFormPicker
+        v-model="formData.a5"
+        required
+        :range="pickerRange"
+        range-key="name"
+        range-value="id"
+        label="缴税地"
+        placeholder="请选择缴税地" />
+      <ZdbFormInput
+        v-model="formData.a6"
+        required
+        type="text"
+        maxlength="20"
+        label="联系人"
+        placeholder="请输入联系人" />
+      <ZdbFormInput
+        v-model="formData.a7"
+        required
+        type="text"
+        maxlength="11"
+        label="联系方式"
+        placeholder="请输入联系方式" />
+      <ZdbFormPicker
+        v-model="formData.a8"
+        :range="pickerRange"
+        range-key="name"
+        range-value="id"
+        label="企业类型"
+        placeholder="请选择企业类型" />
+      <ZdbFormInput
+        v-model="formData.a9"
+        type="digit"
+        maxlength="12"
+        label="贷款金额"
+        placeholder="请输入贷款金额(小于1000万)" />
+      <ZdbFormTextarea v-model="formData.a10" maxlength="140" label="贷款用途" placeholder="请输入贷款用途" />
+      <ZdbFormInput
+        v-model="formData.a11"
+        type="digit"
+        maxlength="6"
+        label="贷款期限"
+        placeholder="请输入贷款期限(小于2年)" />
 
-      <div class="input-wrapper">
-        <div class="key">企业类型</div>
-        <div class="value">
-          <picker
-            class="picker"
-            mode="selector"
-            range-key="name"
-            :range="pickerRange"
-            :value="pickerValue"
-            @change="onChangePicker">
-            <div class="picker-content">
-              <div v-if="pickerValue" class="picker-value">{{ formData.a4_desc }}</div>
-              <div v-else class="picker-placeholder">请选择企业类型</div>
-              <YhIcon class="picker-icon" color="#7a7a7a" name="picker" size="28rpx" />
-            </div>
-          </picker>
-        </div>
-      </div>
-      <div class="input-wrapper">
-        <div class="key">贷款金额</div>
-        <div class="value">
-          <input
-            v-model="formData.a6"
-            type="digit"
-            class="input"
-            maxlength="20"
-            placeholder="请输入贷款金额(小于1000万)" />
-        </div>
-      </div>
-      <div class="input-wrapper textarea-wrapper">
-        <div class="key">贷款用途</div>
-        <div class="value">
-          <textarea v-model="formData.a5" class="textarea" maxlength="140" placeholder="请输入贷款用途"></textarea>
-        </div>
-      </div>
-      <div class="input-wrapper">
-        <div class="key">贷款期限</div>
-        <div class="value">
-          <input v-model="formData.a7" type="digit" class="input" maxlength="20" placeholder="请输入贷款期限" />
-        </div>
-      </div>
-      <div class="input-wrapper">
-        <div class="key">是否贷过款</div>
-        <div class="value">
-          <picker
-            class="picker"
-            mode="selector"
-            range-key="name"
-            :range="pickerRange"
-            :value="pickerValue"
-            @change="onChangePicker">
-            <div class="picker-content">
-              <div v-if="pickerValue" class="picker-value">{{ formData.a4_desc }}</div>
-              <div v-else class="picker-placeholder">请选择是否贷过款</div>
-              <YhIcon class="picker-icon" color="#7a7a7a" name="picker" size="28rpx" />
-            </div>
-          </picker>
-        </div>
-      </div>
-      <div class="input-wrapper">
-        <div class="key">上一年度缴税金额</div>
-        <div class="value">
-          <input v-model="formData.a7" type="digit" class="input" maxlength="20" placeholder="请输入金额(万元)" />
-        </div>
-      </div>
-      <div class="input-wrapper">
-        <div class="key">上一年度主营业务收入</div>
-        <div class="value">
-          <input v-model="formData.a7" type="digit" class="input" maxlength="20" placeholder="请输入金额(万元)" />
-        </div>
-      </div>
-      <div class="input-wrapper">
-        <div class="key">目前负债情况</div>
-        <div class="value">
-          <input v-model="formData.a7" type="digit" class="input" maxlength="20" placeholder="请输入金额(万元)" />
-        </div>
-      </div>
+      <ZdbFormPicker
+        v-model="formData.a12"
+        :range="pickerRange"
+        range-key="name"
+        range-value="id"
+        label="是否贷过款"
+        placeholder="请选择是否贷过款" />
+
+      <ZdbFormInput
+        v-model="formData.a13"
+        type="digit"
+        maxlength="10"
+        label="上一年度缴税金额"
+        placeholder="请输入金额(万元)" />
+
+      <ZdbFormInput
+        v-model="formData.a14"
+        type="digit"
+        maxlength="10"
+        label="上一年度主营业务收入"
+        placeholder="请输入金额(万元)" />
+      <ZdbFormInput
+        v-model="formData.a15"
+        type="digit"
+        maxlength="10"
+        label="目前负债情况"
+        placeholder="请输入金额(万元)" />
     </div>
 
     <div class="button-wrapper">
@@ -154,7 +109,10 @@
 </template>
 <script setup lang="ts">
   import YhButton from '@/components/yh/button/button.vue'
-  import YhIcon from '@/components/yh/icon/icon.vue'
+
+  import ZdbFormInput from '@/components/project/zdb-form-input/zdb-form-input.vue'
+  import ZdbFormTextarea from '@/components/project/zdb-form-textarea/zdb-form-textarea.vue'
+  import ZdbFormPicker from '@/components/project/zdb-form-picker/zdb-form-picker.vue'
 
   import { reactive, ref } from 'vue'
 
@@ -163,15 +121,20 @@
     a2: '',
     a3: '',
     a4: '',
-    a4_desc: '',
     a5: '',
     a6: '',
     a7: '',
     a8: '',
-    a9: ''
+    a9: '',
+    a10: '',
+    a11: '',
+    a12: '',
+    a13: '',
+    a14: '',
+    a15: '',
+    a16: ''
   })
 
-  const pickerValue = ref('')
   const pickerRange = ref([
     {
       id: '0',
@@ -182,13 +145,6 @@
       name: '测试2'
     }
   ])
-
-  const onChangePicker = (event: WechatMiniprogram.PickerChange) => {
-    const { value } = event.detail
-    pickerValue.value = value as string
-    formData.a4_desc = pickerRange.value[Number(value)].name
-    console.log('value', value)
-  }
 </script>
 
 <style lang="scss" scoped></style>
