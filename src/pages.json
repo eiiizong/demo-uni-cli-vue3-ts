@@ -236,12 +236,6 @@
           }
         },
         {
-          "path": "switch-statistics-object/switch-statistics-object",
-          "style": {
-            "navigationBarTitleText": "切换统计对象"
-          }
-        },
-        {
           "path": "workload/workload",
           "style": {
             "navigationBarTitleText": "工作量"
@@ -312,11 +306,6 @@
       {
         "name": "packageWorkload-search-statistics-object",
         "path": "pages/packageWorkload/search-statistics-object/search-statistics-object",
-        "query": ""
-      },
-      {
-        "name": "packageWorkload-switch-statistics-object",
-        "path": "pages/packageWorkload/switch-statistics-object/switch-statistics-object",
         "query": ""
       },
       {

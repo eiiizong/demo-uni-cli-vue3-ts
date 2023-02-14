@@ -66,9 +66,13 @@ declare namespace Store {
      */
     userName?: string
     /**
-     * 查询对id
+     * 查询对象id
      */
     userId?: string
+    /**
+     * 查询对象组织架构
+     */
+    org?: string[]
   }
 }
 

@@ -11,16 +11,23 @@
   import Tips from './Tips.vue'
   import QueryResult from './QueryResult.vue'
 
-  import { toRefs } from 'vue'
+  import { toRefs, onMounted } from 'vue'
   import { useStoreUserInfo, useStoreWorkloadQueryInfo } from '@/stores/modules'
+  import { getCurrentDate } from '@/utils/get'
 
   const storeUserInfo = useStoreUserInfo()
   const storeWorkloadQueryInfo = useStoreWorkloadQueryInfo()
 
   const { userInfo } = toRefs(storeUserInfo)
-  const { workloadQueryInfo } = toRefs(storeWorkloadQueryInfo)
 
-  console.log('us', userInfo.value, workloadQueryInfo.value)
+  onMounted(() => [
+    storeWorkloadQueryInfo.updateWorkloadQueryInfo({
+      userName: userInfo.value.userName || '张三',
+      org: ['四川省', '成都市融资再担保有限责任公司', '创新产品部'],
+      startDate: getCurrentDate(),
+      endDate: getCurrentDate()
+    })
+  ])
 </script>
 
 <style lang="scss" scoped>
