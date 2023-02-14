@@ -20,25 +20,14 @@
           <input v-model="formData.a3" type="text" class="input" maxlength="20" placeholder="请输入" />
         </div>
       </div>
-      <ZdbFormPicker v-model="formData.a5" required label="缴税地" placeholder="请选择纳税地" />
-      <!-- <div class="input-wrapper required">
-        <div class="key">缴税地</div>
-        <div class="value">
-          <picker
-            class="picker"
-            mode="selector"
-            range-key="name"
-            :range="pickerRange"
-            :value="pickerValue"
-            @change="onChangePicker">
-            <div class="picker-content">
-              <div v-if="pickerValue" class="picker-value">{{ formData.a4_desc }}</div>
-              <div v-else class="picker-placeholder">请选择纳税地</div>
-              <YhIcon class="picker-icon" color="#7a7a7a" name="picker" size="28rpx" />
-            </div>
-          </picker>
-        </div>
-      </div> -->
+      <ZdbFormPicker
+        v-model="formData.a5"
+        required
+        :range="pickerRange"
+        range-key="name"
+        range-value="id"
+        label="缴税地"
+        placeholder="请选择纳税地" />
       <ZdbFormTextarea v-model="formData.a5" required maxlength="140" label="贷款用途" placeholder="请输入贷款用途" />
       <div class="input-wrapper required">
         <div class="key">融资期限</div>
