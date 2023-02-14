@@ -70,7 +70,7 @@
 
 <style lang="scss" scoped>
   $color-key: #3d424d;
-  $color-value: #a1a7b3;
+  $color-value: #3d424d;
   $input-height: 102rpx;
   $input-font-size: 30rpx;
   $input-line-height: 42rpx;

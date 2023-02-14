@@ -8,20 +8,22 @@
         maxlength="20"
         label="融资主体名称"
         placeholder="请输入单位名称" />
-      <div class="input-wrapper required">
-        <div class="key">合作银行</div>
-        <div class="value">
-          <input v-model="formData.a2" type="text" class="input" maxlength="20" placeholder="请输入合作银行" />
-        </div>
-      </div>
-      <div class="input-wrapper required">
-        <div class="key">统一社会信用代码</div>
-        <div class="value">
-          <input v-model="formData.a3" type="text" class="input" maxlength="20" placeholder="请输入" />
-        </div>
-      </div>
+      <ZdbFormInput
+        v-model="formData.a2"
+        required
+        type="text"
+        maxlength="20"
+        label="合作银行"
+        placeholder="请输入合作银行" />
+      <ZdbFormInput
+        v-model="formData.a3"
+        required
+        type="text"
+        maxlength="18"
+        label="统一社会信用代码"
+        placeholder="请输入" />
       <ZdbFormPicker
-        v-model="formData.a5"
+        v-model="formData.a4"
         required
         :range="pickerRange"
         range-key="name"
@@ -29,35 +31,34 @@
         label="缴税地"
         placeholder="请选择纳税地" />
       <ZdbFormTextarea v-model="formData.a5" required maxlength="140" label="贷款用途" placeholder="请输入贷款用途" />
-      <div class="input-wrapper required">
-        <div class="key">融资期限</div>
-        <div class="value">
-          <input
-            v-model="formData.a6"
-            type="digit"
-            class="input"
-            maxlength="20"
-            placeholder="请输入融资期限(单位：年)" />
-        </div>
-      </div>
-      <div class="input-wrapper required">
-        <div class="key">拟申请额度</div>
-        <div class="value">
-          <input v-model="formData.a7" type="digit" class="input" maxlength="20" placeholder="请输入金额(单位：万元)" />
-        </div>
-      </div>
-      <div class="input-wrapper required">
-        <div class="key">联系人</div>
-        <div class="value">
-          <input v-model="formData.a8" type="text" class="input" maxlength="20" placeholder="请输入联系人" />
-        </div>
-      </div>
-      <div class="input-wrapper required">
-        <div class="key">联系方式</div>
-        <div class="value">
-          <input v-model="formData.a9" type="number" class="input" maxlength="20" placeholder="请输入联系方式" />
-        </div>
-      </div>
+      <ZdbFormInput
+        v-model="formData.a6"
+        required
+        type="digit"
+        maxlength="6"
+        label="融资期限"
+        placeholder="请输入融资期限(单位：年)" />
+      <ZdbFormInput
+        v-model="formData.a7"
+        required
+        type="digit"
+        maxlength="6"
+        label="拟申请额度"
+        placeholder="请输入金额(单位：万元)" />
+      <ZdbFormInput
+        v-model="formData.a8"
+        required
+        type="text"
+        maxlength="20"
+        label="联系人"
+        placeholder="请输入联系人" />
+      <ZdbFormInput
+        v-model="formData.a9"
+        required
+        type="number"
+        maxlength="11"
+        label="联系方式"
+        placeholder="请输入联系方式" />
     </div>
 
     <div class="button-wrapper">
@@ -74,12 +75,12 @@
 
   import { reactive, ref } from 'vue'
 
+  // 表单数据
   const formData = reactive({
     a1: '',
     a2: '',
     a3: '',
     a4: '',
-    a4_desc: '',
     a5: '',
     a6: '',
     a7: '',
@@ -87,7 +88,6 @@
     a9: ''
   })
 
-  const pickerValue = ref('')
   const pickerRange = ref([
     {
       id: '0',

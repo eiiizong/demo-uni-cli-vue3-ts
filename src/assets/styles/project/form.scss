@@ -15,4 +15,7 @@ $input-line-height: 42rpx;
     font-size: $input-font-size;
     line-height: $input-line-height;
   }
+  .button-wrapper {
+    padding: $spacing 0;
+  }
 }
