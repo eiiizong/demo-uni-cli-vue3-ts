@@ -1,16 +1,16 @@
 <template>
   <view class="query-result">
     <div v-if="keyword" class="wrapper">
-      <ZdbTitle title="搜索结果" />
+      <ZdbTitle title="搜索结果" :space="false" />
       <div class="items">
-        <div v-for="item in aaa" :key="item.id" class="item">
-          <CardItem />
+        <div v-for="item in renderList" :key="item.userId" class="item">
+          <CardItem :render-data="item" />
         </div>
       </div>
     </div>
     <div v-else class="wrapper">
-      <ZdbTitle title="当前对象" />
-      <CardItem @clcik="emit('showPopup')" />
+      <ZdbTitle title="当前对象" :space="false" />
+      <CardItem :render-data="workloadQueryInfo" @clcik="emit('showPopup')" />
     </div>
   </view>
 </template>
@@ -19,28 +19,26 @@
   import ZdbTitle from '@/components/project/zdb-title/zdb-title.vue'
   import CardItem from './CardItem.vue'
 
-  import { ref } from 'vue'
+  import type { PropType } from 'vue'
+  import type { Store } from '@/stores/types'
+  import { toRefs } from 'vue'
+  import { useStoreWorkloadQueryInfo } from '@/stores/modules'
 
   const emit = defineEmits(['showPopup'])
   const props = defineProps({
     keyword: {
       type: String,
       required: true
+    },
+    renderList: {
+      type: Array as PropType<Store.WorkloadQueryInfo[]>,
+      required: true
     }
   })
 
-  const aaa = ref([
-    {
-      id: '1'
-    },
-    {
-      id: '2'
-    }
-  ])
+  const storeWorkloadQueryInfo = useStoreWorkloadQueryInfo()
 
-  // const onClick = () => {
-  //   console.log('12')
-  // }
+  const { workloadQueryInfo } = toRefs(storeWorkloadQueryInfo)
 </script>
 
 <style lang="scss" scoped>

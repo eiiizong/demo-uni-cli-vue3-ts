@@ -19,6 +19,9 @@
   import QueryResult from './QueryResult.vue'
 
   import { ref, reactive } from 'vue'
+  import { useStoreWorkloadQueryInfo } from '@/stores/modules'
+
+  const storeWorkloadQueryInfo = useStoreWorkloadQueryInfo()
 
   // 是否显示弹窗
   const isShowPopup = ref(false)
@@ -32,13 +35,14 @@
 
   // 选择组织
   const onChangeSelectOrg = (data: any[]) => {
-    console.log('data', data)
+    storeWorkloadQueryInfo.updateWorkloadQueryInfo({
+      userName: '张三2',
+      org: data.map((item) => item.orgname)
+    })
   }
 
   // 确定搜索
   const onConfirm = () => {
-    console.log(keyword.value)
-
     setTimeout(() => {
       customData.queryResult = [
         {
