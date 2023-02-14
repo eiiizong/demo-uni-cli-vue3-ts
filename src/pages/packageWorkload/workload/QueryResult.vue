@@ -156,7 +156,7 @@
         font-size: 30rpx;
         line-height: 42rpx;
         padding: 14rpx 0;
-        border-bottom: 1px solid $color-border;
+        border-bottom: 1rpx solid $color-border;
         position: relative;
         .img {
           width: 20rpx;

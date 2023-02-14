@@ -3,14 +3,27 @@
     <div class="input-wrapper">
       <div class="label">起止日期</div>
       <div class="value">
-        <picker class="picker" mode="date" @change="onChangeStartDate">
+        <picker
+          class="picker"
+          mode="date"
+          :value="workloadQueryInfo.startDate"
+          :end="toDay"
+          @change="onChangeStartDate">
           <view class="picker-content">
-            <div v-if="workloadQueryInfo.startDate" class="picker-value">{{ workloadQueryInfo.startDate }}</div>
+            <div v-if="workloadQueryInfo.startDate" class="picker-value">
+              {{ workloadQueryInfo.startDate }}
+            </div>
             <div v-else class="picker-placeholder">开始日期</div>
           </view>
         </picker>
         <div class="separate">至</div>
-        <picker class="picker" mode="date" :start="workloadQueryInfo.startDate" :end="toDay" @change="onChangeEndDate">
+        <picker
+          class="picker"
+          mode="date"
+          :value="workloadQueryInfo.endDate"
+          :start="workloadQueryInfo.startDate"
+          :end="toDay"
+          @change="onChangeEndDate">
           <view class="picker-content">
             <div v-if="workloadQueryInfo.endDate" class="picker-value">{{ workloadQueryInfo.endDate }}</div>
             <div v-else class="picker-placeholder">结束日期</div>
@@ -51,11 +64,13 @@
     navigateTo('search-statistics-object', 'packageWorkload')
   }
 
+  // 改变开始日期
   const onChangeStartDate = (event: WechatMiniprogram.PickerChange) => {
     const { value } = event.detail
     storeWorkloadQueryInfo.updateWorkloadQueryInfo({ startDate: value as string })
   }
 
+  // 改变结束日期
   const onChangeEndDate = (event: WechatMiniprogram.PickerChange) => {
     const { value } = event.detail
     storeWorkloadQueryInfo.updateWorkloadQueryInfo({ endDate: value as string })
