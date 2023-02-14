@@ -1,5 +1,5 @@
 <template>
-  <view class="zdb-card-policy" :class="type === '02' ? 'type-02' : ''" @click="handleClick">
+  <view class="zdb-card-policy" :class="type === '02' ? 'type-02' : ''" @click="onClick">
     <div class="name">{{ renderData.chi051 }}</div>
     <div class="desc">{{ renderData.chi037_desc }}</div>
     <div class="info">
@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-  // import { previewPDFWeixin, previewPDFAlipay, previewPDFH5 } from '@/utils/custom-api/index'
+  import { navigateTo } from '@/utils/uni-api'
   /**
    * 政策文件渲染item
    * @description 政策文件渲染item
@@ -29,9 +29,9 @@
     }
   })
 
-  const handleClick = () => {
-    const { chi050, chi051, chi056 } = props.renderData
-    console.log(chi050, chi051, chi056)
+  // 点击事件
+  const onClick = () => {
+    navigateTo('policy-details', 'packagePolicy')
   }
 </script>
 

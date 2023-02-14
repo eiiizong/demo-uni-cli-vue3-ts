@@ -180,7 +180,7 @@
       ]
     },
     {
-      "root": "pages/packageOrg",
+      "root": "pages/packagePolicy",
       "pages": [
         {
           "path": "policy-details/policy-details",
@@ -295,8 +295,8 @@
         "query": ""
       },
       {
-        "name": "packageProject-policy-list",
-        "path": "pages/packageProject/policy-list/policy-list",
+        "name": "packagePolicy-policy-list",
+        "path": "pages/packagePolicy/policy-list/policy-list",
         "query": ""
       },
       {
