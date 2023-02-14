@@ -49,6 +49,27 @@ declare namespace Store {
      */
     userType?: '0' | '1' | '2' | '3' | '4'
   }
+  /**
+   * store 工作量查询信息
+   */
+  export interface WorkloadQueryInfo {
+    /**
+     * 开始日期
+     */
+    startDate?: string
+    /**
+     * 结束日期
+     */
+    endDate?: string
+    /**
+     * 查询对象姓名
+     */
+    userName?: string
+    /**
+     * 查询对id
+     */
+    userId?: string
+  }
 }
 
 export type { Store }

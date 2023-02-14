@@ -1,4 +1,3 @@
-import type { Ref } from 'vue'
 import type { Store } from '@/stores/types'
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
@@ -18,7 +17,7 @@ const useStoreUserInfo = defineStore('storeUserInfo', () => {
   /**
    * 设置 userInfo 游客无须登录也可以访问
    */
-  const userInfo: Ref<Store.UserInfo> = ref({})
+  const userInfo = ref<Store.UserInfo>({})
 
   /**
    * 获取 userInfo

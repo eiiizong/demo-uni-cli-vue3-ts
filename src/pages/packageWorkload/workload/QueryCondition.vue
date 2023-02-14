@@ -1,27 +1,27 @@
 <template>
   <view class="query-condition">
     <div class="input-wrapper">
-      <div class="label">统计对象</div>
-      <div class="value">
-        <div class="input" @click="onClickSelect">哈哈</div>
-      </div>
-    </div>
-    <div class="input-wrapper">
       <div class="label">起止日期</div>
       <div class="value">
-        <picker class="picker" mode="date">
+        <picker class="picker" mode="date" @change="onChangeStartDate">
           <view class="picker-content">
-            <div class="picker-value">12</div>
-            <div class="picker-placeholder"></div>
+            <div v-if="workloadQueryInfo.startDate" class="picker-value">{{ workloadQueryInfo.startDate }}</div>
+            <div v-else class="picker-placeholder">开始日期</div>
           </view>
         </picker>
         <div class="separate">至</div>
-        <picker class="picker" mode="date">
+        <picker class="picker" mode="date" :start="workloadQueryInfo.startDate" :end="toDay" @change="onChangeEndDate">
           <view class="picker-content">
-            <div class="picker-value"></div>
-            <div class="picker-placeholder">请选择</div>
+            <div v-if="workloadQueryInfo.endDate" class="picker-value">{{ workloadQueryInfo.endDate }}</div>
+            <div v-else class="picker-placeholder">结束日期</div>
           </view>
         </picker>
+      </div>
+    </div>
+    <div class="input-wrapper">
+      <div class="label">统计对象</div>
+      <div class="value">
+        <div class="input" @click="onClickSelect">{{ workloadQueryInfo.userName }}</div>
       </div>
     </div>
   </view>
@@ -29,6 +29,11 @@
 
 <script setup lang="ts">
   import { navigateTo } from '@/utils/uni-api'
+
+  import { toRefs, ref } from 'vue'
+  import { useStoreWorkloadQueryInfo } from '@/stores/modules'
+  import { getCurrentDate } from '@/utils/get'
+
   const props = defineProps({
     value: {
       type: String,
@@ -36,8 +41,24 @@
     }
   })
 
+  const toDay = ref(getCurrentDate('day'))
+
+  const storeWorkloadQueryInfo = useStoreWorkloadQueryInfo()
+  const { workloadQueryInfo } = toRefs(storeWorkloadQueryInfo)
+
+  // 跳转至搜索页
   const onClickSelect = () => {
     navigateTo('search-statistics-object', 'packageWorkload')
+  }
+
+  const onChangeStartDate = (event: WechatMiniprogram.PickerChange) => {
+    const { value } = event.detail
+    storeWorkloadQueryInfo.updateWorkloadQueryInfo({ startDate: value as string })
+  }
+
+  const onChangeEndDate = (event: WechatMiniprogram.PickerChange) => {
+    const { value } = event.detail
+    storeWorkloadQueryInfo.updateWorkloadQueryInfo({ endDate: value as string })
   }
 </script>
 
@@ -67,19 +88,19 @@
       .input {
         flex: 1;
         height: 72rpx;
-        background-color: #fdfdfd;
+        background-color: transparent;
         border-radius: 4rpx;
-        border: solid 1px #999999;
+        border: solid 1px $color-border;
         font-size: inherit;
         line-height: 68rpx;
-        padding: 0 26rpx;
+        padding: 0 24rpx;
       }
 
       .separate {
         padding: 0 16rpx;
       }
       .picker-placeholder {
-        color: rgba(0, 0, 0, 0.3);
+        color: #7a7a7a;
       }
       &:last-child {
         margin-bottom: 0;
