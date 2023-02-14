@@ -180,6 +180,23 @@
       ]
     },
     {
+      "root": "pages/packageOrg",
+      "pages": [
+        {
+          "path": "policy-details/policy-details",
+          "style": {
+            "navigationBarTitleText": "政策文件详情"
+          }
+        },
+        {
+          "path": "policy-list/policy-list",
+          "style": {
+            "navigationBarTitleText": "政策文件"
+          }
+        }
+      ]
+    },
+    {
       "root": "pages/packageProcess",
       "pages": [
         {
@@ -216,12 +233,6 @@
           "path": "process-details/process-details",
           "style": {
             "navigationBarTitleText": "流程详情"
-          }
-        },
-        {
-          "path": "query-policy/query-policy",
-          "style": {
-            "navigationBarTitleText": "政策文件"
           }
         }
       ]
@@ -284,8 +295,8 @@
         "query": ""
       },
       {
-        "name": "packageProject-query-policy",
-        "path": "pages/packageProject/query-policy/query-policy",
+        "name": "packageProject-policy-list",
+        "path": "pages/packageProject/policy-list/policy-list",
         "query": ""
       },
       {

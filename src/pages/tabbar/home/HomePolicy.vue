@@ -62,7 +62,7 @@
 
   // 路由跳转
   const onClick = () => {
-    navigateTo('query-policy', 'packageProject')
+    navigateTo('policy-list', 'packagePolicy')
   }
 </script>
 

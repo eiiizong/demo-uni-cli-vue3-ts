@@ -11,10 +11,10 @@
 
   // 路由跳转
   const onClick = () => {
-    navigateTo('query-policy', 'packageProject', { focus: true })
+    navigateTo('policy-list', 'packagePolicy', { focus: true })
   }
 </script>
-s
+
 <style lang="scss" scoped>
   .home-search {
     width: 100%;
