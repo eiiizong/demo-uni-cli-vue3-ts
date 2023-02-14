@@ -1,6 +1,6 @@
 <template>
   <view class="query-result">
-    <div class="wrapper">
+    <div v-if="keyword" class="wrapper">
       <ZdbTitle title="搜索结果" />
       <div class="items">
         <div v-for="item in aaa" :key="item.id" class="item">
@@ -8,7 +8,7 @@
         </div>
       </div>
     </div>
-    <div class="wrapper">
+    <div v-else class="wrapper">
       <ZdbTitle title="当前对象" />
       <CardItem @clcik="emit('showPopup')" />
     </div>
@@ -23,9 +23,9 @@
 
   const emit = defineEmits(['showPopup'])
   const props = defineProps({
-    value: {
+    keyword: {
       type: String,
-      default: ''
+      required: true
     }
   })
 
@@ -46,6 +46,8 @@
 <style lang="scss" scoped>
   .query-result {
     width: 100%;
+    padding: 0 $spacing;
+    background-color: #fff;
     .wrapper {
       .items {
         .item {
