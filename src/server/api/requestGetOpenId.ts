@@ -14,9 +14,7 @@ const requestGetOpenId = (
   isShowErrorToast = true
 ): Promise<GetOpenIdSuccessResult> => {
   const data = {
-    code,
-    userType: '1',
-    appIndex: '0'
+    code
   }
 
   return new Promise((resolve, reject) => {

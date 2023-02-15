@@ -53,9 +53,9 @@ export { hideHomeButton } from './hideHomeButton'
 // export { setTabBarStyle } from './setTabBarStyle'
 // export { setTabBarItem } from './setTabBarItem'
 // export { setTabBarBadge } from './setTabBarBadge'
-// export { removeTabBarBadge } from './removeTabBarBadge'
-// export { hideTabBarRedDot } from './hideTabBarRedDot'
-// export { hideTabBar } from './hideTabBar'
+export { removeTabBarBadge } from './removeTabBarBadge'
+export { hideTabBarRedDot } from './hideTabBarRedDot'
+export { hideTabBar } from './hideTabBar'
 
 // 界面-下拉刷新
 export { stopPullDownRefresh } from './stopPullDownRefresh'
