@@ -4,7 +4,7 @@
     <QueryResult :keyword="keyword" :render-list="customData.queryResult" @show-popup="isShowPopup = true" />
 
     <div v-if="!keyword" class="button-wrapper">
-      <YhButton type="primary" block>确定</YhButton>
+      <YhButton type="primary" block @click="onClickButton">确定</YhButton>
     </div>
 
     <ZdbSelectOrg v-model="isShowPopup" @change="onChangeSelectOrg" />
@@ -20,6 +20,7 @@
 
   import { ref, reactive } from 'vue'
   import { useStoreWorkloadQueryInfo } from '@/stores/modules'
+  import { navigateBack } from '@/utils/uni-api'
 
   const storeWorkloadQueryInfo = useStoreWorkloadQueryInfo()
 
@@ -55,6 +56,10 @@
         }
       ]
     }, 1000)
+  }
+
+  const onClickButton = () => {
+    navigateBack()
   }
 </script>
 
