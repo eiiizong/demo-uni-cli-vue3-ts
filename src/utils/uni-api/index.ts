@@ -85,6 +85,7 @@ export { clearStorage } from './clearStorage'
 
 // 媒体-图片
 export { previewImage } from './previewImage'
+export { getImageInfo } from './getImageInfo'
 export { chooseImage } from './chooseImage'
 
 // 开放接口-登录
