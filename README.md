@@ -16,8 +16,6 @@
 $ node -v
 ```
 
-
-
 - **yarn (推荐使用)**
 
 ```bash
@@ -60,10 +58,6 @@ $ yarn dev
 
 [./src/doc/项目运行说明文档.md](./src/doc/项目运行说明文档.md)
 
-或
-
-[./src/doc/项目运行说明文档.pdf](./src/doc/项目运行说明文档.pdf)
-
 ### 3、项目打包
 
 使用 `npm`：
@@ -89,7 +83,3 @@ $ yarn build
 详细打包步骤参考：
 
 [./src/doc/项目打包发行说明文档.md](./src/doc/项目打包发行说明文档.md)
-
-或
-
-[./src/doc/项目打包发行说明文档.pdf](./src/doc/项目打包发行说明文档.pdf)
