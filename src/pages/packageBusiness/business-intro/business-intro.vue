@@ -81,13 +81,13 @@
     .tab-content {
       height: 100%;
       overflow: auto;
-      padding: 20rpx 0;
+      padding: 20rpx 30rpx;
       background-color: #fff;
       .img {
         width: 100%;
-        height: 1474rpx;
+        height: 1600rpx;
         &.img-02 {
-          height: 1210rpx;
+          height: 1250rpx;
         }
       }
     }
