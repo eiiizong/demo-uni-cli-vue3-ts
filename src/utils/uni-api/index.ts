@@ -33,8 +33,8 @@ export { showLoading } from './showLoading'
 export { showActionSheet } from './showActionSheet'
 export { hideToast } from './hideToast'
 export { hideLoading } from './hideLoading'
-// export { enableAlertBeforeUnload } from './enableAlertBeforeUnload'
-// export { disableAlertBeforeUnload } from './disableAlertBeforeUnload'
+export { enableAlertBeforeUnload } from './enableAlertBeforeUnload'
+export { disableAlertBeforeUnload } from './disableAlertBeforeUnload'
 
 // 界面-导航栏
 export { showNavigationBarLoading } from './showNavigationBarLoading'
@@ -44,7 +44,7 @@ export { hideNavigationBarLoading } from './hideNavigationBarLoading'
 export { hideHomeButton } from './hideHomeButton'
 
 // 界面-背景
-// export { setBackgroundTextStyle } from './setBackgroundTextStyle'
+export { setBackgroundTextStyle } from './setBackgroundTextStyle'
 export { setBackgroundColor } from './setBackgroundColor'
 
 // 界面-Tab Bar
