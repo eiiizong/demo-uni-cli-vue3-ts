@@ -49,9 +49,9 @@ export { setBackgroundTextStyle } from './setBackgroundTextStyle'
 export { setBackgroundColor } from './setBackgroundColor'
 
 // 界面-Tab Bar
-// export { showTabBarRedDot } from './showTabBarRedDot'
-// export { showTabBar } from './showTabBar'
-// export { setTabBarStyle } from './setTabBarStyle'
+export { showTabBarRedDot } from './showTabBarRedDot'
+export { showTabBar } from './showTabBar'
+export { setTabBarStyle } from './setTabBarStyle'
 export { setTabBarItem } from './setTabBarItem'
 export { setTabBarBadge } from './setTabBarBadge'
 export { removeTabBarBadge } from './removeTabBarBadge'
@@ -91,6 +91,9 @@ export { chooseImage } from './chooseImage'
 
 // 开放接口-登录
 export { login } from './login'
+
+// 开放接口-生物认证
+export { startSoterAuthentication } from './startSoterAuthentication'
 
 // 位置
 export { openLocation } from './openLocation'
