@@ -1,21 +1,54 @@
 <template>
   <view class="home-policy">
-    <ZdbPanel title="政策文件" right-text="查看更多" @click="onClick">
+    <div class="tabs">
+      <div
+        v-for="item in tabs"
+        :key="item.id"
+        class="tab"
+        :class="currentTabId === item.id ? 'active' : ''"
+        @click="onClickTab(item.id)">
+        {{ item.name }}
+      </div>
+    </div>
+    <div class="query-result">
       <div class="items">
         <div v-for="item in navs" :key="item.chi050" class="item">
           <ZdbCardPolicy :render-data="item" />
         </div>
       </div>
-    </ZdbPanel>
+      <div class="button-wrapper">
+        <YhButton type="primary" block @click="onClickButton">查看更多</YhButton>
+      </div>
+    </div>
   </view>
 </template>
 
 <script setup lang="ts">
-  import ZdbPanel from '@/components/project/zdb-panel/zdb-panel.vue'
+  import YhButton from '@/components/yh/button/button.vue'
   import ZdbCardPolicy from '@/components/project/zdb-card-policy/zdb-card-policy.vue'
 
   import { ref } from 'vue'
   import { navigateTo } from '@/utils/uni-api'
+
+  const currentTabId = ref('0')
+  const tabs = ref([
+    {
+      id: '0',
+      name: '业务进展'
+    },
+    {
+      id: '1',
+      name: '机构动态'
+    },
+    {
+      id: '2',
+      name: '业务聚焦'
+    },
+    {
+      id: '3',
+      name: '政策解读'
+    }
+  ])
 
   const navs = ref([
     {
@@ -60,8 +93,13 @@
     }
   ])
 
-  // 路由跳转
-  const onClick = () => {
+  const onClickTab = (id: string) => {
+    currentTabId.value = id
+
+    // navigateTo('policy-list', 'packagePolicy')
+  }
+
+  const onClickButton = () => {
     navigateTo('policy-list', 'packagePolicy')
   }
 </script>
@@ -71,12 +109,37 @@
     width: 100%;
     background-color: $color-page;
     padding-bottom: $spacing;
-    .items {
-      .item {
-        margin-bottom: 14rpx;
+    padding: 0 $spacing;
+    .tabs {
+      display: flex;
+      align-items: center;
+
+      .tab {
+        font-size: 32rpx;
+        line-height: 80rpx;
+        color: #333;
+        margin-right: $spacing;
+        transition: all 0.3s;
         &:last-child {
-          margin-bottom: 0;
+          margin-right: 0;
         }
+        &.active {
+          color: $color-primary;
+          font-weight: 700;
+        }
+      }
+    }
+    .query-result {
+      .items {
+        .item {
+          margin-bottom: 14rpx;
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+      .button-wrapper {
+        padding: $spacing;
       }
     }
   }
