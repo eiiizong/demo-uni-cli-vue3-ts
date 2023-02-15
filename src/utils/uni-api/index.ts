@@ -20,7 +20,7 @@ export { navigateBack } from './navigateBack'
 // 跳转
 export { navigateToMiniProgram } from './navigateToMiniProgram'
 export { navigateBackMiniProgram } from './navigateBackMiniProgram'
-// export { exitMiniProgram } from './exitMiniProgram'
+export { exitMiniProgram } from './exitMiniProgram'
 
 // 转发
 export { showShareMenu } from './showShareMenu'
@@ -45,7 +45,7 @@ export { hideHomeButton } from './hideHomeButton'
 
 // 界面-背景
 // export { setBackgroundTextStyle } from './setBackgroundTextStyle'
-// export { setBackgroundColor } from './setBackgroundColor'
+export { setBackgroundColor } from './setBackgroundColor'
 
 // 界面-Tab Bar
 // export { showTabBarRedDot } from './showTabBarRedDot'
@@ -71,7 +71,7 @@ export { downloadFile } from './downloadFile'
 export { uploadFile } from './uploadFile'
 
 // 支付
-// export { requestPayment } from './requestPayment'
+export { requestPayment } from './requestPayment'
 
 // 数据缓存
 export { setStorageSync } from './setStorageSync'
@@ -97,6 +97,7 @@ export { chooseLocation } from './chooseLocation'
 
 // 文件
 export { openDocument } from './openDocument'
+export { getFileSystemManager } from './getFileSystemManager'
 
 // 开放接口-用户信息
 export { getUserProfile } from './getUserProfile'
