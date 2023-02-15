@@ -5,6 +5,7 @@ export { canIUse } from './canIUse'
 
 // 基础-系统
 export { getSystemInfo } from './getSystemInfo'
+export { getSystemInfoSync } from './getSystemInfoSync'
 
 // 基础-更新
 export { updateWeChatApp } from './updateWeChatApp'
@@ -51,8 +52,8 @@ export { setBackgroundColor } from './setBackgroundColor'
 // export { showTabBarRedDot } from './showTabBarRedDot'
 // export { showTabBar } from './showTabBar'
 // export { setTabBarStyle } from './setTabBarStyle'
-// export { setTabBarItem } from './setTabBarItem'
-// export { setTabBarBadge } from './setTabBarBadge'
+export { setTabBarItem } from './setTabBarItem'
+export { setTabBarBadge } from './setTabBarBadge'
 export { removeTabBarBadge } from './removeTabBarBadge'
 export { hideTabBarRedDot } from './hideTabBarRedDot'
 export { hideTabBar } from './hideTabBar'

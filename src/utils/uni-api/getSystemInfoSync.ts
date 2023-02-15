@@ -1,13 +1,6 @@
 /**
- * 获取系统信息同步接口
- * @support 
- * 微信小程序支持情况说明：https://developers.weixin.qq.com/miniprogram/dev/api/base/system/system-info/wx.getSystemInfoSync.html
- * 
- * 本接口从基础库版本 1.9.6 起支持在小程序插件中使用
- * 
- * uniapp支持情况说明：https://uniapp.dcloud.io/api/system/info?id=getsysteminfosync
- * 
- * @returns {Object}
+ * 获取系统信息的同步接口
+ * @support uniapp详细说明：https://uniapp.dcloud.io/api/system/info?id=getsysteminfosync
  *
  * @example
  try {
