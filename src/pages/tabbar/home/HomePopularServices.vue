@@ -135,13 +135,25 @@
       imgSrc: imageNavBMDFK
     }
 
+    // 政策法规
+    const navZCFG: PopularServiceNavItem = {
+      id: 'zcfg',
+      name: '政策法规',
+      desc: '一键查询政策',
+      pathName: 'policy-list',
+      packageName: 'packagePolicy',
+      isAuth: false,
+      disabled: false,
+      imgSrc: imageNavBMDFK
+    }
+
     // 默认为游客访问内容
     const arr: PopularServiceNavItem[][] = [[], []]
 
     const { role } = userInfo.value
 
     switch (role) {
-      // 游客
+      // 企业
       case '1':
         arr[0].push(navBMDSQ)
         arr[0].push(navWYRZ)
@@ -149,7 +161,7 @@
         arr[0].push(navHZJG)
         arr[1].push(navBMDFK)
         break
-      // 领导
+      // 合作机构
       case '2':
         arr[0].push(navRYDYBZ)
         arr[0].push(navGZL)
@@ -171,7 +183,7 @@
         arr[1].push(navWYRZ)
         arr[1].push(navYWJS)
         break
-      // 合作机构
+      // 领导
       case '4':
         arr[0].push(navHZJG)
         arr[0].push(navSPJDCX)
@@ -180,7 +192,14 @@
         arr[1].push(navBMDSQ)
         arr[1].push(navWYRZ)
         break
+      // 默认游客
       default:
+        arr[0].push(navYWJS)
+        arr[0].push(navWYRZ)
+        arr[0].push(navBMDSQ)
+        arr[0].push(navBMDFK)
+        arr[1].push(navHZJG)
+        arr[1].push(navZCFG)
         break
     }
 

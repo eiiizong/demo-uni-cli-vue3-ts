@@ -10,9 +10,7 @@
     // 登录
     requestCustomLogin().then((res) => {
       storeUserInfo.updateStoreUserInfo({
-        ...res,
-        // 自定义用户类型 以便测试
-        role: '2'
+        ...res
       })
     })
   })

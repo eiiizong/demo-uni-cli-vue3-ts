@@ -31,10 +31,6 @@ export interface LoginSuccessResult {
    */
   tel: string
   /**
-   * 用户 token
-   */
-  token: string
-  /**
    * 用户id
    */
   userId: string
@@ -42,4 +38,8 @@ export interface LoginSuccessResult {
    * 用户姓名
    */
   userName: string
+  /**
+   * 企业名称
+   */
+  orgName?: string
 }
