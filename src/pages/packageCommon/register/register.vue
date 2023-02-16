@@ -87,7 +87,7 @@
     requestRegisterCompany(openId || '', tel || '', companyName, userName).then((res) => {
       storeUserInfo.updateStoreUserInfo({
         userName,
-        companyName
+        orgName: companyName
       })
 
       showToast('注册成功', 'success').then(() => {

@@ -12,7 +12,7 @@ declare namespace Store {
     /**
      * 用户单位名称
      */
-    companyName?: string
+    orgName?: string
 
     /**
      * 帐号状态（0正常使用 1锁定 2暂停使用 3禁止使用）

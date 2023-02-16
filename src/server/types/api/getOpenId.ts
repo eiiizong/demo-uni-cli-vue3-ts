@@ -41,7 +41,7 @@ interface UserInfo {
   /**
    * 企业名称
    */
-  companyName?: string
+  orgName?: string
 }
 
 /**

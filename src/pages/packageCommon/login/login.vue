@@ -48,16 +48,15 @@
         // 登录
         requestLogin(openId || '', res).then((res) => {
           const { role } = res
-
           storeUserInfo.updateStoreUserInfo(res)
-          // 游客 处理注册逻辑
+          // 游客 跳转至注册页面
           if (role === '0') {
             redirectTo('register', 'packageCommon')
           } else {
             // 提示用户登录成功后返回上一页
             showToast('登录成功', 'success').then(() => {
               setTimeout(() => {
-                navigateBack()
+                navigateBack(1)
               }, 1500)
             })
           }

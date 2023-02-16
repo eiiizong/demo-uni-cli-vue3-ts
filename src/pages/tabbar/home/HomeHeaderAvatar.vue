@@ -8,7 +8,7 @@
     <div class="info">
       <template v-if="userInfo.userId">
         <div class="user-name">{{ formatUserName(userInfo.userName) }}</div>
-        <div class="user-unit">单位：{{ userInfo.unitName || '暂无' }}</div>
+        <div class="user-unit">单位：{{ userInfo.orgName || '暂无' }}</div>
       </template>
       <template v-else>
         <div class="no-login" @click="useJumpLoginPage">去登录</div>
