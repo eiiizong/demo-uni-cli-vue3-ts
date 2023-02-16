@@ -41,22 +41,24 @@
   // 获取用户手机号登录
   const onGetPhoneNumber = (event: WechatMiniprogram.ButtonGetPhoneNumber) => {
     const { sessionKey, openId } = userInfo.value
-    const { errMsg, code, encryptedData, cloudID, iv } = event.detail
+    const { errMsg, encryptedData, iv } = event.detail
     if (errMsg === 'getPhoneNumber:ok') {
       // 获取用户真实手机号
       requestGetRealPhone(encryptedData || '', iv || '', sessionKey || '').then((res) => {
         // 登录
         requestLogin(openId || '', res).then((res) => {
-          storeUserInfo.updateStoreUserInfo({
-            userId: '1',
-            userName: '游客1'
-          })
-          // 提示用户登录成功后返回上一页
-          showToast('登录成功', 'success').then(() => {
-            setTimeout(() => {
-              navigateBack()
-            }, 1500)
-          })
+          console.log('res12', res)
+
+          // storeUserInfo.updateStoreUserInfo({
+          //   userId: '1',
+          //   userName: '游客1'
+          // })
+          // // 提示用户登录成功后返回上一页
+          // showToast('登录成功', 'success').then(() => {
+          //   setTimeout(() => {
+          //     navigateBack()
+          //   }, 1500)
+          // })
         })
       })
     } else {

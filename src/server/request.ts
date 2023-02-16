@@ -125,22 +125,26 @@ const request = (
             apiResData = { ...(_data as Api.RequestResponseReslut<any>) }
           }
 
-          const { code, data: resData, errors } = apiResData
+          const { code, data: resData, message } = apiResData
 
-          // 服务器返回错误
-          if (errors && errors.length > 0) {
-            const error = errors[0]
-            if (showErrorToast) {
-              showModal(error.msg)
-            }
-            reject(error)
-          } else {
+          // 请求成功，数据正常
+          if (code === 200) {
             // 服务器返回的数据是否正常判断
-            if (code === 200 && resData) {
+            if (resData) {
               resolve(resData)
             } else {
-              reject(resData)
+              reject(apiResData)
             }
+          } else {
+            // 服务器返回错误
+            if (showErrorToast) {
+              if (message) {
+                showModal(message)
+              } else {
+                showModal('未返还message字段', '接口调用错误')
+              }
+            }
+            reject(apiResData)
           }
         } else {
           reject(res)

@@ -17,14 +17,11 @@ const requestLogin = (
 ): Promise<LoginSuccessResult> => {
   const data = {
     openid: openId,
-    tel,
-    loginId: '510902199507236534',
-    idCard: '510902199507236534',
-    userName: '曾小明'
+    tel
   }
 
   return new Promise((resolve, reject) => {
-    request('/frontRestService/frontLoginRestService/login', data, isShowLoading, isShowErrorToast)
+    request('login.do', data, isShowLoading, isShowErrorToast)
       .then((res) => {
         resolve(res)
       })

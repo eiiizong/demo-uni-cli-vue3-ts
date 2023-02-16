@@ -29,7 +29,7 @@ declare namespace Api {
     /**
      * 错误信息
      */
-    errors?: any[]
+    message?: string
   }
 
   interface B001_ItemList {

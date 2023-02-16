@@ -1,4 +1,3 @@
-import type { GetRealPhoneSuccessResult } from '@/server/types/api'
 import { request } from '@/server/request'
 
 /**
@@ -16,7 +15,7 @@ const requestGetRealPhone = (
   sessionKey: string,
   isShowLoading = true,
   isShowErrorToast = true
-): Promise<GetRealPhoneSuccessResult> => {
+): Promise<string> => {
   const data = {
     encryptedData,
     iv,
@@ -24,7 +23,7 @@ const requestGetRealPhone = (
   }
 
   return new Promise((resolve, reject) => {
-    request('/frontRestService/frontLoginRestService/getRealPhone', data, isShowLoading, isShowErrorToast)
+    request('getRealPhone.do', data, isShowLoading, isShowErrorToast)
       .then((res) => {
         resolve(res)
       })
