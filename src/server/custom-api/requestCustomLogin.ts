@@ -5,12 +5,12 @@ import { useJumpLoginPage } from '@/hooks/project'
 
 /**
  * 自定义登录 业务逻辑不一致请自行更改
- * @param {boolean} [isShowNotLoggedInPrompt=true] 用户未登录时 是否进行提示。默认 true。
+ * @param {boolean} [isShowNotLoggedInPrompt=true] 用户未登录时 是否进行提示。默认 false 。
  * @param {boolean} [isShowLoading=true] 是否显示加载中动画。默认值 true。
  * @param {boolean} [isShowErrorToast=true] 是否显示接口调用错误提示。默认值 true。
  */
 const requestCustomLogin = (
-  isShowNotLoggedInPrompt = true,
+  isShowNotLoggedInPrompt = false,
   isShowLoading = true,
   isShowErrorToast = true
 ): Promise<Store.UserInfo> => {

@@ -18,7 +18,7 @@ const requestGetOpenId = (
   }
 
   return new Promise((resolve, reject) => {
-    request('/frontRestService/frontLoginRestService/getOpenId', data, isShowLoading, isShowErrorToast)
+    request('getOpenId.do', data, isShowLoading, isShowErrorToast)
       .then((res) => {
         resolve(res)
       })

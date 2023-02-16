@@ -1,17 +1,20 @@
 <script setup lang="ts">
   import { onLaunch, onShow, onHide, onError } from '@dcloudio/uni-app'
   import { checkAppUpdate } from '@/utils/check'
-  // import { requestCustomLogin } from '@/server/custom-api'
+  import { requestCustomLogin } from '@/server/custom-api'
   import { useStoreUserInfo } from '@/stores/modules'
 
   onLaunch(() => {
     const storeUserInfo = useStoreUserInfo()
 
-    // // 登录
-    // requestCustomLogin().then((res) => {
-    //   storeUserInfo.updateStoreUserInfo(res)
-    // })
-    storeUserInfo.updateStoreUserInfo({ userType: '2' })
+    // 登录
+    requestCustomLogin().then((res) => {
+      storeUserInfo.updateStoreUserInfo({
+        ...res,
+        // 自定义用户类型 以便测试
+        userType: '2'
+      })
+    })
   })
 
   onShow(() => {

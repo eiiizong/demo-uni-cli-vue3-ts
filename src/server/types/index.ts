@@ -14,18 +14,22 @@ declare namespace Api {
    * 定义所有接口返回的数据类型
    */
   export interface RequestResponseReslut<T> {
+    /**
+     * 状态码 200 成功
+     */
     code?: number
-    data?: {
-      resultData: {
-        code?: string
-        message?: string
-        token?: string
-        data?: T
-      }
-    }
-    errors?: RequestResponseReslutError[]
-    requestId?: string
+    /**
+     * 数据
+     */
+    data?: T
+    /**
+     * true 成功
+     */
     serviceSuccess?: boolean
+    /**
+     * 错误信息
+     */
+    errors?: any[]
   }
 
   interface B001_ItemList {

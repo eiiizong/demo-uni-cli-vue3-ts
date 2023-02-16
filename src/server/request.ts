@@ -11,10 +11,10 @@ const isOpenDataEncryption = VITE_OPEN_DATA_ENCRYPTION === 'true'
 // 当前环境是否为开发环境
 const isDev = getIsDev()
 // 字符串中是否含有“http”或者“https”的正则验证表达式
-const httpExp = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/
+const httpExp = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- ./?%&=]*)?/
 
 // 是否已经发生错误 如果发生错误 则不再执行
-let isError = false
+const isError = false
 
 /**
  * 自定义发起 HTTPS 网络请求 未定义token过期业务逻辑
@@ -112,9 +112,13 @@ const request = (
             const decryptStr = AES_Decrypt(_data as string)
             apiResData = JSON.parse(decryptStr)
             if (isDev) {
+              // eslint-disable-next-line no-console
               console.groupCollapsed(`请求地址 => ${url}`)
+              // eslint-disable-next-line no-console
               console.log('%c params', 'color: #03A9F4; font-weight: bold', data)
+              // eslint-disable-next-line no-console
               console.log('%c res data', 'color: #4CAF50; font-weight: bold', apiResData)
+              // eslint-disable-next-line no-console
               console.groupEnd()
             }
           } else {
@@ -133,36 +137,9 @@ const request = (
           } else {
             // 服务器返回的数据是否正常判断
             if (code === 200 && resData) {
-              const { resultData } = resData
-              if (resultData) {
-                const { code, message, token, data } = resultData
-                if (code === '200') {
-                  resolve(data)
-                } else if (code === '401') {
-                  // 登录超时
-                  if (!isError) {
-                    isError = true
-                    showModal('登录超时！即将退出小程序，请重新进入！').then((res) => {
-                      isError = false
-                      // @ts-ignore：类型“Uni”上不存在属性“exitMiniProgram”
-                      uni.exitMiniProgram()
-                    })
-                    reject(resultData)
-                  }
-                } else if (code === '402') {
-                  // 更新token
-                  resolve(resultData)
-                } else {
-                  if (showErrorToast) {
-                    showModal(message ? message : '接口未返回message字段')
-                    reject(resultData)
-                  } else {
-                    reject(resultData)
-                  }
-                }
-              } else {
-                reject(resData)
-              }
+              resolve(resData)
+            } else {
+              reject(resData)
             }
           }
         } else {
