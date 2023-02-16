@@ -13,10 +13,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 100rpx;
-    padding-bottom: 100rpx;
+    padding: 52rpx 0;
     .logo {
-      width: 255rpx;
+      width: 256rpx;
       height: 240rpx;
     }
   }

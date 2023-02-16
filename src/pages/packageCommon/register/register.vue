@@ -5,14 +5,11 @@
     <div class="main-wrapper">
       <div class="main">
         <RegisterLogo />
-        <RegisterForm v-model="isAgree" />
-        <YhButton
-          block
-          type="primary"
-          open-type="getPhoneNumber"
-          :disabled="!isAgree"
-          @getphonenumber="onGetPhoneNumber">
-          登 录
+        <RegisterTip />
+        <RegisterForm v-model="formData" />
+        <YhButton block type="primary" :disabled="!isInputCompleted" @click="onClickRegister"> 立即注册 </YhButton>
+        <YhButton block plain custom-style="border:0;" type="primary" @click="onClickCancelRegister">
+          取消注册
         </YhButton>
         <RegisterFooter />
       </div>
@@ -24,10 +21,11 @@
   import YhNavBar from '@/components/yh/nav-bar/nav-bar.vue'
 
   import RegisterLogo from './RegisterLogo.vue'
+  import RegisterTip from './RegisterTip.vue'
   import RegisterForm from './RegisterForm.vue'
   import RegisterFooter from './RegisterFooter.vue'
 
-  import { ref, toRefs } from 'vue'
+  import { reactive, toRefs, computed } from 'vue'
   import { navigateBack, showModal, showToast } from '@/utils/uni-api'
   import { requestGetRealPhone, requestLogin } from '@/server/api'
   import { useStoreUserInfo } from '@/stores/modules'
@@ -35,33 +33,21 @@
   const storeUserInfo = useStoreUserInfo()
   const { userInfo } = toRefs(storeUserInfo)
 
-  // 用户是否同意协议
-  const isAgree = ref(false)
+  // 用户输入完成
+  const isInputCompleted = computed(() => {
+    return false
+  })
 
-  // 获取用户手机号登录
-  const onGetPhoneNumber = (event: WechatMiniprogram.ButtonGetPhoneNumber) => {
-    const { sessionKey, openId } = userInfo.value
-    const { errMsg, code, encryptedData, cloudID, iv } = event.detail
-    if (errMsg === 'getPhoneNumber:ok') {
-      // 获取用户真实手机号
-      requestGetRealPhone(encryptedData || '', iv || '', sessionKey || '').then((res) => {
-        // 登录
-        requestLogin(openId || '', res).then((res) => {
-          storeUserInfo.updateStoreUserInfo({
-            userId: '1',
-            userName: '游客1'
-          })
-          // 提示用户登录成功后返回上一页
-          showToast('登录成功', 'success').then(() => {
-            setTimeout(() => {
-              navigateBack()
-            }, 1500)
-          })
-        })
-      })
-    } else {
-      showModal('请点击允许同意')
-    }
+  const formData = reactive({
+    a: ''
+  })
+
+  // 注册
+  const onClickRegister = () => {}
+
+  // 取消注册
+  const onClickCancelRegister = () => {
+    navigateBack(1)
   }
 </script>
 

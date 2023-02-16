@@ -1,24 +1,21 @@
 <template>
   <div class="register-form">
     <div class="input-wrapper">
-      <img :src="imageIcon01" alt="" class="img" />
-      <input class="input" type="text" placeholder="请输入" />
+      <div class="label">名称</div>
+      <input class="input" type="text" placeholder="请输入企业名称或个体工商户名称" />
     </div>
     <div class="input-wrapper">
-      <img :src="imageIcon02" alt="" class="img" />
-      <input class="input" type="text" placeholder="请输入" />
+      <div class="label">用户名</div>
+      <input class="input" type="text" placeholder="请输入用户名" />
     </div>
     <div class="input-wrapper">
-      <img :src="imageIcon03" alt="" class="img" />
-      <input class="input" type="text" placeholder="请输入" disabled />
+      <div class="label">手机号</div>
+      <input class="input" type="text" placeholder="请输入手机号" disabled />
     </div>
   </div>
 </template>
-<script setup lang="ts">
-  import imageIcon01 from './images/icon-01.png'
-  import imageIcon02 from './images/icon-02.png'
-  import imageIcon03 from './images/icon-03.png'
 
+<script setup lang="ts">
   const emit = defineEmits(['update:modelValue'])
   const props = defineProps({
     modelValue: {
@@ -30,35 +27,37 @@
 
 <style lang="scss" scoped>
   .register-form {
-    padding-bottom: 40rpx;
+    padding-top: 68rpx;
+    padding-bottom: 52rpx;
     .input-wrapper {
       position: relative;
-      margin-bottom: 20rpx;
-      .img {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        left: 20rpx;
-        width: 40rpx;
-        height: 40rpx;
+      margin-bottom: 28rpx;
+      color: #7b7c7e;
+      font-weight: 500;
+      .label {
+        font-size: 28rpx;
+        line-height: 42rpx;
+        color: inherit;
+        margin-bottom: 8rpx;
       }
       .input {
         width: 100%;
-        height: 84rpx;
-        border: 1px solid $color-border;
-        padding-left: 80rpx;
-        padding-right: 20rpx;
-        color: #333;
-        font-size: 30rpx;
-        line-height: 40rpx;
+        height: 88rpx;
+        background-color: #f5f6f9;
+        padding: 0 16rpx;
+        color: inherit;
+        font-size: 28rpx;
+        line-height: 1.4;
         border-radius: 8rpx;
         overflow: hidden;
-      }
-      &:first-child {
-        .img {
-          width: 44rpx;
+        font-weight: 500;
+        transition: all 0.3s;
+        &[disabled] {
+          background-color: #f1f1f1;
+          opacity: 0.8;
         }
       }
+
       &:last-child {
         margin-bottom: 0;
       }

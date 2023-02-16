@@ -86,12 +86,12 @@ const request = (
     }
 
     // 合并 data 并且添加其他统一参数 如调用渠道
-    if (isObject(data)) {
-      data = {
-        ...data,
-        chb004: '03' // 调用渠道 01 核心系统 02 网厅 03 微信小程序
-      }
-    }
+    // if (isObject(data)) {
+    //   data = {
+    //     ...data,
+    //     chb004: '03' // 调用渠道 01 核心系统 02 网厅 03 微信小程序
+    //   }
+    // }
 
     if (isOpenDataEncryption) {
       paramsStr = JSON.stringify(data)
