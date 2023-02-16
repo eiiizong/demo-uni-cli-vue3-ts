@@ -10,6 +10,10 @@ declare namespace Store {
      * 用户唯一 token
      */
     token?: string
+    /**
+     * session_key
+     */
+    sessionKey?: string
   }
   /**
    * store 工作量查询信息
