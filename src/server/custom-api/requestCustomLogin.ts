@@ -25,7 +25,7 @@ const requestCustomLogin = (
 
               // 用户已经登录
               if (wxUserInfo) {
-                const { userId, portraiturl, userName, tel, unitName, userType } = wxUserInfo
+                const { userId, portraiturl, userName, tel, unitName, role } = wxUserInfo
                 resolve({
                   sessionKey: encodeURIComponent(session_key),
                   sessionId,
@@ -33,7 +33,7 @@ const requestCustomLogin = (
                   userId,
                   unitName,
                   userName,
-                  userType,
+                  role,
                   tel,
                   avatarUrl: portraiturl,
                   token

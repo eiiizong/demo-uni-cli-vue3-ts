@@ -28,7 +28,7 @@
   import LoginFooter from './LoginFooter.vue'
 
   import { ref, toRefs } from 'vue'
-  import { navigateBack, showModal, showToast } from '@/utils/uni-api'
+  import { navigateBack, showModal, showToast, redirectTo } from '@/utils/uni-api'
   import { requestGetRealPhone, requestLogin } from '@/server/api'
   import { useStoreUserInfo } from '@/stores/modules'
 
@@ -47,18 +47,20 @@
       requestGetRealPhone(encryptedData || '', iv || '', sessionKey || '').then((res) => {
         // 登录
         requestLogin(openId || '', res).then((res) => {
-          console.log('res12', res)
+          const { role } = res
 
-          // storeUserInfo.updateStoreUserInfo({
-          //   userId: '1',
-          //   userName: '游客1'
-          // })
-          // // 提示用户登录成功后返回上一页
-          // showToast('登录成功', 'success').then(() => {
-          //   setTimeout(() => {
-          //     navigateBack()
-          //   }, 1500)
-          // })
+          storeUserInfo.updateStoreUserInfo(res)
+          // 游客 处理注册逻辑
+          if (role === '0') {
+            redirectTo('register', 'packageCommon')
+          } else {
+            // 提示用户登录成功后返回上一页
+            showToast('登录成功', 'success').then(() => {
+              setTimeout(() => {
+                navigateBack()
+              }, 1500)
+            })
+          }
         })
       })
     } else {

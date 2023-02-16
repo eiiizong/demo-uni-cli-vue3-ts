@@ -138,9 +138,9 @@
     // 默认为游客访问内容
     const arr: PopularServiceNavItem[][] = [[], []]
 
-    const { userType } = userInfo.value
+    const { role } = userInfo.value
 
-    switch (userType) {
+    switch (role) {
       // 游客
       case '1':
         arr[0].push(navBMDSQ)

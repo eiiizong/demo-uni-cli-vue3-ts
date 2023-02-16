@@ -12,7 +12,7 @@
       storeUserInfo.updateStoreUserInfo({
         ...res,
         // 自定义用户类型 以便测试
-        userType: '2'
+        role: '2'
       })
     })
   })

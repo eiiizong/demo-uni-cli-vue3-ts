@@ -55,7 +55,7 @@
   }
 
   const onClickChild = (id: string) => {
-    if (userInfo.value.userType === '2') {
+    if (userInfo.value.role === '2') {
       navigateTo('org-details', 'packageOrg', { id })
     }
   }
