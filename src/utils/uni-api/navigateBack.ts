@@ -3,7 +3,6 @@
  * @param {number} [delta=1] - 返回的页面数，如果 delta 大于现有页面数，则返回到首页。。默认值`1`。
  * @param {string} [animationType='pop-out'] - 窗口显示的动画效果。默认值`pop-out`。仅 APP 支持。
  * @param {number} [animationDuration=300] - 窗口动画持续时间，单位为 ms。默认值`300`。仅 APP 支持。
- * @returns { Promise }
  * @support uniapp详细说明： https://uniapp.dcloud.io/api/router.html#navigateBack
  * @example navigateBack()
  */

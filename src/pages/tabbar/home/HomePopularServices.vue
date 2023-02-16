@@ -1,7 +1,7 @@
 <template>
   <view class="home-popular-services">
     <ZdbPanel title="热门服务" :space="false">
-      <swiper class="swiper" indicator-dots circular indicator-color="#a288ff" indicator-active-color="#6c46da">
+      <swiper class="swiper" indicator-dots indicator-color="#a288ff" indicator-active-color="#6c46da">
         <swiper-item v-for="(item, index) in navs" :key="index" class="swiper-item">
           <div class="navs">
             <div v-for="itemNav in item" :key="itemNav.id" class="nav" @click="onJumpRoute(itemNav)">
@@ -33,7 +33,7 @@
   import type { PopularServiceNavItem } from '@/types'
 
   import { computed, toRefs } from 'vue'
-  import { navigateTo } from '@/utils/uni-api'
+  import { navigateTo, showModal } from '@/utils/uni-api'
   import { useStoreUserInfo } from '@/stores/modules'
 
   const { userInfo } = toRefs(useStoreUserInfo())
@@ -107,6 +107,7 @@
       pathName: 'whitelist-apply',
       packageName: 'packageForm',
       isAuth: true,
+      isAuthRole: true,
       disabled: false,
       imgSrc: imageNavBMDSQ
     }
@@ -119,6 +120,7 @@
       pathName: 'financing',
       packageName: 'packageForm',
       isAuth: true,
+      isAuthRole: true,
       disabled: false,
       imgSrc: imageNavWYRZ
     }
@@ -131,6 +133,7 @@
       pathName: 'whitelist-feedback',
       packageName: 'packageForm',
       isAuth: true,
+      isAuthRole: true,
       disabled: false,
       imgSrc: imageNavBMDFK
     }
@@ -208,8 +211,27 @@
 
   // 路由跳转
   const onJumpRoute = (data: PopularServiceNavItem) => {
-    const { pathName, packageName } = data
-    navigateTo(pathName, packageName)
+    const { pathName, packageName, isAuth, isAuthRole } = data
+    const { userId, role } = userInfo.value
+
+    // 必须登陆后才能访问
+    if (isAuth) {
+      // 未登录
+      if (!userId) {
+        showModal('请登录后再访问').then(() => {
+          navigateTo('login', 'packageCommon')
+        })
+      } else {
+        // 已登陆 游客需要注册才能访问
+        if (isAuthRole && role === '0') {
+          navigateTo('register', 'packageCommon')
+        } else {
+          navigateTo(pathName, packageName)
+        }
+      }
+    } else {
+      navigateTo(pathName, packageName)
+    }
   }
 </script>
 

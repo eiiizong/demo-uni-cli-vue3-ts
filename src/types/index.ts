@@ -31,6 +31,10 @@ export interface PopularServiceNavItem {
    */
   isAuth: boolean
   /**
+   * 验证用户角色
+   */
+  isAuthRole?: boolean
+  /**
    * 是否禁用
    */
   disabled: boolean

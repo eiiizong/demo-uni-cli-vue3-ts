@@ -25,15 +25,16 @@ const redirectTo = (
     // 必需传入 name 参数
     if (name) {
       const url = getJumpRouteUrl(name, packageName, params)
-      uni.navigateTo({
+      uni.redirectTo({
         url,
         success(res) {
           resolve(res)
         },
         fail(err) {
+          // eslint-disable-next-line no-console
           console.error(`uni.redirectTo 接口调用失败！跳转路径：${url}`, err)
           reject(err)
-        },
+        }
       })
     } else {
       const errMsg = 'redirectTo 方法传入的第一个参数 name 不能为空，请检查！'
