@@ -85,17 +85,13 @@
     const { companyName, userName } = formData
 
     requestRegisterCompany(openId || '', tel || '', companyName, userName).then((res) => {
-      storeUserInfo.updateStoreUserInfo({
-        userName,
-        orgName: companyName
-      })
+      storeUserInfo.updateStoreUserInfo(res)
 
       showToast('注册成功', 'success').then(() => {
         setTimeout(() => {
           navigateBack()
         }, 1500)
       })
-      console.log('res', res)
     })
   }
 

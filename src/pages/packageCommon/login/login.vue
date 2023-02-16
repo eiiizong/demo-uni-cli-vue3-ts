@@ -28,7 +28,7 @@
   import LoginFooter from './LoginFooter.vue'
 
   import { ref, toRefs } from 'vue'
-  import { navigateBack, showModal, showToast, redirectTo } from '@/utils/uni-api'
+  import { navigateBack, showToast, redirectTo } from '@/utils/uni-api'
   import { requestGetRealPhone, requestLogin } from '@/server/api'
   import { useStoreUserInfo } from '@/stores/modules'
 
@@ -62,8 +62,6 @@
           }
         })
       })
-    } else {
-      showModal('请点击允许同意')
     }
   }
 </script>
