@@ -1,10 +1,11 @@
 <template>
-  <div class="login">
-    <YhNavBar title="登录" background-color="transparent" color="#fff" :border="false" />
+  <div class="register">
+    <YhNavBar title="企业注册" background-color="transparent" color="#fff" :border="false" />
 
     <div class="main-wrapper">
       <div class="main">
-        <LoginLogo />
+        <RegisterLogo />
+        <RegisterForm v-model="isAgree" />
         <YhButton
           block
           type="primary"
@@ -13,8 +14,7 @@
           @getphonenumber="onGetPhoneNumber">
           登 录
         </YhButton>
-        <LoginAgreement v-model="isAgree" />
-        <LoginFooter />
+        <RegisterFooter />
       </div>
     </div>
   </div>
@@ -23,9 +23,9 @@
   import YhButton from '@/components/yh/button/button.vue'
   import YhNavBar from '@/components/yh/nav-bar/nav-bar.vue'
 
-  import LoginLogo from './LoginLogo.vue'
-  import LoginAgreement from './LoginAgreement.vue'
-  import LoginFooter from './LoginFooter.vue'
+  import RegisterLogo from './RegisterLogo.vue'
+  import RegisterForm from './RegisterForm.vue'
+  import RegisterFooter from './RegisterFooter.vue'
 
   import { ref, toRefs } from 'vue'
   import { navigateBack, showModal, showToast } from '@/utils/uni-api'
@@ -66,7 +66,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .login {
+  .register {
     width: 100%;
     background-image: linear-gradient(to bottom, #1a2970, #1ba2ca);
     .main-wrapper {

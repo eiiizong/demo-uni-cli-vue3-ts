@@ -52,6 +52,15 @@
             "backgroundColorTop": "#ffffff",
             "backgroundColorBottom": "#ffffff"
           }
+        },
+        {
+          "path": "register/register",
+          "style": {
+            "navigationBarTitleText": "企业注册",
+            "navigationStyle": "custom",
+            "backgroundColorTop": "#1a2970",
+            "backgroundColorBottom": "#1ba2ca"
+          }
         }
       ]
     },
@@ -292,6 +301,11 @@
       {
         "name": "packageCommon-login",
         "path": "pages/packageCommon/login/login",
+        "query": ""
+      },
+      {
+        "name": "packageCommon-register",
+        "path": "pages/packageCommon/register/register",
         "query": ""
       },
       {
