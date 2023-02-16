@@ -21,22 +21,13 @@ const requestCustomLogin = (
         if (code) {
           requestGetOpenId(code, isShowLoading, isShowErrorToast)
             .then((res) => {
-              const { openid, session_key, sessionId, wxUserInfo, token } = res
-
+              const { openid, session_key, wxUserInfo } = res
               // 用户已经登录
               if (wxUserInfo) {
-                const { userId, portraiturl, userName, tel, unitName, role } = wxUserInfo
                 resolve({
+                  ...wxUserInfo,
                   sessionKey: encodeURIComponent(session_key),
-                  sessionId,
-                  openId: openid,
-                  userId,
-                  unitName,
-                  userName,
-                  role,
-                  tel,
-                  avatarUrl: portraiturl,
-                  token
+                  openId: openid
                 })
               } else {
                 if (isShowNotLoggedInPrompt) {

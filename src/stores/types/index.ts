@@ -12,7 +12,7 @@ declare namespace Store {
     /**
      * 用户单位名称
      */
-    unitName?: string
+    companyName?: string
 
     /**
      * 帐号状态（0正常使用 1锁定 2暂停使用 3禁止使用）
@@ -42,10 +42,6 @@ declare namespace Store {
      * 用户手机号
      */
     tel?: string
-    /**
-     * 用户 token
-     */
-    token?: string
     /**
      * 用户id
      */

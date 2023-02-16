@@ -27,7 +27,7 @@
 
   import { ref, reactive, toRefs, computed } from 'vue'
   import { onPageScroll, onUnload } from '@dcloudio/uni-app'
-  import { navigateBack, showModal } from '@/utils/uni-api'
+  import { navigateBack, showModal, showToast } from '@/utils/uni-api'
   import { requestRegisterCompany } from '@/server/api'
   import { useStoreUserInfo } from '@/stores/modules'
 
@@ -85,6 +85,16 @@
     const { companyName, userName } = formData
 
     requestRegisterCompany(openId || '', tel || '', companyName, userName).then((res) => {
+      storeUserInfo.updateStoreUserInfo({
+        userName,
+        companyName
+      })
+
+      showToast('注册成功', 'success').then(() => {
+        setTimeout(() => {
+          navigateBack()
+        }, 1500)
+      })
       console.log('res', res)
     })
   }

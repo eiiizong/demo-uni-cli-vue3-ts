@@ -31,10 +31,6 @@ interface UserInfo {
    */
   tel: string
   /**
-   * 用户 token
-   */
-  token: string
-  /**
    * 用户id
    */
   userId: string
@@ -42,6 +38,10 @@ interface UserInfo {
    * 用户姓名
    */
   userName: string
+  /**
+   * 企业名称
+   */
+  companyName?: string
 }
 
 /**
