@@ -3,29 +3,45 @@
  */
 interface UserInfo {
   /**
-   * 电话号码
+   * 帐号状态（0正常使用 1锁定 2暂停使用 3禁止使用）
+   */
+  accountStatus: '0' | '1' | '2' | '3'
+  /**
+   * 用户账号id
+   */
+  loginId: string
+  /**
+   * 用户 openId
+   */
+  openId: string
+  /**
+   * 用户注册时间
+   */
+  registerTime: number
+  /**
+   * 用户类型 0:游客,1:企业,2:合作机构,3:经办人,4:领导
+   */
+  role: '0' | '1' | '2' | '3' | '4'
+  /**
+   * 用户sessionId
+   */
+  sessionId: string
+  /**
+   * 用户手机号
    */
   tel: string
   /**
-   * 用户头像url
+   * 用户 token
    */
-  portraiturl?: string
+  token: string
   /**
    * 用户id
    */
-  userId?: string
+  userId: string
   /**
    * 用户姓名
    */
-  userName?: string
-  /**
-   * 用户类型 0 未登录用户 1 游客 2 领导 3 经办人 4 合作机构
-   */
-  role?: '0' | '1' | '2' | '3' | '4'
-  /**
-   * 单位名称
-   */
-  unitName?: string
+  userName: string
 }
 
 /**
@@ -37,17 +53,9 @@ export interface GetOpenIdSuccessResult {
    */
   openid: string
   /**
-   * sessionId
-   */
-  sessionId: string
-  /**
    * session_key
    */
   session_key: string
-  /**
-   * token
-   */
-  token?: string
   /**
    * 用户信息 已登录返回 未登录则没有该数据
    */

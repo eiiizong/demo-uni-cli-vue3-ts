@@ -2,27 +2,70 @@
   <div class="register-form">
     <div class="input-wrapper">
       <div class="label">名称</div>
-      <input class="input" type="text" placeholder="请输入企业名称或个体工商户名称" />
+      <input
+        class="input"
+        type="text"
+        placeholder="请输入企业名称或个体工商户名称"
+        :value="companyName"
+        @input="onInputCompanyName" />
     </div>
     <div class="input-wrapper">
       <div class="label">用户名</div>
-      <input class="input" type="text" placeholder="请输入用户名" />
+      <input class="input" type="text" placeholder="请输入用户名" :value="userName" @input="onInputUserName" />
     </div>
     <div class="input-wrapper">
       <div class="label">手机号</div>
-      <input class="input" type="text" placeholder="请输入手机号" disabled />
+      <input class="input" type="text" placeholder="请输入手机号" disabled :value="TMTel" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  const emit = defineEmits(['update:modelValue'])
+  import { computed, toRefs } from 'vue'
+  import { formatPhoneNumber } from '@/utils/format'
+  import { useStoreUserInfo } from '@/stores/modules'
+
+  const emit = defineEmits(['update:companyName', 'update:userName'])
   const props = defineProps({
-    modelValue: {
-      type: Boolean,
+    /**
+     * 企业名称或个体工商户名称
+     */
+    companyName: {
+      type: String,
+      required: true
+    },
+    /**
+     * 用户名
+     */
+    userName: {
+      type: String,
       required: true
     }
   })
+
+  const storeUserInfo = useStoreUserInfo()
+  const { userInfo } = toRefs(storeUserInfo)
+
+  const TMTel = computed(() => {
+    const { tel } = userInfo.value
+    if (tel) {
+      return formatPhoneNumber(tel)
+    } else {
+      return ''
+    }
+  })
+
+  const onInputCompanyName = (event: unknown) => {
+    const { detail } = event as WechatMiniprogram.Input
+    const { value } = detail
+    emit('update:companyName', value)
+  }
+
+  const onInputUserName = (event: unknown) => {
+    const { detail } = event as WechatMiniprogram.Input
+    const { value } = detail
+    emit('update:userName', value)
+  }
 </script>
 
 <style lang="scss" scoped>

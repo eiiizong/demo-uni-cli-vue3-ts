@@ -25,11 +25,10 @@
   import HomeNews from './HomeNews.vue'
   import HomePolicy from './HomePolicy.vue'
 
-  import type { Ref } from 'vue'
   import { ref } from 'vue'
   import { onPageScroll, onHide } from '@dcloudio/uni-app'
 
-  const scrollTimer: Ref<any> = ref(null)
+  const scrollTimer = ref<any>(null)
   const navBarBackgroundColor = ref('transparent')
 
   // 监听页面滚动
