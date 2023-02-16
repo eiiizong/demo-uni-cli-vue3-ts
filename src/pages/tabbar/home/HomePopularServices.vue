@@ -150,6 +150,30 @@
       imgSrc: imageNavBMDFK
     }
 
+    // 白名单查询
+    const navBMDCX: PopularServiceNavItem = {
+      id: 'bmdcx',
+      name: '白名单查询',
+      desc: '一键查询白名单',
+      pathName: 'policy-list',
+      packageName: 'packagePolicy',
+      isAuth: false,
+      disabled: false,
+      imgSrc: imageNavBMDFK
+    }
+
+    // 统计报表
+    const navTJBB: PopularServiceNavItem = {
+      id: 'tjbb',
+      name: '统计报表',
+      desc: '一键查询统计报表',
+      pathName: 'policy-list',
+      packageName: 'packagePolicy',
+      isAuth: false,
+      disabled: false,
+      imgSrc: imageNavBMDFK
+    }
+
     // 默认为游客访问内容
     const arr: PopularServiceNavItem[][] = [[], []]
 
@@ -158,42 +182,38 @@
     switch (role) {
       // 企业
       case '1':
-        arr[0].push(navBMDSQ)
-        arr[0].push(navWYRZ)
         arr[0].push(navYWJS)
-        arr[0].push(navHZJG)
-        arr[1].push(navBMDFK)
+        arr[0].push(navWYRZ)
+        arr[0].push(navBMDSQ)
+        arr[0].push(navBMDFK)
+        arr[1].push(navHZJG)
+        arr[1].push(navSPJDCX)
+        arr[1].push(navZCFG)
         break
       // 合作机构
       case '2':
-        arr[0].push(navRYDYBZ)
-        arr[0].push(navGZL)
-        arr[0].push(navBMDFK)
+        arr[0].push(navYWJS)
         arr[0].push(navHZJG)
-        arr[1].push(navBMDSQ)
-        arr[1].push(navWYRZ)
-        arr[1].push(navYWJS)
-        // 其他权限 测试使用
-        arr[1].push(navSPJDCX)
+        arr[0].push(navSPJDCX)
+        arr[0].push(navBMDCX)
+        arr[1].push(navZCFG)
         break
       // 经办人
       case '3':
         arr[0].push(navRYDYBZ)
+        arr[0].push(navTJBB)
         arr[0].push(navGZL)
-        arr[0].push(navBMDFK)
-        arr[0].push(navHZJG)
-        arr[1].push(navBMDSQ)
-        arr[1].push(navWYRZ)
+        arr[0].push(navBMDCX)
         arr[1].push(navYWJS)
         break
       // 领导
       case '4':
-        arr[0].push(navHZJG)
-        arr[0].push(navSPJDCX)
-        arr[0].push(navYWJS)
-        arr[0].push(navBMDFK)
-        arr[1].push(navBMDSQ)
-        arr[1].push(navWYRZ)
+        arr[0].push(navRYDYBZ)
+        arr[0].push(navTJBB)
+        arr[0].push(navGZL)
+        arr[0].push(navBMDCX)
+        arr[1].push(navYWJS)
+        arr[1].push(navHZJG)
         break
       // 默认游客
       default:
