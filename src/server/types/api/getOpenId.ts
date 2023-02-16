@@ -42,6 +42,14 @@ interface UserInfo {
    * 企业名称
    */
   orgName?: string
+  /**
+   * 用户单位名称 组织架构 例如：四川省/成都市/合作银行/银海公司（测试）
+   */
+  orgNamePath?: string
+  /**
+   * 用户单位名称id 组织架构 例如： 1/2/3/4
+   */
+  orgIdPath?: string
 }
 
 /**
