@@ -11,7 +11,9 @@
 
   import type { Api } from '@/server/types'
   import { toRefs, computed } from 'vue'
+  import { onLoad } from '@dcloudio/uni-app'
   import { useStoreUserInfo } from '@/stores/modules'
+  import { requestGetCooper } from '@/server/api'
 
   const storeUserInfo = useStoreUserInfo()
 
@@ -34,6 +36,17 @@
       arr.push(item)
     }
     return arr
+  })
+
+  // 查询数据
+  const queryData = () => {
+    requestGetCooper().then((res) => {
+      console.log('res', res)
+    })
+  }
+
+  onLoad(() => {
+    queryData()
   })
 </script>
 
