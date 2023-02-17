@@ -53,10 +53,11 @@
         label="缴税地"
         placeholder="请选择缴税地" />
       <ZdbFormPicker
-        v-model="formData.a1"
-        :range="codeData.yesorno"
-        range-key="label"
-        range-value="value"
+        v-if="formData.taxPlace && codeData.crb19n && codeData.crb19n.length > 0"
+        v-model="formData.crb19n"
+        :range="codeData.crb19n"
+        range-key="orgName"
+        range-value="orgId"
         label="区县产业部门"
         placeholder="请选择区县产业部门" />
       <ZdbFormPicker
@@ -129,10 +130,10 @@
   import ZdbFormTextarea from '@/components/project/zdb-form-textarea/zdb-form-textarea.vue'
   import ZdbFormPicker from '@/components/project/zdb-form-picker/zdb-form-picker.vue'
 
-  import type { CodeItem } from '@/server/types/api'
+  import type { CodeItem, GetIndustrialSectorSuccessResultListItem } from '@/server/types/api'
   import { reactive, watch, toRefs } from 'vue'
   import { onLoad } from '@dcloudio/uni-app'
-  import { requestGetCode, requestW003 } from '@/server/api'
+  import { requestGetCode, requestGetIndustrialSector, requestW003 } from '@/server/api'
   import { showModal, showToast, showLoading, hideLoading } from '@/utils/uni-api'
   import { checkPhoneNumber } from '@/utils/check'
   import { useStoreUserInfo } from '@/stores/modules'
@@ -146,6 +147,7 @@
     crb116: CodeItem[]
     chb015: CodeItem[]
     enterprisetype: CodeItem[]
+    crb19n: GetIndustrialSectorSuccessResultListItem[]
   }>({
     /**
      * 是与否码表
@@ -162,12 +164,19 @@
     /**
      * 企业类型码表
      */
-    enterprisetype: []
+    enterprisetype: [],
+    /**
+     * 企业类型码表
+     */
+    crb19n: []
   })
 
   // 表单
   const formData = reactive({
-    a1: '',
+    /**
+     * 区县产业部门
+     */
+    crb19n: '',
     /**
      * 借款人
      */
@@ -265,6 +274,7 @@
 
     hideLoading()
   }
+
   // 校验form表达是否输入完成并且正确
   const checkFormData = () => {
     let { borrower, industry, registeredAddress, taxPlace, contactPerson, contactInformation, loanAmount, loanTerm } =
@@ -335,33 +345,99 @@
       showModal('贷款期限需小于2年，请重新输入！')
       return false
     }
+
+    return true
   }
 
   // 提交表单
   const onClickSubmit = () => {
-    let { borrower, industry, registeredAddress, taxPlace, contactPerson, contactInformation, loanAmount, loanTerm } =
-      formData
+    let {
+      borrower,
+      businessEntity,
+      industry,
+      registeredAddress,
+      taxPlace,
+      crb19n,
+      contactPerson,
+      contactInformation,
+      typeOfEnterprise,
+      loanAmount,
+      loanPurpose,
+      loanTerm,
+      borrowerd,
+      taxAmount,
+      businessIncome,
+      debtSituation
+    } = formData
     const checkResult = checkFormData()
     if (!checkResult) {
       return false
     }
 
-    requestW003().then((res) => {
-      console.log('res', res)
+    requestW003(
+      borrower,
+      businessEntity,
+      industry,
+      registeredAddress,
+      taxPlace,
+      crb19n,
+      contactPerson,
+      contactInformation,
+      typeOfEnterprise,
+      loanAmount,
+      loanPurpose,
+      loanTerm,
+      borrowerd,
+      taxAmount,
+      businessIncome,
+      debtSituation
+    ).then(() => {
+      showToast('提交成功', 'success').then(() => {
+        setTimeout(() => {
+          onClickReset(false)
+        }, 1500)
+      })
     })
   }
 
   // 重置表单
-  const onClickReset = () => {
-    showToast('重置成功')
+  const onClickReset = (showTip = true) => {
+    formData.borrower = ''
+    formData.industry = ''
+    formData.registeredAddress = ''
+    formData.contactPerson = ''
+    formData.contactInformation = ''
+    formData.taxPlace = ''
+    formData.crb19n = ''
+    formData.typeOfEnterprise = ''
+    formData.loanAmount = ''
+    formData.loanTerm = ''
+    formData.borrowerd = ''
+    formData.taxAmount = ''
+    formData.businessIncome = ''
+    formData.debtSituation = ''
+    showTip && showToast('重置成功')
   }
 
-  // 监听
+  // 监听 userInfo
   watch(
     () => userInfo.value.orgName,
     (val) => {
       if (val) {
         formData.businessEntity = val
+      }
+    },
+    { immediate: true }
+  )
+
+  // 监听 taxPlace 缴税地改变
+  watch(
+    () => formData.taxPlace,
+    (val) => {
+      if (val) {
+        requestGetIndustrialSector(val).then((res) => {
+          codeData.crb19n = [...res]
+        })
       }
     },
     { immediate: true }

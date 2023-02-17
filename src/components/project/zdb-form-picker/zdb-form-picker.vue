@@ -10,7 +10,7 @@
         :value="pickerValue"
         @change="onChangePicker">
         <div class="picker-content">
-          <div v-if="modelValue" class="picker-value">{{ valueDesc }}</div>
+          <div v-if="modelValue + ''" class="picker-value">{{ valueDesc }}</div>
           <div v-else class="picker-placeholder">{{ placeholder }}</div>
           <YhIcon class="picker-icon" color="#7a7a7a" name="picker" size="28rpx" />
         </div>
@@ -129,10 +129,25 @@
 
   // 选择
   const onChangePicker = (event: WechatMiniprogram.PickerChange) => {
-    const { mode } = props
+    const { mode, range, rangeValue } = props
+
     const { value } = event.detail
+
+    let result = ''
     if (mode === 'selector') {
-      emit('update:modelValue', value)
+      if (range && range instanceof Array) {
+        for (let i = 0, len = range.length; i < len; i++) {
+          const item = range[i]
+          if ((value as string) === i + '') {
+            result = item[rangeValue]
+            break
+          }
+        }
+      }
+    }
+
+    if (mode === 'selector') {
+      emit('update:modelValue', result)
     }
   }
 </script>

@@ -1,5 +1,6 @@
 export { requestGetCode } from './requestGetCode'
 export { requestGetCooper } from './requestGetCooper'
+export { requestGetIndustrialSector } from './requestGetIndustrialSector'
 export { requestGetOpenId } from './requestGetOpenId'
 export { requestGetRealPhone } from './requestGetRealPhone'
 export { requestLogin } from './requestLogin'
