@@ -18,9 +18,9 @@
       <ZdbFormPicker
         v-model="formData.industry"
         required
-        :range="pickerRange"
-        range-key="name"
-        range-value="id"
+        :range="codeData.crb116"
+        range-key="label"
+        range-value="value"
         label="所属行业"
         placeholder="请选择所属行业" />
       <ZdbFormInput
@@ -30,14 +30,6 @@
         maxlength="20"
         label="注册地址"
         placeholder="请输入注册地址" />
-      <ZdbFormPicker
-        v-model="formData.taxPlace"
-        required
-        :range="pickerRange"
-        range-key="name"
-        range-value="id"
-        label="缴税地"
-        placeholder="请选择缴税地" />
       <ZdbFormInput
         v-model="formData.contactPerson"
         required
@@ -53,18 +45,33 @@
         label="联系方式"
         placeholder="请输入联系方式" />
       <ZdbFormPicker
+        v-model="formData.taxPlace"
+        required
+        :range="codeData.chb015"
+        range-key="label"
+        range-value="value"
+        label="缴税地"
+        placeholder="请选择缴税地" />
+      <ZdbFormPicker
+        v-model="formData.a1"
+        :range="codeData.yesorno"
+        range-key="label"
+        range-value="value"
+        label="区县产业部门"
+        placeholder="请选择区县产业部门" />
+      <ZdbFormPicker
         v-model="formData.typeOfEnterprise"
-        :range="pickerRange"
-        range-key="name"
-        range-value="id"
+        :range="codeData.enterprisetype"
+        range-key="label"
+        range-value="value"
         label="企业类型"
         placeholder="请选择企业类型" />
       <ZdbFormInput
         v-model="formData.loanAmount"
         type="digit"
-        maxlength="12"
+        maxlength="9"
         label="贷款金额"
-        placeholder="请输入贷款金额(小于1000万)" />
+        placeholder="请输入金额(单位:万元,小于1000万)" />
       <ZdbFormTextarea v-model="formData.loanPurpose" maxlength="140" label="贷款用途" placeholder="请输入贷款用途" />
       <ZdbFormInput
         v-model="formData.loanTerm"
@@ -74,28 +81,28 @@
         placeholder="请输入贷款期限(小于2年)" />
 
       <ZdbFormPicker
-        v-model="formData.a12"
-        :range="pickerRange"
-        range-key="name"
-        range-value="id"
+        v-model="formData.borrowerd"
+        :range="codeData.yesorno"
+        range-key="label"
+        range-value="value"
         label="是否贷过款"
         placeholder="请选择是否贷过款" />
 
       <ZdbFormInput
-        v-model="formData.a13"
+        v-model="formData.taxAmount"
         type="digit"
         maxlength="10"
         label="上一年度缴税金额"
         placeholder="请输入金额(万元)" />
 
       <ZdbFormInput
-        v-model="formData.a14"
+        v-model="formData.businessIncome"
         type="digit"
         maxlength="10"
         label="上一年度主营业务收入"
         placeholder="请输入金额(万元)" />
       <ZdbFormInput
-        v-model="formData.a15"
+        v-model="formData.debtSituation"
         type="digit"
         maxlength="10"
         label="目前负债情况"
@@ -122,17 +129,45 @@
   import ZdbFormTextarea from '@/components/project/zdb-form-textarea/zdb-form-textarea.vue'
   import ZdbFormPicker from '@/components/project/zdb-form-picker/zdb-form-picker.vue'
 
+  import type { CodeItem } from '@/server/types/api'
   import { reactive, ref, watch, toRefs } from 'vue'
-  import { requestW003 } from '@/server/api'
-  import { showModal, showToast } from '@/utils/uni-api'
+  import { onLoad } from '@dcloudio/uni-app'
+  import { requestGetCode, requestW003 } from '@/server/api'
+  import { showModal, showToast, showLoading, hideLoading } from '@/utils/uni-api'
   import { checkPhoneNumber } from '@/utils/check'
   import { useStoreUserInfo } from '@/stores/modules'
 
   const storeUserInfo = useStoreUserInfo()
   const { userInfo } = toRefs(storeUserInfo)
 
+  // 码表
+  const codeData = reactive<{
+    yesorno: CodeItem[]
+    crb116: CodeItem[]
+    chb015: CodeItem[]
+    enterprisetype: CodeItem[]
+  }>({
+    /**
+     * 是与否码表
+     */
+    yesorno: [],
+    /**
+     * 所属行业码表
+     */
+    crb116: [],
+    /**
+     * 纳税地码表
+     */
+    chb015: [],
+    /**
+     * 企业类型码表
+     */
+    enterprisetype: []
+  })
+
   // 表单
   const formData = reactive({
+    a1: '',
     /**
      * 借款人
      */
@@ -178,25 +213,21 @@
      */
     loanTerm: '',
     /**
-     *
+     * 是否贷过款
      */
-    a12: '',
+    borrowerd: '',
     /**
-     *
+     * 上一年度缴税金额(万元)
      */
-    a13: '',
+    taxAmount: '',
     /**
-     *
+     * 上一年度主营业务收入(万元)
      */
-    a14: '',
+    businessIncome: '',
     /**
-     *
+     * 目前负债情况(万元)
      */
-    a15: '',
-    /**
-     *
-     */
-    a16: ''
+    debtSituation: ''
   })
 
   const pickerRange = ref([
@@ -210,9 +241,54 @@
     }
   ])
 
+  // 获取码表
+  const getCodeData = () => {
+    showLoading()
+
+    Promise.allSettled([
+      // 行业
+      requestGetCode('crb116', false),
+      // 是否
+      requestGetCode('yesorno', false),
+      // 纳税地
+      requestGetCode('chb015', false),
+      // 企业类型
+      requestGetCode('enterprisetype', false)
+    ]).then((res) => {
+      const res00 = res[0]
+      const res01 = res[1]
+      const res02 = res[2]
+      const res03 = res[3]
+
+      const { status: status00, value: value00 } = res00
+      const { status: status01, value: value01 } = res01
+      const { status: status02, value: value02 } = res02
+      const { status: status03, value: value03 } = res03
+
+      if (status00 === 'fulfilled' && value00) {
+        codeData.crb116 = [...value00.codeList]
+      }
+
+      if (status01 === 'fulfilled' && value01) {
+        codeData.yesorno = [...value01.codeList]
+      }
+      if (status02 === 'fulfilled' && value02) {
+        codeData.chb015 = [...value02.codeList]
+      }
+
+      if (status03 === 'fulfilled' && value03) {
+        codeData.enterprisetype = [...value03.codeList]
+      }
+
+      hideLoading()
+
+      console.log('res', res)
+    })
+  }
   // 校验form表达是否输入完成并且正确
   const checkFormData = () => {
-    let { borrower, industry, registeredAddress, taxPlace, contactPerson, contactInformation } = formData
+    let { borrower, industry, registeredAddress, taxPlace, contactPerson, contactInformation, loanAmount, loanTerm } =
+      formData
 
     borrower = borrower.trim()
     if (!borrower) {
@@ -241,11 +317,6 @@
       }
     }
 
-    if (!taxPlace) {
-      showModal('请选择纳税地')
-      return false
-    }
-
     contactPerson = contactPerson.trim()
     if (!contactPerson) {
       showModal('请输入联系人')
@@ -268,10 +339,28 @@
         return false
       }
     }
+
+    if (!taxPlace) {
+      showModal('请选择纳税地')
+      return false
+    }
+
+    // 以下非必填项填写之后需校验格式是否正确
+    if (loanAmount && Number(loanAmount) > 1000) {
+      showModal('贷款金额需小于1000万元，请重新输入！')
+      return false
+    }
+
+    if (loanTerm && Number(loanTerm) > 2) {
+      showModal('贷款期限需小于2年，请重新输入！')
+      return false
+    }
   }
 
   // 提交表单
   const onClickSubmit = () => {
+    let { borrower, industry, registeredAddress, taxPlace, contactPerson, contactInformation, loanAmount, loanTerm } =
+      formData
     const checkResult = checkFormData()
     if (!checkResult) {
       return false
@@ -297,6 +386,10 @@
     },
     { immediate: true }
   )
+
+  onLoad(() => {
+    getCodeData()
+  })
 </script>
 
 <style lang="scss" scoped></style>
