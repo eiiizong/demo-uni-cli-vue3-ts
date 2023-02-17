@@ -80,7 +80,6 @@
         maxlength="6"
         label="贷款期限"
         placeholder="请输入贷款期限(小于2年)" />
-
       <ZdbFormPicker
         v-model="formData.borrowerd"
         :range="codeData.yesorno"
@@ -88,14 +87,12 @@
         range-value="value"
         label="是否贷过款"
         placeholder="请选择是否贷过款" />
-
       <ZdbFormInput
         v-model="formData.taxAmount"
         type="digit"
         maxlength="10"
         label="上一年度缴税金额"
         placeholder="请输入金额(万元)" />
-
       <ZdbFormInput
         v-model="formData.businessIncome"
         type="digit"
@@ -411,6 +408,7 @@
     formData.crb19n = ''
     formData.typeOfEnterprise = ''
     formData.loanAmount = ''
+    formData.loanPurpose = ''
     formData.loanTerm = ''
     formData.borrowerd = ''
     formData.taxAmount = ''
