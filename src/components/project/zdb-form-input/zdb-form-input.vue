@@ -6,7 +6,8 @@
         :value="modelValue"
         :type="type"
         class="input"
-        :maxlength="maxlength"
+        :disabled="disabled"
+        :maxlength="disabled ? -1 : maxlength"
         :placeholder="placeholder"
         @input="onInput" />
     </div>
@@ -55,6 +56,13 @@
      * 是否必须输入 默认 false
      */
     required: {
+      type: Boolean,
+      default: () => false
+    },
+    /**
+     * 是否禁用 默认 false
+     */
+    disabled: {
       type: Boolean,
       default: () => false
     }
@@ -108,6 +116,10 @@
       padding: calc(($input-height - 2rpx - $input-line-height) / 2) 0;
       font-size: $input-font-size;
       line-height: $input-line-height;
+      transition: all 0.3s;
+      &[disabled] {
+        opacity: 0.6;
+      }
     }
 
     &.required {

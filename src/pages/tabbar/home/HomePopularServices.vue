@@ -192,11 +192,20 @@
         break
       // 合作机构
       case '2':
+        // 以下为正确菜单
+        // arr[0].push(navYWJS)
+        // arr[0].push(navHZJG)
+        // arr[0].push(navSPJDCX)
+        // arr[0].push(navBMDCX)
+        // arr[1].push(navZCFG)
         arr[0].push(navYWJS)
-        arr[0].push(navHZJG)
-        arr[0].push(navSPJDCX)
-        arr[0].push(navBMDCX)
+        arr[0].push(navWYRZ)
+        arr[0].push(navBMDSQ)
+        arr[0].push(navBMDFK)
+        arr[1].push(navHZJG)
+        arr[1].push(navSPJDCX)
         arr[1].push(navZCFG)
+        // 以下为测试菜单
         break
       // 经办人
       case '3':
