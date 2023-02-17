@@ -2,21 +2,21 @@
   <div class="whitelist-apply custom-form-page">
     <div class="form-wrapper">
       <ZdbFormInput
-        v-model="formData.a1"
+        v-model="formData.borrower"
         required
         type="text"
         maxlength="20"
         label="借款人"
         placeholder="请输入借款人" />
       <ZdbFormInput
-        v-model="formData.a2"
+        v-model="formData.businessEntity"
         required
+        disabled
         type="text"
-        maxlength="20"
         label="经营主体"
         placeholder="请输入您的经营主体" />
       <ZdbFormPicker
-        v-model="formData.a3"
+        v-model="formData.industry"
         required
         :range="pickerRange"
         range-key="name"
@@ -24,14 +24,14 @@
         label="所属行业"
         placeholder="请选择所属行业" />
       <ZdbFormInput
-        v-model="formData.a4"
+        v-model="formData.registeredAddress"
         required
         type="text"
         maxlength="20"
         label="注册地址"
         placeholder="请输入注册地址" />
       <ZdbFormPicker
-        v-model="formData.a5"
+        v-model="formData.taxPlace"
         required
         :range="pickerRange"
         range-key="name"
@@ -39,14 +39,14 @@
         label="缴税地"
         placeholder="请选择缴税地" />
       <ZdbFormInput
-        v-model="formData.a6"
+        v-model="formData.contactPerson"
         required
         type="text"
         maxlength="20"
         label="联系人"
         placeholder="请输入联系人" />
       <ZdbFormInput
-        v-model="formData.a7"
+        v-model="formData.contactInformation"
         required
         type="number"
         maxlength="11"
@@ -103,7 +103,15 @@
     </div>
 
     <div class="button-wrapper">
-      <YhButton block type="primary">提交</YhButton>
+      <YhButton block type="primary" @click="onClickSubmit">提交</YhButton>
+      <YhButton
+        block
+        type="primary"
+        custom-style="border:0; background-color: transparent;"
+        plain
+        @click="onClickReset">
+        重置
+      </YhButton>
     </div>
   </div>
 </template>
@@ -114,16 +122,45 @@
   import ZdbFormTextarea from '@/components/project/zdb-form-textarea/zdb-form-textarea.vue'
   import ZdbFormPicker from '@/components/project/zdb-form-picker/zdb-form-picker.vue'
 
-  import { reactive, ref } from 'vue'
+  import { reactive, ref, watch, toRefs } from 'vue'
+  import { requestW003 } from '@/server/api'
+  import { showModal, showToast } from '@/utils/uni-api'
+  import { checkPhoneNumber } from '@/utils/check'
+  import { useStoreUserInfo } from '@/stores/modules'
 
+  const storeUserInfo = useStoreUserInfo()
+  const { userInfo } = toRefs(storeUserInfo)
+
+  // 表单
   const formData = reactive({
-    a1: '',
-    a2: '',
-    a3: '',
-    a4: '',
-    a5: '',
-    a6: '',
-    a7: '',
+    /**
+     * 借款人
+     */
+    borrower: '',
+    /**
+     * 经营主体
+     */
+    businessEntity: '',
+    /**
+     * 所属行业
+     */
+    industry: '',
+    /**
+     * 注册地址
+     */
+    registeredAddress: '',
+    /**
+     * 纳税地
+     */
+    taxPlace: '',
+    /**
+     * 联系人姓名
+     */
+    contactPerson: '',
+    /**
+     * 联系人联系方式
+     */
+    contactInformation: '',
     a8: '',
     a9: '',
     a10: '',
@@ -145,6 +182,94 @@
       name: '测试2'
     }
   ])
+
+  // 校验form表达是否输入完成并且正确
+  const checkFormData = () => {
+    let { borrower, industry, registeredAddress, taxPlace, contactPerson, contactInformation, a8, a9 } = formData
+
+    borrower = borrower.trim()
+    if (!borrower) {
+      showModal('请输入借款人')
+      return false
+    } else {
+      if (borrower.length < 2) {
+        showModal('请输入正确的借款人姓名')
+        return false
+      }
+    }
+
+    if (!industry) {
+      showModal('请选择所属行业')
+      return false
+    }
+
+    registeredAddress = registeredAddress.trim()
+    if (!registeredAddress) {
+      showModal('请输入注册地址')
+      return false
+    } else {
+      if (registeredAddress.length < 4) {
+        showModal('请输入完整的注册地址')
+        return false
+      }
+    }
+
+    if (!taxPlace) {
+      showModal('请选择纳税地')
+      return false
+    }
+
+    contactPerson = contactPerson.trim()
+    if (!contactPerson) {
+      showModal('请输入联系人')
+      return false
+    } else {
+      if (contactPerson.length < 2) {
+        showModal('请输入正确的联系人姓名')
+        return false
+      }
+    }
+
+    contactInformation = contactInformation.trim()
+    if (!contactInformation) {
+      showModal('请输入联系方式')
+      return false
+    } else {
+      const checkResult = checkPhoneNumber(contactInformation, '联系方式')
+      if (!checkResult.isOk) {
+        showModal(checkResult.errMsg)
+        return false
+      }
+    }
+  }
+
+  // 提交表单
+  const onClickSubmit = () => {
+    const checkResult = checkFormData()
+    if (!checkResult) {
+      return false
+    }
+
+    requestW003().then((res) => {
+      console.log('res', res)
+    })
+  }
+
+  // 重置表单
+  const onClickReset = () => {
+    showToast('重置成功')
+  }
+
+  // 监听
+  watch(
+    () => userInfo.value.orgName,
+    (val) => {
+      if (val) {
+        formData.businessEntity = val
+      }
+    },
+    { immediate: true }
+  )
 </script>
 
 <style lang="scss" scoped></style>

@@ -10,7 +10,7 @@ const requestGetCooper = (isShowLoading = true, isShowErrorToast = true): Promis
   const data = {}
 
   return new Promise((resolve, reject) => {
-    request('getCooper.do', data, isShowLoading, isShowErrorToast)
+    request('wx/wxController!getCooper.do', data, isShowLoading, isShowErrorToast)
       .then((res) => {
         resolve(res)
       })

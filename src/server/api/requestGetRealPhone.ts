@@ -23,7 +23,7 @@ const requestGetRealPhone = (
   }
 
   return new Promise((resolve, reject) => {
-    request('getRealPhone.do', data, isShowLoading, isShowErrorToast)
+    request('wx/wxController!getRealPhone.do', data, isShowLoading, isShowErrorToast)
       .then((res) => {
         resolve(res)
       })

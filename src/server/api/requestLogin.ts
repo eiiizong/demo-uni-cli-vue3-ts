@@ -21,7 +21,7 @@ const requestLogin = (
   }
 
   return new Promise((resolve, reject) => {
-    request('login.do', data, isShowLoading, isShowErrorToast)
+    request('wx/wxController!login.do', data, isShowLoading, isShowErrorToast)
       .then((res) => {
         resolve(res)
       })

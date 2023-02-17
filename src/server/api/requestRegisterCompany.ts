@@ -27,7 +27,7 @@ const requestRegisterCompany = (
   }
 
   return new Promise((resolve, reject) => {
-    request('registerCompany.do', data, isShowLoading, isShowErrorToast)
+    request('wx/wxController!registerCompany.do', data, isShowLoading, isShowErrorToast)
       .then((res) => {
         resolve(res)
       })

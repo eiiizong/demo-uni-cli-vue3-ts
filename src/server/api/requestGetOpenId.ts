@@ -18,7 +18,7 @@ const requestGetOpenId = (
   }
 
   return new Promise((resolve, reject) => {
-    request('getOpenId.do', data, isShowLoading, isShowErrorToast)
+    request('wx/wxController!getOpenId.do', data, isShowLoading, isShowErrorToast)
       .then((res) => {
         resolve(res)
       })
