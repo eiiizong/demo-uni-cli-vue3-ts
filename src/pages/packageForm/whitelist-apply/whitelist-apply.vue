@@ -130,7 +130,7 @@
   import ZdbFormPicker from '@/components/project/zdb-form-picker/zdb-form-picker.vue'
 
   import type { CodeItem } from '@/server/types/api'
-  import { reactive, ref, watch, toRefs } from 'vue'
+  import { reactive, watch, toRefs } from 'vue'
   import { onLoad } from '@dcloudio/uni-app'
   import { requestGetCode, requestW003 } from '@/server/api'
   import { showModal, showToast, showLoading, hideLoading } from '@/utils/uni-api'
@@ -230,22 +230,11 @@
     debtSituation: ''
   })
 
-  const pickerRange = ref([
-    {
-      id: '0',
-      name: '测试1'
-    },
-    {
-      id: '1',
-      name: '测试2'
-    }
-  ])
-
   // 获取码表
-  const getCodeData = () => {
+  const getCodeData = async () => {
     showLoading()
 
-    Promise.allSettled([
+    const data = await Promise.allSettled([
       // 行业
       requestGetCode('crb116', false),
       // 是否
@@ -254,36 +243,27 @@
       requestGetCode('chb015', false),
       // 企业类型
       requestGetCode('enterprisetype', false)
-    ]).then((res) => {
-      const res00 = res[0]
-      const res01 = res[1]
-      const res02 = res[2]
-      const res03 = res[3]
+    ])
 
-      const { status: status00, value: value00 } = res00
-      const { status: status01, value: value01 } = res01
-      const { status: status02, value: value02 } = res02
-      const { status: status03, value: value03 } = res03
+    const [res00, res01, res02, res03] = data
 
-      if (status00 === 'fulfilled' && value00) {
-        codeData.crb116 = [...value00.codeList]
-      }
+    if (res00.status === 'fulfilled' && res00.value) {
+      codeData.crb116 = [...res00.value.codeList]
+    }
 
-      if (status01 === 'fulfilled' && value01) {
-        codeData.yesorno = [...value01.codeList]
-      }
-      if (status02 === 'fulfilled' && value02) {
-        codeData.chb015 = [...value02.codeList]
-      }
+    if (res01.status === 'fulfilled' && res01.value) {
+      codeData.yesorno = [...res01.value.codeList]
+    }
 
-      if (status03 === 'fulfilled' && value03) {
-        codeData.enterprisetype = [...value03.codeList]
-      }
+    if (res02.status === 'fulfilled' && res02.value) {
+      codeData.chb015 = [...res02.value.codeList]
+    }
 
-      hideLoading()
+    if (res03.status === 'fulfilled' && res03.value) {
+      codeData.enterprisetype = [...res03.value.codeList]
+    }
 
-      console.log('res', res)
-    })
+    hideLoading()
   }
   // 校验form表达是否输入完成并且正确
   const checkFormData = () => {

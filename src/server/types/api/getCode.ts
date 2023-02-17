@@ -28,4 +28,5 @@ export interface GetCodeSuccessResult {
    * 码表数据
    */
   codeList: CodeItem[]
+  value?: CodeItem[]
 }
