@@ -53,21 +53,21 @@
         label="联系方式"
         placeholder="请输入联系方式" />
       <ZdbFormPicker
-        v-model="formData.a8"
+        v-model="formData.typeOfEnterprise"
         :range="pickerRange"
         range-key="name"
         range-value="id"
         label="企业类型"
         placeholder="请选择企业类型" />
       <ZdbFormInput
-        v-model="formData.a9"
+        v-model="formData.loanAmount"
         type="digit"
         maxlength="12"
         label="贷款金额"
         placeholder="请输入贷款金额(小于1000万)" />
-      <ZdbFormTextarea v-model="formData.a10" maxlength="140" label="贷款用途" placeholder="请输入贷款用途" />
+      <ZdbFormTextarea v-model="formData.loanPurpose" maxlength="140" label="贷款用途" placeholder="请输入贷款用途" />
       <ZdbFormInput
-        v-model="formData.a11"
+        v-model="formData.loanTerm"
         type="digit"
         maxlength="6"
         label="贷款期限"
@@ -161,14 +161,41 @@
      * 联系人联系方式
      */
     contactInformation: '',
-    a8: '',
-    a9: '',
-    a10: '',
-    a11: '',
+    /**
+     * 企业类型
+     */
+    typeOfEnterprise: '',
+    /**
+     * 贷款金额(万元)
+     */
+    loanAmount: '',
+    /**
+     * 贷款用途
+     */
+    loanPurpose: '',
+    /**
+     * 贷款期限
+     */
+    loanTerm: '',
+    /**
+     *
+     */
     a12: '',
+    /**
+     *
+     */
     a13: '',
+    /**
+     *
+     */
     a14: '',
+    /**
+     *
+     */
     a15: '',
+    /**
+     *
+     */
     a16: ''
   })
 
@@ -185,7 +212,7 @@
 
   // 校验form表达是否输入完成并且正确
   const checkFormData = () => {
-    let { borrower, industry, registeredAddress, taxPlace, contactPerson, contactInformation, a8, a9 } = formData
+    let { borrower, industry, registeredAddress, taxPlace, contactPerson, contactInformation } = formData
 
     borrower = borrower.trim()
     if (!borrower) {
