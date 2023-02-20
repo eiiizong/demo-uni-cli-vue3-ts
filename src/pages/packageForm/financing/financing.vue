@@ -9,13 +9,14 @@
         maxlength="20"
         label="融资主体名称"
         placeholder="请输入单位名称" />
-      <ZdbFormInput
+      <ZdbFormPicker
         v-model="formData.a2"
         required
-        type="text"
-        maxlength="20"
+        :range="codeData.cooperativeBank"
+        range-key="orgname"
+        range-value="orgname"
         label="合作银行"
-        placeholder="请输入合作银行" />
+        placeholder="请选择合作银行" />
       <ZdbFormInput
         v-model="formData.a3"
         required
@@ -83,12 +84,12 @@
   import ZdbFormTextarea from '@/components/project/zdb-form-textarea/zdb-form-textarea.vue'
   import ZdbFormPicker from '@/components/project/zdb-form-picker/zdb-form-picker.vue'
 
-  import type { CodeItem } from '@/server/types/api'
+  import type { CodeItem, W008SuccessResultListItem } from '@/server/types/api'
   import { reactive, toRefs, watch } from 'vue'
   import { onLoad } from '@dcloudio/uni-app'
   import { showModal, showToast, showLoading, hideLoading } from '@/utils/uni-api'
   import { formatPhoneNumber } from '@/utils/format'
-  import { requestGetCode, requestW004 } from '@/server/api'
+  import { requestGetCode, requestW004, requestW008 } from '@/server/api'
   import { checkSocialCode } from '@/utils/check'
   import { useStoreUserInfo } from '@/stores/modules'
 
@@ -98,11 +99,16 @@
   // 码表
   const codeData = reactive<{
     chb015: CodeItem[]
+    cooperativeBank: W008SuccessResultListItem[]
   }>({
     /**
      * 纳税地码表
      */
-    chb015: []
+    chb015: [],
+    /**
+     * 合作银行
+     */
+    cooperativeBank: []
   })
 
   // 表单数据
@@ -151,13 +157,19 @@
 
     const data = await Promise.allSettled([
       // 纳税地
-      requestGetCode('chb015', false)
+      requestGetCode('chb015', false),
+      // 合作银行
+      requestW008(false)
     ])
 
-    const [res00] = data
+    const [res00, res01] = data
 
     if (res00.status === 'fulfilled' && res00.value) {
       codeData.chb015 = [...res00.value.codeList]
+    }
+
+    if (res01.status === 'fulfilled' && res01.value) {
+      codeData.cooperativeBank = [...res01.value]
     }
 
     hideLoading()
@@ -167,15 +179,9 @@
   const checkFormData = () => {
     let { a2, a3, a4, a5, a6, a7, a8 } = formData
 
-    a2 = a2.trim()
     if (!a2) {
-      showModal('请输入合作银行')
+      showModal('请选择合作银行')
       return false
-    } else {
-      if (a2.length < 4) {
-        showModal('请输入正确的合作银行')
-        return false
-      }
     }
 
     a3 = a3.trim()
@@ -255,7 +261,7 @@
     formData.a3 = ''
     formData.a4 = ''
     formData.a5 = ''
-    formData.a5 = ''
+    formData.a6 = ''
     formData.a7 = ''
     formData.a8 = ''
     formData.a9 = ''

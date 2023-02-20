@@ -38,11 +38,15 @@ const requestW004 = (
     TAX_PLACE,
     BANK,
     // 来源
-    source: 'wx'
+    source: 'wx',
+    // 融资申请类别
+    financeType: '',
+    // 专项产品编号
+    specialNumber: ''
   }
 
   return new Promise((resolve, reject) => {
-    request('wx/wxController!W003.do', data, isShowLoading, isShowErrorToast)
+    request('wx/wxController!W004.do', data, isShowLoading, isShowErrorToast)
       .then((res) => {
         resolve(res)
       })
