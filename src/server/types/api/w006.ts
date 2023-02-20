@@ -74,4 +74,12 @@ export interface W006SuccessResult {
    * 去年补贴金额(万元)
    */
   lastyearbutiejine?: number
+  /**
+   * 去年户均金额
+   */
+  lastyearaveragemoey?: number
+  /**
+   * 去年申报笔数
+   */
+  lastyeartotaltime?: number
 }
