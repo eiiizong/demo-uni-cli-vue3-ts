@@ -1,5 +1,5 @@
 <template>
-  <div class="register-footer">本服务由久远银海股份有限公司提供数据支持</div>
+  <div class="register-footer">本服务由久远银海股份有限公司提供技术支持</div>
 </template>
 <script setup lang="ts"></script>
 
