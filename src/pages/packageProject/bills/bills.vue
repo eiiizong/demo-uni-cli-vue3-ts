@@ -16,21 +16,40 @@
   import BillTotal from './BillTotal.vue'
   import BillFooter from './BillFooter.vue'
 
+  import type { W006SuccessResult } from '@/server/types/api'
   import { ref } from 'vue'
   import { onLoad, onPageScroll, onHide } from '@dcloudio/uni-app'
+  import { showLoading, hideLoading } from '@/utils/uni-api'
+  import { requestW006 } from '@/server/api'
 
-  import type { Ref } from 'vue'
-
-  const scrollTimer: Ref<any> = ref(null)
   const navBarBackgroundColor = ref('transparent')
   const color = ref('#ffffff')
+  const scrollTimer = ref<any>(null)
+  /**
+   * 一本帐数据
+   */
+  const billData = ref<W006SuccessResult>({})
 
-  const getData = () => {
-    console.log('navBarBackgroundColor', navBarBackgroundColor)
+  //查询数据
+  const queryData = async () => {
+    showLoading()
+
+    const data = await Promise.allSettled([
+      // 一本账统计
+      requestW006(false)
+    ])
+
+    const [res00] = data
+
+    if (res00.status === 'fulfilled' && res00.value) {
+      billData.value = { ...res00.value }
+    }
+
+    hideLoading()
   }
 
   onLoad(() => {
-    getData()
+    queryData()
   })
 
   onHide(() => {
