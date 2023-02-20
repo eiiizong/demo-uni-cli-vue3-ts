@@ -147,8 +147,8 @@
       showModal('请输入问题描述')
       return false
     } else {
-      if (a1.length < 10) {
-        showModal('请至少输入10个字符！')
+      if (a3.length < 10) {
+        showModal('问题描述请至少输入10个字符！')
         return false
       }
     }
@@ -197,6 +197,7 @@
 
   // 重置表单
   const onClickReset = (showTip = true) => {
+    initDataByUserInfo()
     formData.a1 = ''
     formData.a2 = ''
     formData.a3 = ''
