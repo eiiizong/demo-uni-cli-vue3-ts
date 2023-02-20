@@ -5,7 +5,7 @@
       <div class="content">
         <div class="name">白名单企业</div>
         <div class="value">
-          <div class="val Impact">38,534</div>
+          <div class="val Impact">{{ renderData.whitenum || 0 }}</div>
           <div class="unit">家</div>
         </div>
       </div>
@@ -15,7 +15,7 @@
       <div class="content">
         <div class="name">白名单获贷率</div>
         <div class="value">
-          <div class="val Impact">38%</div>
+          <div class="val Impact">{{ renderData.whiterate || 0 }}%</div>
         </div>
       </div>
     </div>

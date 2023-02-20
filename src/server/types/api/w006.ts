@@ -54,4 +54,24 @@ export interface W006SuccessResult {
    * 白名单获贷率
    */
   whiterate?: number
+  /**
+   * 白名单企业数
+   */
+  whitenum?: number
+  /**
+   * 去年留存金额(万元)
+   */
+  lastyearleavemoney?: number
+  /**
+   * 去年投放户数
+   */
+  lastyeartotalnumber?: number
+  /**
+   * 去年补偿金额(万元)
+   */
+  lastyearbuchangjine?: number
+  /**
+   * 去年补贴金额(万元)
+   */
+  lastyearbutiejine?: number
 }

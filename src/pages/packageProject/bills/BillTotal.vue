@@ -10,7 +10,7 @@
       <div class="info">
         <div class="key">资金池余额</div>
         <div class="value">
-          <div class="val Impact">{{ renderData.poolsummoney }}</div>
+          <div class="val Impact">{{ renderData.poolsummoney || 0 }}</div>
           <div class="unit">亿元</div>
         </div>
       </div>
@@ -20,7 +20,7 @@
         <div class="item-main">
           <div class="key">风险资金池</div>
           <div class="value">
-            <div class="val Impact">{{ renderData.riskpoolmoney }}</div>
+            <div class="val Impact">{{ renderData.riskpoolmoney || 0 }}</div>
             <div class="unit">亿元</div>
           </div>
         </div>
@@ -29,7 +29,7 @@
         <div class="item-main">
           <div class="key">机动资金池</div>
           <div class="value">
-            <div class="val Impact">{{ renderData.jidongpoolmoney }}</div>
+            <div class="val Impact">{{ renderData.jidongpoolmoney || 0 }}</div>
             <div class="unit">亿元</div>
           </div>
         </div>

@@ -17,7 +17,7 @@
     <div class="tab-content">
       <div v-if="tabId === '01'" class="cell">
         <div class="left">
-          <div class="value Impact">{{ renderData.totalmoney }}</div>
+          <div class="value Impact">{{ renderData.totalmoney || 0 }}</div>
           <div class="unit">亿元</div>
         </div>
         <div class="right">
@@ -29,14 +29,14 @@
       <div v-if="tabId === '02'" class="cell cell-02">
         <div class="left">
           <div class="value">
-            <div class="val Impact">{{ renderData.money73 }}</div>
+            <div class="val Impact">{{ renderData.money73 || 0 }}</div>
             <div class="unit">亿元</div>
           </div>
           <div class="desc">73模式</div>
         </div>
         <div class="right">
           <div class="value">
-            <div class="val Impact">{{ renderData.money442 }}</div>
+            <div class="val Impact">{{ renderData.money442 || 0 }}</div>
             <div class="unit">亿元</div>
           </div>
           <div class="desc">442模式</div>

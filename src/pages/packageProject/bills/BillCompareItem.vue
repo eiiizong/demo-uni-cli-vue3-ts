@@ -1,7 +1,7 @@
 <template>
   <div class="compare-item">
     <div class="left">
-      <div class="name">累计投放</div>
+      <div class="name">{{ label }}</div>
       <div class="value" :style="{ color: color }">
         <div class="val Impact">{{ nowYearValue }}</div>
         <div class="unit">{{ unit }}</div>
