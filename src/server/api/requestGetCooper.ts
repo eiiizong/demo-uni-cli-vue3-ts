@@ -1,3 +1,4 @@
+import type { GetCooperSuccessResultListItem } from '@/server/types/api'
 import { request } from '@/server/request'
 
 /**
@@ -6,7 +7,7 @@ import { request } from '@/server/request'
  * @param {boolean} [isShowErrorToast=true] 是否显示错误提示 默认值 true
  */
 
-const requestGetCooper = (isShowLoading = true, isShowErrorToast = true): Promise<string> => {
+const requestGetCooper = (isShowLoading = true, isShowErrorToast = true): Promise<GetCooperSuccessResultListItem[]> => {
   const data = {}
 
   return new Promise((resolve, reject) => {

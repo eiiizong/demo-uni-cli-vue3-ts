@@ -1,5 +1,5 @@
 export type { GetCodeSuccessResult, CodeItem } from './getCode'
-export type { GetCooperSuccessResult } from './getCooper'
+export type { GetCooperSuccessResultListItem } from './getCooper'
 export type { GetIndustrialSectorSuccessResultListItem } from './getIndustrialSector'
 export type { GetOpenIdSuccessResult } from './getOpenId'
 export type { LoginSuccessResult } from './login'

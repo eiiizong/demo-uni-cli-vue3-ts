@@ -1,36 +1,21 @@
-interface DataItem {
-  /**
-   * 机构id
-   */
-  orgId: string
-  /**
-   * 机构名称
-   */
-  orgName: string
-  /**
-   * 机构组织架构
-   */
-  orgNamePath: string
-  /**
-   * 机构名称
-   */
-  orgType: string
-  /**
-   * 机构名称
-   */
-  orgTypeName: string
-}
-
 /**
  * getCooper 接口调用成功返回的数据格式
  */
-export interface GetCooperSuccessResult {
+export interface GetCooperSuccessResultListItem {
+  /**
+   * 机构id
+   */
+  id: string
   /**
    * 机构名称
    */
-  orgName: string
+  name: string
   /**
-   * 机构名称下的子机构
+   * 机构pid
    */
-  children: DataItem[]
+  pid: string
+  /**
+   * 子节点
+   */
+  childList?: GetCooperSuccessResultListItem[]
 }

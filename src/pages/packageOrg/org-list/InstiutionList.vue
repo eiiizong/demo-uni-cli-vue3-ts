@@ -4,14 +4,14 @@
       <div class="toolbar" @click="onClick(item.id)">
         <div class="left">
           <span>{{ item.name }}</span>
-          <span>（{{ item.list ? item.list.length : '0' }}）</span>
+          <span>（{{ item.childList ? item.childList.length : '0' }}）</span>
         </div>
         <YhIcon name="arrow-down" class="icon" size="24rpx" />
       </div>
 
       <div v-show="currentTabs.includes(item.id)" class="list-content">
         <div
-          v-for="itemList in item.list"
+          v-for="itemList in item.childList"
           :key="itemList.id"
           class="list-content-item"
           @click.stop="onClickChild(itemList.id)">
@@ -25,8 +25,8 @@
 <script setup lang="ts">
   import YhIcon from '@/components/yh/icon/icon.vue'
 
-  import type { Api } from '@/server/types'
-  import type { PropType, Ref } from 'vue'
+  import type { GetCooperSuccessResultListItem } from '@/server/types/api'
+  import type { PropType } from 'vue'
 
   import { ref, toRefs } from 'vue'
   import { navigateTo } from '@/utils/uni-api'
@@ -38,12 +38,12 @@
   const emit = defineEmits(['update:modelValue'])
   const props = defineProps({
     renderList: {
-      type: Array as PropType<Api.B001_SuccessResultItem[]>,
+      type: Array as PropType<GetCooperSuccessResultListItem[]>,
       required: true
     }
   })
 
-  const currentTabs: Ref<string[]> = ref([])
+  const currentTabs = ref<string[]>([])
 
   const onClick = (id: string) => {
     const index = currentTabs.value.indexOf(id)
@@ -55,7 +55,8 @@
   }
 
   const onClickChild = (id: string) => {
-    if (userInfo.value.role === '2') {
+    // 领导可以点击查看详情
+    if (userInfo.value.role === '4') {
       navigateTo('org-details', 'packageOrg', { id })
     }
   }
@@ -97,8 +98,9 @@
           margin-bottom: 22rpx;
           background-color: #e2f2ff;
           border-radius: 8rpx;
-          padding: 0 28rpx;
           line-height: 88rpx;
+          padding: 24rpx;
+          line-height: 40rpx;
           &:last-child {
             margin-bottom: 0;
           }
