@@ -17,7 +17,7 @@
     <div class="tab-content">
       <div v-if="tabId === '01'" class="cell">
         <div class="left">
-          <div class="value Impact">627.04</div>
+          <div class="value Impact">{{ renderData.totalmoney }}</div>
           <div class="unit">亿元</div>
         </div>
         <div class="right">
@@ -29,15 +29,15 @@
       <div v-if="tabId === '02'" class="cell cell-02">
         <div class="left">
           <div class="value">
-            <div class="val Impact">627.04</div>
+            <div class="val Impact">{{ renderData.money73 }}</div>
             <div class="unit">亿元</div>
           </div>
           <div class="desc">73模式</div>
         </div>
         <div class="right">
           <div class="value">
-            <div class="val Impact">627.04</div>
-            <div class="unit">亿</div>
+            <div class="val Impact">{{ renderData.money442 }}</div>
+            <div class="unit">亿元</div>
           </div>
           <div class="desc">442模式</div>
         </div>
@@ -50,18 +50,33 @@
   import YhNavBar from '@/components/yh/nav-bar/nav-bar.vue'
   import { ref } from 'vue'
 
+  import type { PropType } from 'vue'
+  import type { W006SuccessResult } from '@/server/types/api'
+
   const props = defineProps({
+    /**
+     * 渲染数据
+     */
+    renderData: {
+      type: Object as PropType<W006SuccessResult>,
+      required: true
+    },
+    /**
+     * 导航栏背景色
+     */
     backgorundColor: {
       type: String,
       required: true
     },
+    /**
+     * 导航栏文本颜色
+     */
     color: {
       type: String,
       required: true
     }
   })
 
-  const tabId = ref('02')
   const tabsData = ref([
     {
       id: '01',
@@ -72,6 +87,8 @@
       name: '信贷模式'
     }
   ])
+
+  const tabId = ref('01')
 </script>
 
 <style lang="scss" scoped>

@@ -25,6 +25,19 @@
 <script setup lang="ts">
   import imageBg01 from './images/bg-01.png'
   import imageBg02 from './images/bg-02.png'
+
+  import type { PropType } from 'vue'
+  import type { W006SuccessResult } from '@/server/types/api'
+
+  const props = defineProps({
+    /**
+     * 渲染数据
+     */
+    renderData: {
+      type: Object as PropType<W006SuccessResult>,
+      required: true
+    }
+  })
 </script>
 
 <style lang="scss" scoped>

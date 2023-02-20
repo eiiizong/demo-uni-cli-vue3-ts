@@ -8,10 +8,10 @@
         <div class="text">{{ wranType === '1' ? '正常' : wranType === '2' ? '预警' : '叫停' }}</div>
       </div>
       <div class="info">
-        <div class="key">风险资金池</div>
+        <div class="key">资金池余额</div>
         <div class="value">
-          <div class="val Impact">2998424.34</div>
-          <div class="unit">万</div>
+          <div class="val Impact">{{ renderData.poolsummoney }}</div>
+          <div class="unit">亿元</div>
         </div>
       </div>
     </div>
@@ -20,8 +20,8 @@
         <div class="item-main">
           <div class="key">风险资金池</div>
           <div class="value">
-            <div class="val Impact">5555.04</div>
-            <div class="unit">万</div>
+            <div class="val Impact">{{ renderData.riskpoolmoney }}</div>
+            <div class="unit">亿元</div>
           </div>
         </div>
       </div>
@@ -29,8 +29,8 @@
         <div class="item-main">
           <div class="key">机动资金池</div>
           <div class="value">
-            <div class="val Impact">5555.04</div>
-            <div class="unit">万</div>
+            <div class="val Impact">{{ renderData.jidongpoolmoney }}</div>
+            <div class="unit">亿元</div>
           </div>
         </div>
       </div>
@@ -43,7 +43,20 @@
   import imageIcon02 from './images/icon-02.png'
   import imageIcon03 from './images/icon-03.png'
 
+  import type { PropType } from 'vue'
+  import type { W006SuccessResult } from '@/server/types/api'
+
   import { ref } from 'vue'
+
+  const props = defineProps({
+    /**
+     * 渲染数据
+     */
+    renderData: {
+      type: Object as PropType<W006SuccessResult>,
+      required: true
+    }
+  })
 
   // 1 正常 2 预警 3 叫停
   const wranType = ref('1')

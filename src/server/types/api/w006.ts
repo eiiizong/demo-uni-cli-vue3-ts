@@ -15,7 +15,7 @@ export interface W006SuccessResult {
    */
   butiejine?: number
   /**
-   * 机动资金池总金额(亿)
+   * 机动资金池总金额(亿元)
    */
   jidongpoolmoney?: number
   /**
@@ -23,23 +23,23 @@ export interface W006SuccessResult {
    */
   leavemoney?: number
   /**
-   * 73模式金额(万元)
+   * 73模式金额(亿元)
    */
   money73?: number
   /**
-   * 442模式金额(万元)
+   * 442模式金额(亿元)
    */
   money442?: number
   /**
-   * 资金池总金额(亿)
+   * 资金池总金额(亿元)
    */
   poolsummoney?: number
   /**
-   * 风险资金池总金额(亿)
+   * 风险资金池总金额(亿元)
    */
   riskpoolmoney?: number
   /**
-   * 投放总金额(万元)
+   * 投放总金额(亿元)
    */
   totalmoney?: number
   /**

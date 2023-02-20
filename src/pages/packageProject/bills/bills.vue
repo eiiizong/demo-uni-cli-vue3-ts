@@ -1,10 +1,10 @@
 <template>
   <BillBg class="bills">
-    <BillHearder :backgorund-color="navBarBackgroundColor" :color="color" />
+    <BillHearder :backgorund-color="navBarBackgroundColor" :color="color" :render-data="billData" />
     <div class="main">
-      <BillCompare />
-      <BillTotal />
-      <BillFooter />
+      <BillCompare :render-data="billData" />
+      <BillTotal :render-data="billData" />
+      <BillFooter :render-data="billData" />
     </div>
   </BillBg>
 </template>
