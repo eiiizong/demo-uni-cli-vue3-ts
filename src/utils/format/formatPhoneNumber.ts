@@ -1,6 +1,6 @@
 /**
  * 格式化电话号码 13288876677 => 132****6677
- * @param {string} value 姓名
+ * @param {string} value 电话号码
  */
 const formatPhoneNumber = (value: string): string => {
   let result = ''
