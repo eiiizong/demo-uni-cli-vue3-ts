@@ -2,7 +2,7 @@
   <qiun-data-charts
     class="echart"
     type="area"
-    canvas-id="OSNJlWOeODqfMVYbybuCSSZFBjryAXeJ"
+    :canvas-id="echartId"
     :canvas2d="true"
     :opts="opts"
     :chart-data="chartData" />
@@ -12,16 +12,33 @@
   import { ref, onMounted } from 'vue'
 
   const props = defineProps({
+    /**
+     * 渲染数据
+     */
     renderList: {
       type: Array,
       required: true
+    },
+    /**
+     * echart id
+     */
+    echartId: {
+      type: String,
+      required: true
+    },
+    /**
+     * 展示颜色
+     */
+    color: {
+      type: String,
+      default: () => '#2661ff'
     }
   })
 
   const chartData = ref({})
 
   const opts = ref({
-    color: ['#1890FF'],
+    color: [props.color],
     padding: [0, 0, 0, 0],
     enableScroll: false,
     canvas2d: true,

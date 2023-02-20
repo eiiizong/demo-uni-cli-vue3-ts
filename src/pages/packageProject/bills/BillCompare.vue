@@ -1,221 +1,83 @@
 <template>
   <view class="bill-compare">
-    <div class="item">
-      <div class="left">
-        <div class="name">累计投放</div>
-        <div class="value">
-          <div class="val Impact">2224</div>
-          <div class="unit">户</div>
-        </div>
-        <div class="compare-value">
-          <div class="last-year">去年：</div>
-          <div class="val Impact">232424</div>
-          <div class="unit">户</div>
-        </div>
-      </div>
-      <div class="right">
-        <div class="compare-result">
-          <img class="img" :src="imageIconDown" alt="" />
-          <div class="value Impact">2.5%</div>
-        </div>
-        <div class="echart">
-          <EchartLine01 :render-list="[]" />
-          <!-- <qiun-data-charts type="line" :opts="opts" :chart-data="chartData" /> -->
-        </div>
-      </div>
-    </div>
-    <div class="item">
-      <div class="left">
-        <div class="name">累计投放</div>
-        <div class="value">
-          <div class="val Impact">2224</div>
-          <div class="unit">户</div>
-        </div>
-        <div class="compare-value">
-          <div class="last-year">去年：</div>
-          <div class="val Impact">232424</div>
-          <div class="unit">户</div>
-        </div>
-      </div>
-      <div class="right">
-        <div class="compare-result">
-          <img class="img" :src="imageIconUp" alt="" />
-          <div class="value Impact">2.5%</div>
-        </div>
-        <div class="echart"></div>
-      </div>
-    </div>
-    <div class="item">
-      <div class="left">
-        <div class="name">累计投放</div>
-        <div class="value">
-          <div class="val Impact">2224</div>
-          <div class="unit">户</div>
-        </div>
-        <div class="compare-value">
-          <div class="last-year">去年：</div>
-          <div class="val Impact">232424</div>
-          <div class="unit">户</div>
-        </div>
-      </div>
-      <div class="right">
-        <div class="compare-result">
-          <img class="img" :src="imageIconUp" alt="" />
-          <div class="value Impact">2.5%</div>
-        </div>
-        <div class="echart"></div>
-      </div>
-    </div>
-    <div class="item">
-      <div class="left">
-        <div class="name">累计投放</div>
-        <div class="value">
-          <div class="val Impact">2224</div>
-          <div class="unit">户</div>
-        </div>
-        <div class="compare-value">
-          <div class="last-year">去年：</div>
-          <div class="val Impact">232424</div>
-          <div class="unit">户</div>
-        </div>
-      </div>
-      <div class="right">
-        <div class="compare-result">
-          <img class="img" :src="imageIconUp" alt="" />
-          <div class="value Impact">2.5%</div>
-        </div>
-        <div class="echart"></div>
-      </div>
-    </div>
+    <BillCompareItem
+      label="累计投放"
+      echart-id="echart_ljtf"
+      unit="户"
+      color="#2661ff"
+      :now-year-value="0"
+      :last-year-value="0"
+      :rate-value="0"
+      :compare-list="[10, 20, 30, 40]" />
+    <BillCompareItem
+      label="存量余额"
+      echart-id="echart_clye"
+      unit="万元"
+      color="#eca02d"
+      :now-year-value="0"
+      :last-year-value="0"
+      :rate-value="0"
+      :compare-list="[10, 20, 30, 40]" />
+    <BillCompareItem
+      label="补贴金额"
+      echart-id="echart_btje"
+      unit="万元"
+      color="#009bc2"
+      :now-year-value="0"
+      :last-year-value="0"
+      :rate-value="0"
+      :compare-list="[10, 20, 30, 40]" />
+    <BillCompareItem
+      label="补偿金额"
+      echart-id="echart_bcje"
+      unit="万元"
+      color="#f85c5c"
+      :now-year-value="0"
+      :last-year-value="0"
+      :rate-value="0"
+      :compare-list="[10, 20, 30, 40]" />
+    <BillCompareItem
+      label="投放笔数"
+      echart-id="echart_tfbs"
+      unit="笔"
+      color="#ff0000"
+      :now-year-value="0"
+      :last-year-value="0"
+      :rate-value="0"
+      :compare-list="[10, 20, 30, 40]" />
+    <BillCompareItem
+      label="户均贷款"
+      echart-id="echart_hjdk"
+      unit="万元"
+      color="#ff0000"
+      :now-year-value="0"
+      :last-year-value="0"
+      :rate-value="0"
+      :compare-list="[10, 20, 30, 40]" />
   </view>
 </template>
 
 <script setup lang="ts">
-  import imageIconDown from './images/icon-down.png'
-  import imageIconUp from './images/icon-up.png'
+  import BillCompareItem from './BillCompareItem.vue'
 
-  import EchartLine01 from './EchartLine01.vue'
-  // import { ref, onMounted } from 'vue'
+  import type { PropType } from 'vue'
+  import type { W006SuccessResult } from '@/server/types/api'
+
+  const props = defineProps({
+    /**
+     * 渲染数据
+     */
+    renderData: {
+      type: Object as PropType<W006SuccessResult>,
+      required: true
+    }
+  })
 </script>
 
 <style lang="scss" scoped>
-  $color1: #2661ff;
-  $color2: #eca02d;
-  $color3: #009bc2;
-  $color4: #f85c5c;
   .bill-compare {
     width: 100%;
     padding: 0 $spacing;
     padding-top: 24rpx;
-    .item {
-      display: flex;
-      align-items: center;
-      border-bottom: 5rpx solid #f5f5f5;
-      padding-bottom: 40rpx;
-      &:nth-of-type(2) {
-        .left {
-          .value {
-            .val {
-              color: $color2;
-            }
-            .unit {
-              color: rgba($color2, 0.65);
-            }
-          }
-        }
-      }
-      &:nth-of-type(3) {
-        .left {
-          .value {
-            .val {
-              color: $color3;
-            }
-            .unit {
-              color: rgba($color3, 0.65);
-            }
-          }
-        }
-      }
-      &:nth-of-type(4) {
-        .left {
-          .value {
-            .val {
-              color: $color4;
-            }
-            .unit {
-              color: rgba($color4, 0.65);
-            }
-          }
-        }
-      }
-    }
-
-    .left {
-      flex: 1;
-      overflow: hidden;
-      .name {
-        font-size: 32rpx;
-        line-height: 44rpx;
-        color: #a7b4d9;
-        padding-top: 20rpx;
-      }
-      .value {
-        display: flex;
-        align-items: center;
-        padding-top: 20rpx;
-        .val {
-          font-size: 66rpx;
-          font-weight: 700;
-          line-height: 74rpx;
-          color: $color1;
-        }
-        .unit {
-          font-size: 42rpx;
-          line-height: 1;
-          padding-left: 10rpx;
-          color: rgba($color1, 0.65);
-        }
-      }
-      .compare-value {
-        display: flex;
-        align-items: center;
-        font-size: 28rpx;
-        line-height: 40rpx;
-        color: #a7b4d9;
-        padding-top: 18rpx;
-        .val {
-          font-size: 34rpx;
-          font-weight: 700;
-        }
-        .unit {
-          font-size: 28rpx;
-          padding-left: 8rpx;
-        }
-      }
-    }
-    .right {
-      padding-top: 64rpx;
-      .compare-result {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        padding-bottom: 8rpx;
-        .img {
-          width: 22rpx;
-          height: 14rpx;
-          margin-right: 8rpx;
-        }
-        .value {
-          font-size: 32rpx;
-          line-height: 36rpx;
-          color: #a7b4d9;
-          font-weight: 500;
-        }
-      }
-      .echart {
-        width: 236rpx;
-        height: 120rpx;
-      }
-    }
   }
 </style>
