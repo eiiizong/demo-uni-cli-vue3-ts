@@ -5,25 +5,21 @@
     </div>
     <div class="con">
       <div class="title">
-        <div class="name">担保费补贴申请</div>
-        <div class="status">进行中</div>
+        <div class="name">{{ renderData.processname }}</div>
+        <div class="status" :class="statusClass">{{ renderData.state }}</div>
       </div>
       <div class="cells">
         <div class="cell">
           <div class="key">申报机构：</div>
-          <div class="value">担保融资公司</div>
+          <div class="value">{{ renderData.orgname }}</div>
         </div>
         <div class="cell">
           <div class="key">申报时间：</div>
-          <div class="value">担保融资公司</div>
+          <div class="value">{{ moment(renderData.aae036).format('YYYY-MM-DD HH:mm:ss') }}</div>
         </div>
       </div>
       <div class="footer">
         <div class="left">如需查看数据详情，登录“蓉易贷”网站端</div>
-        <div class="right" @click="onClick">
-          <span>流程一览</span>
-          <YhIcon name="arrow-right" size="20rpx" />
-        </div>
       </div>
     </div>
   </view>
@@ -32,29 +28,36 @@
 <script setup lang="ts">
   import imageBg from './images/bg.png'
 
-  import YhIcon from '@/components/yh/icon/icon.vue'
+  import moment from 'moment'
 
   import type { PropType } from 'vue'
-  import { navigateTo } from '@/utils/uni-api'
-
-  interface Item {
-    id?: string
-    key?: string
-    value?: string | number
-    unit?: string
-  }
+  import { computed } from 'vue'
+  import type { W009SuccessResultListItem } from '@/server/types/api'
 
   const emit = defineEmits(['click'])
   const props = defineProps({
     renderData: {
-      type: Object as PropType<Item>,
+      type: Object as PropType<W009SuccessResultListItem>,
       required: true
     }
   })
 
-  const onClick = () => {
-    navigateTo('process-details', 'packageProcess')
-  }
+  const statusClass = computed(() => {
+    let str = ''
+    const { cpb102 } = props.renderData
+
+    if (cpb102 === '0') {
+      str = 'no-handle'
+    } else if (cpb102 === '2') {
+      str = 'success'
+    } else if (cpb102 === '4') {
+      str = 'back'
+    } else if (cpb102 === '9') {
+      str = 'fail'
+    }
+
+    return str
+  })
 </script>
 
 <style lang="scss" scoped>
@@ -62,7 +65,11 @@
     width: 100%;
     position: relative;
     .bg {
+      border-radius: 18rpx;
+      overflow: hidden;
+      border: 1px solid #bbd3ed;
       .img {
+        display: block;
         width: 100%;
         height: 286rpx;
       }
@@ -81,15 +88,29 @@
       position: relative;
       padding-right: 100rpx;
       .status {
+        min-width: 100rpx;
         position: absolute;
         top: 50%;
         right: -32rpx;
         transform: translateY(-50%);
         line-height: 50rpx;
-        background-image: linear-gradient(to right, #ffffff 0%, #c3e1ff 100%);
+        background-image: linear-gradient(to right, #ffffff 0%, #c3e1ff 50%, #c3e1ff 100%);
         color: $color-primary;
         font-size: 28rpx;
         padding: 0 8rpx;
+        text-align: center;
+        &.fail {
+          background-image: linear-gradient(to right, #f2f2f2 0%, #e8e8e8 100%);
+          color: #979797;
+        }
+        &.success {
+          background-image: linear-gradient(to right, #ffffff 0%, #cbefe8 50%, #cbefe8 100%);
+          color: #1bbe9e;
+        }
+        &.back {
+          background-image: linear-gradient(to right, #f2f2f2 0%, #e8e8e8 100%);
+          color: #979797;
+        }
       }
     }
     .cells {

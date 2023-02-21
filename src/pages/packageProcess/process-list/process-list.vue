@@ -2,7 +2,7 @@
   <view class="process-list">
     <div v-if="customData.queryResultList.length > 0" class="content">
       <div class="lists">
-        <div v-for="item in customData.queryResultList" :key="item.id" class="list">
+        <div v-for="item in customData.queryResultList" :key="item.businessid" class="list">
           <ZdbCardApply :render-data="item" />
         </div>
       </div>
@@ -91,7 +91,7 @@
   const queryData = () => {
     const { pageNo, pageSize } = queryInfo
     const { tel } = userInfo.value
-    requestW009(tel ? '13739436300' : '13739436300', pageNo, pageSize)
+    requestW009(tel || '', pageNo, pageSize)
       .then((res) => {
         const { list, pages } = res.pageBean
         formatPagingData(list, pages)
