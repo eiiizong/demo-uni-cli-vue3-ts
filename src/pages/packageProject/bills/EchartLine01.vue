@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, onMounted } from 'vue'
+  import { ref, watch, nextTick } from 'vue'
 
   const props = defineProps({
     /**
@@ -20,9 +20,23 @@
       required: true
     },
     /**
+     * x 轴数据
+     */
+    xAxis: {
+      type: Array,
+      required: true
+    },
+    /**
      * echart id
      */
     echartId: {
+      type: String,
+      required: true
+    },
+    /**
+     * label
+     */
+    label: {
       type: String,
       required: true
     },
@@ -79,16 +93,18 @@
     }
   })
 
-  const getServerData = () => {
+  const renderEchart = () => {
+    const { xAxis, renderList, label } = props
+
     // 模拟从服务器获取数据时的延时
     setTimeout(() => {
       // 模拟服务器返回数据，如果数据格式和标准格式不同，需自行按下面的格式拼接
       let res = {
-        categories: ['2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+        categories: xAxis,
         series: [
           {
-            name: '成交量A',
-            data: [35, 18, 25, 37, 30, 20, 30]
+            name: label,
+            data: renderList
           }
         ]
       }
@@ -96,9 +112,17 @@
     }, 500)
   }
 
-  onMounted(() => {
-    getServerData()
-  })
+  watch(
+    () => props.renderList,
+    (val) => {
+      if (val && val.length > 0) {
+        nextTick(() => {
+          renderEchart()
+        })
+      }
+    },
+    { immediate: true }
+  )
 </script>
 
 <style lang="scss" scoped>

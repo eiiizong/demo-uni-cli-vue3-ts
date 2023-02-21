@@ -19,7 +19,7 @@
         <div class="value Impact">{{ rateValue }}%</div>
       </div>
       <div class="echart">
-        <EchartLine01 :render-list="compareList" :echart-id="echartId" :color="color" />
+        <EchartLine01 :render-list="compareList" :echart-id="echartId" :color="color" :x-axis="xAxis" :label="label" />
       </div>
     </div>
   </div>
@@ -51,6 +51,13 @@
      */
     label: {
       type: String,
+      required: true
+    },
+    /**
+     * x 轴数据
+     */
+    xAxis: {
+      type: Array,
       required: true
     },
     /**

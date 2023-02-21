@@ -8,7 +8,9 @@
       :now-year-value="renderData.totalnumber || 0"
       :last-year-value="renderData.lastyeartotalnumber || 0"
       :rate-value="0"
-      :compare-list="[10, 20, 30, 40]" />
+      :compare-list="renderData.totalnumberValues || []"
+      :x-axis="xAxis" />
+
     <BillCompareItem
       label="存量余额"
       echart-id="echart_clye"
@@ -17,7 +19,8 @@
       :now-year-value="renderData.leavemoney || 0"
       :last-year-value="renderData.lastyearleavemoney || 0"
       :rate-value="renderData.leavemoneyrate || 0"
-      :compare-list="[10, 20, 30, 40]" />
+      :compare-list="renderData.leavemoneyValues || []"
+      :x-axis="xAxis" />
     <BillCompareItem
       label="补贴金额"
       echart-id="echart_btje"
@@ -26,7 +29,8 @@
       :now-year-value="renderData.butiejine || 0"
       :last-year-value="renderData.lastyearbutiejine || 0"
       :rate-value="renderData.butiejinerate || 0"
-      :compare-list="[10, 20, 30, 40]" />
+      :compare-list="renderData.butiejineValues || []"
+      :x-axis="xAxis" />
     <BillCompareItem
       label="补偿金额"
       echart-id="echart_bcje"
@@ -35,7 +39,8 @@
       :now-year-value="renderData.buchangjine || 0"
       :last-year-value="renderData.lastyearbuchangjine || 0"
       :rate-value="renderData.buchangjinerate || 0"
-      :compare-list="[10, 20, 30, 40]" />
+      :compare-list="renderData.buchangjineValues || []"
+      :x-axis="xAxis" />
     <BillCompareItem
       label="投放笔数"
       echart-id="echart_tfbs"
@@ -44,7 +49,8 @@
       :now-year-value="renderData.totaltime || 0"
       :last-year-value="renderData.lastyeartotaltime || 0"
       :rate-value="renderData.totaltimerate || 0"
-      :compare-list="[10, 20, 30, 40]" />
+      :compare-list="renderData.totaltimeValues || []"
+      :x-axis="xAxis" />
     <BillCompareItem
       label="户均贷款"
       echart-id="echart_hjdk"
@@ -53,7 +59,8 @@
       :now-year-value="renderData.averagemoey || 0"
       :last-year-value="renderData.lastyearaveragemoey || 0"
       :rate-value="renderData.averagemoeyrate || 0"
-      :compare-list="[10, 20, 30, 40]" />
+      :compare-list="renderData.averagemoeyValues || []"
+      :x-axis="xAxis" />
   </view>
 </template>
 
@@ -69,6 +76,13 @@
      */
     renderData: {
       type: Object as PropType<W006SuccessResult>,
+      required: true
+    },
+    /**
+     * x 轴 渲染数据
+     */
+    xAxis: {
+      type: Object as PropType<string[]>,
       required: true
     }
   })

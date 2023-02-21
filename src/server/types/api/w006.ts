@@ -19,6 +19,10 @@ export interface W006SuccessResult {
    */
   totalnumber?: number
   /**
+   * 投放总户数 echarts 数据
+   */
+  totalnumberValues?: number[]
+  /**
    * 投放总户数 比例
    */
   totalnumberrate?: number
@@ -30,6 +34,10 @@ export interface W006SuccessResult {
    * 存量余额(万元)
    */
   leavemoney?: number
+  /**
+   * 存量余额 echarts 数据
+   */
+  leavemoneyValues?: number[]
   /**
    * 存量余额(万元) 比例
    */
@@ -43,6 +51,10 @@ export interface W006SuccessResult {
    */
   butiejine?: number
   /**
+   * 补贴金额 echarts 数据
+   */
+  butiejineValues?: number[]
+  /**
    * 补贴金额(万元) 比例
    */
   butiejinerate?: number
@@ -54,6 +66,10 @@ export interface W006SuccessResult {
    * 补偿金额(万元)
    */
   buchangjine?: number
+  /**
+   * 补偿金额 echarts 数据
+   */
+  buchangjineValues?: number[]
   /**
    * 补偿金额(万元) 比例
    */
@@ -67,6 +83,10 @@ export interface W006SuccessResult {
    */
   totaltime?: number
   /**
+   * 投放笔数 echarts 数据
+   */
+  totaltimeValues?: number[]
+  /**
    * 投放笔数 比例
    */
   totaltimerate?: number
@@ -78,6 +98,10 @@ export interface W006SuccessResult {
    * 户均贷款(万元)
    */
   averagemoey?: number
+  /**
+   * 户均贷款 echarts 数据
+   */
+  averagemoeyValues?: number[]
   /**
    * 户均贷款(万元) 比例
    */
