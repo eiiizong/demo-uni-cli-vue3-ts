@@ -16,7 +16,7 @@
       color="#eca02d"
       :now-year-value="renderData.leavemoney || 0"
       :last-year-value="renderData.lastyearleavemoney || 0"
-      :rate-value="0"
+      :rate-value="renderData.leavemoneyrate || 0"
       :compare-list="[10, 20, 30, 40]" />
     <BillCompareItem
       label="补贴金额"
@@ -25,7 +25,7 @@
       color="#009bc2"
       :now-year-value="renderData.butiejine || 0"
       :last-year-value="renderData.lastyearbutiejine || 0"
-      :rate-value="0"
+      :rate-value="renderData.butiejinerate || 0"
       :compare-list="[10, 20, 30, 40]" />
     <BillCompareItem
       label="补偿金额"
@@ -34,7 +34,7 @@
       color="#f85c5c"
       :now-year-value="renderData.buchangjine || 0"
       :last-year-value="renderData.lastyearbuchangjine || 0"
-      :rate-value="0"
+      :rate-value="renderData.buchangjinerate || 0"
       :compare-list="[10, 20, 30, 40]" />
     <BillCompareItem
       label="投放笔数"
@@ -43,7 +43,7 @@
       color="#a288ff"
       :now-year-value="renderData.totaltime || 0"
       :last-year-value="renderData.lastyeartotaltime || 0"
-      :rate-value="0"
+      :rate-value="renderData.totaltimerate || 0"
       :compare-list="[10, 20, 30, 40]" />
     <BillCompareItem
       label="户均贷款"
@@ -52,7 +52,7 @@
       color="#1ed097"
       :now-year-value="renderData.averagemoey || 0"
       :last-year-value="renderData.lastyearaveragemoey || 0"
-      :rate-value="0"
+      :rate-value="renderData.averagemoeyrate || 0"
       :compare-list="[10, 20, 30, 40]" />
   </view>
 </template>

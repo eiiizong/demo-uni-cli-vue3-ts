@@ -11,7 +11,7 @@
     requestCustomLogin().then((res) => {
       storeUserInfo.updateStoreUserInfo({
         ...res,
-        role: '2'
+        role: '3'
       })
     })
   })

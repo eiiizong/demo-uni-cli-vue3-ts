@@ -1,7 +1,7 @@
 /**
- * w006 接口调用成功返回的数据格式
+ * w007 接口调用成功返回的数据格式
  */
-export interface W006SuccessResult {
+export interface W007SuccessResult {
   /**
    * 投放总金额(亿元)
    */
