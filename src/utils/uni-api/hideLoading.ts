@@ -3,6 +3,8 @@
  * @support uniapp详细说明： https://uniapp.dcloud.io/api/ui/prompt?id=hideloading
  * @example hideLoading()
  */
-const hideLoading = () => uni.hideLoading()
+const hideLoading = () => {
+  uni.hideLoading()
+}
 
 export { hideLoading }

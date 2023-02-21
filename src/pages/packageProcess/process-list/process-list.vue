@@ -21,31 +21,67 @@
   import ZdbLoadMore from '@/components/project/zdb-load-more/zdb-load-more.vue'
   import ZdbCardApply from '@/components/project/zdb-card-apply/zdb-card-apply.vue'
 
-  import { reactive } from 'vue'
+  import type { W009SuccessResultListItem } from '@/server/types/api'
+  import { reactive, toRefs } from 'vue'
   import { onLoad } from '@dcloudio/uni-app'
+  import { requestW009 } from '@/server/api'
+  import { useStoreUserInfo } from '@/stores/modules'
 
+  const storeUserInfo = useStoreUserInfo()
+  const { userInfo } = toRefs(storeUserInfo)
+
+  // 查询条件
   const queryInfo = reactive({
+    /**
+     * 当前页数
+     */
     pageNo: 1,
+    /**
+     * 每页请求条数
+     */
     pageSize: 10
   })
 
-  const customData = reactive({
-    // 查询结果数据
-    queryResultList: [{ id: '1' }, { id: '2' }, { id: '3' }, { id: '4' }, { id: '5' }, { id: '6' }], // 数据查询结果
-    // 是否请求完成 控制 no-data 组件在未请求完成时不显示
+  // 自定义数据
+  const customData = reactive<{
+    /**
+     * 查询结果数据
+     */
+    queryResultList: W009SuccessResultListItem[]
+    /**
+     * 是否请求完成 控制 no-data 组件在未请求完成时不显示
+     */
+    isRequestOver: boolean
+    /**
+     * 数据是否存在多页，不止一页
+     */
+    isMultiplePages: boolean
+    /**
+     * 当数据不止一页时是否加载完成
+     */
+    isLoadOver: boolean
+  }>({
+    queryResultList: [],
     isRequestOver: false,
-    // 数据是否存在多页，不止一页
     isMultiplePages: false,
-    // 当数据不止一页时是否加载完成
     isLoadOver: false
   })
 
   // 查询数据
   const queryData = () => {
     const { pageNo, pageSize } = queryInfo
-    console.log(pageNo, pageSize)
+    const { tel } = userInfo.value
+    requestW009(tel || '13739436300', pageNo, pageSize)
+      .then((res) => {
+        const { list } = res.pageBen
+        customData.queryResultList = [...list]
+      })
+      .finally(() => {
+        customData.isRequestOver = true
+      })
   }
 
+  // 页面加载完成
   onLoad(() => {
     queryData()
   })

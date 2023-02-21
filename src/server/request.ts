@@ -1,7 +1,7 @@
 import type { Api } from './types'
 import { showModal, showLoading, hideLoading, request as uniRequest } from '@/utils/uni-api'
 import { getIsDev } from '@/utils/get'
-import { isObject } from '@/utils/is'
+// import { isObject } from '@/utils/is'
 import { useStoreUserInfo } from '@/stores/modules'
 import { AES_Encrypt, AES_Decrypt } from './aes' // 加密
 
