@@ -2,8 +2,8 @@
   <view v-if="renderList.length > 0" class="query-history">
     <div class="title">
       <div class="left">历史记录</div>
-      <div class="right">
-        <YhIcon name="clear" size="32rpx" />
+      <div class="right" @click="emit('detele')">
+        <YhIcon name="delete-fill" size="32rpx" />
       </div>
     </div>
     <div class="items">
@@ -17,7 +17,7 @@
 
   import type { PropType } from 'vue'
 
-  const emit = defineEmits(['click'])
+  const emit = defineEmits(['click', 'detele'])
 
   const props = defineProps({
     renderList: {

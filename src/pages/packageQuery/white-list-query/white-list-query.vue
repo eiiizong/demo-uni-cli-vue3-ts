@@ -1,200 +1,103 @@
 <template>
   <view class="white-list-query">
-    <QueryConditions v-model:model-value="keyword" />
-    <QueryHistory :render-list="['234']" />
-    <QueryResult v-model:model-value="keyword" />
+    <QueryConditions v-model:model-value="keyword" @confirm="onConfirm" />
+    <QueryHistory :render-list="historys" @click="onClickHistoryItem" @detele="onDeleteHistory" />
+    <QueryResult v-if="customData.queryResultList.length > 0" />
+    <template v-else>
+      <ZdbNoData v-if="customData.isRequestOver" />
+    </template>
   </view>
 </template>
 
 <script setup lang="ts">
+  import ZdbNoData from '@/components/project/zdb-no-data/zdb-no-data.vue'
+
   import QueryConditions from './QueryConditions.vue'
   import QueryHistory from './QueryHistory.vue'
   import QueryResult from './QueryResult.vue'
 
-  import { reactive, ref } from 'vue'
-  import { onLoad, onReachBottom } from '@dcloudio/uni-app'
+  import type { W009SuccessResultListItem } from '@/server/types/api'
 
+  import { reactive, ref } from 'vue'
+  import { getStorage, removeStorage, setStorage, showToast } from '@/utils/uni-api'
+  import { onLoad } from '@dcloudio/uni-app'
+
+  /**
+   * 白名单本地储存key
+   */
+  const WHITE_LIST_STORAGE_KEY = 'WHITE_LIST_STORAGE_KEY'
+
+  /**
+   * 搜索关键字
+   */
   const keyword = ref('')
 
-  const queryInfo = reactive({
-    keyword: '',
-    tabId: '0',
-    pageNo: 1,
-    pageSize: 10
-  })
+  /**
+   * 历史搜索记录
+   */
+  const historys = ref<string[]>([])
 
-  const customData = reactive({
-    tabsData: [
-      {
-        id: '0',
-        name: '国家政策',
-        num: 10
-      },
-      {
-        id: '1',
-        name: '省级政策',
-        num: 10
-      },
-      {
-        id: '2',
-        name: '市级政策',
-        num: 10
-      }
-    ],
-    // 查询结果
-    queryResultList: [
-      {
-        chi031: '28',
-        chi037: '6',
-        chi037_desc: '卫生健康局',
-        chi050: '10307',
-        chi051:
-          '计生委关于调整全国农村部分计划生育家庭奖励扶助和计划生育家庭特别扶助计生委关于调整全国农村部分计划生育家庭奖励扶助和计划生育家庭特别扶助标准的通知标准的通知',
-        chi052: '2019-03-06',
-        chi053: '115485',
-        chi054: '',
-        myrownum: '1',
-        yab003: '511011',
-        yab003_desc: '东兴区'
-      },
-      {
-        chi031: '28',
-        chi037: '6',
-        chi037_desc: '卫生健康局',
-        chi050: '10307',
-        chi051: '计生委关于调整全国农村部分计划生育家庭奖励扶助和计划生育家庭特别扶助标准的通知',
-        chi052: '2019-03-06 15:23:11.0',
-        chi053: '115485',
-        chi054: '',
-        myrownum: '1',
-        yab003: '511011',
-        yab003_desc: '东兴区'
-      },
-      {
-        chi031: '28',
-        chi037: '6',
-        chi037_desc: '卫生健康局',
-        chi050: '10307',
-        chi051: '计生委关于调整全国农村部分计划生育家庭奖励扶助和计划生育家庭特别扶助标准的通知',
-        chi052: '2019-03-06 15:23:11.0',
-        chi053: '115485',
-        chi054: '',
-        myrownum: '1',
-        yab003: '511011',
-        yab003_desc: '东兴区'
-      },
-      {
-        chi031: '28',
-        chi037: '6',
-        chi037_desc: '卫生健康局',
-        chi050: '10307',
-        chi051:
-          '计生委关于调整全国农村部分计划生育家庭奖励扶助和计划生育家庭特别扶助计生委关于调整全国农村部分计划生育家庭奖励扶助和计划生育家庭特别扶助标准的通知标准的通知',
-        chi052: '2019-03-06',
-        chi053: '115485',
-        chi054: '',
-        myrownum: '1',
-        yab003: '511011',
-        yab003_desc: '东兴区'
-      },
-      {
-        chi031: '28',
-        chi037: '6',
-        chi037_desc: '卫生健康局',
-        chi050: '10307',
-        chi051: '计生委关于调整全国农村部分计划生育家庭奖励扶助和计划生育家庭特别扶助标准的通知',
-        chi052: '2019-03-06 15:23:11.0',
-        chi053: '115485',
-        chi054: '',
-        myrownum: '1',
-        yab003: '511011',
-        yab003_desc: '东兴区'
-      },
-      {
-        chi031: '28',
-        chi037: '6',
-        chi037_desc: '卫生健康局',
-        chi050: '10307',
-        chi051: '计生委关于调整全国农村部分计划生育家庭奖励扶助和计划生育家庭特别扶助标准的通知',
-        chi052: '2019-03-06 15:23:11.0',
-        chi053: '115485',
-        chi054: '',
-        myrownum: '1',
-        yab003: '511011',
-        yab003_desc: '东兴区'
-      },
-      {
-        chi031: '28',
-        chi037: '6',
-        chi037_desc: '卫生健康局',
-        chi050: '10307',
-        chi051:
-          '计生委关于调整全国农村部分计划生育家庭奖励扶助和计划生育家庭特别扶助计生委关于调整全国农村部分计划生育家庭奖励扶助和计划生育家庭特别扶助标准的通知标准的通知',
-        chi052: '2019-03-06',
-        chi053: '115485',
-        chi054: '',
-        myrownum: '1',
-        yab003: '511011',
-        yab003_desc: '东兴区'
-      },
-      {
-        chi031: '28',
-        chi037: '6',
-        chi037_desc: '卫生健康局',
-        chi050: '10307',
-        chi051: '计生委关于调整全国农村部分计划生育家庭奖励扶助和计划生育家庭特别扶助标准的通知',
-        chi052: '2019-03-06 15:23:11.0',
-        chi053: '115485',
-        chi054: '',
-        myrownum: '1',
-        yab003: '511011',
-        yab003_desc: '东兴区'
-      },
-      {
-        chi031: '28',
-        chi037: '6',
-        chi037_desc: '卫生健康局',
-        chi050: '10307',
-        chi051: '计生委关于调整全国农村部分计划生育家庭奖励扶助和计划生育家庭特别扶助标准的通知',
-        chi052: '2019-03-06 15:23:11.0',
-        chi053: '115485',
-        chi054: '',
-        myrownum: '1',
-        yab003: '511011',
-        yab003_desc: '东兴区'
-      }
-    ],
-    isRequestOver: false, // 是否请求完成 控制no-data组件在未请求完成时显示
-    isLoadOver: false, // 是否加载完成
-    isMultiplePages: false // 是否多页
+  // 自定义数据
+  const customData = reactive<{
+    /**
+     * 查询结果数据
+     */
+    queryResultList: W009SuccessResultListItem[]
+    /**
+     * 是否请求完成 控制 no-data 组件在未请求完成时不显示
+     */
+    isRequestOver: boolean
+    /**
+     * 数据是否存在多页，不止一页
+     */
+    isMultiplePages: boolean
+    /**
+     * 当数据不止一页时是否加载完成
+     */
+    isLoadOver: boolean
+  }>({
+    queryResultList: [],
+    isRequestOver: false,
+    isMultiplePages: false,
+    isLoadOver: false
   })
-
-  const isFocus = ref(false)
 
   // 查询数据
   const queryData = () => {
     console.log('queryData')
   }
 
-  // 加载更多数据
-  const loadMoreData = () => {
-    queryInfo.pageNo++
+  // 键盘输入事件
+  const onConfirm = () => {
+    if (keyword.value) {
+      const arr = [...historys.value]
+      arr.push(keyword.value)
+
+      const data = [...new Set(arr)]
+      historys.value = [...data]
+      setStorage(WHITE_LIST_STORAGE_KEY, data)
+      queryData()
+    }
+  }
+
+  // 点击历史搜索记录
+  const onClickHistoryItem = (data: string) => {
+    keyword.value = data
     queryData()
   }
 
-  onLoad((e) => {
-    if (e.focus) {
-      isFocus.value = true
-    }
-  })
+  // 删除历史搜索记录
+  const onDeleteHistory = () => {
+    historys.value = []
+    removeStorage(WHITE_LIST_STORAGE_KEY).then(() => {
+      showToast('删除成功')
+    })
+  }
 
-  // 页面上拉触底事件的处理函数 上拉加载更多
-  onReachBottom(() => {
-    const { isLoadOver } = customData
-    if (isLoadOver) {
-      return
-    }
-    loadMoreData()
+  onLoad(() => {
+    getStorage(WHITE_LIST_STORAGE_KEY).then((res) => {
+      historys.value = res.data
+    })
   })
 </script>
 

@@ -37,23 +37,36 @@
   import YhIcon from '@/components/yh/icon/icon.vue'
 
   const renderList = [
+    'photo',
+    'photo-fail',
+    'photo-o',
     'plus',
     'minus',
-
-    'female',
-    'male',
     'picker',
     'tick',
+    'female',
+    'male',
+    'delete-fill',
     'loading',
-    'radio',
-    'radio-checked',
-    'back',
-    'arrow-right',
     'close',
     'close-round-fill',
-    'search',
+    'close_round',
+    'back',
+    'back-light',
+    'scan',
     'checkbox',
-    'checkbox-checked'
+    'checkbox-checked',
+    'radio',
+    'radio-checked',
+    'arrow-right',
+    'arrow-left',
+    'arrow-down',
+    'arrow-up',
+    'search',
+    'voice',
+    'voice-fill',
+    'wifi',
+    'edit'
   ]
 </script>
 
@@ -65,14 +78,27 @@
       display: flex;
       align-items: center;
       flex-wrap: wrap;
+      padding: 24rpx;
       .item {
+        width: 24%;
         text-align: center;
-        margin-bottom: 32rpx;
-        margin: 0 32rpx;
+        margin-bottom: 24rpx;
+        background-color: #fff;
+        border-radius: 8rpx;
+        padding: 16rpx;
+        color: $color-primary;
+        margin-right: 10rpx;
         .name {
           font-size: 24rpx;
           line-height: 48rpx;
           color: #666;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+          color: $color-text;
+        }
+        &:nth-of-type(4n + 4) {
+          margin-right: 0;
         }
       }
     }

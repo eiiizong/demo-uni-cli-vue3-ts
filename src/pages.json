@@ -266,6 +266,11 @@
         "query": ""
       },
       {
+        "name": "packageDemo-icon",
+        "path": "pages/packageDemo/icon/icon",
+        "query": ""
+      },
+      {
         "name": "packageBusiness-business-intro",
         "path": "pages/packageBusiness/business-intro/business-intro",
         "query": ""

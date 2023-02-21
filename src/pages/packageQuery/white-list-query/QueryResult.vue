@@ -10,7 +10,9 @@
 
 <script setup lang="ts">
   import ZdbCardPolicy from '@/components/project/zdb-card-policy/zdb-card-policy.vue'
+
   import type { PropType } from 'vue'
+
   import { ref } from 'vue'
 
   interface objType {
