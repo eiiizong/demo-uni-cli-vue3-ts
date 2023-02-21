@@ -51,6 +51,7 @@
       disabled: false,
       imgSrc: imageNavRYDYBZ
     }
+
     // 进度查询
     const navSPJDCX: PopularServiceNavItem = {
       id: 'jdcx',
@@ -61,18 +62,6 @@
       isAuth: true,
       disabled: false,
       imgSrc: imageNavSPJDCX
-    }
-
-    // 合作机构
-    const navHZJG: PopularServiceNavItem = {
-      id: 'hzjg',
-      name: '合作机构',
-      desc: '查询合作机构详情',
-      pathName: 'org-list',
-      packageName: 'packageOrg',
-      isAuth: false,
-      disabled: false,
-      imgSrc: imageNavHZJG
     }
 
     // 工作量
@@ -142,12 +131,12 @@
     const navZCFG: PopularServiceNavItem = {
       id: 'zcfg',
       name: '政策法规',
-      desc: '一键查询政策',
+      desc: '浏览相关政策文件',
       pathName: 'policy-list',
       packageName: 'packagePolicy',
       isAuth: false,
       disabled: false,
-      imgSrc: imageNavBMDFK
+      imgSrc: imageNavHZJG
     }
 
     // 白名单查询
@@ -166,7 +155,7 @@
     const navTJBB: PopularServiceNavItem = {
       id: 'tjbb',
       name: '统计报表',
-      desc: '一键查询统计报表',
+      desc: '各项数据，一键速览',
       pathName: 'policy-list',
       packageName: 'packagePolicy',
       isAuth: false,
@@ -175,63 +164,48 @@
     }
 
     // 默认为游客访问内容
-    const arr: PopularServiceNavItem[][] = [[], []]
+    let arr: PopularServiceNavItem[][] = []
 
     const { role } = userInfo.value
 
     switch (role) {
-      // 企业
-      case '1':
-        arr[0].push(navYWJS)
-        arr[0].push(navWYRZ)
-        arr[0].push(navBMDSQ)
-        arr[0].push(navBMDFK)
-        arr[1].push(navHZJG)
-        arr[1].push(navSPJDCX)
-        arr[1].push(navZCFG)
-        break
       // 合作机构
       case '2':
-        // 以下为正确菜单
-        // arr[0].push(navYWJS)
-        // arr[0].push(navHZJG)
-        // arr[0].push(navSPJDCX)
-        // arr[0].push(navBMDCX)
-        // arr[1].push(navZCFG)
+        arr = [[]]
+        arr[0].push(navBMDCX)
+        arr[0].push(navSPJDCX)
         arr[0].push(navYWJS)
-        arr[0].push(navWYRZ)
-        arr[0].push(navBMDSQ)
-        arr[0].push(navBMDFK)
-        arr[1].push(navHZJG)
-        arr[1].push(navSPJDCX)
-        arr[1].push(navZCFG)
-        // 以下为测试菜单
+        arr[0].push(navZCFG)
         break
       // 经办人
       case '3':
+        arr = [[], []]
         arr[0].push(navRYDYBZ)
         arr[0].push(navTJBB)
         arr[0].push(navGZL)
         arr[0].push(navBMDCX)
         arr[1].push(navYWJS)
+        arr[1].push(navZCFG)
         break
       // 领导
       case '4':
+        arr = [[], []]
         arr[0].push(navRYDYBZ)
         arr[0].push(navTJBB)
         arr[0].push(navGZL)
         arr[0].push(navBMDCX)
         arr[1].push(navYWJS)
-        arr[1].push(navHZJG)
-        break
-      // 默认游客
-      default:
-        arr[0].push(navYWJS)
-        arr[0].push(navWYRZ)
-        arr[0].push(navBMDSQ)
-        arr[0].push(navBMDFK)
-        arr[1].push(navHZJG)
         arr[1].push(navZCFG)
+        break
+      // 默认游客 企业
+      default:
+        arr = [[], []]
+        arr[0].push(navYWJS)
+        arr[0].push(navZCFG)
+        arr[0].push(navBMDSQ)
+        arr[0].push(navWYRZ)
+        arr[1].push(navBMDFK)
+        arr[1].push(navSPJDCX)
         break
     }
 

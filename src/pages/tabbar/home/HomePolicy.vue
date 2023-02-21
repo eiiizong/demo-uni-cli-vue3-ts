@@ -116,7 +116,7 @@
 
       .tab {
         font-size: 32rpx;
-        line-height: 80rpx;
+        line-height: 100rpx;
         color: #333;
         margin-right: $spacing;
         transition: all 0.3s;
