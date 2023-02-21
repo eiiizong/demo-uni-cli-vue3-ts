@@ -166,46 +166,6 @@
       ]
     },
     {
-      "root": "pages/packageOrg",
-      "pages": [
-        {
-          "path": "org-basic-info/org-basic-info",
-          "style": {
-            "navigationBarTitleText": "合作机构基本信息"
-          }
-        },
-        {
-          "path": "org-details/org-details",
-          "style": {
-            "navigationBarTitleText": "合作机构详情"
-          }
-        },
-        {
-          "path": "org-list/org-list",
-          "style": {
-            "navigationBarTitleText": "合作机构"
-          }
-        }
-      ]
-    },
-    {
-      "root": "pages/packagePolicy",
-      "pages": [
-        {
-          "path": "policy-details/policy-details",
-          "style": {
-            "navigationBarTitleText": "政策文件详情"
-          }
-        },
-        {
-          "path": "policy-list/policy-list",
-          "style": {
-            "navigationBarTitleText": "政策文件"
-          }
-        }
-      ]
-    },
-    {
       "root": "pages/packageProcess",
       "pages": [
         {
@@ -242,6 +202,35 @@
           "path": "process-details/process-details",
           "style": {
             "navigationBarTitleText": "流程详情"
+          }
+        }
+      ]
+    },
+    {
+      "root": "pages/packageQuery",
+      "pages": [
+        {
+          "path": "policy-details/policy-details",
+          "style": {
+            "navigationBarTitleText": "政策文件详情"
+          }
+        },
+        {
+          "path": "policy-query/policy-query",
+          "style": {
+            "navigationBarTitleText": "政策文件"
+          }
+        },
+        {
+          "path": "report-form-query/report-form-query",
+          "style": {
+            "navigationBarTitleText": "报表统计"
+          }
+        },
+        {
+          "path": "white-list-query/white-list-query",
+          "style": {
+            "navigationBarTitleText": "白名单查询"
           }
         }
       ]
@@ -309,21 +298,6 @@
         "query": ""
       },
       {
-        "name": "packagePolicy-policy-list",
-        "path": "pages/packagePolicy/policy-list/policy-list",
-        "query": ""
-      },
-      {
-        "name": "packageOrg-org-details",
-        "path": "pages/packageOrg/org-details/org-details",
-        "query": ""
-      },
-      {
-        "name": "packageOrg-org-list",
-        "path": "pages/packageOrg/org-list/org-list",
-        "query": ""
-      },
-      {
         "name": "packageWorkload-workload",
         "path": "pages/packageWorkload/workload/workload",
         "query": ""
@@ -356,6 +330,11 @@
       {
         "name": "packageForm-whitelist-feedback",
         "path": "pages/packageForm/whitelist-feedback/whitelist-feedback",
+        "query": ""
+      },
+      {
+        "name": "packageQuery-policy-query",
+        "path": "pages/packageQuery/policy-query/policy-query",
         "query": ""
       }
     ]

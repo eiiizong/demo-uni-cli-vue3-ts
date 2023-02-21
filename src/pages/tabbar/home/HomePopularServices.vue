@@ -132,8 +132,8 @@
       id: 'zcfg',
       name: '政策法规',
       desc: '浏览相关政策文件',
-      pathName: 'policy-list',
-      packageName: 'packagePolicy',
+      pathName: 'policy-query',
+      packageName: 'packageQuery',
       isAuth: false,
       disabled: false,
       imgSrc: imageNavHZJG
@@ -144,8 +144,8 @@
       id: 'bmdcx',
       name: '白名单查询',
       desc: '一键查询白名单',
-      pathName: 'policy-list',
-      packageName: 'packagePolicy',
+      pathName: 'white-list-query',
+      packageName: 'packageQuery',
       isAuth: false,
       disabled: false,
       imgSrc: imageNavBMDFK
@@ -156,8 +156,8 @@
       id: 'tjbb',
       name: '统计报表',
       desc: '各项数据，一键速览',
-      pathName: 'policy-list',
-      packageName: 'packagePolicy',
+      pathName: 'report-form-query',
+      packageName: 'packageQuery',
       isAuth: false,
       disabled: false,
       imgSrc: imageNavBMDFK

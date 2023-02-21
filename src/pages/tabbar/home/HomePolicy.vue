@@ -95,12 +95,10 @@
 
   const onClickTab = (id: string) => {
     currentTabId.value = id
-
-    // navigateTo('policy-list', 'packagePolicy')
   }
 
   const onClickButton = () => {
-    navigateTo('policy-list', 'packagePolicy')
+    navigateTo('policy-query', 'packageQuery')
   }
 </script>
 

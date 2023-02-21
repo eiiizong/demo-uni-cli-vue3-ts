@@ -31,7 +31,7 @@
 
   // 点击事件
   const onClick = () => {
-    navigateTo('policy-details', 'packagePolicy')
+    navigateTo('policy-details', 'packageQuery')
   }
 </script>
 
