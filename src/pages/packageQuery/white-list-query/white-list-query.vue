@@ -1,10 +1,20 @@
 <template>
-  <view class="white-list-query"> white-list-query </view>
+  <view class="white-list-query">
+    <QueryConditions v-model:model-value="keyword" />
+    <QueryHistory :render-list="['234']" />
+    <QueryResult v-model:model-value="keyword" />
+  </view>
 </template>
 
 <script setup lang="ts">
+  import QueryConditions from './QueryConditions.vue'
+  import QueryHistory from './QueryHistory.vue'
+  import QueryResult from './QueryResult.vue'
+
   import { reactive, ref } from 'vue'
   import { onLoad, onReachBottom } from '@dcloudio/uni-app'
+
+  const keyword = ref('')
 
   const queryInfo = reactive({
     keyword: '',

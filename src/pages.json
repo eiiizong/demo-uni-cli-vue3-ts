@@ -324,6 +324,16 @@
         "name": "packageQuery-policy-query",
         "path": "pages/packageQuery/policy-query/policy-query",
         "query": ""
+      },
+      {
+        "name": "packageQuery-white-list-query",
+        "path": "pages/packageQuery/white-list-query/white-list-query",
+        "query": ""
+      },
+      {
+        "name": "packageQuery-report-form-query",
+        "path": "pages/packageQuery/report-form-query/report-form-query",
+        "query": ""
       }
     ]
   }
