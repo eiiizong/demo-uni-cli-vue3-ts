@@ -1,7 +1,12 @@
 <template>
   <view class="home-popular-services">
     <ZdbPanel title="热门服务" :space="false">
-      <swiper class="swiper" indicator-dots indicator-color="#a288ff" indicator-active-color="#6c46da">
+      <swiper
+        v-if="navs.length > 1"
+        class="swiper"
+        indicator-dots
+        indicator-color="#a288ff"
+        indicator-active-color="#6c46da">
         <swiper-item v-for="(item, index) in navs" :key="index" class="swiper-item">
           <div class="navs">
             <div v-for="itemNav in item" :key="itemNav.id" class="nav" @click="onJumpRoute(itemNav)">
@@ -14,6 +19,15 @@
           </div>
         </swiper-item>
       </swiper>
+      <div v-else class="navs no-swiper">
+        <div v-for="itemNav in navs[0]" :key="itemNav.id" class="nav" @click="onJumpRoute(itemNav)">
+          <img :src="itemNav.imgSrc" alt="" class="bg" />
+          <div class="content">
+            <div class="key">{{ itemNav.name }}</div>
+            <div class="desc">{{ itemNav.desc }}</div>
+          </div>
+        </div>
+      </div>
     </ZdbPanel>
   </view>
 </template>
@@ -256,6 +270,9 @@
       display: flex;
       align-items: center;
       flex-wrap: wrap;
+      &.no-swiper {
+        padding: 0 $spacing;
+      }
       .nav {
         width: 330rpx;
         height: 200rpx;

@@ -191,18 +191,6 @@
             "navigationBarTitleText": "蓉易贷一本账",
             "navigationStyle": "custom"
           }
-        },
-        {
-          "path": "business-intro/business-intro",
-          "style": {
-            "navigationBarTitleText": "业务介绍"
-          }
-        },
-        {
-          "path": "process-details/process-details",
-          "style": {
-            "navigationBarTitleText": "流程详情"
-          }
         }
       ]
     },
