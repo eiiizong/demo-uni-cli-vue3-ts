@@ -11,7 +11,7 @@
       <ZdbNoData v-if="customData.isRequestOver" />
     </template>
     <template v-if="customData.isMultiplePages">
-      <ZdbLoadMore :is-load-over="customData.isLoadOver" />
+      <ZdbLoadMore :is-load-over="customData.isLoadOver" @load-more="loadMoreData" />
     </template>
   </view>
 </template>
@@ -23,7 +23,7 @@
 
   import type { W009SuccessResultListItem } from '@/server/types/api'
   import { reactive, toRefs } from 'vue'
-  import { onLoad } from '@dcloudio/uni-app'
+  import { onLoad, onReachBottom } from '@dcloudio/uni-app'
   import { requestW009 } from '@/server/api'
   import { useStoreUserInfo } from '@/stores/modules'
 
@@ -67,23 +67,58 @@
     isLoadOver: false
   })
 
+  // 处理请求返还分页的数据 判定是否还有下一页以及请求是否完成
+  const formatPagingData = (data: any[], pages: number) => {
+    const { pageNo } = queryInfo
+
+    if (pages > 1) {
+      customData.isMultiplePages = true
+    } else {
+      customData.isMultiplePages = false
+    }
+
+    // 请求完成 暂无其他数据
+    if (pageNo >= pages) {
+      customData.isLoadOver = true
+    } else {
+      customData.isLoadOver = false
+    }
+
+    customData.queryResultList = [...customData.queryResultList, ...data]
+  }
+
   // 查询数据
   const queryData = () => {
     const { pageNo, pageSize } = queryInfo
     const { tel } = userInfo.value
-    requestW009(tel || '13739436300', pageNo, pageSize)
+    requestW009(tel ? '13739436300' : '13739436300', pageNo, pageSize)
       .then((res) => {
-        const { list } = res.pageBen
-        customData.queryResultList = [...list]
+        const { list, pages } = res.pageBean
+        formatPagingData(list, pages)
       })
       .finally(() => {
         customData.isRequestOver = true
       })
   }
 
+  /**
+   * 加载更多数据
+   */
+  const loadMoreData = () => {
+    queryInfo.pageNo++
+    queryData()
+  }
+
   // 页面加载完成
   onLoad(() => {
     queryData()
+  })
+
+  // 页面上拉触底事件的处理函数 上拉加载更多
+  onReachBottom(() => {
+    if (!customData.isLoadOver) {
+      loadMoreData()
+    }
   })
 </script>
 
