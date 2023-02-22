@@ -1,17 +1,19 @@
 <template>
-  <view class="query-result">
-    <div v-if="renderList.length > 0" class="items">
-      <div v-for="item in renderList" :key="item.crb110" class="item">
-        <CardItem :render-data="item" />
+  <div class="query-result-wrapper">
+    <view class="query-result" :class="renderList.length > 0 ? 'data' : ''">
+      <div v-if="renderList.length > 0" class="items">
+        <div v-for="item in renderList" :key="item.crb110" class="item">
+          <CardItem :render-data="item" />
+        </div>
       </div>
-    </div>
-    <template v-else>
-      <ZdbNoData v-if="isRequestOver" tip="暂未搜索到相关数据" />
-    </template>
-    <div v-if="isMultiplePages" class="load-more-wrapper">
-      <ZdbLoadMore :is-load-over="isLoadOver" @load-more="emit('loadMore')" />
-    </div>
-  </view>
+      <template v-else>
+        <ZdbNoData v-if="isRequestOver" tip="暂未搜索到相关数据" />
+      </template>
+      <div v-if="isMultiplePages" class="load-more-wrapper">
+        <ZdbLoadMore :is-load-over="isLoadOver" @load-more="emit('loadMore')" />
+      </div>
+    </view>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -51,6 +53,11 @@
   .query-result {
     width: 100%;
     padding: $spacing;
+    // 有数据才显示背景色
+    &.data {
+      background-color: #fff;
+      border-top: 1px solid $color-border;
+    }
     .items {
       width: 100%;
       .item {
