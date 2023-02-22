@@ -2,13 +2,13 @@
   <view class="white-list-query">
     <QueryConditions v-model:model-value="queryInfo.keyword" @confirm="onConfirm" />
     <QueryHistory v-if="isShowHistory" :render-list="historys" @click="onClickHistoryItem" @detele="onDeleteHistory" />
-    <QueryResult v-if="customData.queryResultList.length > 0" />
+    <QueryResult v-if="customData.queryResultList.length > 0" :render-list="customData.queryResultList" />
     <template v-else>
       <ZdbNoData v-if="customData.isRequestOver" tip="暂未搜索到相关数据" />
     </template>
-    <template v-if="customData.isMultiplePages">
+    <div v-if="customData.isMultiplePages" class="load-more-wrapper">
       <ZdbLoadMore :is-load-over="customData.isLoadOver" @load-more="loadMoreData" />
-    </template>
+    </div>
   </view>
 </template>
 
@@ -77,7 +77,17 @@
      */
     isLoadOver: boolean
   }>({
-    queryResultList: [],
+    queryResultList: [
+      {
+        chb015: '成华区',
+        crb11b: '已准入',
+        crb11l: 1638460800000,
+        crb110: 1017537,
+        crb111: '成都钦川物流有限公司',
+        crb116: '交通运输业',
+        crb118: '小型企业'
+      }
+    ],
     isRequestOver: false,
     isMultiplePages: false,
     isLoadOver: false
@@ -186,5 +196,8 @@
 <style lang="scss" scoped>
   .white-list-query {
     width: 100%;
+    .load-more-wrapper {
+      padding: $spacing;
+    }
   }
 </style>

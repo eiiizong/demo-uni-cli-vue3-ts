@@ -3,41 +3,37 @@
  */
 export interface W011SuccessResultListItem {
   /**
-   * 申报机构编码
+   * 所在区域
    */
-  aae017: string
+  chb015: string
   /**
-   * 申报时间
+   * 准入状态
    */
-  aae036: number
+  crb11b: string
   /**
-   * 业务id
+   * 白名单入库时间
    */
-  businessid: string
+  crb11l: number
   /**
-   * 项目编号
+   * 退库时间
    */
-  chi031: string
+  crb11m?: number
   /**
-   * 流程id
+   * 白名单主键
    */
-  cpb100: string
+  crb110: number
   /**
-   * 流程状态 0 未经办 1经办中、2申请通过、3不通过、4打回、5撤销、6合并、7拆分、8取消经办、9业务作废
+   * 白名单企业名
    */
-  cpb102: '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
+  crb111: string
   /**
-   * 申报机构转码
+   * 行业
    */
-  orgname: string
+  crb116: string
   /**
-   * 业务名称
+   * 行业规模
    */
-  processname: string
-  /**
-   * 流程状态转码
-   */
-  state: string
+  crb118: string
 }
 
 /**

@@ -180,7 +180,7 @@
     // 默认为游客访问内容
     let arr: PopularServiceNavItem[][] = []
 
-    const { role } = userInfo.value
+    const { role, tel } = userInfo.value
 
     switch (role) {
       // 合作机构
@@ -221,6 +221,20 @@
         arr[1].push(navBMDFK)
         arr[1].push(navSPJDCX)
         break
+    }
+
+    if (tel === '13708045206' || tel === '18482160080') {
+      arr = [[], [], []]
+      arr[0].push(navRYDYBZ)
+      arr[0].push(navSPJDCX)
+      arr[0].push(navGZL)
+      arr[0].push(navYWJS)
+      arr[1].push(navBMDSQ)
+      arr[1].push(navWYRZ)
+      arr[1].push(navBMDFK)
+      arr[1].push(navZCFG)
+      arr[2].push(navBMDCX)
+      arr[2].push(navTJBB)
     }
 
     return arr
