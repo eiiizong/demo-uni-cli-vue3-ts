@@ -1,5 +1,5 @@
 <template>
-  <view v-if="renderList.length > 0" class="query-result">
+  <view class="query-result">
     <div v-if="renderList.length > 0" class="items">
       <div v-for="item in renderList" :key="item.crb110" class="item">
         <CardItem :render-data="item" />
@@ -9,7 +9,7 @@
       <ZdbNoData v-if="isRequestOver" tip="暂未搜索到相关数据" />
     </template>
     <div v-if="isMultiplePages" class="load-more-wrapper">
-      <ZdbLoadMore :is-load-over="isLoadOver" @load-more="emit('loadMoreData')" />
+      <ZdbLoadMore :is-load-over="isLoadOver" @load-more="emit('loadMore')" />
     </div>
   </view>
 </template>
@@ -23,7 +23,7 @@
   import type { PropType } from 'vue'
   import type { W011SuccessResultListItem } from '@/server/types/api'
 
-  const emit = defineEmits(['loadMoreData'])
+  const emit = defineEmits(['loadMore'])
   const props = defineProps({
     /**
      * 渲染数据
@@ -50,10 +50,9 @@
 <style lang="scss" scoped>
   .query-result {
     width: 100%;
-    flex: 1;
-    overflow: auto;
-    padding: $spacing $spacing 0;
+    padding: $spacing;
     .items {
+      width: 100%;
       .item {
         margin-bottom: 24rpx;
         &:last-child {

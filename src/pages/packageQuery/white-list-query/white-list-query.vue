@@ -1,8 +1,9 @@
 <template>
   <view class="white-list-query">
-    <QueryConditions v-model:model-value="queryInfo.keyword" @confirm="onConfirm" />
+    <QueryConditions v-model:model-value="queryInfo.keyword" @focus="isShowHistory = true" @confirm="onConfirm" />
     <QueryHistory v-if="isShowHistory" :render-list="historys" @click="onClickHistoryItem" @detele="onDeleteHistory" />
     <QueryResult
+      v-else
       :render-list="customData.queryResultList"
       :is-request-over="customData.isRequestOver"
       :is-multiple-pages="customData.isMultiplePages"
@@ -73,17 +74,7 @@
      */
     isLoadOver: boolean
   }>({
-    queryResultList: [
-      {
-        chb015: '成华区',
-        crb11b: '已准入',
-        crb11l: 1638460800000,
-        crb110: 1017537,
-        crb111: '成都钦川物流有限公司',
-        crb116: '交通运输业',
-        crb118: '小型企业'
-      }
-    ],
+    queryResultList: [],
     isRequestOver: false,
     isMultiplePages: false,
     isLoadOver: false

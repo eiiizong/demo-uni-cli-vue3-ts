@@ -9,6 +9,7 @@
         :value="modelValue"
         :focus="focus"
         @input="onInput"
+        @focus="emit('focus')"
         @confirm="emit('confirm')" />
       <YhIcon name="search" size="32rpx" class="btn" />
     </div>
@@ -18,7 +19,7 @@
 <script setup lang="ts">
   import YhIcon from '@/components/yh/icon/icon.vue'
 
-  const emit = defineEmits(['update:modelValue', 'confirm'])
+  const emit = defineEmits(['update:modelValue', 'confirm', 'focus'])
 
   const props = defineProps({
     modelValue: {

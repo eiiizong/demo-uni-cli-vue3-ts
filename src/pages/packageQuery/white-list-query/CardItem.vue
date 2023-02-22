@@ -1,23 +1,23 @@
 <template>
-  <view class="card-item" :class="type === 'disabled' ? 'disabled' : 'disabled'">
+  <view class="card-item" :class="renderData.crb11b === '1' ? '' : 'disabled'">
     <div class="bg">
-      <img v-if="true" :src="imageBg01" alt="" class="img" />
-      <img v-else :ssrc="imageBg02" alt="" class="bg" />
+      <img v-if="renderData.crb11b === '1'" :src="imageBg01" alt="" class="img" />
+      <img v-else :src="imageBg02" alt="" class="img" />
     </div>
     <div class="con">
       <div class="name">
         <div class="left">{{ renderData.crb111 }}</div>
-        <div class="right">{{ renderData.crb11b }}</div>
+        <div class="right">{{ renderData.crb11b_desc }}</div>
       </div>
       <div class="tags">
-        <div class="tag">12323</div>
-        <div class="tag">5657</div>
+        <div class="tag">{{ renderData.chb015_desc }}</div>
+        <div class="tag">{{ renderData.crb116_desc }}</div>
       </div>
       <div class="cells">
         <div class="cell">
           <div class="key">企业规模</div>
           <div class="value">
-            {{ renderData.crb118 }}
+            {{ renderData.crb118_desc }}
           </div>
         </div>
         <div class="cell">

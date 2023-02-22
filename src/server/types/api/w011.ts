@@ -7,9 +7,17 @@ export interface W011SuccessResultListItem {
    */
   chb015: string
   /**
+   * 所在区域
+   */
+  chb015_desc: string
+  /**
+   * 准入状态 1 已准入 2 已退出 3 退出中
+   */
+  crb11b: '1' | '2' | '3'
+  /**
    * 准入状态
    */
-  crb11b: string
+  crb11b_desc: string
   /**
    * 白名单入库时间
    */
@@ -31,9 +39,17 @@ export interface W011SuccessResultListItem {
    */
   crb116: string
   /**
+   * 行业
+   */
+  crb116_desc: string
+  /**
    * 行业规模
    */
   crb118: string
+  /**
+   * 行业规模
+   */
+  crb118_desc: string
 }
 
 /**
