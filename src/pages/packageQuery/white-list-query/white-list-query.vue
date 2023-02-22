@@ -2,20 +2,16 @@
   <view class="white-list-query">
     <QueryConditions v-model:model-value="queryInfo.keyword" @confirm="onConfirm" />
     <QueryHistory v-if="isShowHistory" :render-list="historys" @click="onClickHistoryItem" @detele="onDeleteHistory" />
-    <QueryResult v-if="customData.queryResultList.length > 0" :render-list="customData.queryResultList" />
-    <template v-else>
-      <ZdbNoData v-if="customData.isRequestOver" tip="暂未搜索到相关数据" />
-    </template>
-    <div v-if="customData.isMultiplePages" class="load-more-wrapper">
-      <ZdbLoadMore :is-load-over="customData.isLoadOver" @load-more="loadMoreData" />
-    </div>
+    <QueryResult
+      :render-list="customData.queryResultList"
+      :is-request-over="customData.isRequestOver"
+      :is-multiple-pages="customData.isMultiplePages"
+      :is-load-over="customData.isLoadOver"
+      @load-more="loadMoreData" />
   </view>
 </template>
 
 <script setup lang="ts">
-  import ZdbNoData from '@/components/project/zdb-no-data/zdb-no-data.vue'
-  import ZdbLoadMore from '@/components/project/zdb-load-more/zdb-load-more.vue'
-
   import QueryConditions from './QueryConditions.vue'
   import QueryHistory from './QueryHistory.vue'
   import QueryResult from './QueryResult.vue'
