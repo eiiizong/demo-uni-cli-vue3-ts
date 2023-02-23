@@ -79,7 +79,9 @@
   import YhLoading from '@/components/yh/loading/loading.vue'
   import YhButton from '@/components/yh/button/button.vue'
 
+  import type { W012SuccessResultListItem } from '@/server/types/api'
   import { ref, computed, onMounted } from 'vue'
+  import { requestW012 } from '@/server/api'
   import orgList from './json/org'
 
   const emit = defineEmits(['update:modelValue', 'change'])
@@ -107,14 +109,14 @@
       default: () => '地区选择'
     },
     /**
-     * 标题
+     * 显示名称id
      */
     idKey: {
       type: String,
       default: () => 'orgid'
     },
     /**
-     * 标题
+     * 显示名称字段
      */
     renderKey: {
       type: String,
@@ -297,11 +299,10 @@
   const requestData = () => {
     updataBeforeRequestResponse()
 
-    // 模拟数据请求
-    setTimeout(() => {
-      const data = getDataByIncludesKey(orgList)
-      updataAfterRequestResponse(orgList, data, false)
-    }, 4000)
+    requestW012().then((res) => {
+      const data = getDataByIncludesKey(res)
+      updataAfterRequestResponse(res, data, false)
+    })
   }
 
   // 点击事件
