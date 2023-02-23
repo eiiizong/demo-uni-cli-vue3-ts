@@ -11,7 +11,7 @@
 
   // 路由跳转
   const onClick = () => {
-    navigateTo('policy-list', 'packagePolicy', { focus: true })
+    navigateTo('policy-query', 'packageQuery', { focus: true })
   }
 </script>
 

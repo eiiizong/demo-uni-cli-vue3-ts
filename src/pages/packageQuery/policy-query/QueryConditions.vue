@@ -1,5 +1,5 @@
 <template>
-  <view class="query-criteria">
+  <view class="query-conditions">
     <div class="input-wrapper">
       <input
         type="text"
@@ -38,7 +38,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .query-criteria {
+  .query-conditions {
     width: 100%;
     padding: 24rpx $spacing;
     .input-wrapper {

@@ -1,14 +1,12 @@
 <template>
   <view class="policy-query">
-    <QueryCriteria v-model="queryInfo.keyword" :focus="isFocus" @confirm="queryData" />
-    <Tabs v-model="queryInfo.tabId" :render-list="customData.tabsData" />
+    <QueryConditions v-model="queryInfo.keyword" :focus="isFocus" @confirm="queryData" />
     <QueryResult class="query-result-wrapper" :render-list="customData.queryResultList" />
   </view>
 </template>
 
 <script setup lang="ts">
-  import QueryCriteria from './QueryCriteria.vue'
-  import Tabs from './Tabs.vue'
+  import QueryConditions from './QueryConditions.vue'
   import QueryResult from './QueryResult.vue'
 
   import { reactive, ref } from 'vue'

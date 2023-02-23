@@ -1,13 +1,13 @@
 <template>
   <view class="home-header">
     <HomeHeaderAvatar />
-    <HomeSearch />
+    <!-- <HomeSearch /> -->
   </view>
 </template>
 
 <script setup lang="ts">
   import HomeHeaderAvatar from './HomeHeaderAvatar.vue'
-  import HomeSearch from './HomeSearch.vue'
+  // import HomeSearch from './HomeSearch.vue'
 </script>
 
 <style lang="scss" scoped>
