@@ -1,5 +1,5 @@
 <template>
-  <view class="white-list-query">
+  <view class="news-query">
     <QueryConditions v-model:model-value="queryInfo.keyword" @focus="isShowHistory = true" @confirm="onConfirm" />
     <QueryHistory v-if="isShowHistory" :render-list="historys" @click="onClickHistoryItem" @detele="onDeleteHistory" />
     <QueryResult
@@ -181,7 +181,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .white-list-query {
+  .news-query {
     width: 100%;
     .load-more-wrapper {
       padding: $spacing;

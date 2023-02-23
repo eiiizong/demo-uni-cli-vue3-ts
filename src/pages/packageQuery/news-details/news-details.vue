@@ -1,5 +1,5 @@
 <template>
-  <view class="policy-details">
+  <view class="news-details">
     <rich-text :nodes="news" />
   </view>
 </template>
@@ -25,7 +25,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .policy-details {
+  .news-details {
     width: 100%;
     padding: $spacing;
     background-color: #fff;

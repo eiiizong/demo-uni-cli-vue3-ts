@@ -3,7 +3,7 @@
     <view class="query-result" :class="renderList.length > 0 ? 'data' : ''">
       <div v-if="renderList.length > 0" class="items">
         <div v-for="item in renderList" :key="item.crb110" class="item">
-          <CardItem :render-data="item" />
+          <ZdbCardPolicy :render-data="item" />
         </div>
       </div>
       <template v-else>
@@ -20,7 +20,7 @@
   import ZdbNoData from '@/components/project/zdb-no-data/zdb-no-data.vue'
   import ZdbLoadMore from '@/components/project/zdb-load-more/zdb-load-more.vue'
 
-  import CardItem from './CardItem.vue'
+  import ZdbCardPolicy from '@/components/project/zdb-card-policy/zdb-card-policy.vue'
 
   import type { PropType } from 'vue'
   import type { W011SuccessResultListItem } from '@/server/types/api'

@@ -198,9 +198,15 @@
       "root": "pages/packageQuery",
       "pages": [
         {
-          "path": "policy-details/policy-details",
+          "path": "news-details/news-details",
           "style": {
-            "navigationBarTitleText": "政策文件详情"
+            "navigationBarTitleText": "详情"
+          }
+        },
+        {
+          "path": "news-query/news-query",
+          "style": {
+            "navigationBarTitleText": "业务进展"
           }
         },
         {
