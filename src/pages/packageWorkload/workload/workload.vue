@@ -1,17 +1,17 @@
 <template>
   <view class="workload">
-    <QueryCondition />
+    <QueryConditions />
     <Tips />
     <QueryResult />
   </view>
 </template>
 
 <script setup lang="ts">
-  import QueryCondition from './QueryCondition.vue'
+  import QueryConditions from './QueryConditions.vue'
   import Tips from './Tips.vue'
   import QueryResult from './QueryResult.vue'
 
-  import { toRefs, onMounted } from 'vue'
+  import { reactive, toRefs, onMounted } from 'vue'
   import { useStoreUserInfo, useStoreWorkloadQueryInfo } from '@/stores/modules'
   import { getCurrentDate } from '@/utils/get'
 
@@ -19,6 +19,17 @@
   const storeWorkloadQueryInfo = useStoreWorkloadQueryInfo()
 
   const { userInfo } = toRefs(storeUserInfo)
+
+  const queryInfo = reactive({
+    tel: '',
+    userid: '',
+    startDate: '',
+    endDate: ''
+  })
+
+  const queryData = () => {
+    const { tel, userid, startDate, endDate } = queryData
+  }
 
   onMounted(() => [
     storeWorkloadQueryInfo.updateWorkloadQueryInfo({

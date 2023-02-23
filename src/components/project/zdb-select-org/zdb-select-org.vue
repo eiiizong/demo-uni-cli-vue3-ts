@@ -79,10 +79,9 @@
   import YhLoading from '@/components/yh/loading/loading.vue'
   import YhButton from '@/components/yh/button/button.vue'
 
-  import type { W012SuccessResultListItem } from '@/server/types/api'
   import { ref, computed, onMounted } from 'vue'
   import { requestW012 } from '@/server/api'
-  import orgList from './json/org'
+  // import orgList from './json/org'
 
   const emit = defineEmits(['update:modelValue', 'change'])
 
@@ -120,14 +119,14 @@
      */
     renderKey: {
       type: String,
-      default: () => 'orgname'
+      default: () => 'name'
     },
     /**
      * 显示的数据包含的字段
      */
     includesKey: {
       type: Array,
-      default: () => ['orgtype', 'orgname', 'orgid']
+      default: () => ['ispeople', 'orgid', 'name', 'userid']
     }
   })
 
@@ -299,7 +298,8 @@
   const requestData = () => {
     updataBeforeRequestResponse()
 
-    requestW012().then((res) => {
+    // 请求真实数据
+    requestW012(false).then((res) => {
       const data = getDataByIncludesKey(res)
       updataAfterRequestResponse(res, data, false)
     })
