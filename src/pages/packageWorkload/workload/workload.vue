@@ -2,7 +2,7 @@
   <view class="workload">
     <QueryConditions />
     <Tips />
-    <QueryResult />
+    <QueryResult :is-request-over="customData.isRequestOver" :render-list="customData.queryResultList" />
   </view>
 </template>
 
@@ -11,34 +11,60 @@
   import Tips from './Tips.vue'
   import QueryResult from './QueryResult.vue'
 
-  import { reactive, toRefs, onMounted } from 'vue'
+  import { W013SuccessResultListItem } from '@/server/types/api'
+
+  import { toRefs, reactive } from 'vue'
+  import { onLoad } from '@dcloudio/uni-app'
   import { useStoreUserInfo, useStoreWorkloadQueryInfo } from '@/stores/modules'
-  import { getCurrentDate } from '@/utils/get'
+  import { requestW013 } from '@/server/api'
 
   const storeUserInfo = useStoreUserInfo()
   const storeWorkloadQueryInfo = useStoreWorkloadQueryInfo()
 
   const { userInfo } = toRefs(storeUserInfo)
+  const { workloadQueryInfo } = toRefs(storeWorkloadQueryInfo)
 
-  const queryInfo = reactive({
-    tel: '',
-    userid: '',
-    startDate: '',
-    endDate: ''
+  // 自定义数据
+  const customData = reactive<{
+    /**
+     * 查询结果数据
+     */
+    queryResultList: W013SuccessResultListItem[]
+    /**
+     * 是否请求完成 控制 no-data 组件在未请求完成时不显示
+     */
+    isRequestOver: boolean
+  }>({
+    queryResultList: [],
+    isRequestOver: false
   })
 
+  /**
+   * 查询数据
+   */
   const queryData = () => {
-    const { tel, userid, startDate, endDate } = queryData
+    const { tel, userId, startDate, endDate } = workloadQueryInfo.value
+    requestW013(userId ? '' : tel || '', userId || '', startDate || '', endDate || '')
+      .then((res) => {
+        customData.queryResultList = [...res]
+      })
+      .finally(() => {
+        customData.isRequestOver = true
+      })
   }
 
-  onMounted(() => [
+  onLoad(() => {
+    const { tel, userName, orgName } = userInfo.value
     storeWorkloadQueryInfo.updateWorkloadQueryInfo({
-      userName: userInfo.value.userName || '张三',
-      org: ['四川省', '成都市融资再担保有限责任公司', '创新产品部'],
-      startDate: getCurrentDate(),
-      endDate: getCurrentDate()
+      tel,
+      userName,
+      userId: '100043',
+      org: orgName?.split('/') || [],
+      startDate: '',
+      endDate: ''
     })
-  ])
+    queryData()
+  })
 </script>
 
 <style lang="scss" scoped>

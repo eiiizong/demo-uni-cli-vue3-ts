@@ -32,7 +32,7 @@
      */
     renderList: {
       type: Array as PropType<W011SuccessResultListItem[]>,
-      default: () => []
+      required: true
     },
     isRequestOver: {
       type: Boolean,

@@ -3,51 +3,23 @@
  */
 export interface W013SuccessResultListItem {
   /**
-   * 所在区域
+   * 作废数
    */
-  chb015: string
+  backnum: 7
   /**
-   * 所在区域
+   * 项目编码
    */
-  chb015_desc: string
+  chi031: 'A004'
   /**
-   * 准入状态 1 已准入 2 已退出 3 退出中
+   * 项目编码中文
    */
-  crb11b: '1' | '2' | '3'
+  chi031_desc: '白名单变更归属地'
   /**
-   * 准入状态
+   * 通过笔数
    */
-  crb11b_desc: string
+  passnum: 0
   /**
-   * 白名单入库时间
+   * 作废笔数
    */
-  crb11l: number
-  /**
-   * 退库时间
-   */
-  crb11m?: number
-  /**
-   * 白名单主键
-   */
-  crb110: number
-  /**
-   * 白名单企业名
-   */
-  crb111: string
-  /**
-   * 行业
-   */
-  crb116: string
-  /**
-   * 行业
-   */
-  crb116_desc: string
-  /**
-   * 行业规模
-   */
-  crb118: string
-  /**
-   * 行业规模
-   */
-  crb118_desc: string
+  unpassnum: 0
 }
