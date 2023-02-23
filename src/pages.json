@@ -332,6 +332,16 @@
         "query": ""
       },
       {
+        "name": "packageQuery-news-details",
+        "path": "pages/packageQuery/news-details/news-details",
+        "query": ""
+      },
+      {
+        "name": "packageQuery-news-query",
+        "path": "pages/packageQuery/news-query/news-query",
+        "query": ""
+      },
+      {
         "name": "packageQuery-policy-query",
         "path": "pages/packageQuery/policy-query/policy-query",
         "query": ""
