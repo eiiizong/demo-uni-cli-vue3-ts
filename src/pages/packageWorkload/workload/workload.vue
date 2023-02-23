@@ -13,7 +13,7 @@
 
   import { W013SuccessResultListItem } from '@/server/types/api'
 
-  import { toRefs, reactive } from 'vue'
+  import { toRefs, reactive, watch } from 'vue'
   import { onLoad } from '@dcloudio/uni-app'
   import { useStoreUserInfo, useStoreWorkloadQueryInfo } from '@/stores/modules'
   import { requestW013 } from '@/server/api'
@@ -53,6 +53,16 @@
       })
   }
 
+  watch(
+    () => workloadQueryInfo.value,
+    (val) => {
+      if (val.tel || val.userId) {
+        queryData()
+      }
+    },
+    { immediate: true }
+  )
+
   onLoad(() => {
     const { tel, userName, orgName } = userInfo.value
     storeWorkloadQueryInfo.updateWorkloadQueryInfo({
@@ -63,7 +73,6 @@
       startDate: '',
       endDate: ''
     })
-    queryData()
   })
 </script>
 

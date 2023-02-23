@@ -5,21 +5,21 @@ export interface W013SuccessResultListItem {
   /**
    * 作废数
    */
-  backnum: 7
+  backnum: number
   /**
    * 项目编码
    */
-  chi031: 'A004'
+  chi031: string
   /**
    * 项目编码中文
    */
-  chi031_desc: '白名单变更归属地'
+  chi031_desc: string
   /**
    * 通过笔数
    */
-  passnum: 0
+  passnum: number
   /**
    * 作废笔数
    */
-  unpassnum: 0
+  unpassnum: number
 }

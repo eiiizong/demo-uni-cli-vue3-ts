@@ -1,9 +1,9 @@
 <template>
   <div class="card-item">
     <div class="name-wrapper">
-      <img class="img" :src="iamges[index % 7]" alt="" />
-      <div class="key">补贴支付申请</div>
-      <div class="value">共186笔</div>
+      <img class="img" :src="images[index % 7]" alt="" />
+      <div class="key">{{ renderData.chi031_desc }}</div>
+      <div class="value">共{{ total }}笔</div>
     </div>
     <div class="cells">
       <div class="cell">
@@ -11,21 +11,21 @@
           <div class="point"></div>
           <div class="text">通过(笔)</div>
         </div>
-        <div class="value">170</div>
+        <div class="value">{{ renderData.passnum || 0 }}</div>
       </div>
       <div class="cell">
         <div class="key">
           <div class="point"></div>
           <div class="text">退回(笔)</div>
         </div>
-        <div class="value">170</div>
+        <div class="value">{{ renderData.backnum || 0 }}</div>
       </div>
       <div class="cell">
         <div class="key">
           <div class="point"></div>
-          <div class="text">作废(笔)</div>
+          <div class="text">不通过(笔)</div>
         </div>
-        <div class="value">170</div>
+        <div class="value">{{ renderData.unpassnum || 0 }}</div>
       </div>
     </div>
   </div>
@@ -43,7 +43,9 @@
   import type { PropType } from 'vue'
   import type { W013SuccessResultListItem } from '@/server/types/api'
 
-  const iamges = [image01, image02, image03, image04, image05, image06, image07]
+  import { computed } from 'vue'
+
+  const images = [image01, image02, image03, image04, image05, image06, image07]
 
   const props = defineProps({
     // 渲染数据
@@ -58,6 +60,28 @@
       type: Number,
       required: true
     }
+  })
+
+  /**
+   * 总计数
+   */
+  const total = computed(() => {
+    let num = 0
+    const { passnum, backnum, unpassnum } = props.renderData
+
+    if (passnum) {
+      num += passnum
+    }
+
+    if (backnum) {
+      num += backnum
+    }
+
+    if (unpassnum) {
+      num += unpassnum
+    }
+
+    return num
   })
 </script>
 
