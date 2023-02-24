@@ -61,7 +61,7 @@
 
   // 跳转至搜索页
   const onClickSelect = () => {
-    navigateTo('search-statistics-object', 'packageWorkload')
+    // navigateTo('search-statistics-object', 'packageWorkload')
   }
 
   // 改变开始日期

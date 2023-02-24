@@ -235,7 +235,7 @@
       arr[1].push(navBMDFK)
       arr[1].push(navZCFG)
       arr[2].push(navBMDCX)
-      arr[2].push(navTJBB)
+      // arr[2].push(navTJBB)
     }
 
     return arr

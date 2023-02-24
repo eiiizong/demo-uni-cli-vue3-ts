@@ -68,7 +68,7 @@
     storeWorkloadQueryInfo.updateWorkloadQueryInfo({
       tel,
       userName,
-      userId: '100043',
+      userId: '',
       org: orgName?.split('/') || [],
       startDate: '',
       endDate: ''
