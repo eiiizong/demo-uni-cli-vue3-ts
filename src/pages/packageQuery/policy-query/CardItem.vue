@@ -35,7 +35,6 @@
 
   // 点击事件
   const onClick = () => {
-    // navigateTo('news-details', 'packageQuery')
     const { chi050 } = props.renderData
     requestW016(chi050).then((res) => {
       console.log('res', res)

@@ -51,6 +51,7 @@ const request = (
         resolve(res)
       },
       fail(err) {
+        // eslint-disable-next-line no-console
         console.error('uni.request 接口调用失败 => ', err)
         reject(err)
       }
