@@ -2,7 +2,12 @@
   <BillBg class="bills">
     <BillHearder :backgorund-color="navBarBackgroundColor" :color="color" :render-data="billData" />
     <div class="main">
-      <BillCompare :render-data="billData" :x-axis="echartXAxis" />
+      <BillCompare
+        :render-data-month="compareData.month"
+        :render-data-quarter="compareData.quarter"
+        :render-data-total="compareData.total"
+        :render-data-year="compareData.year"
+        :x-axis="echartXAxis" />
       <!-- <BillTotal :render-data="billData" /> -->
       <BillFooter :render-data="billData" />
     </div>
@@ -16,9 +21,9 @@
   // import BillTotal from './BillTotal.vue'
   import BillFooter from './BillFooter.vue'
 
-  import type { W006SuccessResult } from '@/server/types/api'
+  import type { W006SuccessResult, W007SuccessResult } from '@/server/types/api'
 
-  import { ref } from 'vue'
+  import { ref, reactive } from 'vue'
   import { onLoad, onPageScroll, onHide } from '@dcloudio/uni-app'
   import { showLoading, hideLoading } from '@/utils/uni-api'
   import { requestW006, requestW007 } from '@/server/api'
@@ -30,7 +35,20 @@
    * 一本帐数据
    */
   const billData = ref<W006SuccessResult>({})
-
+  /**
+   * 一本帐对比数据
+   */
+  const compareData = reactive<{
+    month: W007SuccessResult
+    quarter: W007SuccessResult
+    year: W007SuccessResult
+    total: W007SuccessResult
+  }>({
+    month: {},
+    quarter: {},
+    year: {},
+    total: {}
+  })
   const echartXAxis = ref<string[]>([])
 
   // 查询数据
@@ -40,40 +58,30 @@
     const data = await Promise.allSettled([
       // 一本账统计
       requestW006(false),
-      requestW007(false)
+      // 一本账对比数据
+      requestW007('0', false),
+      requestW007('1', false),
+      requestW007('2', false),
+      requestW007('3', false)
     ])
 
-    const [res00, res01] = data
+    const [res00, res01, res02, res03, res04] = data
 
     if (res00.status === 'fulfilled' && res00.value) {
       billData.value = { ...res00.value }
     }
 
     if (res01.status === 'fulfilled' && res01.value) {
-      let xAxis: string[] = []
-      let arr1: number[] = []
-      let arr2: number[] = []
-      let arr3: number[] = []
-      let arr4: number[] = []
-      let arr5: number[] = []
-      let arr6: number[] = []
-      for (let i = 0, len = res01.value.length; i < len; i++) {
-        const item = res01.value[i]
-        arr1.push(item.totalnumber)
-        arr2.push(item.totaltime)
-        arr3.push(item.buchangjine)
-        arr4.push(item.butiejine)
-        arr5.push(item.averagemoney)
-        arr6.push(item.leavemoney)
-        xAxis.push(item.month)
-      }
-      billData.value.totalnumberValues = arr1
-      billData.value.totaltimeValues = arr2
-      billData.value.buchangjineValues = arr3
-      billData.value.butiejineValues = arr4
-      billData.value.averagemoeyValues = arr5
-      billData.value.leavemoneyValues = arr6
-      echartXAxis.value = xAxis
+      compareData.month = { ...res01.value }
+    }
+    if (res02.status === 'fulfilled' && res02.value) {
+      compareData.quarter = { ...res02.value }
+    }
+    if (res03.status === 'fulfilled' && res03.value) {
+      compareData.year = { ...res03.value }
+    }
+    if (res04.status === 'fulfilled' && res04.value) {
+      compareData.total = { ...res04.value }
     }
 
     hideLoading()

@@ -4,7 +4,7 @@ export type { GetIndustrialSectorSuccessResultListItem } from './getIndustrialSe
 export type { GetOpenIdSuccessResult } from './getOpenId'
 export type { LoginSuccessResult } from './login'
 export type { W006SuccessResult } from './w006'
-export type { W007SuccessResultListItem } from './w007'
+export type { W007SuccessResult } from './w007'
 export type { W008SuccessResultListItem } from './w008'
 export type { W009SuccessResult, W009SuccessResultListItem } from './w009'
 export type { W011SuccessResult, W011SuccessResultListItem } from './w011'
