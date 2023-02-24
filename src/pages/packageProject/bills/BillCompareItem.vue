@@ -3,13 +3,18 @@
     <div class="left">
       <div class="name">{{ label }}</div>
       <div class="value" :style="{ color: color }">
-        <div class="val Impact">{{ nowYearValue }}</div>
-        <div class="unit">{{ unit }}</div>
+        <div class="val Impact">{{ labelValue }}</div>
+        <div class="unit">{{ labelValueUnit }}</div>
       </div>
-      <div class="compare-value">
-        <div class="last-year">去年：</div>
-        <div class="val Impact">{{ lastYearValue }}</div>
-        <div class="unit">{{ unit }}</div>
+      <div class="cell">
+        <div class="key">{{ otherLabel01 }}</div>
+        <div class="val Impact">{{ otherLabel01Value }}</div>
+        <div class="unit">{{ otherLabel01ValueUnit }}</div>
+      </div>
+      <div class="cell">
+        <div class="key">{{ otherLabel02 }}</div>
+        <div class="val Impact">{{ otherLabel02Value }}</div>
+        <div class="unit">{{ otherLabel02ValueUnit }}</div>
       </div>
     </div>
     <div class="right">
@@ -33,26 +38,69 @@
 
   const props = defineProps({
     /**
-     * 今年的数值
-     */
-    nowYearValue: {
-      type: Number,
-      default: () => 0
-    },
-    /**
-     * 去年的数值
-     */
-    lastYearValue: {
-      type: Number,
-      default: () => 0
-    },
-    /**
      * 统计项的名称
      */
     label: {
       type: String,
       required: true
     },
+    /**
+     * 统计项的名称的值
+     */
+    labelValue: {
+      type: Number,
+      default: () => 0
+    },
+    /**
+     * 统计项的名称的值的单位
+     */
+    labelValueUnit: {
+      type: String,
+      default: () => ''
+    },
+    /**
+     * 其他统计项的名称01
+     */
+    otherLabel01: {
+      type: String,
+      required: true
+    },
+    /**
+     * 其他统计项的名称的值01
+     */
+    otherLabel01Value: {
+      type: Number,
+      default: () => 0
+    },
+    /**
+     * 其他统计项的名称的值的单位01
+     */
+    otherLabel01ValueUnit: {
+      type: String,
+      default: () => ''
+    },
+    /**
+     * 其他统计项的名称02
+     */
+    otherLabel02: {
+      type: String,
+      required: true
+    },
+    /**
+     * 其他统计项的名称的值02
+     */
+    otherLabel02Value: {
+      type: Number,
+      default: () => 0
+    },
+    /**
+     * 其他统计项的名称的值的单位02
+     */
+    otherLabel02ValueUnit: {
+      type: String,
+      default: () => ''
+    },
+
     /**
      * x 轴数据
      */
@@ -74,13 +122,7 @@
       type: String,
       default: () => '#2661ff'
     },
-    /**
-     * 统计项的单位
-     */
-    unit: {
-      type: String,
-      default: () => '万元'
-    },
+
     /**
      * 同比结果 是否增加 true 增加 false 减少
      */
@@ -139,7 +181,7 @@
           opacity: 0.66;
         }
       }
-      .compare-value {
+      .cell {
         display: flex;
         align-items: center;
         font-size: 28rpx;
@@ -149,10 +191,10 @@
         .val {
           font-size: 34rpx;
           font-weight: 700;
+          padding: 0 8rpx;
         }
         .unit {
           font-size: 28rpx;
-          padding-left: 8rpx;
         }
       }
     }

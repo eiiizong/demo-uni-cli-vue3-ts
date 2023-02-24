@@ -13,6 +13,24 @@
     <div class="item">
       <img class="img" :src="imageBg02" alt="" />
       <div class="content">
+        <div class="name">白名单获贷户数</div>
+        <div class="value">
+          <div class="val Impact">{{ 0 }}户</div>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <img class="img" :src="imageBg02" alt="" />
+      <div class="content">
+        <div class="name">白名单获贷金额</div>
+        <div class="value">
+          <div class="val Impact">{{ 0 }}万元</div>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <img class="img" :src="imageBg01" alt="" />
+      <div class="content">
         <div class="name">白名单获贷率</div>
         <div class="value">
           <div class="val Impact">{{ renderData.whiterate || 0 }}%</div>
@@ -49,10 +67,12 @@
     justify-content: space-between;
     padding: $spacing;
     border-top: 20rpx solid $color-page;
+    flex-wrap: wrap;
     .item {
       width: 330rpx;
       height: 164rpx;
       position: relative;
+      margin-bottom: 24rpx;
       .img {
         width: 100%;
         height: 100%;

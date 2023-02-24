@@ -3,7 +3,7 @@
     <BillHearder :backgorund-color="navBarBackgroundColor" :color="color" :render-data="billData" />
     <div class="main">
       <BillCompare :render-data="billData" :x-axis="echartXAxis" />
-      <BillTotal :render-data="billData" />
+      <!-- <BillTotal :render-data="billData" /> -->
       <BillFooter :render-data="billData" />
     </div>
   </BillBg>
@@ -13,7 +13,7 @@
   import BillBg from './BillBg.vue'
   import BillHearder from './BillHearder.vue'
   import BillCompare from './BillCompare.vue'
-  import BillTotal from './BillTotal.vue'
+  // import BillTotal from './BillTotal.vue'
   import BillFooter from './BillFooter.vue'
 
   import type { W006SuccessResult } from '@/server/types/api'

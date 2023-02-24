@@ -1,65 +1,49 @@
 <template>
   <view class="bill-compare">
     <BillCompareItem
-      label="投放户数"
       echart-id="echart_ljtf"
-      unit="户"
       color="#2661ff"
-      :now-year-value="renderData.totalnumber || 0"
-      :last-year-value="renderData.lastyeartotalnumber || 0"
+      label="投放金额"
+      :label-value="renderData.totalnumber || 0"
+      label-value-unit="万元"
+      other-label01="投放户数"
+      :other-label01-value="renderData.totalnumber || 0"
+      other-label01-value-unit="户"
+      other-label02="投放笔数"
+      :other-label02-value="renderData.totalnumber || 0"
+      other-label02-value-unit="笔"
       :rate-value="0"
       :compare-list="renderData.totalnumberValues || []"
       :x-axis="xAxis" />
-
     <BillCompareItem
-      label="存量余额"
       echart-id="echart_clye"
-      unit="万元"
       color="#eca02d"
-      :now-year-value="renderData.leavemoney || 0"
-      :last-year-value="renderData.lastyearleavemoney || 0"
+      label="补贴金额"
+      :label-value="renderData.leavemoney || 0"
+      label-value-unit="万元"
+      other-label01="补贴笔数"
+      :other-label01-value="renderData.totalnumber || 0"
+      other-label01-value-unit="笔"
+      other-label02="补贴机构数"
+      :other-label02-value="renderData.totalnumber || 0"
+      other-label02-value-unit="家"
       :rate-value="renderData.leavemoneyrate || 0"
       :compare-list="renderData.leavemoneyValues || []"
       :x-axis="xAxis" />
     <BillCompareItem
-      label="补贴金额"
       echart-id="echart_btje"
-      unit="万元"
       color="#009bc2"
-      :now-year-value="renderData.butiejine || 0"
-      :last-year-value="renderData.lastyearbutiejine || 0"
+      label="补偿金额"
+      :label-value="renderData.butiejine || 0"
+      label-value-unit="万元"
+      other-label01="补偿笔数"
+      :other-label01-value="renderData.totalnumber || 0"
+      other-label01-value-unit="笔"
+      other-label02="补偿机构数"
+      :other-label02-value="renderData.totalnumber || 0"
+      other-label02-value-unit="家"
       :rate-value="renderData.butiejinerate || 0"
       :compare-list="renderData.butiejineValues || []"
-      :x-axis="xAxis" />
-    <BillCompareItem
-      label="补偿金额"
-      echart-id="echart_bcje"
-      unit="万元"
-      color="#f85c5c"
-      :now-year-value="renderData.buchangjine || 0"
-      :last-year-value="renderData.lastyearbuchangjine || 0"
-      :rate-value="renderData.buchangjinerate || 0"
-      :compare-list="renderData.buchangjineValues || []"
-      :x-axis="xAxis" />
-    <BillCompareItem
-      label="投放笔数"
-      echart-id="echart_tfbs"
-      unit="笔"
-      color="#a288ff"
-      :now-year-value="renderData.totaltime || 0"
-      :last-year-value="renderData.lastyeartotaltime || 0"
-      :rate-value="renderData.totaltimerate || 0"
-      :compare-list="renderData.totaltimeValues || []"
-      :x-axis="xAxis" />
-    <BillCompareItem
-      label="户均贷款"
-      echart-id="echart_hjdk"
-      unit="万元"
-      color="#1ed097"
-      :now-year-value="renderData.averagemoey || 0"
-      :last-year-value="renderData.lastyearaveragemoey || 0"
-      :rate-value="renderData.averagemoeyrate || 0"
-      :compare-list="renderData.averagemoeyValues || []"
       :x-axis="xAxis" />
   </view>
 </template>
