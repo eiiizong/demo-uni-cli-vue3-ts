@@ -53,7 +53,8 @@
 
   // 格式化金额
   const formatterAmount = (data: W007SuccessResult, key: 'month' | 'quarter' | 'year' | 'total') => {
-    const maxNum = 100000
+    // 百亿
+    const maxNum = 10000000000
     if (data.beiAn) {
       let { beiAnJinE } = data.beiAn
       // 如果备案金额大于百亿万
