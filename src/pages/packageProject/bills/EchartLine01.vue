@@ -69,7 +69,7 @@
       lineHeight: 0,
       fontSize: 0,
       titleFontSize: 0,
-      labelCount: 7
+      labelCount: props.renderList.length || 7
     },
     yAxis: {
       gridType: 'dash',

@@ -16,8 +16,8 @@
           :other-label02-value="renderData.totalnumber || 0"
           other-label02-value-unit="笔"
           :rate-value="0"
-          :compare-list="renderData.totalnumberValues || []"
-          :x-axis="xAxis" />
+          :compare-list="[12, 23, 23, 23, 44, 55, 65, 32, 34, 43, 67, 89]"
+          :x-axis="['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']" />
         <BillCompareItem
           echart-id="echart_btje_month"
           color="#eca02d"
@@ -31,8 +31,8 @@
           :other-label02-value="renderData.totalnumber || 0"
           other-label02-value-unit="家"
           :rate-value="renderData.leavemoneyrate || 0"
-          :compare-list="renderData.leavemoneyValues || []"
-          :x-axis="xAxis" />
+          :compare-list="[12, 23, 23, 23, 44, 55, 65, 32, 34, 43, 67, 89]"
+          :x-axis="['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']" />
         <BillCompareItem
           echart-id="echart_bcje_month"
           color="#009bc2"
@@ -46,8 +46,8 @@
           :other-label02-value="renderData.totalnumber || 0"
           other-label02-value-unit="家"
           :rate-value="renderData.butiejinerate || 0"
-          :compare-list="renderData.butiejineValues || []"
-          :x-axis="xAxis" />
+          :compare-list="[12, 23, 23, 23, 44, 55, 65, 32, 34, 43, 67, 89]"
+          :x-axis="['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']" />
       </swiper-item>
       <swiper-item class="swiper-item">
         <BillCompareItem
@@ -232,7 +232,7 @@
     width: 100%;
     .swiper {
       width: 100%;
-      height: 894rpx;
+      height: 316rpx * 3 - 2rpx;
       .swiper-item {
         padding: 0 $spacing;
       }

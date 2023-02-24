@@ -151,7 +151,7 @@
   .compare-item {
     display: flex;
     align-items: center;
-    border-bottom: 5rpx solid #f5f5f5;
+    border-bottom: 2rpx solid $color-border;
     padding-bottom: 40rpx;
 
     .left {
@@ -219,7 +219,8 @@
       }
       .echart {
         width: 236rpx;
-        height: 120rpx;
+        width: 240rpx;
+        height: 140rpx;
       }
     }
   }
