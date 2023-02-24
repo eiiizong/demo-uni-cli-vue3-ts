@@ -51,6 +51,47 @@
   })
   const echartXAxis = ref<string[]>([])
 
+  // 格式化金额
+  const formatterAmount = (data: W007SuccessResult, key: 'month' | 'quarter' | 'year' | 'total') => {
+    const maxNum = 100000
+    if (data.beiAn) {
+      let { beiAnJinE } = data.beiAn
+      // 如果备案金额大于百亿万
+      if (beiAnJinE > maxNum) {
+        let num = (beiAnJinE / 100).toFixed(2)
+        data.beiAn.beiAnJinE = Number(num)
+        data.beiAn.beiAnJinEUnit = '百万元'
+      } else {
+        data.beiAn.beiAnJinEUnit = '万元'
+      }
+    }
+
+    if (data.buTie) {
+      let { butiejine } = data.buTie
+      // 如果补贴金额大于百亿
+      if (butiejine > maxNum) {
+        let num = (butiejine / 10000).toFixed(2)
+        data.buTie.butiejine = Number(num)
+        data.buTie.butiejineUnit = '万元'
+      } else {
+        data.buTie.butiejineUnit = '元'
+      }
+    }
+
+    if (data.buChang) {
+      let { buchangjine } = data.buChang
+      // 如果补偿金额大于百亿
+      if (buchangjine > maxNum) {
+        let num = (buchangjine / 10000).toFixed(2)
+        data.buChang.buchangjine = Number(num)
+        data.buChang.buchangjineUnit = '万元'
+      } else {
+        data.buChang.buchangjineUnit = '元'
+      }
+    }
+
+    compareData[key] = { ...data }
+  }
   // 查询数据
   const queryData = async () => {
     showLoading()
@@ -72,16 +113,20 @@
     }
 
     if (res01.status === 'fulfilled' && res01.value) {
-      compareData.month = { ...res01.value }
+      const data = res01.value
+      formatterAmount(data, 'month')
     }
     if (res02.status === 'fulfilled' && res02.value) {
-      compareData.quarter = { ...res02.value }
+      const data = res02.value
+      formatterAmount(data, 'quarter')
     }
     if (res03.status === 'fulfilled' && res03.value) {
-      compareData.year = { ...res03.value }
+      const data = res03.value
+      formatterAmount(data, 'year')
     }
     if (res04.status === 'fulfilled' && res04.value) {
-      compareData.total = { ...res04.value }
+      const data = res04.value
+      formatterAmount(data, 'total')
     }
 
     hideLoading()

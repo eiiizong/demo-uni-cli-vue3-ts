@@ -19,6 +19,10 @@ export interface W007SuccessResult {
      * 投放金额
      */
     beiAnJinE: number
+    /**
+     * 投放金额单位，默认万元（接口未返回该字段，改字段为自定义字段）
+     */
+    beiAnJinEUnit?: string
   }
   /**
    * 补偿数据
@@ -36,6 +40,10 @@ export interface W007SuccessResult {
      * 补偿金额
      */
     buchangjine: number
+    /**
+     * 补偿金额单位，默认元（接口未返回该字段，改字段为自定义字段）
+     */
+    buchangjineUnit?: string
   }
   /**
    * 补贴数据
@@ -53,5 +61,9 @@ export interface W007SuccessResult {
      * 补贴金额
      */
     butiejine: number
+    /**
+     * 补贴金额单位，默认元（接口未返回该字段，改字段为自定义字段）
+     */
+    butiejineUnit?: string
   }
 }
