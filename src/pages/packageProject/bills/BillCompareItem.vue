@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="right">
-      <div class="compare-result">
+      <div v-if="isShowRate" class="compare-result">
         <img v-if="isAdd" class="img" :src="imageIconUp" alt="" />
         <img v-else class="img" :src="imageIconDown" alt="" />
         <div class="value Impact">{{ rateValue }}%</div>
@@ -129,6 +129,13 @@
     isAdd: {
       type: Boolean,
       default: () => false
+    },
+    /**
+     * 是否显示比例
+     */
+    isShowRate: {
+      type: Boolean,
+      default: () => true
     },
     /**
      * 同比结果

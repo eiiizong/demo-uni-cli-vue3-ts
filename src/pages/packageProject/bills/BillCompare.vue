@@ -63,8 +63,8 @@
           :other-label02-value="renderData.totalnumber || 0"
           other-label02-value-unit="笔"
           :rate-value="0"
-          :compare-list="renderData.totalnumberValues || []"
-          :x-axis="xAxis" />
+          :compare-list="[32, 23, 23, 23]"
+          :x-axis="['1', '2', '3', '4']" />
         <BillCompareItem
           echart-id="echart_btje_jd"
           color="#eca02d"
@@ -78,8 +78,8 @@
           :other-label02-value="renderData.totalnumber || 0"
           other-label02-value-unit="家"
           :rate-value="renderData.leavemoneyrate || 0"
-          :compare-list="renderData.leavemoneyValues || []"
-          :x-axis="xAxis" />
+          :compare-list="[32, 23, 23, 23]"
+          :x-axis="['1', '2', '3', '4']" />
         <BillCompareItem
           echart-id="echart_bcje_jd"
           color="#009bc2"
@@ -93,8 +93,8 @@
           :other-label02-value="renderData.totalnumber || 0"
           other-label02-value-unit="家"
           :rate-value="renderData.butiejinerate || 0"
-          :compare-list="renderData.butiejineValues || []"
-          :x-axis="xAxis" />
+          :compare-list="[32, 23, 23, 23]"
+          :x-axis="['1', '2', '3', '4']" />
       </swiper-item>
       <swiper-item class="swiper-item">
         <BillCompareItem
@@ -110,8 +110,8 @@
           :other-label02-value="renderData.totalnumber || 0"
           other-label02-value-unit="笔"
           :rate-value="0"
-          :compare-list="renderData.totalnumberValues || []"
-          :x-axis="xAxis" />
+          :compare-list="[32, 23, 23, 23, 52]"
+          :x-axis="['1', '2', '3', '4', '5']" />
         <BillCompareItem
           echart-id="echart_btje_year"
           color="#eca02d"
@@ -125,8 +125,8 @@
           :other-label02-value="renderData.totalnumber || 0"
           other-label02-value-unit="家"
           :rate-value="renderData.leavemoneyrate || 0"
-          :compare-list="renderData.leavemoneyValues || []"
-          :x-axis="xAxis" />
+          :compare-list="[32, 23, 23, 23, 52]"
+          :x-axis="['1', '2', '3', '4', '5']" />
         <BillCompareItem
           echart-id="echart_bcje_year"
           color="#009bc2"
@@ -140,8 +140,8 @@
           :other-label02-value="renderData.totalnumber || 0"
           other-label02-value-unit="家"
           :rate-value="renderData.butiejinerate || 0"
-          :compare-list="renderData.butiejineValues || []"
-          :x-axis="xAxis" />
+          :compare-list="[32, 23, 23, 23, 52]"
+          :x-axis="['1', '2', '3', '4', '5']" />
       </swiper-item>
       <swiper-item class="swiper-item">
         <BillCompareItem
@@ -156,9 +156,9 @@
           other-label02="投放笔数"
           :other-label02-value="renderData.totalnumber || 0"
           other-label02-value-unit="笔"
-          :rate-value="0"
-          :compare-list="renderData.totalnumberValues || []"
-          :x-axis="xAxis" />
+          :is-show-rate="false"
+          :compare-list="[0, 0, 0, 0, 0, 0, 0, 0, 45, 27]"
+          :x-axis="['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']" />
         <BillCompareItem
           echart-id="echart_btje_lj"
           color="#eca02d"
@@ -171,9 +171,9 @@
           other-label02="补贴机构数"
           :other-label02-value="renderData.totalnumber || 0"
           other-label02-value-unit="家"
-          :rate-value="renderData.leavemoneyrate || 0"
-          :compare-list="renderData.leavemoneyValues || []"
-          :x-axis="xAxis" />
+          :is-show-rate="false"
+          :compare-list="[0, 0, 0, 0, 0, 0, 0, 0, 25, 27]"
+          :x-axis="['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']" />
         <BillCompareItem
           echart-id="echart_bcje_lj"
           color="#009bc2"
@@ -186,9 +186,9 @@
           other-label02="补偿机构数"
           :other-label02-value="renderData.totalnumber || 0"
           other-label02-value-unit="家"
-          :rate-value="renderData.butiejinerate || 0"
-          :compare-list="renderData.butiejineValues || []"
-          :x-axis="xAxis" />
+          :is-show-rate="false"
+          :compare-list="[0, 0, 0, 0, 0, 0, 0, 0, 45, 37]"
+          :x-axis="['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']" />
       </swiper-item>
     </swiper>
   </view>
