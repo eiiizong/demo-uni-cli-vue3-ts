@@ -2,7 +2,7 @@
   <div class="query-result-wrapper">
     <view class="query-result" :class="renderList.length > 0 ? 'data' : ''">
       <div v-if="renderList.length > 0" class="items">
-        <div v-for="item in renderList" :key="item.crb110" class="item">
+        <div v-for="item in renderList" :key="item.chi050" class="item">
           <CardItem :render-data="item" />
         </div>
       </div>
@@ -23,7 +23,7 @@
   import CardItem from './CardItem.vue'
 
   import type { PropType } from 'vue'
-  import type { W011SuccessResultListItem } from '@/server/types/api'
+  import type { W015SuccessResultListItem } from '@/server/types/api'
 
   const emit = defineEmits(['loadMore'])
   const props = defineProps({
@@ -31,7 +31,7 @@
      * 渲染数据
      */
     renderList: {
-      type: Array as PropType<W011SuccessResultListItem[]>,
+      type: Array as PropType<W015SuccessResultListItem[]>,
       default: () => []
     },
     isRequestOver: {
@@ -54,10 +54,10 @@
     width: 100%;
     padding: $spacing;
     // 有数据才显示背景色
-    &.data {
-      background-color: #fff;
-      border-top: 1px solid $color-border;
-    }
+    // &.data {
+    //   background-color: #fff;
+    //   border-top: 1px solid $color-border;
+    // }
     .items {
       width: 100%;
       .item {

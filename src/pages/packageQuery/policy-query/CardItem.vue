@@ -1,17 +1,21 @@
 <template>
   <view class="zdb-card-policy" :class="type === '02' ? 'type-02' : ''" @click="onClick">
     <div class="name">{{ renderData.chi051 }}</div>
-    <div class="desc">{{ renderData.chi037_desc }}</div>
+    <div class="desc">{{ renderData.aae011_desc || '暂无' }}</div>
     <div class="info">
-      <div class="unit">{{ renderData.chi037_desc }}</div>
+      <div class="unit">{{ renderData.aae011_desc || '暂无' }}</div>
       <div class="line">|</div>
-      <div class="time">{{ renderData.chi052 }}</div>
+      <div class="time">{{ moment(renderData.aae036).format('YYYY-MM-DD') || '暂无' }}</div>
     </div>
   </view>
 </template>
 
 <script setup lang="ts">
-  import { navigateTo } from '@/utils/uni-api'
+  import type { PropType } from 'vue'
+  import type { W015SuccessResultListItem } from '@/server/types/api'
+
+  import moment from 'moment'
+  import { requestW016 } from '@/server/api'
   /**
    * 政策文件渲染item
    * @description 政策文件渲染item
@@ -20,7 +24,7 @@
   const props = defineProps({
     // 渲染数据
     renderData: {
-      type: [Object],
+      type: Object as PropType<W015SuccessResultListItem>,
       required: true
     },
     type: {
@@ -31,7 +35,11 @@
 
   // 点击事件
   const onClick = () => {
-    navigateTo('news-details', 'packageQuery')
+    // navigateTo('news-details', 'packageQuery')
+    const { chi050 } = props.renderData
+    requestW016(chi050).then((res) => {
+      console.log('res', res)
+    })
   }
 </script>
 

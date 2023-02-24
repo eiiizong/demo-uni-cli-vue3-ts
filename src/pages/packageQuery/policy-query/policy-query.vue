@@ -17,12 +17,12 @@
   import QueryHistory from './QueryHistory.vue'
   import QueryResult from './QueryResult.vue'
 
-  import type { W011SuccessResultListItem } from '@/server/types/api'
+  import type { W015SuccessResultListItem } from '@/server/types/api'
 
   import { reactive, ref } from 'vue'
   import { getStorage, removeStorage, setStorage, showToast } from '@/utils/uni-api'
   import { onLoad, onReachBottom } from '@dcloudio/uni-app'
-  import { requestW011 } from '@/server/api'
+  import { requestW015 } from '@/server/api'
 
   /**
    * 白名单本地储存key
@@ -60,7 +60,7 @@
     /**
      * 查询结果数据
      */
-    queryResultList: W011SuccessResultListItem[]
+    queryResultList: W015SuccessResultListItem[]
     /**
      * 是否请求完成 控制 no-data 组件在未请求完成时不显示
      */
@@ -74,7 +74,15 @@
      */
     isLoadOver: boolean
   }>({
-    queryResultList: [],
+    queryResultList: [
+      {
+        aae011: '1',
+        aae011_desc: '四川省',
+        aae036: 1675240390000,
+        chi050: 100076,
+        chi051: '白名单入库'
+      }
+    ],
     isRequestOver: false,
     isMultiplePages: false,
     isLoadOver: false
@@ -115,7 +123,7 @@
   // 查询数据
   const queryData = () => {
     const { keyword, pageNo, pageSize } = queryInfo
-    requestW011(keyword, pageNo, pageSize)
+    requestW015(keyword, pageNo, pageSize)
       .then((res) => {
         const { list, pages } = res.pageBean
         formatPagingData(list, pages)
