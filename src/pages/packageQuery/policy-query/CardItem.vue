@@ -15,7 +15,7 @@
   import type { W015SuccessResultListItem } from '@/server/types/api'
 
   import moment from 'moment'
-  import { requestW016 } from '@/server/api'
+  import { previewPDFWeixin } from '@/server/custom-api'
   /**
    * 政策文件渲染item
    * @description 政策文件渲染item
@@ -35,10 +35,8 @@
 
   // 点击事件
   const onClick = () => {
-    const { chi050 } = props.renderData
-    requestW016(chi050).then((res) => {
-      console.log('res', res)
-    })
+    const { chi050, chi051 } = props.renderData
+    previewPDFWeixin(chi050, chi051)
   }
 </script>
 
