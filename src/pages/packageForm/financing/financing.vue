@@ -211,7 +211,7 @@
       showModal('请输入融资期限')
       return false
     } else {
-      if (Number(a6) > 2) {
+      if (Number(a6) >= 2) {
         showModal('融资期限需小于2年，请重新输入！')
         return false
       }
@@ -256,7 +256,6 @@
 
   // 重置表单
   const onClickReset = (showTip = true) => {
-    formData.a1 = ''
     formData.a2 = ''
     formData.a3 = ''
     formData.a4 = ''
@@ -264,7 +263,6 @@
     formData.a6 = ''
     formData.a7 = ''
     formData.a8 = ''
-    formData.a9 = ''
     showTip && showToast('重置成功')
   }
 

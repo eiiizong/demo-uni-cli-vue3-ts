@@ -333,12 +333,12 @@
     }
 
     // 以下非必填项填写之后需校验格式是否正确
-    if (loanAmount && Number(loanAmount) > 1000) {
+    if (loanAmount && Number(loanAmount) >= 1000) {
       showModal('贷款金额需小于1000万元，请重新输入！')
       return false
     }
 
-    if (loanTerm && Number(loanTerm) > 2) {
+    if (loanTerm && Number(loanTerm) >= 2) {
       showModal('贷款期限需小于2年，请重新输入！')
       return false
     }
