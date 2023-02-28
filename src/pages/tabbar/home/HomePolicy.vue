@@ -12,11 +12,11 @@
     </div>
     <div class="query-result">
       <div class="items">
-        <div v-for="item in navs" :key="item.chi050" class="item">
+        <div v-for="item in renderList" :key="item.code" class="item">
           <ZdbCardPolicy :render-data="item" />
         </div>
       </div>
-      <div class="button-wrapper">
+      <div v-if="renderList.length > 3" class="button-wrapper">
         <YhButton type="primary" block @click="onClickButton">查看更多</YhButton>
       </div>
     </div>
@@ -27,8 +27,18 @@
   import YhButton from '@/components/yh/button/button.vue'
   import ZdbCardPolicy from '@/components/project/zdb-card-policy/zdb-card-policy.vue'
 
+  import type { PropType } from 'vue'
+  import { W017SuccessResultListItem } from '@/server/types/api'
+
   import { ref } from 'vue'
   import { navigateTo } from '@/utils/uni-api'
+
+  const props = defineProps({
+    renderList: {
+      type: Array as PropType<W017SuccessResultListItem[]>,
+      required: true
+    }
+  })
 
   const currentTabId = ref('0')
   const tabs = ref([
@@ -47,49 +57,6 @@
     {
       id: '3',
       name: '政策解读'
-    }
-  ])
-
-  const navs = ref([
-    {
-      chi031: '28',
-      chi037: '6',
-      chi037_desc: '卫生健康局',
-      chi050: '10307',
-      chi051:
-        '计生委关于调整全国农村部分计划生育家庭奖励扶助和计划生育家庭特别扶助计生委关于调整全国农村部分计划生育家庭奖励扶助和计划生育家庭特别扶助标准的通知标准的通知',
-      chi052: '2019-03-06',
-      chi053: '115485',
-      chi054: '',
-      myrownum: '1',
-      yab003: '511011',
-      yab003_desc: '东兴区'
-    },
-    {
-      chi031: '28',
-      chi037: '6',
-      chi037_desc: '卫生健康局',
-      chi050: '10307',
-      chi051: '计生委关于调整全国农村部分计划生育家庭奖励扶助和计划生育家庭特别扶助标准的通知',
-      chi052: '2019-03-06 15:23:11.0',
-      chi053: '115485',
-      chi054: '',
-      myrownum: '1',
-      yab003: '511011',
-      yab003_desc: '东兴区'
-    },
-    {
-      chi031: '28',
-      chi037: '6',
-      chi037_desc: '卫生健康局',
-      chi050: '10307',
-      chi051: '计生委关于调整全国农村部分计划生育家庭奖励扶助和计划生育家庭特别扶助标准的通知',
-      chi052: '2019-03-06 15:23:11.0',
-      chi053: '115485',
-      chi054: '',
-      myrownum: '1',
-      yab003: '511011',
-      yab003_desc: '东兴区'
     }
   ])
 

@@ -10,7 +10,7 @@
     <div class="main">
       <HomePopularServices />
       <HomeNews :render-data="newsData" />
-      <HomePolicy />
+      <HomePolicy :render-list="otherNewsData" />
     </div>
   </HomeBg>
 </template>
@@ -30,23 +30,29 @@
   import { ref } from 'vue'
   import { onPageScroll, onHide, onLoad } from '@dcloudio/uni-app'
   import { showLoading, hideLoading } from '@/utils/uni-api'
-  import { requestW017 } from '@/server/api'
+  import { requestW017, requestW018 } from '@/server/api'
 
   const scrollTimer = ref<any>(null)
   const navBarBackgroundColor = ref('transparent')
 
   const newsData = ref<W017SuccessResultListItem>({})
+  const otherNewsData = ref<W017SuccessResultListItem[]>([])
 
   const queryData = async () => {
     showLoading()
 
-    const data = await Promise.allSettled([requestW017(false)])
+    const data = await Promise.allSettled([requestW017(1, 1, false), requestW018(1, 3, false)])
 
-    const [res00] = data
+    const [res00, res01] = data
 
     if (res00.status === 'fulfilled' && res00.value) {
       const data = res00.value
       newsData.value = data[0]
+    }
+
+    if (res01.status === 'fulfilled' && res01.value) {
+      const data = res01.value
+      otherNewsData.value = data
     }
 
     hideLoading()

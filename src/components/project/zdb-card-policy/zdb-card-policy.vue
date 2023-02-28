@@ -1,26 +1,26 @@
 <template>
   <view class="zdb-card-policy" :class="type === '02' ? 'type-02' : ''" @click="onClick">
-    <div class="name">{{ renderData.chi051 }}</div>
-    <div class="desc">{{ renderData.chi037_desc }}</div>
+    <div class="name">{{ renderData.title }}</div>
+    <div class="desc">{{ renderData.description }}</div>
     <div class="info">
-      <div class="unit">{{ renderData.chi037_desc }}</div>
-      <div class="line">|</div>
-      <div class="time">{{ renderData.chi052 }}</div>
+      <!-- <div class="unit">{{ renderData.chi037_desc }}</div>
+      <div class="line">|</div> -->
+      <div class="time">{{ moment(renderData.create_time).format('YYYY-MM-DD') }}</div>
     </div>
   </view>
 </template>
 
 <script setup lang="ts">
+  import type { PropType } from 'vue'
+  import { W017SuccessResultListItem } from '@/server/types/api'
+
+  import moment from 'moment'
   import { navigateTo } from '@/utils/uni-api'
-  /**
-   * 政策文件渲染item
-   * @description 政策文件渲染item
-   */
 
   const props = defineProps({
     // 渲染数据
     renderData: {
-      type: [Object],
+      type: Object as PropType<W017SuccessResultListItem>,
       required: true
     },
     type: {
