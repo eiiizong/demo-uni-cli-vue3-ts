@@ -1,7 +1,7 @@
 <template>
   <view class="zdb-card-policy" :class="type === '02' ? 'type-02' : ''" @click="onClick">
     <div class="name">{{ renderData.chi051 }}</div>
-    <div class="desc">{{ renderData.aae011_desc || '暂无' }}</div>
+    <!-- <div class="desc">{{ renderData.aae011_desc || '暂无' }}</div> -->
     <div class="info">
       <div class="unit">{{ renderData.aae011_desc || '暂无' }}</div>
       <div class="line">|</div>
