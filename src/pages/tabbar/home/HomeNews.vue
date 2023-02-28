@@ -6,7 +6,7 @@
     </div>
     <div id="scroll_text_wrapper" class="text-wrapper">
       <div id="scroll_text" class="text" :style="scrollTextStyle">
-        最新！成都中小担保公司：银海全力实势产业建圈强强联盒!
+        {{ renderData.description }}
       </div>
     </div>
 
@@ -17,7 +17,17 @@
 <script setup lang="ts">
   import imageBgNews from './images/bg-news.png'
 
-  import { ref, onMounted, computed, nextTick, onUnmounted, getCurrentInstance } from 'vue'
+  import type { PropType } from 'vue'
+  import { W017SuccessResultListItem } from '@/server/types/api'
+
+  import { ref, onMounted, computed, nextTick, onUnmounted, getCurrentInstance, watch } from 'vue'
+
+  const props = defineProps({
+    renderData: {
+      type: Object as PropType<W017SuccessResultListItem>,
+      required: true
+    }
+  })
 
   const instance = getCurrentInstance()
 
@@ -35,6 +45,10 @@
 
   // 滚动字体
   const scrollText = (scrollWrapperId: string, scrollId: string, step = 2, delay = 300) => {
+    const { description } = props.renderData
+    if (!description) {
+      return
+    }
     nextTick(() => {
       uni
         .createSelectorQuery()
@@ -83,6 +97,16 @@
   onUnmounted(() => {
     timer.value && clearImmediate(timer.value)
   })
+
+  watch(
+    () => props.renderData.description,
+    (val) => {
+      if (val) {
+        scrollText('scroll_text_wrapper', 'scroll_text', 2, 100)
+      }
+    },
+    { immediate: true }
+  )
 </script>
 
 <style lang="scss" scoped>
