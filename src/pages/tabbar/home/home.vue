@@ -26,10 +26,25 @@
   import HomePolicy from './HomePolicy.vue'
 
   import { ref } from 'vue'
-  import { onPageScroll, onHide } from '@dcloudio/uni-app'
+  import { onPageScroll, onHide, onLoad } from '@dcloudio/uni-app'
+  import { showLoading } from '@/utils/uni-api'
 
   const scrollTimer = ref<any>(null)
   const navBarBackgroundColor = ref('transparent')
+
+  const queryData = async () => {
+    showLoading()
+
+    const data = await Promise.allSettled([])
+  }
+
+  onLoad(() => {
+    queryData()
+  })
+
+  onHide(() => {
+    scrollTimer.value && clearTimeout(scrollTimer.value)
+  })
 
   // 监听页面滚动
   onPageScroll((e) => {
@@ -42,10 +57,6 @@
         navBarBackgroundColor.value = 'transparent'
       }
     }, 100)
-  })
-
-  onHide(() => {
-    scrollTimer.value && clearTimeout(scrollTimer.value)
   })
 </script>
 

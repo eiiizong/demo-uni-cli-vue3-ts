@@ -15,7 +15,7 @@
       <div class="content">
         <div class="name">白名单获贷户数</div>
         <div class="value">
-          <div class="val Impact">{{ 0 }}户</div>
+          <div class="val Impact">{{ renderData.whitegetloannum || 0 }}户</div>
         </div>
       </div>
     </div>
@@ -24,7 +24,7 @@
       <div class="content">
         <div class="name">白名单获贷金额</div>
         <div class="value">
-          <div class="val Impact">{{ 0 }}万元</div>
+          <div class="val Impact">{{ renderData.whitegetloanmoney || 0 }}亿元</div>
         </div>
       </div>
     </div>

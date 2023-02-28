@@ -51,12 +51,12 @@
   })
   const echartXAxis = ref<string[]>([])
 
-  // 格式化金额
-  const formatterAmount = (data: W007SuccessResult, key: 'month' | 'quarter' | 'year' | 'total') => {
+  // 格式化数据
+  const formatterW007Data = (data: W007SuccessResult, key: 'month' | 'quarter' | 'year' | 'total') => {
     // 百亿
     const maxNum = 10000000000
     if (data.beiAn) {
-      let { beiAnJinE } = data.beiAn
+      let { beiAnJinE, chartDataList } = data.beiAn
       // 如果备案金额大于百亿万
       if (beiAnJinE > maxNum) {
         let num = (beiAnJinE / 100).toFixed(2)
@@ -65,10 +65,15 @@
       } else {
         data.beiAn.beiAnJinEUnit = '万元'
       }
+
+      let xAxisData = chartDataList?.map((item) => item.date)
+      let yAxisData = chartDataList?.map((item) => item.money)
+      data.beiAn.xAxisData = xAxisData
+      data.beiAn.yAxisData = yAxisData
     }
 
     if (data.buTie) {
-      let { butiejine } = data.buTie
+      let { butiejine, chartDataList } = data.buTie
       // 如果补贴金额大于百亿
       if (butiejine > maxNum) {
         let num = (butiejine / 10000).toFixed(2)
@@ -77,10 +82,15 @@
       } else {
         data.buTie.butiejineUnit = '元'
       }
+
+      let xAxisData = chartDataList?.map((item) => item.date)
+      let yAxisData = chartDataList?.map((item) => item.money)
+      data.buTie.xAxisData = xAxisData
+      data.buTie.yAxisData = yAxisData
     }
 
     if (data.buChang) {
-      let { buchangjine } = data.buChang
+      let { buchangjine, chartDataList } = data.buChang
       // 如果补偿金额大于百亿
       if (buchangjine > maxNum) {
         let num = (buchangjine / 10000).toFixed(2)
@@ -89,6 +99,11 @@
       } else {
         data.buChang.buchangjineUnit = '元'
       }
+
+      let xAxisData = chartDataList?.map((item) => item.date)
+      let yAxisData = chartDataList?.map((item) => item.money)
+      data.buChang.xAxisData = xAxisData
+      data.buChang.yAxisData = yAxisData
     }
 
     compareData[key] = { ...data }
@@ -116,19 +131,19 @@
 
     if (res01.status === 'fulfilled' && res01.value) {
       const data = res01.value
-      formatterAmount(data, 'month')
+      formatterW007Data(data, 'month')
     }
     if (res02.status === 'fulfilled' && res02.value) {
       const data = res02.value
-      formatterAmount(data, 'quarter')
+      formatterW007Data(data, 'quarter')
     }
     if (res03.status === 'fulfilled' && res03.value) {
       const data = res03.value
-      formatterAmount(data, 'year')
+      formatterW007Data(data, 'year')
     }
     if (res04.status === 'fulfilled' && res04.value) {
       const data = res04.value
-      formatterAmount(data, 'total')
+      formatterW007Data(data, 'total')
     }
 
     hideLoading()

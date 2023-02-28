@@ -21,7 +21,7 @@
       <div v-if="isShowRate" class="compare-result">
         <img v-if="isAdd" class="img" :src="imageIconUp" alt="" />
         <img v-else class="img" :src="imageIconDown" alt="" />
-        <div class="value Impact">{{ rateValue }}%</div>
+        <div class="value Impact">{{ _rateValue }}%</div>
       </div>
       <div class="echart">
         <EchartLine01 :render-list="compareList" :echart-id="echartId" :color="color" :x-axis="xAxis" :label="label" />
@@ -33,6 +33,10 @@
 <script setup lang="ts">
   import imageIconDown from './images/icon-down.png'
   import imageIconUp from './images/icon-up.png'
+
+  import type { PropType } from 'vue'
+
+  import { computed } from 'vue'
 
   import EchartLine01 from './EchartLine01.vue'
 
@@ -105,8 +109,8 @@
      * x 轴数据
      */
     xAxis: {
-      type: Array,
-      required: true
+      type: Array as PropType<string[]>,
+      default: () => []
     },
     /**
      * echart id
@@ -123,13 +127,6 @@
       default: () => '#2661ff'
     },
 
-    /**
-     * 同比结果 是否增加 true 增加 false 减少
-     */
-    isAdd: {
-      type: Boolean,
-      default: () => false
-    },
     /**
      * 是否显示比例
      */
@@ -148,9 +145,22 @@
      * 折线图数据
      */
     compareList: {
-      type: Array,
-      default: () => [0, 0, 0, 0, 0, 0, 0]
+      type: Array as PropType<number[]>,
+      default: () => []
     }
+  })
+
+  /**
+   * 同比结果 是否增加 true 增加 false 减少
+   */
+  const isAdd = computed(() => {
+    const { rateValue } = props
+    return rateValue >= 0
+  })
+
+  const _rateValue = computed(() => {
+    const { rateValue } = props
+    return rateValue >= 0 ? rateValue : -rateValue
   })
 </script>
 

@@ -131,4 +131,12 @@ export interface W006SuccessResult {
    * 白名单获贷率
    */
   whiterate?: number
+  /**
+   * 白名单货代户数
+   */
+  whitegetloannum?: number
+  /**
+   * 白名单获贷金额
+   */
+  whitegetloanmoney?: number
 }

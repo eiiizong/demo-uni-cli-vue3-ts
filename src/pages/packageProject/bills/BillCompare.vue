@@ -15,9 +15,9 @@
           other-label02="投放笔数"
           :other-label02-value="renderDataMonth.beiAn?.beiAnBiShu || 0"
           other-label02-value-unit="笔"
-          :rate-value="0"
-          :compare-list="[12, 23, 23, 23, 44, 55, 65, 32, 34, 43, 67, 89]"
-          :x-axis="['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']" />
+          :rate-value="renderDataMonth.beiAn?.beianrate"
+          :compare-list="renderDataMonth.beiAn?.yAxisData"
+          :x-axis="renderDataMonth.beiAn?.xAxisData" />
         <BillCompareItem
           echart-id="echart_btje_month"
           color="#eca02d"
@@ -30,9 +30,9 @@
           other-label02="补贴机构数"
           :other-label02-value="renderDataMonth.buTie?.butiejigoushu || 0"
           other-label02-value-unit="家"
-          :rate-value="0"
-          :compare-list="[12, 23, 23, 23, 44, 55, 65, 32, 34, 43, 67, 89]"
-          :x-axis="['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']" />
+          :rate-value="renderDataMonth.buTie?.butierate"
+          :compare-list="renderDataMonth.buTie?.yAxisData"
+          :x-axis="renderDataMonth.buTie?.xAxisData" />
         <BillCompareItem
           echart-id="echart_bcje_month"
           color="#009bc2"
@@ -45,9 +45,9 @@
           other-label02="补偿机构数"
           :other-label02-value="renderDataMonth.buChang?.buchangjigoushu || 0"
           other-label02-value-unit="家"
-          :rate-value="0"
-          :compare-list="[12, 23, 23, 23, 44, 55, 65, 32, 34, 43, 67, 89]"
-          :x-axis="['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']" />
+          :rate-value="renderDataMonth.buChang?.buchangrate"
+          :compare-list="renderDataMonth.buChang?.yAxisData"
+          :x-axis="renderDataMonth.buChang?.xAxisData" />
       </swiper-item>
       <swiper-item class="swiper-item">
         <BillCompareItem
@@ -62,9 +62,9 @@
           other-label02="投放笔数"
           :other-label02-value="renderDataQuarter.beiAn?.beiAnBiShu || 0"
           other-label02-value-unit="笔"
-          :rate-value="0"
-          :compare-list="[32, 23, 23, 23]"
-          :x-axis="['1', '2', '3', '4']" />
+          :rate-value="renderDataQuarter.beiAn?.beianrate"
+          :compare-list="renderDataQuarter.beiAn?.yAxisData"
+          :x-axis="renderDataQuarter.beiAn?.xAxisData" />
         <BillCompareItem
           echart-id="echart_btje_jd"
           color="#eca02d"
@@ -77,9 +77,9 @@
           other-label02="补贴机构数"
           :other-label02-value="renderDataQuarter.buTie?.butiejigoushu || 0"
           other-label02-value-unit="家"
-          :rate-value="0"
-          :compare-list="[32, 23, 23, 23]"
-          :x-axis="['1', '2', '3', '4']" />
+          :rate-value="renderDataQuarter.buTie?.butierate"
+          :compare-list="renderDataQuarter.buTie?.yAxisData"
+          :x-axis="renderDataQuarter.buTie?.xAxisData" />
         <BillCompareItem
           echart-id="echart_bcje_jd"
           color="#009bc2"
@@ -92,9 +92,9 @@
           other-label02="补偿机构数"
           :other-label02-value="renderDataQuarter.buChang?.buchangjigoushu || 0"
           other-label02-value-unit="家"
-          :rate-value="0"
-          :compare-list="[32, 23, 23, 23]"
-          :x-axis="['1', '2', '3', '4']" />
+          :rate-value="renderDataQuarter.buChang?.buchangrate"
+          :compare-list="renderDataQuarter.buChang?.yAxisData"
+          :x-axis="renderDataQuarter.buChang?.xAxisData" />
       </swiper-item>
       <swiper-item class="swiper-item">
         <BillCompareItem
@@ -109,9 +109,9 @@
           other-label02="投放笔数"
           :other-label02-value="renderDataYear.beiAn?.beiAnBiShu || 0"
           other-label02-value-unit="笔"
-          :rate-value="0"
-          :compare-list="[32, 23, 23, 23, 52]"
-          :x-axis="['1', '2', '3', '4', '5']" />
+          :rate-value="renderDataYear.beiAn?.beianrate"
+          :compare-list="renderDataYear.beiAn?.yAxisData"
+          :x-axis="renderDataYear.beiAn?.xAxisData" />
         <BillCompareItem
           echart-id="echart_btje_year"
           color="#eca02d"
@@ -124,9 +124,9 @@
           other-label02="补贴机构数"
           :other-label02-value="renderDataYear.buTie?.butiejigoushu || 0"
           other-label02-value-unit="家"
-          :rate-value="0"
-          :compare-list="[32, 23, 23, 23, 52]"
-          :x-axis="['1', '2', '3', '4', '5']" />
+          :rate-value="renderDataYear.buTie?.butierate"
+          :compare-list="renderDataYear.buTie?.yAxisData"
+          :x-axis="renderDataYear.buTie?.xAxisData" />
         <BillCompareItem
           echart-id="echart_bcje_year"
           color="#009bc2"
@@ -139,9 +139,9 @@
           other-label02="补偿机构数"
           :other-label02-value="renderDataYear.buChang?.buchangjigoushu || 0"
           other-label02-value-unit="家"
-          :rate-value="0"
-          :compare-list="[32, 23, 23, 23, 52]"
-          :x-axis="['1', '2', '3', '4', '5']" />
+          :rate-value="renderDataYear.buChang?.buchangrate"
+          :compare-list="renderDataYear.buChang?.yAxisData"
+          :x-axis="renderDataYear.buChang?.xAxisData" />
       </swiper-item>
       <swiper-item class="swiper-item">
         <BillCompareItem
@@ -157,8 +157,8 @@
           :other-label02-value="renderDataTotal.beiAn?.beiAnBiShu || 0"
           other-label02-value-unit="笔"
           :is-show-rate="false"
-          :compare-list="[0, 0, 0, 0, 0, 0, 0, 0, 45, 27]"
-          :x-axis="['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']" />
+          :compare-list="renderDataTotal.beiAn?.yAxisData"
+          :x-axis="renderDataTotal.beiAn?.xAxisData" />
         <BillCompareItem
           echart-id="echart_btje_lj"
           color="#eca02d"
@@ -172,8 +172,8 @@
           :other-label02-value="renderDataTotal.buTie?.butiejigoushu || 0"
           other-label02-value-unit="家"
           :is-show-rate="false"
-          :compare-list="[0, 0, 0, 0, 0, 0, 0, 0, 25, 27]"
-          :x-axis="['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']" />
+          :compare-list="renderDataTotal.buTie?.yAxisData"
+          :x-axis="renderDataTotal.buTie?.xAxisData" />
         <BillCompareItem
           echart-id="echart_bcje_lj"
           color="#009bc2"
@@ -187,8 +187,8 @@
           :other-label02-value="renderDataTotal.buChang?.buchangjigoushu || 0"
           other-label02-value-unit="家"
           :is-show-rate="false"
-          :compare-list="[0, 0, 0, 0, 0, 0, 0, 0, 45, 37]"
-          :x-axis="['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']" />
+          :compare-list="renderDataTotal.buChang?.yAxisData"
+          :x-axis="renderDataTotal.buChang?.xAxisData" />
       </swiper-item>
     </swiper>
   </view>
