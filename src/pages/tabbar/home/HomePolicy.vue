@@ -22,7 +22,7 @@
         </div>
       </template>
       <template v-else>
-        <ZdbNoData v-if="isRequestOver" tip="暂未搜索到相关数据" />
+        <ZdbNoData v-if="isRequestOver" tip="暂无数据" />
       </template>
     </div>
   </view>
@@ -80,7 +80,8 @@
   }
 
   const onClickButton = () => {
-    navigateTo('policy-query', 'packageQuery')
+    const { currentTabId } = props
+    navigateTo('policy-query', 'packageQuery', { id: currentTabId })
   }
 </script>
 
@@ -110,6 +111,7 @@
       }
     }
     .query-result {
+      min-height: 400rpx;
       .items {
         .item {
           margin-bottom: 14rpx;

@@ -3,8 +3,8 @@
     <div class="name">{{ renderData.title }}</div>
     <div class="desc">{{ renderData.description }}</div>
     <div class="info">
-      <!-- <div class="unit">{{ renderData.chi037_desc }}</div>
-      <div class="line">|</div> -->
+      <div class="unit">每日经济网</div>
+      <div class="line">|</div>
       <div class="time">{{ renderData.create_time }}</div>
     </div>
   </view>
@@ -14,7 +14,7 @@
   import type { PropType } from 'vue'
   import { W017SuccessResultListItem } from '@/server/types/api'
 
-  import { navigateTo } from '@/utils/uni-api'
+  import { navigateTo, setStorageSync } from '@/utils/uni-api'
 
   const props = defineProps({
     // 渲染数据
@@ -30,6 +30,8 @@
 
   // 点击事件
   const onClick = () => {
+    const { renderData } = props
+    setStorageSync('NEWS_DETAILS', renderData)
     navigateTo('news-details', 'packageQuery')
   }
 </script>
