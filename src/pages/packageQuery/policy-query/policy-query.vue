@@ -74,15 +74,7 @@
      */
     isLoadOver: boolean
   }>({
-    queryResultList: [
-      {
-        aae011: '1',
-        aae011_desc: '四川省',
-        aae036: 1675240390000,
-        chi050: 100076,
-        chi051: '白名单入库'
-      }
-    ],
+    queryResultList: [],
     isRequestOver: false,
     isMultiplePages: false,
     isLoadOver: false
