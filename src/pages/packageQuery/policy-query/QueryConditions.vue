@@ -4,14 +4,14 @@
       <input
         type="text"
         class="input"
-        placeholder="请输入企业名称"
+        placeholder="请输入关键字"
         confirm-type="search"
         :value="modelValue"
         :focus="focus"
         @input="onInput"
         @focus="emit('focus')"
         @confirm="emit('confirm')" />
-      <YhIcon name="search" size="32rpx" class="btn" />
+      <YhIcon name="search" size="32rpx" class="btn" @click="emit('confirm')" />
     </div>
   </view>
 </template>

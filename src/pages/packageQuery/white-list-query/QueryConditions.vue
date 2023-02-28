@@ -11,7 +11,7 @@
         @input="onInput"
         @focus="emit('focus')"
         @confirm="emit('confirm')" />
-      <YhIcon name="search" size="32rpx" class="btn" />
+      <YhIcon name="search" size="32rpx" class="btn" @click="emit('confirm')" />
     </div>
   </view>
 </template>
