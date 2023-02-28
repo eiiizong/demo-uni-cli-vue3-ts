@@ -41,6 +41,7 @@
   import imageNavRYDYBZ from './images/nav-rydybz.png'
   import imageNavGZL from './images/nav-gzl.png'
   import imageNavSPJDCX from './images/nav-spjdcx.png'
+  import imageNavZCFK from './images/nav-zcfg.png'
 
   import ZdbPanel from '@/components/project/zdb-panel/zdb-panel.vue'
 
@@ -150,7 +151,7 @@
       packageName: 'packageQuery',
       isAuth: false,
       disabled: false,
-      imgSrc: imageNavHZJG
+      imgSrc: imageNavZCFK
     }
 
     // 白名单查询
