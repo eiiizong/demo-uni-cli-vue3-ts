@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="content">
-      <rich-text :nodes="newsDetails.content" />
+      <rich-text :nodes="newsContent" />
     </div>
   </view>
 </template>
@@ -22,18 +22,45 @@
 <script setup lang="ts">
   import { W017SuccessResultListItem } from '@/server/types/api'
 
-  import { ref } from 'vue'
+  import { ref, computed } from 'vue'
 
   import { onLoad } from '@dcloudio/uni-app'
 
-  import { getStorage } from '@/utils/uni-api'
+  import { getStorage, setNavigationBarTitle } from '@/utils/uni-api'
 
   const newsDetails = ref<W017SuccessResultListItem>({})
+
+  /**
+   * 处理数据 让图片100%显示
+   */
+  const newsContent = computed(() => {
+    const { content } = newsDetails.value
+    let newContent = ''
+    if (content) {
+      newContent = content.replace(/<img[^>]*>/gi, function (match) {
+        match = match.replace(/style="[^"]+"/gi, '').replace(/style='[^']+'/gi, '')
+        match = match.replace(/width="[^"]+"/gi, '').replace(/width='[^']+'/gi, '')
+        match = match.replace(/height="[^"]+"/gi, '').replace(/height='[^']+'/gi, '')
+        return match
+      })
+      newContent = newContent.replace(/style="[^"]+"/gi, function (match) {
+        match = match.replace(/width:[^;]+;/gi, 'max-width:100%;').replace(/width:[^;]+;/gi, 'max-width:100%;')
+        return match
+      })
+      newContent = newContent.replace(/<br[^>]*\/>/gi, '')
+      newContent = newContent.replace(
+        /<img/gi,
+        '<img style="max-width:100%;height:auto;display:block;margin-top:0;margin-bottom:0;"'
+      )
+    }
+    return newContent
+  })
 
   onLoad(() => {
     getStorage('NEWS_DETAILS').then((res) => {
       const details = res.data
       newsDetails.value = details
+      setNavigationBarTitle(details.title)
     })
   })
 </script>
@@ -65,6 +92,9 @@
         justify-content: flex-end;
         margin-bottom: 10rpx;
       }
+    }
+    .content {
+      padding-top: 20rpx;
     }
   }
 </style>
