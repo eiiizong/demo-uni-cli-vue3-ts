@@ -18,7 +18,9 @@
           </div>
         </div>
         <div v-if="renderList.length > 3" class="button-wrapper">
-          <YhButton type="primary" block @click="onClickButton">查看更多</YhButton>
+          <YhButton type="primary" block custom-style="width:50%; height:72rpx; margin:0 auto;" @click="onClickButton">
+            查看更多
+          </YhButton>
         </div>
       </template>
       <template v-else>
@@ -112,6 +114,7 @@
     }
     .query-result {
       min-height: 400rpx;
+      padding-bottom: $spacing;
       .items {
         .item {
           margin-bottom: 14rpx;
@@ -121,7 +124,7 @@
         }
       }
       .button-wrapper {
-        padding: $spacing;
+        padding-top: $spacing;
       }
     }
   }
