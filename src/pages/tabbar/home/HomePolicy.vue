@@ -81,7 +81,7 @@
 
   const onClickButton = () => {
     const { currentTabId } = props
-    navigateTo('policy-query', 'packageQuery', { id: currentTabId })
+    navigateTo('news-query', 'packageQuery', { id: currentTabId })
   }
 </script>
 

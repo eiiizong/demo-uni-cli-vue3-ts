@@ -1,9 +1,6 @@
 <template>
   <view class="news-query">
-    <QueryConditions v-model:model-value="queryInfo.keyword" @focus="isShowHistory = true" @confirm="onConfirm" />
-    <QueryHistory v-if="isShowHistory" :render-list="historys" @click="onClickHistoryItem" @detele="onDeleteHistory" />
     <QueryResult
-      v-else
       :render-list="customData.queryResultList"
       :is-request-over="customData.isRequestOver"
       :is-multiple-pages="customData.isMultiplePages"
@@ -13,26 +10,14 @@
 </template>
 
 <script setup lang="ts">
-  import QueryConditions from './QueryConditions.vue'
-  import QueryHistory from './QueryHistory.vue'
   import QueryResult from './QueryResult.vue'
 
-  import type { W011SuccessResultListItem } from '@/server/types/api'
+  import type { W017SuccessResultListItem } from '@/server/types/api'
 
-  import { reactive, ref } from 'vue'
-  import { getStorage, removeStorage, setStorage, showToast } from '@/utils/uni-api'
+  import { reactive } from 'vue'
+  import { setNavigationBarTitle } from '@/utils/uni-api'
   import { onLoad, onReachBottom } from '@dcloudio/uni-app'
-  import { requestW011 } from '@/server/api'
-
-  /**
-   * 白名单本地储存key
-   */
-  const WHITE_LIST_STORAGE_KEY = 'WHITE_LIST_STORAGE_KEY'
-
-  /**
-   * 是否显示搜索历史模块
-   */
-  const isShowHistory = ref(true)
+  import { requestW018, requestW019, requestW020, requestW021 } from '@/server/api'
 
   // 查询条件
   const queryInfo = reactive({
@@ -44,23 +29,16 @@
      * 每页请求条数
      */
     pageSize: 10,
-    /**
-     * 搜索关键字
-     */
-    keyword: ''
-  })
 
-  /**
-   * 历史搜索记录
-   */
-  const historys = ref<string[]>([])
+    queryId: ''
+  })
 
   // 自定义数据
   const customData = reactive<{
     /**
      * 查询结果数据
      */
-    queryResultList: W011SuccessResultListItem[]
+    queryResultList: W017SuccessResultListItem[]
     /**
      * 是否请求完成 控制 no-data 组件在未请求完成时不显示
      */
@@ -114,47 +92,50 @@
 
   // 查询数据
   const queryData = () => {
-    const { keyword, pageNo, pageSize } = queryInfo
-    requestW011(keyword, pageNo, pageSize)
-      .then((res) => {
-        const { list, pages } = res.pageBean
-        formatPagingData(list, pages)
-      })
-      .finally(() => {
-        customData.isRequestOver = true
-      })
-  }
+    const { queryId, pageNo, pageSize } = queryInfo
 
-  // 键盘输入事件
-  const onConfirm = () => {
-    const { keyword } = queryInfo
-    if (keyword) {
-      const arr = [...historys.value]
-      arr.push(keyword)
-
-      const data = [...new Set(arr)]
-      historys.value = [...data]
-      isShowHistory.value = false
-      setStorage(WHITE_LIST_STORAGE_KEY, data)
-      initData()
-      queryData()
+    if (queryId === '0') {
+      requestW018(pageNo, pageSize)
+        .then((res) => {
+          const { list, pages } = res.pageBean
+          formatPagingData(list, pages)
+        })
+        .finally(() => {
+          customData.isRequestOver = true
+        })
     }
-  }
 
-  // 点击历史搜索记录
-  const onClickHistoryItem = (data: string) => {
-    queryInfo.keyword = data
-    isShowHistory.value = false
-    initData()
-    queryData()
-  }
+    if (queryId === '1') {
+      requestW019(pageNo, pageSize)
+        .then((res) => {
+          const { list, pages } = res.pageBean
+          formatPagingData(list, pages)
+        })
+        .finally(() => {
+          customData.isRequestOver = true
+        })
+    }
 
-  // 删除历史搜索记录
-  const onDeleteHistory = () => {
-    historys.value = []
-    removeStorage(WHITE_LIST_STORAGE_KEY).then(() => {
-      showToast('删除成功')
-    })
+    if (queryId === '2') {
+      requestW020(pageNo, pageSize)
+        .then((res) => {
+          const { list, pages } = res.pageBean
+          formatPagingData(list, pages)
+        })
+        .finally(() => {
+          customData.isRequestOver = true
+        })
+    }
+    if (queryId === '3') {
+      requestW021(pageNo, pageSize)
+        .then((res) => {
+          const { list, pages } = res.pageBean
+          formatPagingData(list, pages)
+        })
+        .finally(() => {
+          customData.isRequestOver = true
+        })
+    }
   }
 
   /**
@@ -166,10 +147,27 @@
   }
 
   // 页面加载完成
-  onLoad(() => {
-    getStorage(WHITE_LIST_STORAGE_KEY).then((res) => {
-      historys.value = res.data
-    })
+  onLoad((e) => {
+    const { id } = e
+
+    if (id) {
+      queryInfo.queryId = id
+      if (id === '0') {
+        setNavigationBarTitle('业务进展')
+      }
+      if (id === '1') {
+        setNavigationBarTitle('机构动态')
+      }
+      if (id === '2') {
+        setNavigationBarTitle('业务聚焦')
+      }
+      if (id === '3') {
+        setNavigationBarTitle('政策解读')
+      }
+    }
+
+    initData()
+    queryData()
   })
 
   // 页面上拉触底事件的处理函数 上拉加载更多
