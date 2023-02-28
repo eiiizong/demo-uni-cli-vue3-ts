@@ -34,7 +34,7 @@
   import { ref, reactive } from 'vue'
   import { onPageScroll, onHide, onLoad } from '@dcloudio/uni-app'
   import { showLoading, hideLoading } from '@/utils/uni-api'
-  import { requestW017, requestW018 } from '@/server/api'
+  import { requestW017, requestW018, requestW019, requestW020, requestW021 } from '@/server/api'
 
   const scrollTimer = ref<any>(null)
   const navBarBackgroundColor = ref('transparent')
@@ -126,7 +126,7 @@
 
     // 机构动态
     if (id === '1') {
-      requestW018(pageNo, pageSize)
+      requestW019(pageNo, pageSize)
         .then((res) => {
           customData.queryResultList = res.pageBean.list
         })
@@ -137,7 +137,7 @@
 
     // 媒体聚焦
     if (id === '2') {
-      requestW018(pageNo, pageSize)
+      requestW020(pageNo, pageSize)
         .then((res) => {
           customData.queryResultList = res.pageBean.list
         })
@@ -148,7 +148,7 @@
 
     // 政策解读
     if (id === '3') {
-      requestW018(pageNo, pageSize)
+      requestW021(pageNo, pageSize)
         .then((res) => {
           customData.queryResultList = res.pageBean.list
         })

@@ -14,7 +14,6 @@
   import type { PropType } from 'vue'
   import { W017SuccessResultListItem } from '@/server/types/api'
 
-  import moment from 'moment'
   import { navigateTo } from '@/utils/uni-api'
 
   const props = defineProps({
