@@ -9,8 +9,12 @@
 
     <div class="main">
       <HomePopularServices />
-      <HomeNews :render-data="newsData" />
-      <HomePolicy :render-list="otherNewsData" />
+      <HomeNews :render-data="customData.newsData" />
+      <HomePolicy
+        :render-list="customData.queryResultList"
+        :current-tab-id="currentTabId"
+        :is-request-over="customData.isRequestOver"
+        @change="onChangeTab" />
     </div>
   </HomeBg>
 </template>
@@ -27,7 +31,7 @@
 
   import { W017SuccessResultListItem } from '@/server/types/api'
 
-  import { ref } from 'vue'
+  import { ref, reactive } from 'vue'
   import { onPageScroll, onHide, onLoad } from '@dcloudio/uni-app'
   import { showLoading, hideLoading } from '@/utils/uni-api'
   import { requestW017, requestW018 } from '@/server/api'
@@ -35,27 +39,123 @@
   const scrollTimer = ref<any>(null)
   const navBarBackgroundColor = ref('transparent')
 
-  const newsData = ref<W017SuccessResultListItem>({})
-  const otherNewsData = ref<W017SuccessResultListItem[]>([])
+  const currentTabId = ref<'0' | '1' | '2' | '3'>('0')
 
+  // 查询条件
+  const queryInfo = reactive({
+    /**
+     * 当前页数
+     */
+    pageNo: 1,
+    /**
+     * 每页请求条数
+     */
+    pageSize: 4
+  })
+
+  // 自定义数据
+  const customData = reactive<{
+    newsData: W017SuccessResultListItem
+    /**
+     * 查询结果数据
+     */
+    queryResultList: W017SuccessResultListItem[]
+    /**
+     * 是否请求完成 控制 no-data 组件在未请求完成时不显示
+     */
+    isRequestOver: boolean
+  }>({
+    newsData: { description: '无' },
+    queryResultList: [],
+    isRequestOver: false
+  })
+
+  /**
+   * 重新查询数据时重置状态
+   */
+  const initData = () => {
+    queryInfo.pageNo = 1
+    queryInfo.pageSize = 4
+    customData.queryResultList = []
+    customData.isRequestOver = false
+  }
+
+  /**
+   * 查询数据
+   */
   const queryData = async () => {
     showLoading()
-
-    const data = await Promise.allSettled([requestW017(1, 1, false), requestW018(1, 3, false)])
+    const { pageNo, pageSize } = queryInfo
+    const data = await Promise.allSettled([requestW017(pageNo, pageSize, false), requestW018(pageNo, pageSize, false)])
 
     const [res00, res01] = data
 
     if (res00.status === 'fulfilled' && res00.value) {
       const data = res00.value
-      newsData.value = data[0]
+      customData.newsData = data.pageBean.list[0]
     }
 
     if (res01.status === 'fulfilled' && res01.value) {
       const data = res01.value
-      otherNewsData.value = data
+      customData.queryResultList = data.pageBean.list
+    }
+    customData.isRequestOver = true
+    hideLoading()
+  }
+
+  // tab 改变
+  const onChangeTab = (id: '0' | '1' | '2' | '3') => {
+    if (id === currentTabId.value) {
+      return
+    } else {
+      currentTabId.value = id
+      initData()
     }
 
-    hideLoading()
+    const { pageNo, pageSize } = queryInfo
+    // 业务进展
+    if (id === '0') {
+      requestW018(pageNo, pageSize)
+        .then((res) => {
+          customData.queryResultList = res.pageBean.list
+        })
+        .finally(() => {
+          customData.isRequestOver = true
+        })
+    }
+
+    // 机构动态
+    if (id === '1') {
+      requestW018(pageNo, pageSize)
+        .then((res) => {
+          customData.queryResultList = res.pageBean.list
+        })
+        .finally(() => {
+          customData.isRequestOver = true
+        })
+    }
+
+    // 媒体聚焦
+    if (id === '2') {
+      requestW018(pageNo, pageSize)
+        .then((res) => {
+          customData.queryResultList = res.pageBean.list
+        })
+        .finally(() => {
+          customData.isRequestOver = true
+        })
+    }
+
+    // 政策解读
+    if (id === '3') {
+      requestW018(pageNo, pageSize)
+        .then((res) => {
+          customData.queryResultList = res.pageBean.list
+        })
+        .finally(() => {
+          customData.isRequestOver = true
+        })
+    }
   }
 
   onLoad(() => {

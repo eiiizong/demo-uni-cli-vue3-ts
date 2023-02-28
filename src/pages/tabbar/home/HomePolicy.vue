@@ -11,20 +11,27 @@
       </div>
     </div>
     <div class="query-result">
-      <div class="items">
-        <div v-for="item in renderList" :key="item.code" class="item">
-          <ZdbCardPolicy :render-data="item" />
+      <template v-if="renderList.length > 0">
+        <div class="items">
+          <div v-for="(item, index) in renderList" :key="item.code" class="item">
+            <ZdbCardPolicy v-if="index < 3" :render-data="item" />
+          </div>
         </div>
-      </div>
-      <div v-if="renderList.length > 3" class="button-wrapper">
-        <YhButton type="primary" block @click="onClickButton">查看更多</YhButton>
-      </div>
+        <div v-if="renderList.length > 3" class="button-wrapper">
+          <YhButton type="primary" block @click="onClickButton">查看更多</YhButton>
+        </div>
+      </template>
+      <template v-else>
+        <ZdbNoData v-if="isRequestOver" tip="暂未搜索到相关数据" />
+      </template>
     </div>
   </view>
 </template>
 
 <script setup lang="ts">
   import YhButton from '@/components/yh/button/button.vue'
+
+  import ZdbNoData from '@/components/project/zdb-no-data/zdb-no-data.vue'
   import ZdbCardPolicy from '@/components/project/zdb-card-policy/zdb-card-policy.vue'
 
   import type { PropType } from 'vue'
@@ -33,14 +40,22 @@
   import { ref } from 'vue'
   import { navigateTo } from '@/utils/uni-api'
 
+  const emit = defineEmits(['change'])
   const props = defineProps({
     renderList: {
       type: Array as PropType<W017SuccessResultListItem[]>,
       required: true
+    },
+    currentTabId: {
+      type: String as PropType<'0' | '1' | '2' | '3'>,
+      required: true
+    },
+    isRequestOver: {
+      type: Boolean,
+      required: true
     }
   })
 
-  const currentTabId = ref('0')
   const tabs = ref([
     {
       id: '0',
@@ -61,7 +76,7 @@
   ])
 
   const onClickTab = (id: string) => {
-    currentTabId.value = id
+    emit('change', id)
   }
 
   const onClickButton = () => {

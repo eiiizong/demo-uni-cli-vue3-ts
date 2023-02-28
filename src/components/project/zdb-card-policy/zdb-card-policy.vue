@@ -5,7 +5,7 @@
     <div class="info">
       <!-- <div class="unit">{{ renderData.chi037_desc }}</div>
       <div class="line">|</div> -->
-      <div class="time">{{ moment(renderData.create_time).format('YYYY-MM-DD') }}</div>
+      <div class="time">{{ renderData.create_time }}</div>
     </div>
   </view>
 </template>

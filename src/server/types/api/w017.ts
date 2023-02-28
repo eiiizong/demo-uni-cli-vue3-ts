@@ -31,3 +31,35 @@ export interface W017SuccessResultListItem {
    */
   title?: string
 }
+
+export interface W017SuccessResult {
+  /**
+   * 数据
+   */
+  pageBean: {
+    /**
+     * 当前条件下返回的数据
+     */
+    list: W017SuccessResultListItem[]
+    /**
+     * 当前请求页数
+     */
+    pageNum: number
+    /**
+     * 当前请求页数
+     */
+    pageNumber: number
+    /**
+     * 当前请求条数
+     */
+    pageSize: number
+    /**
+     * 数据总页数
+     */
+    pages: number
+    /**
+     * 数据总条数
+     */
+    total: number
+  }
+}

@@ -1,4 +1,4 @@
-import type { W017SuccessResultListItem } from '@/server/types/api'
+import type { W017SuccessResult } from '@/server/types/api'
 import { request } from '@/server/request'
 
 /**
@@ -13,7 +13,7 @@ const requestW017 = (
   pageSize: number,
   isShowLoading = true,
   isShowErrorToast = true
-): Promise<W017SuccessResultListItem[]> => {
+): Promise<W017SuccessResult> => {
   const data = {
     pageNo,
     pageSize
