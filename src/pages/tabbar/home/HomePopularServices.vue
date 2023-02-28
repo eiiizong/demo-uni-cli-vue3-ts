@@ -166,16 +166,16 @@
     }
 
     // 统计报表
-    const navTJBB: PopularServiceNavItem = {
-      id: 'tjbb',
-      name: '统计报表',
-      desc: '各项数据，一键速览',
-      pathName: 'report-form-query',
-      packageName: 'packageQuery',
-      isAuth: false,
-      disabled: false,
-      imgSrc: imageNavBMDFK
-    }
+    // const navTJBB: PopularServiceNavItem = {
+    //   id: 'tjbb',
+    //   name: '统计报表',
+    //   desc: '各项数据，一键速览',
+    //   pathName: 'report-form-query',
+    //   packageName: 'packageQuery',
+    //   isAuth: false,
+    //   disabled: false,
+    //   imgSrc: imageNavBMDFK
+    // }
 
     // 默认为游客访问内容
     let arr: PopularServiceNavItem[][] = []

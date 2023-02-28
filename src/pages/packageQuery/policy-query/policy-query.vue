@@ -25,14 +25,14 @@
   import { requestW015 } from '@/server/api'
 
   /**
-   * 白名单本地储存key
+   * 政策文件本地储存key
    */
-  const WHITE_LIST_STORAGE_KEY = 'WHITE_LIST_STORAGE_KEY'
+  const POLICY_STORAGE_KEY = 'POLICY_STORAGE_KEY'
 
   /**
    * 是否显示搜索历史模块
    */
-  const isShowHistory = ref(true)
+  const isShowHistory = ref(false)
 
   // 查询条件
   const queryInfo = reactive({
@@ -136,17 +136,17 @@
   // 键盘输入事件
   const onConfirm = () => {
     const { keyword } = queryInfo
+    // 重新设置搜索历史
     if (keyword) {
       const arr = [...historys.value]
       arr.push(keyword)
-
       const data = [...new Set(arr)]
       historys.value = [...data]
-      isShowHistory.value = false
-      setStorage(WHITE_LIST_STORAGE_KEY, data)
-      initData()
-      queryData()
+      setStorage(POLICY_STORAGE_KEY, data)
     }
+    isShowHistory.value = false
+    initData()
+    queryData()
   }
 
   // 点击历史搜索记录
@@ -160,7 +160,7 @@
   // 删除历史搜索记录
   const onDeleteHistory = () => {
     historys.value = []
-    removeStorage(WHITE_LIST_STORAGE_KEY).then(() => {
+    removeStorage(POLICY_STORAGE_KEY).then(() => {
       showToast('删除成功')
     })
   }
@@ -175,9 +175,10 @@
 
   // 页面加载完成
   onLoad(() => {
-    getStorage(WHITE_LIST_STORAGE_KEY).then((res) => {
+    getStorage(POLICY_STORAGE_KEY).then((res) => {
       historys.value = res.data
     })
+    queryData()
   })
 
   // 页面上拉触底事件的处理函数 上拉加载更多
