@@ -36,7 +36,7 @@
   // 点击事件
   const onClick = () => {
     const { chi050, chi051 } = props.renderData
-    previewPDFWeixin(chi050, chi051)
+    previewPDFWeixin(chi050 + '', chi051)
   }
 </script>
 

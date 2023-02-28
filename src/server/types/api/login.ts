@@ -19,9 +19,9 @@ export interface LoginSuccessResult {
    */
   registerTime?: number
   /**
-   * 用户类型 0:游客,1:企业,2:合作机构,3:经办人,4:领导
+   * 用户类型 0:游客,1:企业,2:合作机构,3:经办人,4:领导 5:区县产业部门
    */
-  role?: '0' | '1' | '2' | '3' | '4'
+  role?: '0' | '1' | '2' | '3' | '4' | '5'
   /**
    * 用户sessionId
    */

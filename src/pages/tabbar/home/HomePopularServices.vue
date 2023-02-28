@@ -183,36 +183,8 @@
     const { role, tel } = userInfo.value
 
     switch (role) {
-      // 合作机构
-      case '2':
-        arr = [[]]
-        arr[0].push(navBMDCX)
-        arr[0].push(navSPJDCX)
-        arr[0].push(navYWJS)
-        arr[0].push(navZCFG)
-        break
-      // 经办人
-      case '3':
-        arr = [[], []]
-        arr[0].push(navRYDYBZ)
-        arr[0].push(navTJBB)
-        arr[0].push(navGZL)
-        arr[0].push(navBMDCX)
-        arr[1].push(navYWJS)
-        arr[1].push(navZCFG)
-        break
-      // 领导
-      case '4':
-        arr = [[], []]
-        arr[0].push(navRYDYBZ)
-        arr[0].push(navTJBB)
-        arr[0].push(navGZL)
-        arr[0].push(navBMDCX)
-        arr[1].push(navYWJS)
-        arr[1].push(navZCFG)
-        break
-      // 默认游客 企业
-      default:
+      // 企业
+      case '1':
         arr = [[], []]
         arr[0].push(navYWJS)
         arr[0].push(navZCFG)
@@ -220,6 +192,50 @@
         arr[0].push(navWYRZ)
         arr[1].push(navBMDFK)
         arr[1].push(navSPJDCX)
+        break
+      // 合作机构
+      case '2':
+        arr = [[], []]
+        arr[0].push(navBMDCX)
+        arr[0].push(navSPJDCX)
+        arr[0].push(navYWJS)
+        arr[0].push(navZCFG)
+        arr[1].push(navBMDSQ)
+        arr[1].push(navBMDFK)
+        break
+      // 经办人
+      case '3':
+        arr = [[], []]
+        arr[0].push(navRYDYBZ)
+        arr[0].push(navGZL)
+        arr[0].push(navBMDCX)
+        arr[0].push(navZCFG)
+        arr[1].push(navYWJS)
+        break
+      // 领导
+      case '4':
+        arr = [[], []]
+        arr[0].push(navRYDYBZ)
+        arr[0].push(navGZL)
+        arr[0].push(navBMDCX)
+        arr[0].push(navZCFG)
+        arr[1].push(navYWJS)
+        break
+      // 区县产业部门
+      case '5':
+        arr = [[]]
+        arr[0].push(navYWJS)
+        arr[0].push(navZCFG)
+        arr[0].push(navBMDCX)
+        break
+      // 默认游客
+      default:
+        arr = [[], []]
+        arr[0].push(navYWJS)
+        arr[0].push(navZCFG)
+        arr[0].push(navBMDSQ)
+        arr[0].push(navWYRZ)
+        arr[1].push(navBMDFK)
         break
     }
 
