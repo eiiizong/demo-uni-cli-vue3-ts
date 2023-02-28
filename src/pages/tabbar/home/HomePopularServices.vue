@@ -160,9 +160,9 @@
       desc: '一键查询白名单',
       pathName: 'white-list-query',
       packageName: 'packageQuery',
-      isAuth: false,
+      isAuth: true,
       disabled: false,
-      imgSrc: imageNavBMDFK
+      imgSrc: imageNavHZJG
     }
 
     // 统计报表
@@ -209,8 +209,8 @@
         arr[0].push(navRYDYBZ)
         arr[0].push(navGZL)
         arr[0].push(navBMDCX)
-        arr[0].push(navZCFG)
-        arr[1].push(navYWJS)
+        arr[0].push(navYWJS)
+        arr[1].push(navZCFG)
         break
       // 领导
       case '4':
@@ -218,8 +218,8 @@
         arr[0].push(navRYDYBZ)
         arr[0].push(navGZL)
         arr[0].push(navBMDCX)
-        arr[0].push(navZCFG)
-        arr[1].push(navYWJS)
+        arr[0].push(navYWJS)
+        arr[1].push(navZCFG)
         break
       // 区县产业部门
       case '5':
