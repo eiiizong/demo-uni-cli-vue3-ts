@@ -34,7 +34,7 @@
     <div class="input-wrapper">
       <div class="label">统计对象</div>
       <div class="value">
-        <div class="input" @click="onClickSelect">{{ workloadQueryInfo.name }}</div>
+        <div class="input" :disabled="!isLeader" @click="onClickSelect">{{ workloadQueryInfo.name }}</div>
       </div>
     </div>
   </view>
@@ -43,7 +43,7 @@
 <script setup lang="ts">
   import { navigateTo } from '@/utils/uni-api'
 
-  import { toRefs, ref } from 'vue'
+  import { toRefs, ref, computed } from 'vue'
   import { useStoreWorkloadQueryInfo, useStoreUserInfo } from '@/stores/modules'
   import { getCurrentDate } from '@/utils/get'
 
@@ -56,10 +56,21 @@
   const { workloadQueryInfo } = toRefs(storeWorkloadQueryInfo)
   const { userInfo } = toRefs(storeUserInfo)
 
-  // 跳转至搜索页
-  const onClickSelect = () => {
+  /**
+   * 登录人是否为领导角色
+   */
+  const isLeader = computed(() => {
+    let tag = false
     const { role } = userInfo.value
     if (role === '4') {
+      tag = true
+    }
+    return tag
+  })
+
+  // 跳转至搜索页
+  const onClickSelect = () => {
+    if (isLeader.value) {
       navigateTo('search-statistics-object', 'packageWorkload')
     }
   }
@@ -109,6 +120,10 @@
         font-size: inherit;
         line-height: 68rpx;
         padding: 0 24rpx;
+        transition: all 0.3s;
+        &[disabled] {
+          opacity: 0.6;
+        }
       }
 
       .separate {

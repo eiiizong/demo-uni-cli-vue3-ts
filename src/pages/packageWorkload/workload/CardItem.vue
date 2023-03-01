@@ -5,27 +5,179 @@
       <div class="key">{{ renderData.chi031_desc }}</div>
       <div class="value">共{{ total }}笔</div>
     </div>
-    <div class="cells">
-      <div class="cell">
-        <div class="key">
-          <div class="point"></div>
-          <div class="text">通过(笔)</div>
+    <div v-if="renderData.backmoney + ''" class="items">
+      <div class="item">
+        <div class="title">总计</div>
+        <div class="cols">
+          <div class="col">
+            <div class="key">
+              <div class="point"></div>
+              <div class="text">通过</div>
+            </div>
+            <div class="num">
+              <span class="val">{{ renderData.passnum || 0 }}</span>
+              <div class="unit">笔</div>
+            </div>
+            <div class="money">
+              <span class="val">{{ renderData.passmoney || 0 }}</span>
+              <div class="unit">万</div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="key">
+              <div class="point"></div>
+              <div class="text">退回</div>
+            </div>
+            <div class="num">
+              <span class="val">{{ renderData.backnum || 0 }}</span>
+              <div class="unit">笔</div>
+            </div>
+            <div class="money">
+              <span class="val">{{ renderData.backmoney || 0 }}</span>
+              <div class="unit">万</div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="key">
+              <div class="point"></div>
+              <div class="text">不通过</div>
+            </div>
+            <div class="num">
+              <span class="val">{{ renderData.unpassnum || 0 }}</span>
+              <div class="unit">笔</div>
+            </div>
+            <div class="money">
+              <span class="val">{{ renderData.unpassmoney || 0 }}</span>
+              <div class="unit">万</div>
+            </div>
+          </div>
         </div>
-        <div class="value">{{ renderData.passnum || 0 }}</div>
       </div>
-      <div class="cell">
-        <div class="key">
-          <div class="point"></div>
-          <div class="text">退回(笔)</div>
+      <div class="item">
+        <div class="title">73模式</div>
+        <div class="cols">
+          <div class="col">
+            <div class="key">
+              <div class="point"></div>
+              <div class="text">通过</div>
+            </div>
+            <div class="num">
+              <span class="val">{{ renderData.passnum73 || 0 }}</span>
+              <div class="unit">笔</div>
+            </div>
+            <div class="money">
+              <span class="val">{{ renderData.passmoney73 || 0 }}</span>
+              <div class="unit">万</div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="key">
+              <div class="point"></div>
+              <div class="text">退回</div>
+            </div>
+            <div class="num">
+              <span class="val">{{ renderData.backnum73 || 0 }}</span>
+              <div class="unit">笔</div>
+            </div>
+            <div class="money">
+              <span class="val">{{ renderData.backmoney73 || 0 }}</span>
+              <div class="unit">万</div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="key">
+              <div class="point"></div>
+              <div class="text">不通过</div>
+            </div>
+            <div class="num">
+              <span class="val">{{ renderData.unpassnum73 || 0 }}</span>
+              <div class="unit">笔</div>
+            </div>
+            <div class="money">
+              <span class="val">{{ renderData.unpassmoney73 || 0 }}</span>
+              <div class="unit">万</div>
+            </div>
+          </div>
         </div>
-        <div class="value">{{ renderData.backnum || 0 }}</div>
       </div>
-      <div class="cell">
+      <div class="item">
+        <div class="title">442模式</div>
+        <div class="cols">
+          <div class="col">
+            <div class="key">
+              <div class="point"></div>
+              <div class="text">通过</div>
+            </div>
+            <div class="num">
+              <span class="val">{{ renderData.passnum442 || 0 }}</span>
+              <div class="unit">笔</div>
+            </div>
+            <div class="money">
+              <span class="val">{{ renderData.passmoney442 || 0 }}</span>
+              <div class="unit">万</div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="key">
+              <div class="point"></div>
+              <div class="text">退回</div>
+            </div>
+            <div class="num">
+              <span class="val">{{ renderData.backnum442 || 0 }}</span>
+              <div class="unit">笔</div>
+            </div>
+            <div class="money">
+              <span class="val">{{ renderData.backmoney442 || 0 }}</span>
+              <div class="unit">万</div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="key">
+              <div class="point"></div>
+              <div class="text">不通过</div>
+            </div>
+            <div class="num">
+              <span class="val">{{ renderData.unpassnum442 || 0 }}</span>
+              <div class="unit">笔</div>
+            </div>
+            <div class="money">
+              <span class="val">{{ renderData.unpassmoney442 || 0 }}</span>
+              <div class="unit">万</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div v-else class="items">
+      <div class="col">
         <div class="key">
           <div class="point"></div>
-          <div class="text">不通过(笔)</div>
+          <div class="text">通过</div>
         </div>
-        <div class="value">{{ renderData.unpassnum || 0 }}</div>
+        <div class="num">
+          <div class="val">{{ renderData.passnum || 0 }}</div>
+          <div class="unit">笔</div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="key">
+          <div class="point"></div>
+          <div class="text">退回</div>
+        </div>
+        <div class="num">
+          <div class="val">{{ renderData.backnum || 0 }}</div>
+          <div class="unit">笔</div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="key">
+          <div class="point"></div>
+          <div class="text">不通过</div>
+        </div>
+        <div class="num">
+          <div class="val">{{ renderData.unpassnum || 0 }}</div>
+          <div class="unit">笔</div>
+        </div>
       </div>
     </div>
   </div>
@@ -121,51 +273,106 @@
         text-align: right;
       }
     }
-    .cells {
-      display: flex;
-      align-items: center;
-      .cell {
-        width: 33.33%;
-        color: $color1;
+
+    .items {
+      .item {
+        position: relative;
+        padding-bottom: 36rpx;
+        &::after {
+          content: '';
+          color: '';
+          width: 50%;
+          height: 1px;
+          background-color: $color-border;
+          border-radius: 1px;
+          position: absolute;
+          left: 50%;
+          bottom: 0;
+          transform: translateX(-50%);
+        }
+        &:last-of-type {
+          &::after {
+            width: 0;
+          }
+        }
+      }
+      .title {
+        color: #666;
         font-size: 28rpx;
         line-height: 40rpx;
-        text-align: center;
-        padding: 24rpx 0;
-        .key {
-          font-size: inherit;
-          color: inherit;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          .point {
-            width: 20rpx;
-            height: 20rpx;
-            background-color: $color1;
-            border-radius: 50%;
-            margin-right: 10rpx;
-          }
-        }
-        .value {
-          width: 100%;
-          font-size: 44rpx;
-          line-height: 50rpx;
+        padding-top: 28rpx;
+      }
+      .cols {
+        display: flex;
+        align-items: center;
+        padding-top: 28rpx;
+        .col {
+          width: 33.33%;
           color: #475f7e;
-          font-weight: 700;
-          padding-top: 14rpx;
-        }
-        &:last-child {
-          color: $color3;
+          text-align: center;
           .key {
+            font-size: 28rpx;
+            line-height: 40rpx;
+            color: $color1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             .point {
-              background-color: $color3;
+              width: 20rpx;
+              height: 20rpx;
+              background-color: $color1;
+              border-radius: 50%;
+              margin-right: 10rpx;
             }
           }
-        }
-        &:nth-of-type(2) {
-          color: $color2;
-          .key {
-            .point {
-              background-color: $color2;
+          .num {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 44rpx;
+            line-height: 60rpx;
+            color: inherit;
+            font-weight: 700;
+            padding: 12rpx 0;
+            .unit {
+              font-size: 26rpx;
+              line-height: 36px;
+              padding-left: 4rpx;
+              font-weight: 400;
+            }
+          }
+          .money {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28rpx;
+            line-height: 40rpx;
+            color: inherit;
+            font-weight: 700;
+            padding: 12rpx 0;
+            .unit {
+              font-size: 24rpx;
+              line-height: 1;
+              padding-left: 2rpx;
+              font-weight: 400;
+            }
+          }
+          &:last-child {
+            .key {
+              color: $color3;
+              .point {
+                background-color: $color3;
+              }
+            }
+          }
+          &:nth-of-type(2) {
+            .key {
+              color: $color2;
+              .point {
+                background-color: $color2;
+              }
             }
           }
         }
