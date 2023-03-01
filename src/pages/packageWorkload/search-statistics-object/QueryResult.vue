@@ -1,6 +1,6 @@
 <template>
   <view v-if="isRequestOver" class="query-result">
-    <ZdbTitle :title="'搜索结果（' + renderList.length + '）'" :space="false" />
+    <ZdbTitle :title="'搜索结果(' + renderList.length + ')'" :space="false" />
     <div v-if="renderList.length > 0" class="items">
       <div v-for="(item, index) in renderList" :key="item.userid" class="item">
         <CardItem :render-data="item" @clcik="onClickSelectObj(index)" />

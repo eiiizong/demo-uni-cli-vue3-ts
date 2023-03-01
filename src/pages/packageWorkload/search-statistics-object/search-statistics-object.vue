@@ -1,6 +1,6 @@
 <template>
   <view class="search-statistics-object">
-    <QueryCondition v-model="keyword" @confirm="onConfirm" @focus="isShowCurrentObject = false" />
+    <QueryCondition v-model="keyword" @confirm="onConfirm" @focus="isShowCurrentObject = true" />
     <template v-if="!isShowCurrentObject">
       <QueryResult
         :render-list="customData.queryResultList"
@@ -29,11 +29,11 @@
 
   import type { W014SuccessResultListItem } from '@/server/types/api'
 
-  import { ref, reactive, computed, toRefs } from 'vue'
-  // import { onLoad } from '@dcloudio/uni-app'
+  import { ref, reactive, toRefs } from 'vue'
   import { useStoreWorkloadQueryInfo } from '@/stores/modules'
   import { navigateBack } from '@/utils/uni-api'
   import { requestW014 } from '@/server/api'
+  import { onLoad } from '@dcloudio/uni-app'
 
   const storeWorkloadQueryInfo = useStoreWorkloadQueryInfo()
 
@@ -47,7 +47,7 @@
   /**
    * 是否显示当前统计对象
    */
-  const isShowCurrentObject = ref(false)
+  const isShowCurrentObject = ref(true)
 
   /**
    * 搜索关键字
@@ -72,35 +72,50 @@
   /**
    * 是否显示当前统计对象
    */
-  const currentObject = computed(() => {
-    let obj = {}
-    const data = workloadQueryInfo.value
-    obj = {
-      ...data,
-      org: data.orgnampath?.split('/')
-    }
-    return obj
-  })
+  const currentObject = ref({})
 
   // 选择组织
   const onChangeSelectOrg = (data: any[]) => {
-    console.log('data', data)
+    if (data && data.length > 0) {
+      let org = []
+      let userName = ''
+      let userId = ''
+      for (let i = 0; i < data.length; i++) {
+        const item = data[i]
+        const { ispeople, name, userid } = item
+        if (ispeople === '1') {
+          userName = name
+          userId = userid
+        } else {
+          org.push(name)
+        }
+      }
+      currentObject.value = {
+        name: userName,
+        userid: userId,
+        org,
+        orgnampath: org.join('/')
+      }
+    }
   }
 
   // 确定搜索
   const onConfirm = () => {
     const name = keyword.value
-    requestW014(name)
-      .then((res) => {
-        for (let i = 0, len = res.length; i < len; i++) {
-          const item = res[i]
-          item.org = item.orgnampath?.split('/')
-        }
-        customData.queryResultList = [...res]
-      })
-      .finally(() => {
-        customData.isRequestOver = true
-      })
+    if (name) {
+      isShowCurrentObject.value = false
+      requestW014(name)
+        .then((res) => {
+          for (let i = 0, len = res.length; i < len; i++) {
+            const item = res[i]
+            item.org = item.orgnampath?.split('/')
+          }
+          customData.queryResultList = [...res]
+        })
+        .finally(() => {
+          customData.isRequestOver = true
+        })
+    }
   }
 
   // 选择某个搜索对象
@@ -110,8 +125,16 @@
   }
 
   const onClickButton = () => {
+    storeWorkloadQueryInfo.updateWorkloadQueryInfo(currentObject.value)
     navigateBack()
   }
+
+  onLoad(() => {
+    currentObject.value = {
+      ...workloadQueryInfo.value,
+      org: workloadQueryInfo.value.orgnampath?.split('/')
+    }
+  })
 </script>
 
 <style lang="scss" scoped>
