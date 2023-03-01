@@ -1,4 +1,4 @@
-import type { W012SuccessResultListItem } from '@/server/types/api'
+import type { W014SuccessResultListItem } from '@/server/types/api'
 import { request } from '@/server/request'
 
 /**
@@ -11,7 +11,7 @@ const requestW014 = (
   name: string,
   isShowLoading = true,
   isShowErrorToast = true
-): Promise<W012SuccessResultListItem[]> => {
+): Promise<W014SuccessResultListItem[]> => {
   const data = {
     name
   }

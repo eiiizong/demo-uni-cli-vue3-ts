@@ -1,17 +1,17 @@
 <template>
-  <view class="query-condition">
+  <view class="query-conditions">
     <div class="input-wrapper">
       <input
         type="text"
         class="input"
-        placeholder="请输入关键字"
+        placeholder="请输入统计对象姓名"
         confirm-type="search"
         :value="modelValue"
+        :focus="focus"
         @input="onInput"
+        @focus="emit('focus')"
         @confirm="emit('confirm')" />
-      <button class="button">
-        <YhIcon name="search" size="36rpx" />
-      </button>
+      <YhIcon name="search" size="32rpx" class="btn" @click="emit('confirm')" />
     </div>
   </view>
 </template>
@@ -19,50 +19,50 @@
 <script setup lang="ts">
   import YhIcon from '@/components/yh/icon/icon.vue'
 
-  const emit = defineEmits(['update:modelValue', 'confirm'])
+  const emit = defineEmits(['update:modelValue', 'confirm', 'focus'])
+
   const props = defineProps({
     modelValue: {
       type: String,
       required: true
+    },
+    focus: {
+      type: Boolean
     }
   })
 
-  const onInput = (event: unknown) => {
-    const { detail } = event as WechatMiniprogram.Input
+  // input 输入触发
+  const onInput = (e: unknown) => {
+    const { detail } = e as WechatMiniprogram.Input
     const { value } = detail
     emit('update:modelValue', value)
   }
 </script>
 
 <style lang="scss" scoped>
-  .query-condition {
+  .query-conditions {
     width: 100%;
-    background-color: #fff;
     padding: 24rpx $spacing;
-    border: 1rpx solid $color-border;
+    background-color: #fff;
     .input-wrapper {
       width: 100%;
       position: relative;
       .input {
-        display: block;
-        width: 100%;
-        height: 72rpx;
+        height: 84rpx;
         background-color: transparent;
         border-radius: 4rpx;
-        line-height: 40rpx;
-        color: #333333;
         font-size: 28rpx;
-        border: solid 1px $color-border;
-        padding: 16rpx 82rpx 16rpx 18rpx;
+        line-height: 1.4;
+        padding-left: 20rpx;
+        padding-right: 20rpx * 2 + 32rpx;
+        border: 1px solid $color-border;
       }
-      .button {
+      .btn {
         position: absolute;
         top: 50%;
-        color: #565f6e;
-        width: auto;
-        right: 22rpx;
-        background-color: transparent;
+        right: 20rpx;
         transform: translateY(-50%);
+        color: #565f6e;
       }
     }
   }

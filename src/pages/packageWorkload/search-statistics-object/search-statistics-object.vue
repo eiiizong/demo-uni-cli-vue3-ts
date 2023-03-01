@@ -1,11 +1,16 @@
 <template>
   <view class="search-statistics-object">
-    <QueryCondition v-model="keyword" @confirm="onConfirm" />
-    <QueryResult :keyword="keyword" :render-list="customData.queryResult" @show-popup="isShowPopup = true" />
+    <QueryCondition v-model="keyword" @confirm="onConfirm" @focus="isShowCurrentObject = false" />
+    <template v-if="isShowCurrentObject">
+      <QueryResult :render-list="customData.queryResultList" :is-request-over="customData.isRequestOver" />
+    </template>
 
-    <div v-if="!keyword" class="button-wrapper">
-      <YhButton type="primary" block @click="onClickButton">确定</YhButton>
-    </div>
+    <template v-else>
+      <CurrentObject :current-object="currentObject" @show-popup="isShowPopup = true" />
+      <div v-if="isShowCurrentObject" class="button-wrapper">
+        <YhButton type="primary" block @click="onClickButton">确定</YhButton>
+      </div>
+    </template>
 
     <ZdbSelectOrg v-model="isShowPopup" @change="onChangeSelectOrg" />
   </view>
@@ -17,45 +22,78 @@
 
   import QueryCondition from './QueryCondition.vue'
   import QueryResult from './QueryResult.vue'
+  import CurrentObject from './CurrentObject.vue'
 
-  import { ref, reactive } from 'vue'
+  import type { W014SuccessResultListItem } from '@/server/types/api'
+
+  import { ref, reactive, computed, toRefs } from 'vue'
+  // import { onLoad } from '@dcloudio/uni-app'
   import { useStoreWorkloadQueryInfo } from '@/stores/modules'
   import { navigateBack } from '@/utils/uni-api'
+  import { requestW014 } from '@/server/api'
 
   const storeWorkloadQueryInfo = useStoreWorkloadQueryInfo()
 
-  // 是否显示弹窗
+  const { workloadQueryInfo } = toRefs(storeWorkloadQueryInfo)
+
+  /**
+   * 是否显示弹窗
+   */
   const isShowPopup = ref(false)
 
-  // 搜索关键字
+  /**
+   * 是否显示当前统计对象
+   */
+  const isShowCurrentObject = ref(false)
+
+  /**
+   * 搜索关键字
+   */
   const keyword = ref('')
 
-  const customData = reactive<any>({
-    queryResult: []
+  // 自定义数据
+  const customData = reactive<{
+    /**
+     * 查询结果数据
+     */
+    queryResultList: W014SuccessResultListItem[]
+    /**
+     * 是否请求完成 控制 no-data 组件在未请求完成时不显示
+     */
+    isRequestOver: boolean
+  }>({
+    queryResultList: [],
+    isRequestOver: false
+  })
+
+  /**
+   * 是否显示当前统计对象
+   */
+  const currentObject = computed(() => {
+    let obj = {}
+    const data = workloadQueryInfo.value
+    obj = {
+      ...data,
+      org: data.orgnampath?.split('/')
+    }
+    return obj
   })
 
   // 选择组织
   const onChangeSelectOrg = (data: any[]) => {
-    storeWorkloadQueryInfo.updateWorkloadQueryInfo({
-      userName: '张三2',
-      org: data.map((item) => item.orgname)
-    })
+    console.log('data', data)
   }
 
   // 确定搜索
   const onConfirm = () => {
-    setTimeout(() => {
-      customData.queryResult = [
-        {
-          name: '哈哈',
-          org: ['四川省', '成都市融资再担保有限责任公司', '创新产品部']
-        },
-        {
-          name: '哈哈2',
-          org: ['四川省2', '成都市融资再担保有限责任公司2', '创新产品部2', '创新产品部23']
-        }
-      ]
-    }, 1000)
+    const name = keyword.value
+    requestW014(name)
+      .then((res) => {
+        customData.queryResultList = [...res]
+      })
+      .finally(() => {
+        customData.isRequestOver = true
+      })
   }
 
   const onClickButton = () => {

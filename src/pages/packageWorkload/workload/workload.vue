@@ -43,8 +43,8 @@
    * 查询数据
    */
   const queryData = () => {
-    const { tel, userId, startDate, endDate } = workloadQueryInfo.value
-    requestW013(userId ? '' : tel || '', userId || '', startDate || '', endDate || '')
+    const { tel, userid, startDate, endDate } = workloadQueryInfo.value
+    requestW013(userid ? '' : tel || '', userid || '', startDate || '', endDate || '')
       .then((res) => {
         customData.queryResultList = [...res]
       })
@@ -56,7 +56,7 @@
   watch(
     () => workloadQueryInfo.value,
     (val) => {
-      if (val.tel || val.userId) {
+      if (val.tel || val.userid) {
         queryData()
       }
     },
@@ -64,14 +64,11 @@
   )
 
   onLoad(() => {
-    const { tel, userName, orgName } = userInfo.value
+    const { userName, tel, orgNamePath } = userInfo.value
     storeWorkloadQueryInfo.updateWorkloadQueryInfo({
+      name: userName,
       tel,
-      userName,
-      userId: '',
-      org: orgName?.split('/') || [],
-      startDate: '',
-      endDate: ''
+      orgnampath: orgNamePath
     })
   })
 </script>

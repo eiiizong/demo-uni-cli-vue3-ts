@@ -2,13 +2,13 @@
   <view class="card-item" @click="emit('clcik')">
     <div class="name">
       <img :src="image01" alt="" class="img" />
-      <div class="left">{{ renderData.userName || '1233' }}</div>
+      <div class="left">{{ renderData.name }}</div>
       <div v-if="showLink" class="right">
         <YhIcon name="arrow-right" size="30rpx" />
       </div>
     </div>
     <div class="info">
-      <div v-for="(item, index) in renderData.org || ['1', '2', '22']" :key="index" class="item">
+      <div v-for="(item, index) in renderData.org" :key="index" class="item">
         <div class="line" :style="{ width: 24 + index * 8 + 'rpx' }"></div>
         <div class="text">{{ item }}</div>
       </div>
@@ -22,7 +22,7 @@
   import YhIcon from '@/components/yh/icon/icon.vue'
 
   import type { PropType } from 'vue'
-  import type { Store } from '@/stores/types'
+  import type { W014SuccessResultListItem } from '@/server/types/api'
 
   const emit = defineEmits(['clcik'])
   const props = defineProps({
@@ -37,7 +37,7 @@
      * 渲染数据
      */
     renderData: {
-      type: Object as PropType<Store.WorkloadQueryInfo>,
+      type: Object as PropType<W014SuccessResultListItem>,
       required: true
     }
   })

@@ -10,7 +10,8 @@
     // 登录
     requestCustomLogin().then((res) => {
       storeUserInfo.updateStoreUserInfo({
-        ...res
+        ...res,
+        role: '4'
       })
     })
   })
