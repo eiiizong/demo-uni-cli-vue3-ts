@@ -5,7 +5,7 @@
       <div class="key">{{ renderData.chi031_desc }}</div>
       <div class="value">共{{ total }}笔</div>
     </div>
-    <div v-if="renderData.backmoney + ''" class="items">
+    <div v-if="renderData.backmoney || renderData.backmoney == 0" class="items">
       <div class="item">
         <div class="title">总计</div>
         <div class="cols">
@@ -149,34 +149,36 @@
       </div>
     </div>
     <div v-else class="items">
-      <div class="col">
-        <div class="key">
-          <div class="point"></div>
-          <div class="text">通过</div>
+      <div class="cols">
+        <div class="col">
+          <div class="key">
+            <div class="point"></div>
+            <div class="text">通过</div>
+          </div>
+          <div class="num">
+            <div class="val">{{ renderData.passnum || 0 }}</div>
+            <div class="unit">笔</div>
+          </div>
         </div>
-        <div class="num">
-          <div class="val">{{ renderData.passnum || 0 }}</div>
-          <div class="unit">笔</div>
+        <div class="col">
+          <div class="key">
+            <div class="point"></div>
+            <div class="text">退回</div>
+          </div>
+          <div class="num">
+            <div class="val">{{ renderData.backnum || 0 }}</div>
+            <div class="unit">笔</div>
+          </div>
         </div>
-      </div>
-      <div class="col">
-        <div class="key">
-          <div class="point"></div>
-          <div class="text">退回</div>
-        </div>
-        <div class="num">
-          <div class="val">{{ renderData.backnum || 0 }}</div>
-          <div class="unit">笔</div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="key">
-          <div class="point"></div>
-          <div class="text">不通过</div>
-        </div>
-        <div class="num">
-          <div class="val">{{ renderData.unpassnum || 0 }}</div>
-          <div class="unit">笔</div>
+        <div class="col">
+          <div class="key">
+            <div class="point"></div>
+            <div class="text">不通过</div>
+          </div>
+          <div class="num">
+            <div class="val">{{ renderData.unpassnum || 0 }}</div>
+            <div class="unit">笔</div>
+          </div>
         </div>
       </div>
     </div>

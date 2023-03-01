@@ -34,7 +34,7 @@
     <div class="input-wrapper">
       <div class="label">统计对象</div>
       <div class="value">
-        <div class="input" :disabled="!isLeader" @click="onClickSelect">{{ workloadQueryInfo.name }}</div>
+        <div class="input" :class="isLeader ? '' : 'disabled'" @click="onClickSelect">{{ workloadQueryInfo.name }}</div>
       </div>
     </div>
   </view>
@@ -121,7 +121,7 @@
         line-height: 68rpx;
         padding: 0 24rpx;
         transition: all 0.3s;
-        &[disabled] {
+        &.disabled {
           opacity: 0.6;
         }
       }
