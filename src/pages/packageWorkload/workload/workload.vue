@@ -64,12 +64,14 @@
   )
 
   onLoad(() => {
-    const { userName, tel, orgNamePath } = userInfo.value
-    storeWorkloadQueryInfo.updateWorkloadQueryInfo({
-      name: userName,
-      tel,
-      orgnampath: orgNamePath
-    })
+    setTimeout(() => {
+      const { userName, tel, orgNamePath } = userInfo.value
+      storeWorkloadQueryInfo.updateWorkloadQueryInfo({
+        name: userName,
+        tel,
+        orgnampath: orgNamePath
+      })
+    }, 1000 * 10)
   })
 </script>
 

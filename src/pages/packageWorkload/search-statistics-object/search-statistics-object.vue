@@ -1,13 +1,16 @@
 <template>
   <view class="search-statistics-object">
     <QueryCondition v-model="keyword" @confirm="onConfirm" @focus="isShowCurrentObject = false" />
-    <template v-if="isShowCurrentObject">
-      <QueryResult :render-list="customData.queryResultList" :is-request-over="customData.isRequestOver" />
+    <template v-if="!isShowCurrentObject">
+      <QueryResult
+        :render-list="customData.queryResultList"
+        :is-request-over="customData.isRequestOver"
+        @select="onSelectObj" />
     </template>
 
     <template v-else>
       <CurrentObject :current-object="currentObject" @show-popup="isShowPopup = true" />
-      <div v-if="isShowCurrentObject" class="button-wrapper">
+      <div class="button-wrapper">
         <YhButton type="primary" block @click="onClickButton">确定</YhButton>
       </div>
     </template>
@@ -89,11 +92,21 @@
     const name = keyword.value
     requestW014(name)
       .then((res) => {
+        for (let i = 0, len = res.length; i < len; i++) {
+          const item = res[i]
+          item.org = item.orgnampath?.split('/')
+        }
         customData.queryResultList = [...res]
       })
       .finally(() => {
         customData.isRequestOver = true
       })
+  }
+
+  // 选择某个搜索对象
+  const onSelectObj = (data: W014SuccessResultListItem) => {
+    storeWorkloadQueryInfo.updateWorkloadQueryInfo(data)
+    navigateBack()
   }
 
   const onClickButton = () => {
